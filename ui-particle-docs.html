@@ -1,6 +1,10 @@
 ﻿<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
+    <style>
+        /* Override global overflow-x:hidden so CSS sticky works */
+        html, body { overflow-x: clip !important; }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>UI Particle System - Scripting API Docs - Tier Studios</title>
@@ -642,6 +646,7 @@ public class DynamicFeedbackSystem : MonoBehaviour
 
 </body>
 </html>
+
 
 
 

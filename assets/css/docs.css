@@ -14,32 +14,33 @@
     overflow: visible !important;
 }
 
+/* ==========================================
+   Documentation Page Layout - matches working Blogger implementation
+========================================== */
 .docs-layout {
     display: flex;
     gap: 40px;
     max-width: 1400px;
     margin: 0 auto;
     padding: 40px 20px;
-    align-items: flex-start;
+    /* NO align-items here - sidebar needs align-self */
 }
 
-/* Main Content */
 .docs-content {
     flex: 1;
     min-width: 0;
 }
 
-/* Sidebar - truly scrolls with the page (no sticky/fixed) */
 .docs-sidebar {
     width: 280px;
     flex-shrink: 0;
-    /* CSS sticky with proper top value accounting for nav */
     position: -webkit-sticky;
     position: sticky;
-    top: 80px;
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
+    top: 20px;
     align-self: flex-start;
+    height: max-content;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
 }
 
 .docs-hero {
