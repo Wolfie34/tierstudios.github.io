@@ -1214,27 +1214,27 @@ body.menu-open {
     }
 
     .menu-wrap {
-        padding: 0 25px;
+        padding: 0 20px;
     }
 
     #menu-items {
+        display: none; /* Hide by default on mobile */
         position: fixed;
         top: 60px;
-        left: -100%;
+        left: 0;
         width: 100%;
         height: calc(100vh - 60px);
         background: var(--bg-primary);
         flex-direction: column;
         align-items: center;
         padding: 40px 0;
-        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 10000;
+        z-index: 99999;
         overflow-y: auto;
         border-top: 1px solid var(--border-color);
     }
 
     #menu-items.active {
-        left: 0;
+        display: flex; /* Show when active */
     }
 
     #menu-items > li {
@@ -1245,8 +1245,9 @@ body.menu-open {
     #menu-items > li > a {
         display: block;
         padding: 15px 0;
-        font-size: 18px;
+        font-size: 20px;
         line-height: 1.5;
+        width: 100%;
     }
 
     #menu-items > li > a::after {
@@ -1265,7 +1266,7 @@ body.menu-open {
 
     .submenu li a {
         padding: 12px 0;
-        font-size: 15px;
+        font-size: 16px;
     }
 
     .mobile-menu-toggle.active span:nth-child(1) {

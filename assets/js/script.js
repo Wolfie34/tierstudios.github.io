@@ -8,20 +8,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const menuItems = document.getElementById('menu-items');
 
     if (menuToggle && menuItems) {
-        menuToggle.addEventListener('click', function() {
+        menuToggle.onclick = function() {
+            console.log("Menu toggle clicked"); // Debug
             menuItems.classList.toggle('active');
             menuToggle.classList.toggle('active');
-            document.body.classList.toggle('menu-open'); // Prevent scrolling
-        });
+            document.body.classList.toggle('menu-open');
+        };
 
         // Close menu when clicking a link
         const navLinks = menuItems.querySelectorAll('a');
         navLinks.forEach(link => {
-            link.addEventListener('click', () => {
+            link.onclick = function() {
                 menuItems.classList.remove('active');
                 menuToggle.classList.remove('active');
                 document.body.classList.remove('menu-open');
-            });
+            };
         });
     }
 
