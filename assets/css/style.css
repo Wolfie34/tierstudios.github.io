@@ -2,30 +2,7 @@
    CSS Variables & Theme Setup
 ========================================== */
 :root {
-    /* Light Theme (Vibrant Cyan/Turquoise) */
-    --main-color: #4fc1ff;
-    --main-color-hover: #2ba6eb;
-    
-    --bg-primary: #f4f7f9;
-    --bg-secondary: #ffffff;
-    --bg-overlay: rgba(255, 255, 255, 0.7);
-    --glass-bg: rgba(255, 255, 255, 0.85);
-    
-    --text-primary: #1a1a1a;
-    --text-secondary: #4a5568;
-    --text-muted: #718096;
-    
-    --border-color: #e2e8f0;
-    --nav-text: #1a1a1a;
-    --header-bg: transparent;
-    --footer-bg: #ffffff;
-    --footer-text: #4a5568;
-    --shadow-color: rgba(0, 0, 0, 0.08);
-    --glow-color: rgba(79, 193, 255, 0.3);
-}
-
-[data-theme="dark"] {
-    /* Dark Theme (Modern Deep Space) */
+    /* Dark Theme (Modern Deep Space) - Default */
     --main-color: #4fc1ff; 
     --main-color-hover: #7cd3ff;
     

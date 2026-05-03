@@ -1,45 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // ==========================================
-    // Theme Toggle Logic
-    // ==========================================
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
-    const themeIcon = themeToggleBtn.querySelector('i');
-
-    // Check for saved user preference, if any, on load of the website
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        htmlElement.setAttribute('data-theme', savedTheme);
-        updateIcon(savedTheme);
-    } else {
-        // Check system preference
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            htmlElement.setAttribute('data-theme', 'dark');
-            updateIcon('dark');
-        }
-    }
-
-    themeToggleBtn.addEventListener('click', function () {
-        let currentTheme = htmlElement.getAttribute('data-theme');
-        let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-        htmlElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateIcon(newTheme);
-    });
-
-    function updateIcon(theme) {
-        const logoImg = document.getElementById('site-logo');
-        if (theme === 'dark') {
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-            if (logoImg) logoImg.src = 'assets/img/logo_dark.PNG';
-        } else {
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
-            if (logoImg) logoImg.src = 'assets/img/logo_light.png';
-        }
-    }
+    // Force Dark Theme Logo
+    const logoImg = document.getElementById('site-logo');
+    if (logoImg) logoImg.src = 'assets/img/logo_dark.PNG';
 
     // ==========================================
     // Code Highlighting & Copy Logic (Gemini Style)
