@@ -537,6 +537,25 @@ ul {
     align-items: center;
     overflow: hidden;
     margin-bottom: 20px;
+    position: relative;
+}
+
+.animated-title-container::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 100px;
+    background: var(--main-color);
+    filter: blur(80px);
+    opacity: 0.4;
+    border-radius: 50%;
+    z-index: -1;
+    animation: pulseGlow 4s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(0.8); opacity: 0.2; }
+    100% { transform: scale(1.4); opacity: 0.7; }
 }
 
 .animated-title {
@@ -568,6 +587,11 @@ ul {
 .animated-title .letter:nth-child(5)  { animation-delay: 0.8s; }
 .animated-title .letter:nth-child(6)  { animation-delay: 1.0s; }
 .animated-title .letter:nth-child(7)  { animation-delay: 1.2s; }
+.animated-title .letter:nth-child(8)  { animation-delay: 1.4s; }
+.animated-title .letter:nth-child(9)  { animation-delay: 1.6s; }
+.animated-title .letter:nth-child(10) { animation-delay: 1.8s; }
+.animated-title .letter:nth-child(11) { animation-delay: 2.0s; }
+.animated-title .letter:nth-child(12) { animation-delay: 2.2s; }
 
 .company-description {
     font-family: 'Inter', sans-serif;
