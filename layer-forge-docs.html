@@ -1,0 +1,591 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Layer Forge Studio - How To Use Guide - Tier Studios</title>
+    <style>html, body { overflow-x: clip !important; }</style>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700|Open+Sans:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/docs.css">
+</head>
+<body class="docs-page">
+<div id="outer-wrapper">
+<nav class="tm-menu">
+  <div class="menu-wrap">
+    <div class="logo"><a href="index.html"><img id="site-logo" src="assets/img/logo_light.png" alt="Tier Studios" style="height:40px;"></a></div>
+    <div class="menu-right">
+      <ul id="menu-items">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Assets <i class="fas fa-angle-down"></i></a>
+          <ul class="submenu">
+            <li><a href="ui-particle-system.html">UI Particle System</a></li>
+            <li><a href="goat-icon-studio.html">Goat Icon Studio</a></li>
+            <li><a href="layer-forge-studio.html">Layer Forge Studio</a></li>
+          </ul>
+        </li>
+        <li><a href="company.html">Company</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="theme-switch-wrapper">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="tm-menu2"></div>
+<div class="docs-layout">
+  <!-- Main Content -->
+  <main class="docs-content" id="docs-content">
+    <div class="docs-hero">
+      <div class="docs-badge"><i class="fas fa-book-open"></i> How To Use Guide</div>
+      <h1>Layer Forge Studio</h1>
+      <p class="docs-version">Complete Usage Reference</p>
+      <p class="docs-intro">A powerful image editing tool built directly inside Unity. Create, edit, and finalize textures without ever leaving the editor.</p>
+    </div>
+
+    <!-- Getting Started -->
+    <section class="docs-section" id="s-getting-started">
+      <h2><span class="section-num"><i class="fas fa-rocket"></i></span> Getting Started</h2>
+      <p>Layer Forge Studio is a powerful image editing tool built directly inside Unity. It allows you to create, edit, and finalize textures without leaving the editor.</p>
+      <p>You can open Layer Forge Studio in two ways:</p>
+      <div class="docs-card-grid">
+        <div class="docs-info-card">
+          <h4><i class="fas fa-bars"></i> From the top menu</h4>
+          <p><code>Tools → Tier Studios → Layer Forge Studio</code></p>
+        </div>
+        <div class="docs-info-card">
+          <h4><i class="fas fa-mouse-pointer"></i> Direct texture editing</h4>
+          <ol>
+            <li>Right-click any PNG/JPG in the Project window</li>
+            <li>Select: <strong>"Edit in Layer Forge Studio"</strong></li>
+            <li>Make your changes</li>
+            <li>Click <strong>"Apply"</strong> to save instantly</li>
+          </ol>
+        </div>
+      </div>
+      <div class="docs-alert" style="margin-top:20px;">
+        <i class="fas fa-lightbulb"></i>
+        <div>This workflow allows seamless editing directly inside your project. <strong>Right-click any texture and start creating!</strong></div>
+      </div>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Project Files -->
+    <section class="docs-section" id="s-project-files">
+      <h2><span class="section-num"><i class="fas fa-file-code"></i></span> Project Files (.lfs)</h2>
+      <p>Layer Forge Studio saves your projects as <code>.lfs</code> binary files.</p>
+
+      <h3 class="docs-sub-heading">Saving</h3>
+      <ul class="docs-shortcut-list">
+        <li><kbd>File → Save</kbd> <span class="kbd-desc">or <kbd>Ctrl+S</kbd> — Save current project</span></li>
+        <li><kbd>File → Save As</kbd> <span class="kbd-desc">or <kbd>Ctrl+Shift+S</kbd> — Save to a new location</span></li>
+      </ul>
+
+      <h3 class="docs-sub-heading">Project & Export Relationship</h3>
+      <p>When you export images from a project, each exported image stores a lightweight <code>.lfmeta</code> reference file linking back to the project.</p>
+      <ul class="feature-list">
+        <li>If the <code>.lfs</code> project exists, "Edit in Layer Forge Studio" opens it directly.</li>
+        <li>If the <code>.lfs</code> project was not yet saved at export time, the full project state is embedded in the <code>.lfmeta</code> as a snapshot for recovery.</li>
+        <li>Once you save the <code>.lfs</code> file, all related <code>.lfmeta</code> files are automatically upgraded to reference the project by ID.</li>
+        <li>You can safely rename or move <code>.lfs</code> files — the system uses internal project IDs, not file names or paths.</li>
+      </ul>
+
+      <h3 class="docs-sub-heading">Apply Button</h3>
+      <div class="docs-alert">
+        <i class="fas fa-info-circle"></i>
+        <div>The <strong>"Apply"</strong> button overwrites the specific image you opened for editing. Apply is <strong>disabled</strong> when opening a <code>.lfs</code> project directly. It is only active when opened via "Edit in Layer Forge Studio" on an image.</div>
+      </div>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Settings -->
+    <section class="docs-section" id="s-settings">
+      <h2><span class="section-num"><i class="fas fa-cog"></i></span> Settings Panel</h2>
+      <p>The Settings panel allows you to customize workflow, limits, and performance. All settings are automatically saved.</p>
+      <div class="docs-card-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px,1fr));">
+        <div class="docs-info-card">
+          <h4><i class="fas fa-folder"></i> Default Paths</h4>
+          <ul><li>Export Path</li><li>Project Save Path</li></ul>
+        </div>
+        <div class="docs-info-card">
+          <h4><i class="fas fa-paint-brush"></i> Tools</h4>
+          <ul><li>Max Brush / Eraser Size</li><li>Default Brush Size</li></ul>
+        </div>
+        <div class="docs-info-card">
+          <h4><i class="fas fa-font"></i> Text</h4>
+          <ul><li>Max Font Size</li><li>Max Line Spacing</li><li>Text Arch Range (Min / Max)</li></ul>
+        </div>
+        <div class="docs-info-card">
+          <h4><i class="fas fa-shapes"></i> Shape</h4>
+          <ul><li>Max Corner Radius</li><li>Max Stroke Width</li></ul>
+        </div>
+        <div class="docs-info-card">
+          <h4><i class="fas fa-tachometer-alt"></i> Performance</h4>
+          <ul><li>Max Undo Steps</li><li>Auto-Save Enabled</li><li>Auto-Save Interval (minutes)</li><li>Auto-Save Slots</li></ul>
+        </div>
+        <div class="docs-info-card">
+          <h4><i class="fas fa-eye"></i> Appearance</h4>
+          <ul><li>Zoom Sensitivity</li><li>Checker Light / Dark colors</li><li>Snap Threshold (px)</li></ul>
+        </div>
+      </div>
+      <p style="margin-top:15px;">Reset all settings anytime using: <strong>"Reset All to Defaults"</strong></p>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Interface Overview -->
+    <section class="docs-section" id="s-interface">
+      <h2><span class="section-num"><i class="fas fa-desktop"></i></span> Interface Overview</h2>
+      <div class="docs-card-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px,1fr));">
+        <div class="docs-info-card">
+          <h4><i class="fas fa-sliders-h"></i> Left Panel – Tool Options</h4>
+          <p>Displays settings for the selected tool.</p>
+          <ul><li>Position (X, Y)</li><li>Rotation</li><li>Scale (Width / Height)</li><li>Lock Aspect Ratio</li><li>Reset Transform</li></ul>
+        </div>
+        <div class="docs-info-card">
+          <h4><i class="fas fa-vector-square"></i> Center – Canvas</h4>
+          <p>Main workspace for editing.</p>
+          <ul><li>Real-time visual feedback</li><li>Supports zooming, panning and guides</li></ul>
+        </div>
+        <div class="docs-info-card">
+          <h4><i class="fas fa-layer-group"></i> Right Panel – Layers</h4>
+          <ul><li>Visibility toggle</li><li>Lock state</li><li>Blend mode</li><li>Opacity</li><li>Effects (FX)</li></ul>
+        </div>
+        <div class="docs-info-card">
+          <h4><i class="fas fa-bars"></i> Top Menu</h4>
+          <p>File / Edit / Layer / Settings</p>
+          <h4 style="margin-top:15px;"><i class="fas fa-grip-lines"></i> Bottom Bar</h4>
+          <p>Displays zoom level, active layer and quick info.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Canvas Controls -->
+    <section class="docs-section" id="s-canvas">
+      <h2><span class="section-num"><i class="fas fa-expand-arrows-alt"></i></span> Canvas Controls</h2>
+      <div class="docs-shortcut-table">
+        <div class="shortcut-row"><kbd>Ctrl + +</kbd><span>Zoom In</span></div>
+        <div class="shortcut-row"><kbd>Ctrl + -</kbd><span>Zoom Out</span></div>
+        <div class="shortcut-row"><kbd>Scroll Wheel</kbd><span>Zoom</span></div>
+        <div class="shortcut-row"><kbd>Middle Mouse</kbd><span>Pan</span></div>
+        <div class="shortcut-row"><kbd>Ctrl + 0</kbd><span>Fit to screen</span></div>
+        <div class="shortcut-row"><kbd>Ctrl + 1</kbd><span>100% zoom</span></div>
+        <div class="shortcut-row"><kbd>Ctrl + R</kbd><span>Toggle ruler</span></div>
+        <div class="shortcut-row"><kbd>Shift</kbd><span>Snap movement</span></div>
+      </div>
+    </section>
+
+    <hr class="docs-divider">
+    <!-- Layer System -->
+    <section class="docs-section" id="s-layers">
+      <h2><span class="section-num"><i class="fas fa-layer-group"></i></span> Layer System</h2>
+      <p>Layer Forge Studio uses a non-destructive layer system.</p>
+      <h3 class="docs-sub-heading">Layer Types</h3>
+      <div class="docs-card-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px,1fr));">
+        <div class="docs-info-card"><h4><i class="fas fa-image"></i> Raster Layer</h4><p>Pixel-based drawing layer</p></div>
+        <div class="docs-info-card"><h4><i class="fas fa-star"></i> Shape Layer <span class="badge-new">Smart</span></h4><p>Vector shapes — editable anytime</p></div>
+        <div class="docs-info-card"><h4><i class="fas fa-font"></i> Text Layer <span class="badge-new">Smart</span></h4><p>Editable text — font, size, color, arch</p></div>
+        <div class="docs-info-card"><h4><i class="fas fa-folder"></i> Folder</h4><p>Group and organize layers</p></div>
+        <div class="docs-info-card"><h4><i class="fas fa-adjust"></i> Adjustment Layer</h4><p>Non-destructive color corrections</p></div>
+        <div class="docs-info-card"><h4><i class="fas fa-photo-video"></i> Image Layer</h4><p>Imported images</p></div>
+      </div>
+      <div class="docs-alert" style="margin-top:20px;">
+        <i class="fas fa-magic"></i>
+        <div><strong>Smart Layers:</strong> Shape and Text layers remain fully editable. Change colors, size, text content, shape type at any time without losing quality. If you need to paint on them, you will be prompted to rasterize first.</div>
+      </div>
+      <h3 class="docs-sub-heading">Each layer supports:</h3>
+      <ul class="feature-list">
+        <li>Blend Modes</li><li>Opacity control</li>
+        <li>Layer Mask (non-destructive hide/reveal)</li>
+        <li>Layer Effects (FX)</li>
+        <li>Clipping Mask (clip content to layer below)</li>
+      </ul>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Layer Effects -->
+    <section class="docs-section" id="s-effects">
+      <h2><span class="section-num"><i class="fas fa-magic"></i></span> Layer Effects (FX)</h2>
+      <p>Layer effects are applied non-destructively and can be stacked.</p>
+      <div class="docs-card-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px,1fr));">
+        <div class="docs-info-card"><h4>Drop Shadow</h4></div>
+        <div class="docs-info-card"><h4>Inner Shadow</h4></div>
+        <div class="docs-info-card"><h4>Outer Glow</h4></div>
+        <div class="docs-info-card"><h4>Inner Glow</h4></div>
+        <div class="docs-info-card"><h4>Bevel &amp; Emboss</h4></div>
+        <div class="docs-info-card"><h4>Stroke</h4></div>
+        <div class="docs-info-card"><h4>Color Overlay</h4></div>
+        <div class="docs-info-card"><h4>Gradient Overlay</h4></div>
+        <div class="docs-info-card"><h4>Gaussian Blur</h4></div>
+        <div class="docs-info-card"><h4>Blur</h4></div>
+        <div class="docs-info-card"><h4>Background Blur</h4></div>
+      </div>
+      <h3 class="docs-sub-heading">Each effect has detailed settings:</h3>
+      <ul class="feature-list">
+        <li>Color, opacity, angle, distance, spread, size</li>
+        <li>Gradient colors and types</li>
+        <li>Stroke position and size</li>
+        <li>Highlight / shadow controls for Bevel &amp; Emboss</li>
+        <li>Add multiple effects to a single layer</li>
+        <li>Enable / disable each effect independently</li>
+        <li>Edit anytime without losing data</li>
+      </ul>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Blend Modes -->
+    <section class="docs-section" id="s-blend">
+      <h2><span class="section-num"><i class="fas fa-circle-half-stroke"></i></span> Blend Modes</h2>
+      <p>Blend modes define how layers interact with each other.</p>
+      <div class="docs-card-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="docs-info-card">
+          <h4>Built-in Blend Modes</h4>
+          <ul class="blend-grid">
+            <li>Normal</li><li>Multiply</li><li>Screen</li><li>Overlay</li>
+            <li>Soft Light</li><li>Hard Light</li><li>Darken</li><li>Lighten</li>
+            <li>Color Dodge</li><li>Color Burn</li><li>Difference</li><li>Exclusion</li>
+          </ul>
+        </div>
+        <div class="docs-info-card">
+          <h4>Custom Blend Modes</h4>
+          <ul class="feature-list">
+            <li>Create your own blend modes</li>
+            <li>Right click Project window → Layer Forge Studio → Add Custom Blend Mode</li>
+            <li>Implement custom shaders</li>
+            <li>They appear automatically in the blend mode dropdown</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Tools -->
+    <section class="docs-section" id="s-tools">
+      <h2><span class="section-num"><i class="fas fa-tools"></i></span> Tools &amp; Shortcuts</h2>
+
+      <h3 class="docs-sub-heading">General Shortcuts</h3>
+      <div class="docs-shortcut-table">
+        <div class="shortcut-row"><kbd>Ctrl+S</kbd><span>Save</span></div>
+        <div class="shortcut-row"><kbd>Ctrl+Shift+S</kbd><span>Save As</span></div>
+        <div class="shortcut-row"><kbd>Ctrl+Z</kbd><span>Undo</span></div>
+        <div class="shortcut-row"><kbd>Ctrl+Shift+Z</kbd><span>Redo</span></div>
+        <div class="shortcut-row"><kbd>Ctrl+E</kbd><span>Export</span></div>
+        <div class="shortcut-row"><kbd>Ctrl+J</kbd><span>Duplicate Layer</span></div>
+        <div class="shortcut-row"><kbd>Ctrl+G</kbd><span>Group Layers into Folder</span></div>
+        <div class="shortcut-row"><kbd>Ctrl+T</kbd><span>Free Transform</span></div>
+        <div class="shortcut-row"><kbd>Ctrl+C / X / V</kbd><span>Copy / Cut / Paste</span></div>
+        <div class="shortcut-row"><kbd>Ctrl+D</kbd><span>Deselect</span></div>
+        <div class="shortcut-row"><kbd>Ctrl+Shift+I</kbd><span>Invert Selection</span></div>
+        <div class="shortcut-row"><kbd>Delete</kbd><span>Clear selected area</span></div>
+      </div>
+
+      <h3 class="docs-sub-heading" style="margin-top:30px;">Tool Reference</h3>
+      <div class="tool-list">
+        <div class="tool-item"><div class="tool-key">V</div><div class="tool-info"><strong>Move Tool</strong><p>Drag to reposition. Arrow keys for 1px nudge. Shift+drag for axis-constrained. Snaps to canvas edges, centers, and other layers.</p></div></div>
+        <div class="tool-item"><div class="tool-key">B</div><div class="tool-info"><strong>Brush Tool</strong><p>Adjustable size, opacity, hardness, spacing. Custom brush support (PNG textures). Pressure-sensitive drawing.</p></div></div>
+        <div class="tool-item"><div class="tool-key">E</div><div class="tool-info"><strong>Eraser Tool</strong><p>Same controls as brush. Erases to transparency.</p></div></div>
+        <div class="tool-item"><div class="tool-key">G</div><div class="tool-info"><strong>Fill Tool</strong><p>Flood fill with tolerance control. Fill with current color.</p></div></div>
+        <div class="tool-item"><div class="tool-key">U</div><div class="tool-info"><strong>Shape Tool</strong><p>Rectangle, Rounded Rectangle, Ellipse, Line, Polygon. Solid color or gradient fill. Stroke with color/gradient. Shift+drag for constrained proportions.</p></div></div>
+        <div class="tool-item"><div class="tool-key">P</div><div class="tool-info"><strong>Pen Tool</strong><p>Bezier path creation. Add, move, delete anchor points. Convert between smooth and corner points. Fill and stroke with color or gradient.</p></div></div>
+        <div class="tool-item"><div class="tool-key">M</div><div class="tool-info"><strong>Marquee Tool</strong><p>Rectangular / Elliptical selection. Shift for square/circle constraint.</p></div></div>
+        <div class="tool-item"><div class="tool-key">L</div><div class="tool-info"><strong>Lasso Tool</strong><p>Freehand selection.</p></div></div>
+        <div class="tool-item"><div class="tool-key">W</div><div class="tool-info"><strong>Quick Selection Tool</strong><p>Automatic edge-based selection. Adjustable tolerance.</p></div></div>
+        <div class="tool-item"><div class="tool-key">T</div><div class="tool-info"><strong>Text Tool</strong><p>Uses project fonts (.ttf / .otf). Font size, color, bold, italic, alignment. Line spacing. Text arch (curved text). Gradient text fill.</p></div></div>
+        <div class="tool-item"><div class="tool-key">S</div><div class="tool-info"><strong>Clone Stamp Tool</strong><p>Alt+click to set source. Paint to clone pixels from source area.</p></div></div>
+        <div class="tool-item"><div class="tool-key">I</div><div class="tool-info"><strong>Eye Dropper</strong><p>Click to pick color from canvas.</p></div></div>
+        <div class="tool-item"><div class="tool-key">C</div><div class="tool-info"><strong>Crop Tool</strong><p>Drag handles to define crop area. Rule of thirds guide. Enter to apply, Escape to cancel.</p></div></div>
+      </div>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Transform -->
+    <section class="docs-section" id="s-transform">
+      <h2><span class="section-num"><i class="fas fa-expand"></i></span> Transform System</h2>
+      <div class="docs-card-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px,1fr));">
+        <div class="docs-info-card">
+          <h4><kbd>Ctrl+T</kbd> Free Transform</h4>
+          <ul><li>Move, rotate, scale any layer</li><li>Corner handles for proportional resize</li><li>Rotation by dragging outside bounding box</li><li>Enter to apply, Escape to cancel</li></ul>
+        </div>
+        <div class="docs-info-card">
+          <h4>Perspective Transform</h4>
+          <ul><li>Activate from Move Tool options</li><li>Drag corners independently for perspective distortion</li><li>Enter to apply, Escape to cancel</li></ul>
+        </div>
+        <div class="docs-info-card">
+          <h4>Mesh Warp</h4>
+          <ul><li>Activate from Move Tool options</li><li>Grid-based mesh deformation</li><li>Drag control points to warp the image</li><li>Enter to apply, Escape to cancel</li></ul>
+        </div>
+        <div class="docs-info-card">
+          <h4>Flip</h4>
+          <ul><li>Flip Horizontal</li><li>Flip Vertical</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Layer Masks -->
+    <section class="docs-section" id="s-masks">
+      <h2><span class="section-num"><i class="fas fa-mask"></i></span> Layer Masks</h2>
+      <p>Layer masks allow non-destructive hide/reveal of layer content.</p>
+      <ul class="feature-list">
+        <li>Add a mask: <code>Layer menu → Add Layer Mask</code></li>
+        <li>White = visible, Black = hidden, Gray = partial</li>
+        <li>Paint on mask with Brush / Eraser tools</li>
+        <li>Enable / Disable mask without deleting</li>
+        <li>Apply mask to permanently merge it</li>
+        <li>Delete mask to remove it</li>
+      </ul>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Layer Actions -->
+    <section class="docs-section" id="s-layer-actions">
+      <h2><span class="section-num"><i class="fas fa-list-check"></i></span> Layer Actions</h2>
+      <ul class="feature-list">
+        <li>Rename Layer</li>
+        <li>Duplicate Layer <kbd>Ctrl+J</kbd></li>
+        <li>Add / Delete / Apply Layer Mask</li>
+        <li>Toggle Mask Enabled</li>
+        <li>Copy / Paste / Clear Layer Effects</li>
+        <li>Create Clipping Mask</li>
+        <li>Merge Down</li>
+        <li>Flatten Image</li>
+        <li>Group Layers <kbd>Ctrl+G</kbd></li>
+        <li>Delete Layer</li>
+        <li>Drag and drop to reorder layers</li>
+      </ul>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Export -->
+    <section class="docs-section" id="s-export">
+      <h2><span class="section-num"><i class="fas fa-file-export"></i></span> Export System</h2>
+      <p>Export your work as PNG or JPEG via <code>File → Export</code> <kbd>Ctrl+E</kbd></p>
+      <div class="docs-card-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="docs-info-card">
+          <h4>Export Settings</h4>
+          <ul><li>File Name</li><li>Format: PNG / JPEG</li><li>JPEG Quality (1–100)</li><li>Output Path (folder picker)</li></ul>
+        </div>
+        <div class="docs-info-card">
+          <h4>Texture Import Settings (auto-applied)</h4>
+          <ul><li>Texture Type: Default, Sprite 2D, Normal Map, etc.</li><li>Sprite Mode: Single / Multiple</li><li>Pixels Per Unit</li><li>Compression Quality</li><li>Generate Mip Maps</li><li>Max Texture Size</li></ul>
+        </div>
+      </div>
+      <div class="docs-alert" style="margin-top:15px;">
+        <i class="fas fa-info-circle"></i>
+        <div>Texture import settings are applied automatically to the exported image in Unity's texture importer — no manual configuration needed.</div>
+      </div>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Adjustment Layers -->
+    <section class="docs-section" id="s-adjustment">
+      <h2><span class="section-num"><i class="fas fa-sliders"></i></span> Adjustment Layers</h2>
+      <p>Non-destructive color corrections applied to all layers below.</p>
+      <div class="docs-card-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="docs-info-card">
+          <h4>Brightness / Contrast</h4>
+          <ul><li>Brightness: Lighten or darken</li><li>Contrast: Increase or decrease</li></ul>
+        </div>
+        <div class="docs-info-card">
+          <h4>Hue / Saturation</h4>
+          <ul><li>Hue: Shift color spectrum</li><li>Saturation: Increase or decrease color intensity</li></ul>
+        </div>
+      </div>
+      <p style="margin-top:10px;">Adjustment layers have their own opacity and blend mode controls.</p>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Custom Extensions -->
+    <section class="docs-section" id="s-extensions">
+      <h2><span class="section-num"><i class="fas fa-puzzle-piece"></i></span> Custom Extensions (Plugin System)</h2>
+      <div class="docs-card-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="docs-info-card">
+          <h4>Custom Brushes</h4>
+          <ul><li>Right click Project window</li><li>Layer Forge Studio → Add Custom Brush</li><li>Supports PNG images, Grayscale textures, Transparent textures</li></ul>
+        </div>
+        <div class="docs-info-card">
+          <h4>Custom Blend Modes</h4>
+          <ul><li>Right click Project window</li><li>Layer Forge Studio → Add Custom Blend Mode</li><li>Write custom shader code</li><li>Automatically integrated into the blend mode list</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Auto-Save -->
+    <section class="docs-section" id="s-autosave">
+      <h2><span class="section-num"><i class="fas fa-clock-rotate-left"></i></span> Auto-Save &amp; Recovery</h2>
+      <ul class="feature-list">
+        <li>Auto-save runs at configurable intervals (default: 5 minutes)</li>
+        <li>Creates recovery snapshots without overwriting your file</li>
+        <li>On next open, if a newer auto-save exists, you are prompted to recover</li>
+        <li>Configure slots and interval in <code>Settings → Performance</code></li>
+      </ul>
+      <div class="docs-alert" style="margin-top:15px;">
+        <i class="fas fa-shield-halved"></i>
+        <div>Also supports Rulers &amp; Guides: <kbd>Ctrl+R</kbd> to toggle rulers, drag from ruler to create guides, layers snap to guides when snapping is enabled.</div>
+      </div>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Keyboard Reference -->
+    <section class="docs-section" id="s-shortcuts">
+      <h2><span class="section-num"><i class="fas fa-keyboard"></i></span> Keyboard Shortcut Reference</h2>
+      <div class="docs-card-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px,1fr));">
+        <div class="docs-info-card">
+          <h4>File</h4>
+          <div class="docs-shortcut-table compact">
+            <div class="shortcut-row"><kbd>Ctrl+S</kbd><span>Save</span></div>
+            <div class="shortcut-row"><kbd>Ctrl+Shift+S</kbd><span>Save As</span></div>
+            <div class="shortcut-row"><kbd>Ctrl+E</kbd><span>Export</span></div>
+          </div>
+        </div>
+        <div class="docs-info-card">
+          <h4>Edit</h4>
+          <div class="docs-shortcut-table compact">
+            <div class="shortcut-row"><kbd>Ctrl+Z</kbd><span>Undo</span></div>
+            <div class="shortcut-row"><kbd>Ctrl+Shift+Z</kbd><span>Redo</span></div>
+            <div class="shortcut-row"><kbd>Ctrl+T</kbd><span>Free Transform</span></div>
+            <div class="shortcut-row"><kbd>Ctrl+J</kbd><span>Duplicate Layer</span></div>
+            <div class="shortcut-row"><kbd>Ctrl+G</kbd><span>Group Layers</span></div>
+            <div class="shortcut-row"><kbd>Delete</kbd><span>Clear Selection</span></div>
+          </div>
+        </div>
+        <div class="docs-info-card">
+          <h4>Tools</h4>
+          <div class="docs-shortcut-table compact">
+            <div class="shortcut-row"><kbd>V</kbd><span>Move</span></div>
+            <div class="shortcut-row"><kbd>B</kbd><span>Brush</span></div>
+            <div class="shortcut-row"><kbd>E</kbd><span>Eraser</span></div>
+            <div class="shortcut-row"><kbd>G</kbd><span>Fill</span></div>
+            <div class="shortcut-row"><kbd>U</kbd><span>Shape</span></div>
+            <div class="shortcut-row"><kbd>M</kbd><span>Marquee</span></div>
+            <div class="shortcut-row"><kbd>L</kbd><span>Lasso</span></div>
+            <div class="shortcut-row"><kbd>W</kbd><span>Quick Selection</span></div>
+            <div class="shortcut-row"><kbd>T</kbd><span>Text</span></div>
+            <div class="shortcut-row"><kbd>P</kbd><span>Pen</span></div>
+            <div class="shortcut-row"><kbd>S</kbd><span>Clone Stamp</span></div>
+            <div class="shortcut-row"><kbd>I</kbd><span>Eye Dropper</span></div>
+            <div class="shortcut-row"><kbd>C</kbd><span>Crop</span></div>
+          </div>
+        </div>
+        <div class="docs-info-card">
+          <h4>Canvas</h4>
+          <div class="docs-shortcut-table compact">
+            <div class="shortcut-row"><kbd>Ctrl+0</kbd><span>Fit to Screen</span></div>
+            <div class="shortcut-row"><kbd>Ctrl+1</kbd><span>100% Zoom</span></div>
+            <div class="shortcut-row"><kbd>Ctrl++</kbd><span>Zoom In</span></div>
+            <div class="shortcut-row"><kbd>Ctrl+-</kbd><span>Zoom Out</span></div>
+            <div class="shortcut-row"><kbd>Ctrl+R</kbd><span>Toggle Rulers</span></div>
+            <div class="shortcut-row"><kbd>Middle Mouse</kbd><span>Pan</span></div>
+            <div class="shortcut-row"><kbd>Scroll Wheel</kbd><span>Zoom</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Compatibility -->
+    <section class="docs-section" id="s-compat">
+      <h2><span class="section-num"><i class="fas fa-check-circle"></i></span> Platform Compatibility</h2>
+      <ul class="feature-list">
+        <li>All file paths use Unity's cross-platform APIs</li>
+        <li>Compute shaders work on DirectX, Metal, and Vulkan</li>
+        <li>Hidden .lfmeta files use dot-prefix convention (native on macOS)</li>
+        <li>No platform-specific dependencies</li>
+        <li>Minimum Unity version: <strong>2020.2+</strong></li>
+        <li>Fully compatible with <strong>Unity 6 (6000.x)</strong></li>
+      </ul>
+    </section>
+
+    <hr class="docs-divider">
+
+    <!-- Final Note -->
+    <section class="docs-section" id="s-final">
+      <div class="docs-final-card">
+        <h2>Layer Forge Studio is built for speed, flexibility and seamless integration inside Unity.</h2>
+        <p class="docs-final-tagline">Create. Edit. Apply. Continue.</p>
+        <a href="layer-forge-studio.html" class="btn-primary" style="display:inline-flex; align-items:center; gap:8px; margin-top:20px; text-decoration:none;">
+          <i class="fa-brands fa-unity"></i> View on Asset Store
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Sidebar TOC -->
+  <aside class="docs-sidebar" id="docs-sidebar">
+    <div class="sidebar-inner">
+      <div class="sidebar-title"><i class="fas fa-book-open"></i> Contents</div>
+      <nav class="toc-nav">
+        <a href="#s-getting-started" class="toc-link">Getting Started</a>
+        <a href="#s-project-files" class="toc-link">Project Files (.lfs)</a>
+        <a href="#s-settings" class="toc-link">Settings Panel</a>
+        <a href="#s-interface" class="toc-link">Interface Overview</a>
+        <a href="#s-canvas" class="toc-link">Canvas Controls</a>
+        <a href="#s-layers" class="toc-link">Layer System</a>
+        <a href="#s-effects" class="toc-link">Layer Effects (FX)</a>
+        <a href="#s-blend" class="toc-link">Blend Modes</a>
+        <a href="#s-tools" class="toc-link">Tools &amp; Shortcuts</a>
+        <a href="#s-transform" class="toc-link">Transform System</a>
+        <a href="#s-masks" class="toc-link">Layer Masks</a>
+        <a href="#s-layer-actions" class="toc-link">Layer Actions</a>
+        <a href="#s-export" class="toc-link">Export System</a>
+        <a href="#s-adjustment" class="toc-link">Adjustment Layers</a>
+        <a href="#s-extensions" class="toc-link">Custom Extensions</a>
+        <a href="#s-autosave" class="toc-link">Auto-Save &amp; Recovery</a>
+        <a href="#s-shortcuts" class="toc-link">Shortcut Reference</a>
+        <a href="#s-compat" class="toc-link">Compatibility</a>
+      </nav>
+      <a href="layer-forge-studio.html" class="sidebar-back-btn"><i class="fas fa-arrow-left"></i> Back to Asset</a>
+    </div>
+  </aside>
+</div>
+
+<footer id="jugas_footer">
+  <div class="copy-container">
+    <div class="footer-social-icons">
+      <a href="https://x.com/tiergamestudio" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://www.instagram.com/tiergamestudio/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://discord.gg/ESvwrchUwA" target="_blank"><i class="fab fa-discord"></i></a>
+      <a href="https://assetstore.unity.com/publishers/124104" target="_blank"><i class="fa-brands fa-unity"></i></a>
+    </div>
+    <div class="jugas_footer_copyright">&copy; 2026 Tier Studios. All rights reserved.</div>
+  </div>
+</footer>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="assets/js/script.js"></script>
+<script>
+  const sections = document.querySelectorAll('.docs-section');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    tocLinks.forEach(l => {
+      l.classList.remove('active');
+      if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
