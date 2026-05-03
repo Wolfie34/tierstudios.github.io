@@ -64,34 +64,36 @@
                         <!-- Media Gallery -->
                         <div class="product-gallery">
                             <div class="gallery-main-view" id="gallery-main-view">
+                                <button class="gallery-nav prev" onclick="navigateGallery(-1)"><i class="fas fa-chevron-left"></i></button>
+                                <button class="gallery-nav next" onclick="navigateGallery(1)"><i class="fas fa-chevron-right"></i></button>
                                 <!-- Default is Video -->
                                 <iframe id="gallery-video" src="https://www.youtube.com/embed/4qqhoKBtlvc" title="Layer Forge Studio Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                <img id="gallery-image" src="" alt="Layer Forge Studio Screenshot" style="display: none;">
+                                <img id="gallery-image" src="" alt="Layer Forge Studio Screenshot" style="display: none;" onclick="openLightbox()">
                             </div>
                             
                             <div class="gallery-thumbnails">
                                 <!-- Video Thumbnail (YouTube HQ Thumbnail) -->
-                                <div class="thumb-item active" onclick="swapMedia('video', 'https://www.youtube.com/embed/4qqhoKBtlvc', this)">
+                                <div class="thumb-item active" data-type="video" data-src="https://www.youtube.com/embed/4qqhoKBtlvc">
                                     <img src="https://img.youtube.com/vi/4qqhoKBtlvc/maxresdefault.jpg" alt="Video Trailer">
                                     <div class="play-icon-overlay"><i class="fas fa-play"></i></div>
                                 </div>
                                 <!-- Images -->
-                                <div class="thumb-item" onclick="swapMedia('image', 'assets/img/layer-forge-studio/Page_1.png', this)">
+                                <div class="thumb-item" data-type="image" data-src="assets/img/layer-forge-studio/Page_1.png">
                                     <img src="assets/img/layer-forge-studio/Page_1.png" alt="Screenshot 1">
                                 </div>
-                                <div class="thumb-item" onclick="swapMedia('image', 'assets/img/layer-forge-studio/Page_2.png', this)">
+                                <div class="thumb-item" data-type="image" data-src="assets/img/layer-forge-studio/Page_2.png">
                                     <img src="assets/img/layer-forge-studio/Page_2.png" alt="Screenshot 2">
                                 </div>
-                                <div class="thumb-item" onclick="swapMedia('image', 'assets/img/layer-forge-studio/Page_3.png', this)">
+                                <div class="thumb-item" data-type="image" data-src="assets/img/layer-forge-studio/Page_3.png">
                                     <img src="assets/img/layer-forge-studio/Page_3.png" alt="Screenshot 3">
                                 </div>
-                                <div class="thumb-item" onclick="swapMedia('image', 'assets/img/layer-forge-studio/Page_4.png', this)">
+                                <div class="thumb-item" data-type="image" data-src="assets/img/layer-forge-studio/Page_4.png">
                                     <img src="assets/img/layer-forge-studio/Page_4.png" alt="Screenshot 4">
                                 </div>
-                                <div class="thumb-item" onclick="swapMedia('image', 'assets/img/layer-forge-studio/Page_5.png', this)">
+                                <div class="thumb-item" data-type="image" data-src="assets/img/layer-forge-studio/Page_5.png">
                                     <img src="assets/img/layer-forge-studio/Page_5.png" alt="Screenshot 5">
                                 </div>
-                                <div class="thumb-item" onclick="swapMedia('image', 'assets/img/layer-forge-studio/Page_6.png', this)">
+                                <div class="thumb-item" data-type="image" data-src="assets/img/layer-forge-studio/Page_6.png">
                                     <img src="assets/img/layer-forge-studio/Page_6.png" alt="Screenshot 6">
                                 </div>
                             </div>
@@ -106,63 +108,9 @@
                                 <i class="fas fa-book"></i> Documentation
                             </a>
                         </div>
-                    </div>
-
-                    <!-- Right Column: Details -->
-                    <div class="product-right-col">
-                        <div class="detail-section">
-                            <h3>Description</h3>
-                            <p>Edit, design and enhance your images directly inside Unity — no external tools, no broken workflow.</p>
-                            <p>Layer Forge Studio is a powerful, layer-based image and texture editor built for Unity. It allows you to modify, create and refine visuals in real-time without ever leaving the engine.</p>
-                            <p>Whether you're polishing UI, creating textures, or making quick adjustments to assets, Layer Forge Studio gives you a fast, intuitive and complete editing workflow.</p>
-                        </div>
-
-                        <div class="detail-section">
-                            <h3>Why Layer Forge Studio?</h3>
-                            <p>Stop switching between external software and Unity.<br>
-                            With Layer Forge Studio, your image editing pipeline stays inside your project from start to finish.<br>
-                            <strong>Right Click → Edit → Apply</strong><br>
-                            That is the core workflow.</p>
-                        </div>
-
-                        <div class="detail-section">
-                            <h3>Key Features</h3>
-                            <ul class="feature-list">
-                                <li><strong>Real-Time Editing:</strong> See your changes instantly while you work.</li>
-                                <li><strong>Layer-Based Workflow:</strong> Create and edit with a flexible multi-layer system designed for fast iteration.</li>
-                                <li><strong>Advanced Effects:</strong> Add blur, glow, shadow, color overlays and more with full control.</li>
-                                <li><strong>Brush & Paint Tools:</strong> Edit textures directly with intuitive brush-based tools.</li>
-                                <li><strong>One-Click Workflow:</strong> Right-click any supported image, open it in Layer Forge Studio, make your changes and apply them back into your project.</li>
-                                <li><strong>Auto Save & Recovery:</strong> Includes an auto-save system designed for professional workflows, helping protect your work while editing.</li>
-                                <li><strong>.lfs Project Save System:</strong> Save full editable Layer Forge projects as .lfs files for standalone workflows.</li>
-                                <li><strong>.lfsmeta Smart Re-Editing:</strong> Stores editable workflow data, so you can reopen the same image later and continue editing without losing layer setups.</li>
-                                <li><strong>Non-Destructive Continuation:</strong> Your workflow is not limited to a one-time export. Reopen, adjust and continue working whenever you need.</li>
-                                <li><strong>Built for Unity Pipelines:</strong> Designed to fit naturally into Unity-based art and production workflows.</li>
-                            </ul>
-                        </div>
-
-                        <div class="detail-section">
-                            <h3>Use Cases</h3>
-                            <ul class="feature-list">
-                                <li>UI image editing and polishing</li>
-                                <li>Texture refinement and paintovers</li>
-                                <li>Creating stylized visuals directly in-engine</li>
-                                <li>Rapid iteration on imported assets</li>
-                                <li>Re-editable workflow for production assets</li>
-                                <li>Artists and developers who want to stay inside Unity</li>
-                            </ul>
-                        </div>
-
-                        <div class="detail-section">
-                            <h3>What Makes It Different</h3>
-                            <p>Layer Forge Studio is not just an image editor. <strong>It is a workflow system.</strong></p>
-                            <p>With .lfs project files, .lfsmeta re-editable asset data, built-in auto-save and direct in-project editing, it gives you a faster and more flexible way to work with visuals inside Unity.</p>
-                            <p>No context switching.<br>
-                            No repetitive export/import cycle.<br>
-                            Just a faster way to create.</p>
-                        </div>
-
-                        <div class="detail-section">
+                        
+                        <!-- Technical Details moved to Left Column -->
+                        <div class="detail-section" style="margin-top: 40px;">
                             <h3>Technical Details</h3>
                             <div class="tech-grid">
                                 <div class="tech-card">
@@ -220,6 +168,16 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Right Column: Details -->
+                    <div class="product-right-col">
+                        <div class="detail-section">
+                            <h3>Description</h3>
+                            <p>Edit, design and enhance your images directly inside Unity — no external tools, no broken workflow.</p>
+                            <p>Layer Forge Studio is a powerful, layer-based image and texture editor built for Unity. It allows you to modify, create and refine visuals in real-time without ever leaving the engine.</p>
+                            <p>Whether you're polishing UI, creating textures, or making quick adjustments to assets, Layer Forge Studio gives you a fast, intuitive and complete editing workflow.</p>
+                        </div>
 
                     </div>
                 </div>
@@ -227,6 +185,12 @@
             </main>
         </div>
 
+        <!-- Lightbox Modal -->
+        <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox()">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <img class="lightbox-content" id="lightbox-img">
+        </div>
+        
         <!-- Footer -->
         <footer id="jugas_footer">
             <div class="copy-container">
@@ -252,30 +216,64 @@
     
     <!-- Gallery Script -->
     <script>
-        function swapMedia(type, source, thumbElement) {
+        const thumbnails = document.querySelectorAll('.thumb-item');
+        let currentGalleryIndex = 0;
+
+        thumbnails.forEach((thumb, index) => {
+            thumb.addEventListener('click', () => {
+                currentGalleryIndex = index;
+                updateGallery();
+            });
+        });
+
+        function navigateGallery(direction) {
+            currentGalleryIndex += direction;
+            if (currentGalleryIndex < 0) currentGalleryIndex = thumbnails.length - 1;
+            if (currentGalleryIndex >= thumbnails.length) currentGalleryIndex = 0;
+            updateGallery();
+        }
+
+        function updateGallery() {
             const video = document.getElementById('gallery-video');
             const image = document.getElementById('gallery-image');
+            const activeThumb = thumbnails[currentGalleryIndex];
             
-            // Remove active class from all thumbs
-            document.querySelectorAll('.thumb-item').forEach(el => el.classList.remove('active'));
-            // Add active class to clicked thumb
-            thumbElement.classList.add('active');
+            const type = activeThumb.getAttribute('data-type');
+            const source = activeThumb.getAttribute('data-src');
 
+            // Update active styling
+            thumbnails.forEach(el => el.classList.remove('active'));
+            activeThumb.classList.add('active');
+
+            // Switch media
             if (type === 'video') {
                 image.style.display = 'none';
                 video.style.display = 'block';
-                // Reload iframe to ensure it plays nicely or just set src
                 if(video.src !== source) video.src = source;
             } else {
                 video.style.display = 'none';
-                // Stop video by resetting src
                 const currentSrc = video.src;
-                video.src = '';
+                video.src = ''; // Stop video
                 video.src = currentSrc;
                 
                 image.style.display = 'block';
                 image.src = source;
             }
+            
+            // Scroll thumbnail into view
+            activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+
+        function openLightbox() {
+            const image = document.getElementById('gallery-image');
+            if(image.style.display !== 'none') {
+                document.getElementById('lightbox-img').src = image.src;
+                document.getElementById('lightbox-modal').style.display = 'flex';
+            }
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').style.display = 'none';
         }
     </script>
 </body>
