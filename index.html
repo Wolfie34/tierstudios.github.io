@@ -1,1 +1,164 @@
-<h1>Tier Studios Çok Yakında!</h1>
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Tier Studios</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700|Open+Sans:400,700,400italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <!-- Highlight.js -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="index">
+    <div id="outer-wrapper">
+        <!-- Navigation -->
+        <nav class="tm-menu">
+            <div class="menu-wrap">
+                <div class="logo">
+                    <a href="index.html"><h2>Tier Studios</h2></a>
+                </div>
+                <div class="menu-right">
+                    <ul id="menu-items">
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="#">Kategoriler <i class="fas fa-angle-down"></i></a>
+                            <ul class="submenu">
+                                <li><a href="#">Yazılım</a></li>
+                                <li><a href="#">Tasarım</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Hakkımızda</a></li>
+                    </ul>
+                    <div class="theme-switch-wrapper">
+                        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Temayı Değiştir">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="tm-menu2"></div> <!-- Spacer for fixed nav -->
+
+        <!-- Header -->
+        <header id="header">
+            <div id="header-inner">
+                <h1>Tier Studios</h1>
+                <p class="description">Yazılım ve Teknoloji Günlüğü</p>
+            </div>
+        </header>
+
+        <!-- Main Content Wrapper -->
+        <div id="content-wrapper" class="row">
+            <!-- Main Content -->
+            <main id="main-wrapper">
+                <div class="post-grid">
+                    <!-- Post Grid Item Example -->
+                    <article class="post-grid-item">
+                        <div class="block-image">
+                            <a href="post.html" class="thumb">
+                                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="Web Geliştirme">
+                            </a>
+                            <div class="retitle">
+                                <div class="post-retitle">
+                                    <h2><a href="post.html">Modern Web Geliştirme Temelleri</a></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-body">
+                            <div class="resumo">
+                                <span>Web geliştirme dünyasına hızlı bir giriş yapın. HTML, CSS ve JavaScript kullanarak nasıl modern ve responsive web siteleri oluşturabileceğinizi öğrenin.</span>
+                            </div>
+                            <div class="post-meta">
+                                <span class="post-timestamp"><i class="fas fa-clock"></i> 3 Mayıs 2026</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Post Grid Item Example 2 -->
+                    <article class="post-grid-item">
+                        <div class="block-image">
+                            <a href="post.html" class="thumb">
+                                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" alt="C# Programlama">
+                            </a>
+                            <div class="retitle">
+                                <div class="post-retitle">
+                                    <h2><a href="post.html">C# ile Nesne Yönelimli Programlama</a></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-body">
+                            <div class="resumo">
+                                <span>Nesne yönelimli programlama prensiplerini C# üzerinden inceleyelim. Sınıflar, kalıtım ve polimorfizm hakkında her şey bu yazıda.</span>
+                            </div>
+                            <div class="post-meta">
+                                <span class="post-timestamp"><i class="fas fa-clock"></i> 2 Mayıs 2026</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Post Grid Item Example 3 -->
+                    <article class="post-grid-item">
+                        <div class="block-image">
+                            <a href="post.html" class="thumb">
+                                <img src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?auto=format&fit=crop&w=600&q=80" alt="Karanlık Tema">
+                            </a>
+                            <div class="retitle">
+                                <div class="post-retitle">
+                                    <h2><a href="post.html">Karanlık Tema ve Kullanıcı Deneyimi</a></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-body">
+                            <div class="resumo">
+                                <span>Modern web sitelerinde karanlık temanın önemi. Kullanıcıların göz yorgunluğunu azaltan ve estetik görünen arayüzler nasıl tasarlanır?</span>
+                            </div>
+                            <div class="post-meta">
+                                <span class="post-timestamp"><i class="fas fa-clock"></i> 1 Mayıs 2026</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Code test section for demonstration -->
+                <div class="code-test-section" style="margin-top: 40px;">
+                    <h2 class="section-title">Kod Vurgulama (Highlight.js) Testi</h2>
+                    <pre><code class="language-csharp">
+using System;
+
+namespace TierStudios
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Merhaba, GitHub Pages ve Dark Mode!");
+            Console.WriteLine("Kopyala butonu ve renkleri test edebilirsiniz.");
+        }
+    }
+}
+                    </code></pre>
+                </div>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer id="jugas_footer">
+            <div class="copy-container">
+                <div class="jugas_footer_copyright">
+                    &copy; 2026 Tier Studios. Tüm hakları saklıdır. | GitHub Pages Altyapısı Kullanılmıştır.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
