@@ -305,9 +305,7 @@ ul {
     text-transform: uppercase;
 }
 
-#header h1 span {
-    color: var(--main-color);
-}
+
 
 #header .description {
     font-family: 'Inter', sans-serif;
