@@ -18,8 +18,8 @@
     --border-color: #e2e8f0;
     --nav-text: #1a1a1a;
     --header-bg: transparent;
-    --footer-bg: #1a202c;
-    --footer-text: #a0aec0;
+    --footer-bg: #ffffff;
+    --footer-text: #4a5568;
     --shadow-color: rgba(0, 0, 0, 0.08);
     --glow-color: rgba(79, 193, 255, 0.3);
 }
@@ -393,7 +393,8 @@ ul {
 .product-stats {
     display: flex;
     align-items: center;
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
     margin-bottom: 25px;
 }
 
@@ -465,29 +466,24 @@ ul {
 
 .footer-social-icons {
     margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
 }
 
 .footer-social-icons a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: var(--bg-secondary);
-    color: var(--text-primary);
-    font-size: 20px;
-    margin: 0 8px;
+    color: var(--text-secondary);
+    font-size: 26px;
     transition: all 0.3s ease;
-    border: 1px solid var(--border-color);
 }
 
 .footer-social-icons a:hover {
-    background: var(--main-color);
-    color: #fff;
-    border-color: var(--main-color);
+    color: var(--main-color);
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px var(--glow-color);
 }
 
 .jugas_footer_copyright {
