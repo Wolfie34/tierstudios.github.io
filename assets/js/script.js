@@ -29,12 +29,15 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function updateIcon(theme) {
+        const logoImg = document.getElementById('site-logo');
         if (theme === 'dark') {
             themeIcon.classList.remove('fa-moon');
             themeIcon.classList.add('fa-sun');
+            if (logoImg) logoImg.src = 'assets/img/logo_dark.png';
         } else {
             themeIcon.classList.remove('fa-sun');
             themeIcon.classList.add('fa-moon');
+            if (logoImg) logoImg.src = 'assets/img/logo_light.png';
         }
     }
 
