@@ -271,23 +271,48 @@ ul {
     overflow: hidden;
 }
 
-/* Subtle animated background shape */
-#header::before {
+/* Moving Glowing Stars Background */
+#header::before, #header::after {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(79, 193, 255, 0.05) 0%, transparent 60%);
-    animation: rotateBg 30s linear infinite;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 0;
     pointer-events: none;
 }
 
-@keyframes rotateBg {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+#header::before {
+    background: transparent;
+    box-shadow: 
+        10vw 20vh 1px #fff, 25vw 45vh 2px rgba(79, 193, 255, 0.8), 
+        40vw 10vh 1px #fff, 55vw 60vh 1px rgba(79, 193, 255, 0.5), 
+        70vw 30vh 2px #fff, 85vw 80vh 1px rgba(79, 193, 255, 0.8),
+        15vw 70vh 1px #fff, 30vw 15vh 2px rgba(79, 193, 255, 0.5),
+        50vw 40vh 1px #fff, 65vw 85vh 2px rgba(79, 193, 255, 0.8),
+        80vw 20vh 1px #fff, 95vw 50vh 1px rgba(79, 193, 255, 0.5),
+        5vw 90vh 2px #fff, 90vw 10vh 1px rgba(79, 193, 255, 0.8),
+        45vw 75vh 1px #fff, 20vw 5vh 2px rgba(79, 193, 255, 0.5);
+    animation: starsMove 100s linear infinite;
+    opacity: 0.4;
+}
+
+#header::after {
+    background: transparent;
+    box-shadow: 
+        12vw 25vh 1px rgba(79, 193, 255, 0.6), 28vw 48vh 1px #fff, 
+        42vw 12vh 2px rgba(79, 193, 255, 0.4), 58vw 62vh 1px #fff, 
+        72vw 32vh 1px rgba(79, 193, 255, 0.6), 88vw 82vh 2px #fff,
+        18vw 72vh 1px rgba(79, 193, 255, 0.4), 33vw 18vh 1px #fff,
+        52vw 42vh 2px rgba(79, 193, 255, 0.6), 68vw 88vh 1px #fff;
+    animation: starsMove 150s linear infinite reverse;
+    opacity: 0.3;
+}
+
+@keyframes starsMove {
+    from { transform: translateY(0); }
+    to { transform: translateY(-1000px); }
 }
 
 #header-inner {
