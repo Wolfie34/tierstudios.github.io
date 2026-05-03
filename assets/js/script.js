@@ -3,6 +3,28 @@ document.addEventListener("DOMContentLoaded", function () {
     const logoImg = document.getElementById('site-logo');
     if (logoImg) logoImg.src = 'assets/img/logo_dark.PNG';
 
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const menuItems = document.getElementById('menu-items');
+
+    if (menuToggle && menuItems) {
+        menuToggle.addEventListener('click', function() {
+            menuItems.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            document.body.classList.toggle('menu-open'); // Prevent scrolling
+        });
+
+        // Close menu when clicking a link
+        const navLinks = menuItems.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuItems.classList.remove('active');
+                menuToggle.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            });
+        });
+    }
+
     // ==========================================
     // Code Highlighting & Copy Logic (Gemini Style)
     // ==========================================
