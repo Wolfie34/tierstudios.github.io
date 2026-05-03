@@ -889,11 +889,13 @@ ul {
 }
 
 .product-detail-header .product-summary {
-    font-size: 18px;
-    color: var(--text-secondary);
-    max-width: 800px;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text-primary);
+    max-width: 900px;
     margin: 0 auto;
     font-family: 'Inter', sans-serif;
+    line-height: 1.6;
 }
 
 .product-detail-layout {
