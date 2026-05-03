@@ -36,32 +36,7 @@
 </nav>
 <div class="tm-menu2"></div>
 <div class="docs-layout">
-  <!-- Sticky Sidebar TOC -->
-  <aside class="docs-sidebar" id="docs-sidebar">
-    <div class="sidebar-inner">
-      <div class="sidebar-title"><i class="fas fa-book-open"></i> Contents</div>
-      <nav class="toc-nav">
-        <a href="#s0" class="toc-link">0. Namespace Structure</a>
-        <a href="#s1" class="toc-link">1. Basic Initialization</a>
-        <a href="#s2" class="toc-link">2. Emission Control</a>
-        <a href="#s3" class="toc-link">3. Emission Settings</a>
-        <a href="#s4" class="toc-link">4. Lifetime &amp; Size</a>
-        <a href="#s5" class="toc-link">5. Color &amp; Gradient</a>
-        <a href="#s6" class="toc-link">6. Rotation Settings</a>
-        <a href="#s7" class="toc-link">7. Velocity Over Lifetime</a>
-        <a href="#s8" class="toc-link">8. Attractor System</a>
-        <a href="#s9" class="toc-link">9. Noise System</a>
-        <a href="#s10" class="toc-link">10. Trail System</a>
-        <a href="#s11" class="toc-link">11. Texture Sheet</a>
-        <a href="#s12" class="toc-link">12. Event System</a>
-        <a href="#s13" class="toc-link">13. Mobile Optimization</a>
-        <a href="#s14" class="toc-link">14. Particle Manipulation</a>
-        <a href="#s15" class="toc-link">15. Complete Example</a>
-        <a href="#summary" class="toc-link">Summary</a>
-      </nav>
-      <a href="ui-particle-system.html" class="sidebar-back-btn"><i class="fas fa-arrow-left"></i> Back to Asset</a>
-    </div>
-  </aside>
+
   <!-- Main Content -->
   <main class="docs-content" id="docs-content">
     <div class="docs-hero">
@@ -604,6 +579,33 @@ public class DynamicFeedbackSystem : MonoBehaviour
     </section>
   </main>
 
+
+  <!-- Sticky Sidebar TOC -->
+  <aside class="docs-sidebar" id="docs-sidebar">
+    <div class="sidebar-inner">
+      <div class="sidebar-title"><i class="fas fa-book-open"></i> Contents</div>
+      <nav class="toc-nav">
+        <a href="#s0" class="toc-link">0. Namespace Structure</a>
+        <a href="#s1" class="toc-link">1. Basic Initialization</a>
+        <a href="#s2" class="toc-link">2. Emission Control</a>
+        <a href="#s3" class="toc-link">3. Emission Settings</a>
+        <a href="#s4" class="toc-link">4. Lifetime &amp; Size</a>
+        <a href="#s5" class="toc-link">5. Color &amp; Gradient</a>
+        <a href="#s6" class="toc-link">6. Rotation Settings</a>
+        <a href="#s7" class="toc-link">7. Velocity Over Lifetime</a>
+        <a href="#s8" class="toc-link">8. Attractor System</a>
+        <a href="#s9" class="toc-link">9. Noise System</a>
+        <a href="#s10" class="toc-link">10. Trail System</a>
+        <a href="#s11" class="toc-link">11. Texture Sheet</a>
+        <a href="#s12" class="toc-link">12. Event System</a>
+        <a href="#s13" class="toc-link">13. Mobile Optimization</a>
+        <a href="#s14" class="toc-link">14. Particle Manipulation</a>
+        <a href="#s15" class="toc-link">15. Complete Example</a>
+        <a href="#summary" class="toc-link">Summary</a>
+      </nav>
+      <a href="ui-particle-system.html" class="sidebar-back-btn"><i class="fas fa-arrow-left"></i> Back to Asset</a>
+    </div>
+  </aside>
 </div>
 <footer id="jugas_footer">
   <div class="copy-container">
@@ -637,6 +639,44 @@ public class DynamicFeedbackSystem : MonoBehaviour
     });
   });
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var sidebar = document.getElementById("docs-sidebar");
+    var layout = document.querySelector(".docs-layout");
+    var mainContent = document.querySelector(".docs-content");
+    if (!sidebar || !layout) return;
+
+    function updateSticky() {
+      if (window.innerWidth <= 1024) {
+        sidebar.style.position = "relative";
+        sidebar.style.top = "0";
+        sidebar.style.left = "auto";
+        sidebar.style.width = "100%";
+        mainContent.style.maxWidth = "none";
+        return;
+      }
+      var layoutRect = layout.getBoundingClientRect();
+      if (layoutRect.top <= 20) {
+        sidebar.style.position = "fixed";
+        sidebar.style.top = "20px";
+        sidebar.style.width = "280px";
+        sidebar.style.left = (layoutRect.right - 280) + "px";
+        mainContent.style.maxWidth = (layoutRect.width - 320) + "px";
+      } else {
+        sidebar.style.position = "relative";
+        sidebar.style.top = "auto";
+        sidebar.style.left = "auto";
+        sidebar.style.width = "280px";
+        mainContent.style.maxWidth = "none";
+      }
+    }
+
+    window.addEventListener("scroll", updateSticky);
+    window.addEventListener("resize", updateSticky);
+    updateSticky();
+  });
+</script>
 </body>
 </html>
+
 
