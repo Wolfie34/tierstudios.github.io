@@ -20,16 +20,10 @@
     min-width: 0;
 }
 
-/* Sidebar - CSS sticky, moves with page until nav, then sticks */
+/* Sidebar - scrolls naturally with the page */
 .docs-sidebar {
     width: 280px;
     flex-shrink: 0;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 90px;              /* account for fixed nav height */
-    align-self: flex-start;
-    max-height: calc(100vh - 110px);
-    overflow-y: auto;
 }
 
 .docs-hero {
