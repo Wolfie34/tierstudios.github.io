@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Goat Icon Studio - Tier Studios</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700|Open+Sans:400,700,400italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="product-detail-page">
+    <div id="outer-wrapper">
+        <!-- Navigation -->
+        <nav class="tm-menu">
+            <div class="menu-wrap">
+                <div class="logo">
+                    <a href="index.html"><img id="site-logo" src="assets/img/logo_light.png" alt="Tier Studios" style="height: 40px;"></a>
+                </div>
+                <div class="menu-right">
+                    <ul id="menu-items">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Assets <i class="fas fa-angle-down"></i></a>
+                            <ul class="submenu">
+                                <li><a href="https://assetstore.unity.com/packages/tools/gui/ui-particle-system-native-canvas-vfx-337750" target="_blank">UI Particle System</a></li>
+                                <li><a href="goat-icon-studio.html">Goat Icon Studio</a></li>
+                                <li><a href="layer-forge-studio.html">Layer Forge Studio</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="company.html">Company</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <div class="theme-switch-wrapper">
+                        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Temayı Değiştir">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="tm-menu2"></div>
+
+        <!-- Main Content Wrapper -->
+        <div id="content-wrapper" class="row">
+            <main id="main-wrapper" style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
+                
+                <!-- Product Header -->
+                <div class="product-detail-header">
+                    <div class="animated-title-container" style="margin-bottom: 15px;">
+                        <h1 class="animated-title" style="font-size: clamp(30px, 6vw, 60px);">
+                            <span class="letter">G</span>
+                            <span class="letter">O</span>
+                            <span class="letter">A</span>
+                            <span class="letter">T</span>
+                            <span class="letter">&nbsp;</span>
+                            <span class="letter">I</span>
+                            <span class="letter">C</span>
+                            <span class="letter">O</span>
+                            <span class="letter">N</span>
+                            <span class="letter">&nbsp;</span>
+                            <span class="letter">S</span>
+                            <span class="letter">T</span>
+                            <span class="letter">U</span>
+                            <span class="letter">D</span>
+                            <span class="letter">I</span>
+                            <span class="letter">O</span>
+                        </h1>
+                    </div>
+                    <p class="product-summary">Create game-ready 2D icons from 3D prefabs in seconds. Batch export, animation capture, multi-object setup, and real-time preview.</p>
+                </div>
+
+                <div class="product-detail-layout">
+                    <!-- Left Column: Gallery & Actions -->
+                    <div class="product-left-col">
+                        <!-- Media Gallery -->
+                        <div class="product-gallery">
+                            <div class="gallery-main-view" id="gallery-main-view">
+                                <button class="gallery-nav prev" onclick="navigateGallery(-1)"><i class="fas fa-chevron-left"></i></button>
+                                <button class="gallery-nav next" onclick="navigateGallery(1)"><i class="fas fa-chevron-right"></i></button>
+                                <!-- Default is Video -->
+                                <iframe id="gallery-video" src="https://www.youtube.com/embed/tpo3lNfNZQ4" title="Goat Icon Studio Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <img id="gallery-image" src="" alt="Goat Icon Studio Screenshot" style="display: none;" onclick="openLightbox()">
+                            </div>
+                            
+                            <div class="gallery-thumbnails">
+                                <!-- Video Thumbnail -->
+                                <div class="thumb-item active" data-type="video" data-src="https://www.youtube.com/embed/tpo3lNfNZQ4">
+                                    <img src="https://img.youtube.com/vi/tpo3lNfNZQ4/maxresdefault.jpg" alt="Video Trailer">
+                                    <div class="play-icon-overlay"><i class="fas fa-play"></i></div>
+                                </div>
+                                <!-- Images -->
+                                <div class="thumb-item" data-type="image" data-src="assets/img/goat-icon-studio/Page_1.png">
+                                    <img src="assets/img/goat-icon-studio/Page_1.png" alt="Screenshot 1">
+                                </div>
+                                <div class="thumb-item" data-type="image" data-src="assets/img/goat-icon-studio/Page_2.png">
+                                    <img src="assets/img/goat-icon-studio/Page_2.png" alt="Screenshot 2">
+                                </div>
+                                <div class="thumb-item" data-type="image" data-src="assets/img/goat-icon-studio/Page_3.png">
+                                    <img src="assets/img/goat-icon-studio/Page_3.png" alt="Screenshot 3">
+                                </div>
+                                <div class="thumb-item" data-type="image" data-src="assets/img/goat-icon-studio/Page_4.png">
+                                    <img src="assets/img/goat-icon-studio/Page_4.png" alt="Screenshot 4">
+                                </div>
+                                <div class="thumb-item" data-type="image" data-src="assets/img/goat-icon-studio/Page_5.png">
+                                    <img src="assets/img/goat-icon-studio/Page_5.png" alt="Screenshot 5">
+                                </div>
+                                <div class="thumb-item" data-type="image" data-src="assets/img/goat-icon-studio/Page_6.png">
+                                    <img src="assets/img/goat-icon-studio/Page_6.png" alt="Screenshot 6">
+                                </div>
+                                <div class="thumb-item" data-type="image" data-src="assets/img/goat-icon-studio/Page_7.png">
+                                    <img src="assets/img/goat-icon-studio/Page_7.png" alt="Screenshot 7">
+                                </div>
+                                <div class="thumb-item" data-type="image" data-src="assets/img/goat-icon-studio/Page_8.png">
+                                    <img src="assets/img/goat-icon-studio/Page_8.png" alt="Screenshot 8">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-stats" style="margin-bottom: 20px;">
+                            <span class="badge stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.9</span>
+                            <span class="badge users"><i class="fas fa-users"></i> 200+ Users</span>
+                            <span class="badge favorites"><i class="fas fa-heart"></i> 120+ Favorites</span>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="product-actions-bar">
+                            <a href="https://assetstore.unity.com/packages/2d/gui/goat-icon-studio-3d-to-2d-icon-generator-351870" class="btn-primary asset-store-btn" target="_blank">
+                                <i class="fa-brands fa-unity"></i> View on Asset Store
+                            </a>
+                            <a href="#" class="btn-secondary doc-btn" target="_blank">
+                                <i class="fas fa-book"></i> Documentation
+                            </a>
+                        </div>
+                        
+                        <!-- Technical Details -->
+                        <div class="detail-section" style="margin-top: 40px;">
+                            <h3>Technical Details</h3>
+                            <div class="tech-grid">
+                                <div class="tech-card">
+                                    <h4>Type & Pipeline</h4>
+                                    <ul>
+                                        <li>Editor Window Tool (No runtime dependency)</li>
+                                        <li>Compatible with Built-in, URP, and HDRP</li>
+                                        <li>Pipeline-independent output (standard PNG)</li>
+                                    </ul>
+                                </div>
+                                <div class="tech-card">
+                                    <h4>Input / Output</h4>
+                                    <ul>
+                                        <li>Input: 3D Models (Prefabs or Scene Objects)</li>
+                                        <li>Output: High-quality PNG icons</li>
+                                        <li>Automatic Sprite setup (Texture Type: Sprite (2D and UI))</li>
+                                    </ul>
+                                </div>
+                                <div class="tech-card">
+                                    <h4>Core Features</h4>
+                                    <ul>
+                                        <li>Single & Batch Icon Generation</li>
+                                        <li>Animation-Based Icon Capture (frame selection)</li>
+                                        <li>Real-time Preview (Zoom, Rotate, Pan)</li>
+                                    </ul>
+                                </div>
+                                <div class="tech-card">
+                                    <h4>Visual Customization</h4>
+                                    <ul>
+                                        <li>Adjustable lighting (intensity, color, angle)</li>
+                                        <li>Flexible backgrounds (transparent, solid, gradient, image)</li>
+                                        <li>Shader-based outline (stroke) system</li>
+                                        <li>Built-in glow effects</li>
+                                    </ul>
+                                </div>
+                                <div class="tech-card">
+                                    <h4>Export Settings</h4>
+                                    <ul>
+                                        <li>Custom resolution support</li>
+                                        <li>Custom save location</li>
+                                        <li>High-quality PNG output</li>
+                                    </ul>
+                                </div>
+                                <div class="tech-card">
+                                    <h4>Performance & Workflow</h4>
+                                    <ul>
+                                        <li>Fast batch processing for large icon sets</li>
+                                        <li>Stable and consistent rendering results</li>
+                                        <li>No external dependencies required</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Details -->
+                    <div class="product-right-col">
+                        <div class="detail-section">
+                            <h3>Description</h3>
+                            <p>Create game-ready 2D icons from your 3D prefabs directly inside the editor.</p>
+                            <p>GOAT Icon Studio is designed to speed up your UI workflow by turning models into clean, production-ready icons in seconds — no external tools, no manual screenshots.</p>
+                            <p>Generate single icons or entire icon sets with a fast and intuitive workflow. Everything is handled inside the editor, so you can focus on creating, not exporting.</p>
+                        </div>
+
+                        <div class="detail-section">
+                            <h3>Key Features</h3>
+                            <ul class="feature-list">
+                                <li><strong>One-Click Generation:</strong> Support for Single & Batch icon generation.</li>
+                                <li><strong>Animation-Based Capture:</strong> Choose the perfect pose directly from animations.</li>
+                                <li><strong>Multi-Object Composition:</strong> Combine multiple assets into one icon easily.</li>
+                                <li><strong>Real-Time Preview:</strong> Rotate, zoom, and frame with mouse control instantly.</li>
+                                <li><strong>Flexible Backgrounds:</strong> Use transparent, color, gradient, or image backgrounds.</li>
+                                <li><strong>Shader-Based Effects:</strong> Built-in Outline & Glow effects to make icons pop.</li>
+                                <li><strong>Adjustable Lighting:</strong> Fine-tune lighting color, intensity, and angle.</li>
+                                <li><strong>High-Quality Export:</strong> Export as PNG (ready for UI use).</li>
+                                <li><strong>Auto Sprite Setup:</strong> Drag & drop ready immediately after export.</li>
+                            </ul>
+                        </div>
+
+                        <div class="detail-section">
+                            <h3>Use Cases</h3>
+                            <p>Perfect for:</p>
+                            <ul class="feature-list">
+                                <li>Inventory systems</li>
+                                <li>RPG & strategy UI</li>
+                                <li>Card and item icons</li>
+                                <li>Shop and marketplace assets</li>
+                                <li>Character portraits</li>
+                            </ul>
+                            <p style="margin-top: 15px;">Save hours of manual work by generating icons in bulk and building complete icon sets in minutes.<br>
+                            Ideal for creating UI icons, sprites, and visual assets from 3D prefabs with a fast and flexible workflow.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox()">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <img class="lightbox-content" id="lightbox-img">
+        </div>
+        
+        <!-- Footer -->
+        <footer id="jugas_footer">
+            <div class="copy-container">
+                <div class="footer-social-icons">
+                    <a href="https://x.com/tiergamestudio" target="_blank" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://www.facebook.com/people/Tier-Studios/61571678942166/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/tiergamestudio/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@TierStudioss" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.linkedin.com/company/107369558/admin/dashboard/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://discord.gg/ESvwrchUwA" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    <a href="https://assetstore.unity.com/publishers/124104" target="_blank" aria-label="Unity Asset Store"><i class="fa-brands fa-unity"></i></a>
+                </div>
+                <div class="jugas_footer_copyright">
+                    &copy; 2026 Tier Studios. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    
+    <!-- Gallery Script -->
+    <script>
+        const thumbnails = document.querySelectorAll('.thumb-item');
+        let currentGalleryIndex = 0;
+
+        thumbnails.forEach((thumb, index) => {
+            thumb.addEventListener('click', () => {
+                currentGalleryIndex = index;
+                updateGallery();
+            });
+        });
+
+        function navigateGallery(direction) {
+            currentGalleryIndex += direction;
+            if (currentGalleryIndex < 0) currentGalleryIndex = thumbnails.length - 1;
+            if (currentGalleryIndex >= thumbnails.length) currentGalleryIndex = 0;
+            updateGallery();
+        }
+
+        function updateGallery() {
+            const video = document.getElementById('gallery-video');
+            const image = document.getElementById('gallery-image');
+            const activeThumb = thumbnails[currentGalleryIndex];
+            
+            const type = activeThumb.getAttribute('data-type');
+            const source = activeThumb.getAttribute('data-src');
+
+            // Update active styling
+            thumbnails.forEach(el => el.classList.remove('active'));
+            activeThumb.classList.add('active');
+
+            // Switch media
+            if (type === 'video') {
+                image.style.display = 'none';
+                video.style.display = 'block';
+                if(video.src !== source) video.src = source;
+            } else {
+                video.style.display = 'none';
+                const currentSrc = video.src;
+                video.src = ''; // Stop video
+                video.src = currentSrc;
+                
+                image.style.display = 'block';
+                image.src = source;
+            }
+            
+            // Scroll thumbnail into view
+            activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+
+        function openLightbox() {
+            const image = document.getElementById('gallery-image');
+            if(image.style.display !== 'none') {
+                document.getElementById('lightbox-img').src = image.src;
+                document.getElementById('lightbox-modal').style.display = 'flex';
+            }
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
