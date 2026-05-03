@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <span style="display:inline-block; width:10px; height:10px; background:#27c93f; border-radius:50%;"></span>
                 <span style="color:#4fc1ff; margin-left:10px; font-weight:bold;">${langName}</span>
             </div>
-            <button class="gemini-copy-btn" type="button"><i class="fas fa-copy"></i> Kopyala</button>
+            <button class="gemini-copy-btn" type="button"><i class="fas fa-copy"></i> Copy</button>
         `;
 
         pre.className = 'gemini-code-content';
@@ -109,14 +109,14 @@ document.addEventListener("DOMContentLoaded", function() {
                     document.execCommand('copy');
                     successEffect();
                 } catch (err) {
-                    copyBtn.innerHTML = '<i class="fas fa-times"></i> Hata';
+                    copyBtn.innerHTML = '<i class="fas fa-times"></i> Error';
                 }
                 document.body.removeChild(textArea);
             }
 
             function successEffect() {
                 var originalHTML = copyBtn.innerHTML;
-                copyBtn.innerHTML = '<i class="fas fa-check"></i> Kopyalandı';
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied';
                 copyBtn.style.color = '#4caf50';
                 copyBtn.style.borderColor = '#4caf50';
                 setTimeout(function() { 
