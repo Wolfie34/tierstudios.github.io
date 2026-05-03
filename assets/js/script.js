@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // ==========================================
     // Theme Toggle Logic
     // ==========================================
@@ -19,10 +19,10 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    themeToggleBtn.addEventListener('click', function() {
+    themeToggleBtn.addEventListener('click', function () {
         let currentTheme = htmlElement.getAttribute('data-theme');
         let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
+
         htmlElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateIcon(newTheme);
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (theme === 'dark') {
             themeIcon.classList.remove('fa-moon');
             themeIcon.classList.add('fa-sun');
-            if (logoImg) logoImg.src = 'assets/img/logo_dark.png';
+            if (logoImg) logoImg.src = 'assets/img/logo_dark.PNG';
         } else {
             themeIcon.classList.remove('fa-sun');
             themeIcon.classList.add('fa-moon');
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // ==========================================
     // Code Highlighting & Copy Logic (Gemini Style)
     // ==========================================
-    
+
     // First, run highlight.js
     if (typeof hljs !== 'undefined') {
         hljs.highlightAll();
@@ -53,9 +53,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // Then wrap the code blocks and add copy buttons
     var codeBlocks = document.querySelectorAll('pre code');
 
-    codeBlocks.forEach(function(codeBlock) {
+    codeBlocks.forEach(function (codeBlock) {
         var pre = codeBlock.parentNode;
-        
+
         // Skip if already processed
         if (pre.parentNode.classList.contains('gemini-code-container')) return;
 
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
         `;
 
         pre.className = 'gemini-code-content';
-        pre.removeAttribute('style'); 
+        pre.removeAttribute('style');
 
         pre.parentNode.insertBefore(container, pre);
         container.appendChild(header);
@@ -89,13 +89,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // 2. Copy Functionality
         var copyBtn = header.querySelector('.gemini-copy-btn');
-        
-        copyBtn.addEventListener('click', function() {
+
+        copyBtn.addEventListener('click', function () {
             var codeText = codeBlock.innerText || codeBlock.textContent;
 
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(codeText).then(successEffect).catch(function() {
-                    fallbackCopy(codeText); 
+                navigator.clipboard.writeText(codeText).then(successEffect).catch(function () {
+                    fallbackCopy(codeText);
                 });
             } else {
                 fallbackCopy(codeText);
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
             function fallbackCopy(text) {
                 var textArea = document.createElement("textarea");
                 textArea.value = text;
-                textArea.style.position = "fixed"; 
+                textArea.style.position = "fixed";
                 document.body.appendChild(textArea);
                 textArea.focus();
                 textArea.select();
@@ -122,8 +122,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied';
                 copyBtn.style.color = '#4caf50';
                 copyBtn.style.borderColor = '#4caf50';
-                setTimeout(function() { 
-                    copyBtn.innerHTML = originalHTML; 
+                setTimeout(function () {
+                    copyBtn.innerHTML = originalHTML;
                     copyBtn.style.color = '';
                     copyBtn.style.borderColor = '';
                 }, 2000);
