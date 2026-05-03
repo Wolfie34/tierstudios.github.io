@@ -1,9 +1,17 @@
+/* Ensure CSS sticky works - no parent can have overflow hidden */
+.docs-page #outer-wrapper,
+.docs-page #content-wrapper,
+.docs-page #main-wrapper {
+    overflow: visible !important;
+}
+
 .docs-layout {
     display: flex;
     gap: 40px;
     max-width: 1400px;
     margin: 0 auto;
     padding: 40px 20px;
+    align-items: flex-start;
 }
 
 /* Main Content */
@@ -12,13 +20,16 @@
     min-width: 0;
 }
 
-/* Sidebar - JS will switch between relative and fixed */
+/* Sidebar - CSS sticky, moves with page until nav, then sticks */
 .docs-sidebar {
     width: 280px;
     flex-shrink: 0;
-    position: relative;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 90px;              /* account for fixed nav height */
     align-self: flex-start;
-    height: max-content;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
 }
 
 .docs-hero {
