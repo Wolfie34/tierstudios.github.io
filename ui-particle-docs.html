@@ -1,0 +1,640 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>UI Particle System - Scripting API Docs - Tier Studios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/docs.css">
+</head>
+<body class="docs-page">
+<div id="outer-wrapper">
+<nav class="tm-menu">
+  <div class="menu-wrap">
+    <div class="logo"><a href="index.html"><img id="site-logo" src="assets/img/logo_light.png" alt="Tier Studios" style="height:40px;"></a></div>
+    <div class="menu-right">
+      <ul id="menu-items">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Assets <i class="fas fa-angle-down"></i></a>
+          <ul class="submenu">
+            <li><a href="ui-particle-system.html">UI Particle System</a></li>
+            <li><a href="goat-icon-studio.html">Goat Icon Studio</a></li>
+            <li><a href="layer-forge-studio.html">Layer Forge Studio</a></li>
+          </ul>
+        </li>
+        <li><a href="company.html">Company</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="theme-switch-wrapper">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="tm-menu2"></div>
+<div class="docs-layout">
+  <!-- Main Content -->
+  <main class="docs-content" id="docs-content">
+    <div class="docs-hero">
+      <div class="docs-badge"><i class="fas fa-code"></i> Scripting API</div>
+      <h1>UI Particle System</h1>
+      <p class="docs-version">v2.1.2 — Scripting Reference</p>
+      <p class="docs-intro">Welcome to the UI Particle System scripting reference. This guide provides comprehensive examples of how to control the particle system entirely via script, using the new <code>TierStudios</code> namespace structure.</p>
+      <div class="docs-alert">
+        <i class="fas fa-bell"></i>
+        <div><strong>NEW NAMESPACE ALERT:</strong> All scripts are now organized under the <code>TierStudios.UIParticleSystem</code> namespace. Please update your <code>using</code> directives as shown in the examples below.</div>
+      </div>
+    </div>
+    <!-- Section 0 -->
+    <section class="docs-section" id="s0">
+      <h2><span class="section-num">0.</span> Namespace Structure</h2>
+      <p>Include these namespaces to access all features.</p>
+      <pre><code class="language-csharp">// Standard Namespace Imports
+using TierStudios.UIParticleSystem.Core;
+using TierStudios.UIParticleSystem.Settings;
+using TierStudios.UIParticleSystem.Managers;
+using TierStudios.UIParticleSystem.Utilities;
+using TierStudios.UIParticleSystem.Enums;</code></pre>
+    </section>
+    <!-- Section 1 -->
+    <section class="docs-section" id="s1">
+      <h2><span class="section-num">1.</span> Basic Initialization</h2>
+      <p>How to initialize the system.</p>
+      <pre><code class="language-csharp">using UnityEngine;
+using TierStudios.UIParticleSystem.Core;
+
+public class ParticleStarter : MonoBehaviour
+{
+    private UIParticleSystem particleSystem;
+
+    void Start()
+    {
+        particleSystem = GetComponent&lt;UIParticleSystem&gt;();
+        particleSystem.StartEmitting();
+    }
+}</code></pre>
+    </section>
+    <!-- Section 2 -->
+    <section class="docs-section" id="s2">
+      <h2><span class="section-num">2.</span> Emission Control</h2>
+      <p>Methods to start, stop, pause, and restart.</p>
+      <pre><code class="language-csharp">using TierStudios.UIParticleSystem.Core;
+using UnityEngine;
+
+public class EmissionController : MonoBehaviour
+{
+    [SerializeField] private UIParticleSystem particleSystem;
+
+    public void StartEmission() =&gt; particleSystem.StartEmitting();
+    public void StopEmission() =&gt; particleSystem.StopEmitting();
+    public void PauseEmission() =&gt; particleSystem.PauseSystem();
+    public void ResumeEmission() =&gt; particleSystem.ResumeSystem();
+    public void RestartEmission() =&gt; particleSystem.RestartSystem();
+
+    public void ClearAllParticles()
+    {
+        UIParticleSystem.ClearAllParticles(particleSystem);
+    }
+
+    public int GetActiveCount()
+    {
+        return particleSystem.GetActiveParticleCount();
+    }
+}</code></pre>
+    </section>
+    <!-- Section 3 -->
+    <section class="docs-section" id="s3">
+      <h2><span class="section-num">3.</span> Modifying Emission Settings</h2>
+      <p>Changing emission rates and bursts at runtime.</p>
+      <pre><code class="language-csharp">using TierStudios.UIParticleSystem.Core;
+using TierStudios.UIParticleSystem.Settings;
+using TierStudios.UIParticleSystem.Enums;
+using UnityEngine;
+
+public class EmissionCustomizer : MonoBehaviour
+{
+    [SerializeField] private UIParticleSystem particleSystem;
+
+    void Start()
+    {
+        var emission = particleSystem.EmissionSettings;
+        emission.emissionRate = 50f;
+        emission.maxParticles = 1000;
+        emission.looping = true;
+        emission.duration = 5f;
+        emission.startDelay = 0.5f;
+        emission.emissionShape = EmissionShapeType.Circle;
+        emission.circleRadius = 100f;
+        emission.emitFromEdge = false;
+        emission.emissionDirection = Vector2.up;
+        emission.randomizeDirection = true;
+        emission.directionVariance = 45f;
+        emission.simulationSpace = SimulationSpace.Local;
+    }
+
+    public void AddExplosion()
+    {
+        var burst = new Burst { time = 1f, count = 200, probability = 1f };
+        particleSystem.EmissionSettings.bursts.Add(burst);
+    }
+}</code></pre>
+    </section>
+    <!-- Section 4 -->
+    <section class="docs-section" id="s4">
+      <h2><span class="section-num">4.</span> Lifetime and Size Settings</h2>
+      <p>Controlling particle lifespan and scale.</p>
+      <pre><code class="language-csharp">using TierStudios.UIParticleSystem.Core;
+using TierStudios.UIParticleSystem.Settings;
+using UnityEngine;
+
+public class ParticleAppearance : MonoBehaviour
+{
+    [SerializeField] private UIParticleSystem particleSystem;
+
+    void Start()
+    {
+        var lifetime = particleSystem.LifetimeSettings;
+        lifetime.useRandomLifetime = true;
+        lifetime.minLifetime = 1f;
+        lifetime.maxLifetime = 3f;
+
+        var size = particleSystem.SizeSettings;
+        size.useSizeRange = true;
+        size.minSize = 20f;
+        size.maxSize = 80f;
+        size.useSizeOverLifetime = true;
+        size.sizeOverLifetime = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+        size.use2DSize = true;
+        size.size2D = new Vector2(50f, 100f);
+    }
+}</code></pre>
+    </section>
+    <!-- Section 5 -->
+    <section class="docs-section" id="s5">
+      <h2><span class="section-num">5.</span> Color and Gradient</h2>
+      <p>Applying solid colors, random ranges, or gradients.</p>
+      <pre><code class="language-csharp">using TierStudios.UIParticleSystem.Core;
+using TierStudios.UIParticleSystem.Settings;
+using UnityEngine;
+
+public class ColorController : MonoBehaviour
+{
+    [SerializeField] private UIParticleSystem particleSystem;
+
+    void Start()
+    {
+        var color = particleSystem.ColorSettings;
+        color.useRandomColors = true;
+        color.particleColor = Color.yellow;
+        color.particleColorEnd = Color.red;
+
+        color.useGradientColor = true;
+        Gradient gradient = new Gradient();
+        gradient.SetKeys(
+            new GradientColorKey[] {
+                new GradientColorKey(Color.white, 0f),
+                new GradientColorKey(Color.blue, 0.5f),
+                new GradientColorKey(Color.cyan, 1f)
+            },
+            new GradientAlphaKey[] {
+                new GradientAlphaKey(1f, 0f),
+                new GradientAlphaKey(0f, 1f)
+            }
+        );
+        color.colorGradient = gradient;
+    }
+}</code></pre>
+    </section>
+    <!-- Section 6 -->
+    <section class="docs-section" id="s6">
+      <h2><span class="section-num">6.</span> Rotation Settings</h2>
+      <p>Controlling angular velocity and initial rotation.</p>
+      <pre><code class="language-csharp">using TierStudios.UIParticleSystem.Core;
+using TierStudios.UIParticleSystem.Settings;
+using UnityEngine;
+
+public class RotationController : MonoBehaviour
+{
+    [SerializeField] private UIParticleSystem particleSystem;
+
+    void Start()
+    {
+        var rotation = particleSystem.RotationSettings;
+        rotation.useRandomRotation = true;
+        rotation.minRotation = 0f;
+        rotation.maxRotation = 360f;
+        rotation.useRotationOverLifetime = true;
+        rotation.useRandomRotationSpeed = true;
+        rotation.minRotationSpeed = -180f;
+        rotation.maxRotationSpeed = 180f;
+    }
+}</code></pre>
+    </section>
+    <!-- Section 7 -->
+    <section class="docs-section" id="s7">
+      <h2><span class="section-num">7.</span> Velocity Over Lifetime <span class="badge-new">NEW</span></h2>
+      <p>Controlling speed, orbital movement, and gravity.</p>
+      <pre><code class="language-csharp">using TierStudios.UIParticleSystem.Core;
+using TierStudios.UIParticleSystem.Settings;
+using TierStudios.UIParticleSystem.Enums;
+using UnityEngine;
+
+public class VelocityController : MonoBehaviour
+{
+    [SerializeField] private UIParticleSystem particleSystem;
+
+    void Start()
+    {
+        var velocity = particleSystem.VelocityOverLifetimeSettings;
+        velocity.enabled = true;
+        velocity.velocityX = AnimationCurve.Linear(0f, 0f, 1f, 50f);
+        velocity.velocityY = AnimationCurve.Linear(0f, 100f, 1f, -100f);
+        velocity.orbitalX = AnimationCurve.Constant(0f, 1f, 45f);
+        velocity.orbitalY = AnimationCurve.Constant(0f, 1f, 90f);
+        velocity.space = SimulationSpace.Local;
+        velocity.speedModifier = AnimationCurve.Linear(0f, 1f, 1f, 0.5f);
+    }
+
+    public void ApplyGravity()
+    {
+        var velocity = particleSystem.VelocityOverLifetimeSettings;
+        velocity.enabled = true;
+        velocity.velocityY = AnimationCurve.Linear(0f, 0f, 1f, -200f);
+    }
+}</code></pre>
+    </section>
+    <!-- Section 8 -->
+    <section class="docs-section" id="s8">
+      <h2><span class="section-num">8.</span> Attractor System</h2>
+      <p>Creating magnets and vortex effects.</p>
+      <pre><code class="language-csharp">using TierStudios.UIParticleSystem.Core;
+using TierStudios.UIParticleSystem.Settings;
+using TierStudios.UIParticleSystem.Enums;
+using UnityEngine;
+
+public class AttractorController : MonoBehaviour
+{
+    [SerializeField] private UIParticleSystem particleSystem;
+    [SerializeField] private Transform attractorTarget;
+
+    void Start()
+    {
+        var attractor = particleSystem.AttractorSettings;
+        attractor.useAttractor = true;
+        attractor.attractorType = AttractorType.Attract;
+        attractor.attractorPosition = attractorTarget.position;
+        attractor.attractorStrength = 150f;
+        attractor.attractorRadius = 300f;
+        attractor.attractorFalloff = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+        attractor.useKillRadius = true;
+        attractor.killRadius = 20f;
+    }
+
+    void Update()
+    {
+        particleSystem.AttractorSettings.attractorPosition = attractorTarget.position;
+    }
+
+    public void CreateVortex()
+    {
+        var attractor = particleSystem.AttractorSettings;
+        attractor.attractorType = AttractorType.Vortex;
+        attractor.attractorStrength = 100f;
+    }
+}</code></pre>
+    </section>
+    <!-- Section 9 -->
+    <section class="docs-section" id="s9">
+      <h2><span class="section-num">9.</span> Noise System</h2>
+      <p>Adding turbulence and organic movement.</p>
+      <pre><code class="language-csharp">using TierStudios.UIParticleSystem.Core;
+using TierStudios.UIParticleSystem.Settings;
+using TierStudios.UIParticleSystem.Enums;
+using UnityEngine;
+
+public class NoiseController : MonoBehaviour
+{
+    [SerializeField] private UIParticleSystem particleSystem;
+
+    void Start()
+    {
+        var noise = particleSystem.NoiseSettings;
+        noise.useNoise = true;
+        noise.noiseType = NoiseType.Perlin;
+        noise.noiseStrength = 50f;
+        noise.noiseFrequency = 1f;
+        noise.noiseScrollSpeed = 10f;
+        noise.noiseOctaves = 3;
+        noise.useNoiseStrengthOverLifetime = true;
+        noise.noiseStrengthOverLifetime = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+    }
+
+    public void ApplyTurbulence()
+    {
+        var noise = particleSystem.NoiseSettings;
+        noise.noiseType = NoiseType.Turbulence;
+        noise.noiseStrength = 100f;
+    }
+}</code></pre>
+    </section>
+    <!-- Section 10 -->
+    <section class="docs-section" id="s10">
+      <h2><span class="section-num">10.</span> Trail System</h2>
+      <p>Rendering trails behind particles.</p>
+      <pre><code class="language-csharp">using TierStudios.UIParticleSystem.Core;
+using TierStudios.UIParticleSystem.Settings;
+using UnityEngine;
+
+public class TrailController : MonoBehaviour
+{
+    [SerializeField] private UIParticleSystem particleSystem;
+
+    void Start()
+    {
+        var trail = particleSystem.TrailSettings;
+        trail.useTrails = true;
+        trail.trailLifetime = 0.5f;
+        trail.trailWidth = 5f;
+        trail.trailMaxPoints = 20;
+        trail.trailUpdateInterval = 0.05f;
+        trail.maxVerticesPerFrame = 1000;
+        trail.inheritParticleColor = true;
+        trail.trailStartColor = Color.white;
+        trail.trailEndColor = new Color(1f, 1f, 1f, 0f);
+        trail.trailWidthCurve = AnimationCurve.Linear(0f, 1f, 1f, 0f);
+        trail.trailMaterial = Resources.Load&lt;Material&gt;("TrailMaterial");
+    }
+
+    public void RefreshTrails()
+    {
+        particleSystem.RefreshTrailSettings();
+    }
+}</code></pre>
+    </section>
+    <!-- Section 11 -->
+    <section class="docs-section" id="s11">
+      <h2><span class="section-num">11.</span> Texture Sheet Animation</h2>
+      <p>Using sprite sheets for animated particles.</p>
+      <pre><code class="language-csharp">using TierStudios.UIParticleSystem.Core;
+using TierStudios.UIParticleSystem.Settings;
+using TierStudios.UIParticleSystem.Enums;
+using UnityEngine;
+
+public class TextureSheetController : MonoBehaviour
+{
+    [SerializeField] private UIParticleSystem particleSystem;
+    [SerializeField] private Texture2D spriteSheet;
+
+    void Start()
+    {
+        var textureSheet = particleSystem.TextureSheetSettings;
+        textureSheet.useTextureSheetAnimation = true;
+        textureSheet.textureSheet = spriteSheet;
+        textureSheet.tilesX = 4;
+        textureSheet.tilesY = 4;
+        textureSheet.animationCycle = AnimationCycle.WholeSheet;
+        textureSheet.animationFrames = 16;
+        textureSheet.animationSpeed = 24f;
+        textureSheet.loopAnimation = true;
+        textureSheet.randomStartFrame = true;
+    }
+
+    public void PlaySingleRow(int rowIndex)
+    {
+        var ts = particleSystem.TextureSheetSettings;
+        ts.animationCycle = AnimationCycle.SingleRow;
+        ts.singleRowIndex = rowIndex;
+    }
+}</code></pre>
+    </section>
+    <!-- Section 12 -->
+    <section class="docs-section" id="s12">
+      <h2><span class="section-num">12.</span> Event System</h2>
+      <p>Listening to system events (C# &amp; UnityEvents).</p>
+      <pre><code class="language-csharp">using TierStudios.UIParticleSystem.Core;
+using TierStudios.UIParticleSystem.Settings;
+using UnityEngine;
+
+public class ParticleEventHandler : MonoBehaviour
+{
+    [SerializeField] private UIParticleSystem particleSystem;
+
+    void OnEnable()
+    {
+        particleSystem.EventSettings.EnableEvents = true;
+        particleSystem.OnParticleSpawned += OnParticleSpawned;
+        particleSystem.OnParticleDied += OnParticleDied;
+        particleSystem.EventSettings.onParticleSpawned.AddListener(OnSpawn);
+    }
+
+    void OnDisable()
+    {
+        particleSystem.OnParticleSpawned -= OnParticleSpawned;
+        particleSystem.OnParticleDied -= OnParticleDied;
+    }
+
+    void OnParticleSpawned(ParticleEventArgs args)
+    {
+        Debug.Log($"Particle Spawned! Pos: {args.Particle.position}");
+    }
+
+    void OnParticleDied(ParticleEventArgs args)
+    {
+        Debug.Log($"Particle Died! Age: {args.Particle.age}");
+    }
+
+    void OnSpawn(ParticleEventData data)
+    {
+        Debug.Log($"UnityEvent Spawn! Index: {data.particleIndex}");
+    }
+}</code></pre>
+    </section>
+    <!-- Section 13 -->
+    <section class="docs-section" id="s13">
+      <h2><span class="section-num">13.</span> Mobile Optimization <span class="badge-new">NEW</span></h2>
+      <p>Optimizing performance for mobile devices.</p>
+      <pre><code class="language-csharp">using TierStudios.UIParticleSystem.Core;
+using UnityEngine;
+
+public class MobileOptimizer : MonoBehaviour
+{
+    [SerializeField] private UIParticleSystem particleSystem;
+
+    void Start()
+    {
+#if UNITY_ANDROID || UNITY_IOS
+        particleSystem.SetMobileOptimization(
+            enabled: true,
+            maxParticles: 50,
+            updateInterval: 0.033f
+        );
+#endif
+    }
+
+    public void EnableMobileMode()
+    {
+        particleSystem.MobileOptimizationMode = true;
+        particleSystem.MobileMaxParticles = 75;
+    }
+
+    public void CheckPerformance()
+    {
+        int effectiveMax = particleSystem.EffectiveMaxParticles;
+        Debug.Log($"Max Particles: {effectiveMax}");
+    }
+}</code></pre>
+    </section>
+    <!-- Section 14 -->
+    <section class="docs-section" id="s14">
+      <h2><span class="section-num">14.</span> Direct Particle Manipulation</h2>
+      <p>Modifying active particles at runtime.</p>
+      <pre><code class="language-csharp">using TierStudios.UIParticleSystem.Core;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ParticleManipulator : MonoBehaviour
+{
+    [SerializeField] private UIParticleSystem particleSystem;
+
+    void Update()
+    {
+        List&lt;Particle&gt; particles = particleSystem.ActiveParticles;
+        foreach (Particle particle in particles)
+        {
+            if (particle == null || !particle.isAlive) continue;
+            particle.position += Vector2.up * Time.deltaTime * 10f;
+            particle.velocity *= 0.99f;
+            particle.color = Color.Lerp(particle.color, Color.red, Time.deltaTime);
+            particle.size += Time.deltaTime * 5f;
+            particle.rotation += Time.deltaTime * 90f;
+        }
+    }
+}</code></pre>
+    </section>
+    <!-- Section 15 -->
+    <section class="docs-section" id="s15">
+      <h2><span class="section-num">15.</span> Complete Example: Dynamic System</h2>
+      <p>A comprehensive example combining multiple features.</p>
+      <pre><code class="language-csharp">using TierStudios.UIParticleSystem.Core;
+using TierStudios.UIParticleSystem.Settings;
+using TierStudios.UIParticleSystem.Enums;
+using UnityEngine;
+
+public class DynamicFeedbackSystem : MonoBehaviour
+{
+    [SerializeField] private UIParticleSystem particleSystem;
+    [SerializeField] private Transform player;
+
+    void Start() { SetupParticleSystem(); }
+
+    void SetupParticleSystem()
+    {
+        var emission = particleSystem.EmissionSettings;
+        emission.emissionRate = 50f;
+        emission.maxParticles = 300;
+        emission.emissionShape = EmissionShapeType.Circle;
+
+        var velocity = particleSystem.VelocityOverLifetimeSettings;
+        velocity.enabled = true;
+        velocity.velocityY = AnimationCurve.Linear(0f, 0f, 1f, -100f);
+
+        var attractor = particleSystem.AttractorSettings;
+        attractor.useAttractor = true;
+        attractor.attractorStrength = 200f;
+        attractor.attractorPosition = player.position;
+
+        particleSystem.StartEmitting();
+    }
+
+    void Update()
+    {
+        if (player != null)
+            particleSystem.AttractorSettings.attractorPosition = player.position;
+    }
+
+    public void TriggerHitEffect(Vector2 hitPosition)
+    {
+        var burst = new Burst { time = 0f, count = 100, probability = 1f };
+        particleSystem.EmissionSettings.bursts.Add(burst);
+        particleSystem.transform.position = hitPosition;
+        particleSystem.RestartSystem();
+    }
+}</code></pre>
+    </section>
+    <!-- Summary -->
+    <section class="docs-section" id="summary">
+      <h2><span class="section-num"><i class="fas fa-list-check"></i></span> Summary of Features</h2>
+      <div class="summary-grid">
+        <div class="summary-card"><i class="fas fa-play-circle"></i><strong>Emission</strong><p>Start, Stop, Pause, Resume, Restart controls.</p></div>
+        <div class="summary-card"><i class="fas fa-sliders"></i><strong>Settings</strong><p>Full access to Emission, Lifetime, Size, Color, etc.</p></div>
+        <div class="summary-card"><i class="fas fa-wind"></i><strong>Velocity <span class="badge-new">New</span></strong><p>Orbital velocity, gravity, and speed modifiers.</p></div>
+        <div class="summary-card"><i class="fas fa-mobile-alt"></i><strong>Mobile <span class="badge-new">New</span></strong><p>Optimization settings for Android/iOS.</p></div>
+        <div class="summary-card"><i class="fas fa-magic"></i><strong>Effects</strong><p>Attractor, Noise, Trail, Texture Sheet Animation.</p></div>
+        <div class="summary-card"><i class="fas fa-bolt"></i><strong>Events</strong><p>Complete C# and UnityEvent system support.</p></div>
+      </div>
+    </section>
+  </main>
+  <!-- Sticky Sidebar TOC -->
+  <aside class="docs-sidebar" id="docs-sidebar">
+    <div class="sidebar-inner">
+      <div class="sidebar-title"><i class="fas fa-book-open"></i> Contents</div>
+      <nav class="toc-nav">
+        <a href="#s0" class="toc-link">0. Namespace Structure</a>
+        <a href="#s1" class="toc-link">1. Basic Initialization</a>
+        <a href="#s2" class="toc-link">2. Emission Control</a>
+        <a href="#s3" class="toc-link">3. Emission Settings</a>
+        <a href="#s4" class="toc-link">4. Lifetime &amp; Size</a>
+        <a href="#s5" class="toc-link">5. Color &amp; Gradient</a>
+        <a href="#s6" class="toc-link">6. Rotation Settings</a>
+        <a href="#s7" class="toc-link">7. Velocity Over Lifetime</a>
+        <a href="#s8" class="toc-link">8. Attractor System</a>
+        <a href="#s9" class="toc-link">9. Noise System</a>
+        <a href="#s10" class="toc-link">10. Trail System</a>
+        <a href="#s11" class="toc-link">11. Texture Sheet</a>
+        <a href="#s12" class="toc-link">12. Event System</a>
+        <a href="#s13" class="toc-link">13. Mobile Optimization</a>
+        <a href="#s14" class="toc-link">14. Particle Manipulation</a>
+        <a href="#s15" class="toc-link">15. Complete Example</a>
+        <a href="#summary" class="toc-link">Summary</a>
+      </nav>
+      <a href="ui-particle-system.html" class="sidebar-back-btn"><i class="fas fa-arrow-left"></i> Back to Asset</a>
+    </div>
+  </aside>
+</div>
+<footer id="jugas_footer">
+  <div class="copy-container">
+    <div class="footer-social-icons">
+      <a href="https://x.com/tiergamestudio" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://www.instagram.com/tiergamestudio/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://discord.gg/ESvwrchUwA" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+      <a href="https://assetstore.unity.com/publishers/124104" target="_blank" aria-label="Unity"><i class="fa-brands fa-unity"></i></a>
+    </div>
+    <div class="jugas_footer_copyright">&copy; 2026 Tier Studios. All rights reserved.</div>
+  </div>
+</footer>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<script src="assets/js/script.js"></script>
+<script>
+  hljs.highlightAll();
+  // Active TOC link on scroll
+  const sections = document.querySelectorAll('.docs-section');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 120) current = section.getAttribute('id');
+    });
+    tocLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
