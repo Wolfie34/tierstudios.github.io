@@ -1,3 +1,12 @@
+/* ==========================================
+   CSS sticky requires overflow:visible on all parents.
+   Override the global overflow-x:hidden for docs pages.
+========================================== */
+.docs-page html,
+.docs-page body {
+    overflow-x: visible !important;
+}
+
 /* Ensure CSS sticky works - no parent can have overflow hidden */
 .docs-page #outer-wrapper,
 .docs-page #content-wrapper,
@@ -20,10 +29,17 @@
     min-width: 0;
 }
 
-/* Sidebar - scrolls naturally with the page */
+/* Sidebar - truly scrolls with the page (no sticky/fixed) */
 .docs-sidebar {
     width: 280px;
     flex-shrink: 0;
+    /* CSS sticky with proper top value accounting for nav */
+    position: -webkit-sticky;
+    position: sticky;
+    top: 80px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    align-self: flex-start;
 }
 
 .docs-hero {
