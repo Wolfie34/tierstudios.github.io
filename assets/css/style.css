@@ -419,6 +419,10 @@ ul {
     color: #ffb800; /* Gold for stars */
 }
 
+.favorites i {
+    color: #ff4757; /* Red for heart */
+}
+
 .product-desc {
     font-size: 17px;
     color: var(--text-secondary);
