@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Layer Forge Studio - Tier Studios</title>
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700|Open+Sans:400,700,400italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700|Open+Sans:400,700,400italic" rel="stylesheet"
+        type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
@@ -13,13 +15,15 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body class="product-detail-page">
     <div id="outer-wrapper">
         <!-- Navigation -->
         <nav class="tm-menu">
             <div class="menu-wrap">
                 <div class="logo">
-                    <a href="index.html"><img id="site-logo" src="assets/img/logo_light.png" alt="Tier Studios" style="height: 40px;"></a>
+                    <a href="index.html"><img id="site-logo" src="assets/img/logo_light.png" alt="Tier Studios"
+                            style="height: 40px;"></a>
                 </div>
                 <div class="menu-right">
                     <ul id="menu-items">
@@ -39,249 +43,290 @@
                         <span></span>
                         <span></span>
                     </div>
-                    </div>
                 </div>
             </div>
-        </nav>
-        <div class="tm-menu2"></div>
+    </div>
+    </nav>
+    <div class="tm-menu2"></div>
 
-        <!-- Main Content Wrapper -->
-        <div id="content-wrapper" class="row">
-            <main id="main-wrapper" style="max-width: 1200px; margin: 0 auto; padding: 20px 20px;">
-                
-                <!-- Product Header -->
-                <div class="product-detail-header">
-                    <div class="animated-title-container" style="margin-bottom: 15px;">
-                        <h1 class="animated-title" style="font-size: clamp(30px, 6vw, 60px);">
-                            <span class="letter">L</span>
-                            <span class="letter">A</span>
-                            <span class="letter">Y</span>
-                            <span class="letter">E</span>
-                            <span class="letter">R</span>
-                            <span class="letter">&nbsp;</span>
-                            <span class="letter">F</span>
-                            <span class="letter">O</span>
-                            <span class="letter">R</span>
-                            <span class="letter">G</span>
-                            <span class="letter">E</span>
-                            <span class="letter">&nbsp;</span>
-                            <span class="letter">S</span>
-                            <span class="letter">T</span>
-                            <span class="letter">U</span>
-                            <span class="letter">D</span>
-                            <span class="letter">I</span>
-                            <span class="letter">O</span>
-                        </h1>
+    <!-- Main Content Wrapper -->
+    <div id="content-wrapper" class="row">
+        <main id="main-wrapper" style="max-width: 1200px; margin: 0 auto; padding: 20px 20px;">
+
+            <!-- Product Header -->
+            <div class="product-detail-header">
+                <div class="animated-title-container" style="margin-bottom: 15px;">
+                    <h1 class="animated-title" style="font-size: clamp(30px, 6vw, 60px);">
+                        <span class="letter">L</span>
+                        <span class="letter">A</span>
+                        <span class="letter">Y</span>
+                        <span class="letter">E</span>
+                        <span class="letter">R</span>
+                        <span class="letter">&nbsp;</span>
+                        <span class="letter">F</span>
+                        <span class="letter">O</span>
+                        <span class="letter">R</span>
+                        <span class="letter">G</span>
+                        <span class="letter">E</span>
+                        <span class="letter">&nbsp;</span>
+                        <span class="letter">S</span>
+                        <span class="letter">T</span>
+                        <span class="letter">U</span>
+                        <span class="letter">D</span>
+                        <span class="letter">I</span>
+                        <span class="letter">O</span>
+                    </h1>
+                </div>
+                <p class="product-summary">Layer-based image & texture editor inside Unity. Edit, design and enhance
+                    visuals in real-time with brushes, effects and one-click workflow.</p>
+            </div>
+
+            <div class="product-detail-layout">
+                <!-- Left Column: Gallery & Actions -->
+                <div class="product-left-col">
+                    <!-- Media Gallery -->
+                    <div class="product-gallery">
+                        <div class="gallery-main-view" id="gallery-main-view">
+                            <button class="gallery-nav prev" onclick="navigateGallery(-1)"><i
+                                    class="fas fa-chevron-left"></i></button>
+                            <button class="gallery-nav next" onclick="navigateGallery(1)"><i
+                                    class="fas fa-chevron-right"></i></button>
+                            <!-- Default is Video -->
+                            <iframe id="gallery-video" src="https://www.youtube.com/embed/4qqhoKBtlvc"
+                                title="Layer Forge Studio Trailer" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                            <img id="gallery-image" src="" alt="Layer Forge Studio Screenshot" style="display: none;"
+                                onclick="openLightbox()">
+                        </div>
+
+                        <div class="gallery-thumbnails">
+                            <!-- Video Thumbnail (YouTube HQ Thumbnail) -->
+                            <div class="thumb-item active" data-type="video"
+                                data-src="https://www.youtube.com/embed/4qqhoKBtlvc">
+                                <img src="https://img.youtube.com/vi/4qqhoKBtlvc/maxresdefault.jpg" alt="Video Trailer">
+                                <div class="play-icon-overlay"><i class="fas fa-play"></i></div>
+                            </div>
+                            <!-- Images -->
+                            <div class="thumb-item" data-type="image"
+                                data-src="assets/img/layer-forge-studio/Page_1.png">
+                                <img src="assets/img/layer-forge-studio/Page_1.png" alt="Screenshot 1">
+                            </div>
+                            <div class="thumb-item" data-type="image"
+                                data-src="assets/img/layer-forge-studio/Page_2.png">
+                                <img src="assets/img/layer-forge-studio/Page_2.png" alt="Screenshot 2">
+                            </div>
+                            <div class="thumb-item" data-type="image"
+                                data-src="assets/img/layer-forge-studio/Page_3.png">
+                                <img src="assets/img/layer-forge-studio/Page_3.png" alt="Screenshot 3">
+                            </div>
+                            <div class="thumb-item" data-type="image"
+                                data-src="assets/img/layer-forge-studio/Page_4.png">
+                                <img src="assets/img/layer-forge-studio/Page_4.png" alt="Screenshot 4">
+                            </div>
+                            <div class="thumb-item" data-type="image"
+                                data-src="assets/img/layer-forge-studio/Page_5.png">
+                                <img src="assets/img/layer-forge-studio/Page_5.png" alt="Screenshot 5">
+                            </div>
+                            <div class="thumb-item" data-type="image"
+                                data-src="assets/img/layer-forge-studio/Page_6.png">
+                                <img src="assets/img/layer-forge-studio/Page_6.png" alt="Screenshot 6">
+                            </div>
+                        </div>
                     </div>
-                    <p class="product-summary">Layer-based image & texture editor inside Unity. Edit, design and enhance visuals in real-time with brushes, effects and one-click workflow.</p>
+
+                    <div class="product-stats" style="margin-bottom: 20px;">
+                        <span class="badge stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            5.0</span>
+                        <span class="badge users"><i class="fas fa-users"></i> 0+ Users</span>
+                        <span class="badge favorites"><i class="fas fa-heart"></i> 0+ Favorites</span>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="product-actions-bar">
+                        <a href="#" class="btn-primary asset-store-btn">
+                            <i class="fa-brands fa-unity"></i> Asset Store
+                        </a>
+                        <a href="https://assetstore.unity.com/packages/tools/painting/layer-forge-studio-370200"
+                            class="btn-secondary doc-btn">
+                            <i class="fas fa-book"></i> Documentation
+                        </a>
+                    </div>
+
+                    <!-- Technical Details moved to Left Column -->
+                    <div class="detail-section" style="margin-top: 40px;">
+                        <h3>Technical Details</h3>
+                        <div class="tech-grid">
+                            <div class="tech-card">
+                                <h4>Core System</h4>
+                                <ul>
+                                    <li>Layer-based image and texture editing inside Unity</li>
+                                    <li>Real-time editing with instant feedback</li>
+                                    <li>Non-destructive workflow with re-editable structure</li>
+                                    <li>Full Undo / Redo system</li>
+                                </ul>
+                            </div>
+                            <div class="tech-card">
+                                <h4>Editing Workflow</h4>
+                                <ul>
+                                    <li>Right Click → Edit → Apply workflow</li>
+                                    <li>Direct editing without external tools</li>
+                                    <li>Seamless pipeline integration</li>
+                                </ul>
+                            </div>
+                            <div class="tech-card">
+                                <h4>Save & Data System</h4>
+                                <ul>
+                                    <li>Auto-save to prevent data loss</li>
+                                    <li>Full project save via .lfs files</li>
+                                    <li>Smart re-editing via .lfsmeta files</li>
+                                    <li>Reopen and continue editing modified images</li>
+                                </ul>
+                            </div>
+                            <div class="tech-card">
+                                <h4>Advanced Layer System</h4>
+                                <ul>
+                                    <li>Multi-layer editing & Layer grouping</li>
+                                    <li>Clipping masks & Layer masks</li>
+                                    <li>Adjustment layers (non-destructive)</li>
+                                    <li>Opacity, blending controls & ordering</li>
+                                </ul>
+                            </div>
+                            <div class="tech-card">
+                                <h4>Effects & Tools</h4>
+                                <ul>
+                                    <li>Blur, Glow, Shadow, Color/Gradient Overlay</li>
+                                    <li>Move (Auto-Select), Brush, Clone Stamp, Smudge</li>
+                                    <li>Shape, Pen, Crop, Marquee/Lasso, Fill, Text</li>
+                                    <li>Transform (move, scale, rotate, perspective warp)</li>
+                                </ul>
+                            </div>
+                            <div class="tech-card">
+                                <h4>Compatibility & Performance</h4>
+                                <ul>
+                                    <li>Optimized GPU-assisted real-time editing</li>
+                                    <li>Works with standard texture formats (PNG, JPEG)</li>
+                                    <li>Compatible with Built-in, URP and HDRP</li>
+                                    <li>Unity Editor tool (no runtime dependency)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="product-detail-layout">
-                    <!-- Left Column: Gallery & Actions -->
-                    <div class="product-left-col">
-                        <!-- Media Gallery -->
-                        <div class="product-gallery">
-                            <div class="gallery-main-view" id="gallery-main-view">
-                                <button class="gallery-nav prev" onclick="navigateGallery(-1)"><i class="fas fa-chevron-left"></i></button>
-                                <button class="gallery-nav next" onclick="navigateGallery(1)"><i class="fas fa-chevron-right"></i></button>
-                                <!-- Default is Video -->
-                                <iframe id="gallery-video" src="https://www.youtube.com/embed/4qqhoKBtlvc" title="Layer Forge Studio Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                <img id="gallery-image" src="" alt="Layer Forge Studio Screenshot" style="display: none;" onclick="openLightbox()">
-                            </div>
-                            
-                            <div class="gallery-thumbnails">
-                                <!-- Video Thumbnail (YouTube HQ Thumbnail) -->
-                                <div class="thumb-item active" data-type="video" data-src="https://www.youtube.com/embed/4qqhoKBtlvc">
-                                    <img src="https://img.youtube.com/vi/4qqhoKBtlvc/maxresdefault.jpg" alt="Video Trailer">
-                                    <div class="play-icon-overlay"><i class="fas fa-play"></i></div>
-                                </div>
-                                <!-- Images -->
-                                <div class="thumb-item" data-type="image" data-src="assets/img/layer-forge-studio/Page_1.png">
-                                    <img src="assets/img/layer-forge-studio/Page_1.png" alt="Screenshot 1">
-                                </div>
-                                <div class="thumb-item" data-type="image" data-src="assets/img/layer-forge-studio/Page_2.png">
-                                    <img src="assets/img/layer-forge-studio/Page_2.png" alt="Screenshot 2">
-                                </div>
-                                <div class="thumb-item" data-type="image" data-src="assets/img/layer-forge-studio/Page_3.png">
-                                    <img src="assets/img/layer-forge-studio/Page_3.png" alt="Screenshot 3">
-                                </div>
-                                <div class="thumb-item" data-type="image" data-src="assets/img/layer-forge-studio/Page_4.png">
-                                    <img src="assets/img/layer-forge-studio/Page_4.png" alt="Screenshot 4">
-                                </div>
-                                <div class="thumb-item" data-type="image" data-src="assets/img/layer-forge-studio/Page_5.png">
-                                    <img src="assets/img/layer-forge-studio/Page_5.png" alt="Screenshot 5">
-                                </div>
-                                <div class="thumb-item" data-type="image" data-src="assets/img/layer-forge-studio/Page_6.png">
-                                    <img src="assets/img/layer-forge-studio/Page_6.png" alt="Screenshot 6">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="product-stats" style="margin-bottom: 20px;">
-                            <span class="badge stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 5.0</span>
-                            <span class="badge users"><i class="fas fa-users"></i> 0+ Users</span>
-                            <span class="badge favorites"><i class="fas fa-heart"></i> 0+ Favorites</span>
-                        </div>
-
-                        <!-- Action Buttons -->
-                        <div class="product-actions-bar">
-                            <a href="#" class="btn-primary asset-store-btn">
-                                <i class="fa-brands fa-unity"></i> Coming Soon
-                            </a>
-                            <a href="layer-forge-docs.html" class="btn-secondary doc-btn">
-                                <i class="fas fa-book"></i> Documentation
-                            </a>
-                        </div>
-                        
-                        <!-- Technical Details moved to Left Column -->
-                        <div class="detail-section" style="margin-top: 40px;">
-                            <h3>Technical Details</h3>
-                            <div class="tech-grid">
-                                <div class="tech-card">
-                                    <h4>Core System</h4>
-                                    <ul>
-                                        <li>Layer-based image and texture editing inside Unity</li>
-                                        <li>Real-time editing with instant feedback</li>
-                                        <li>Non-destructive workflow with re-editable structure</li>
-                                        <li>Full Undo / Redo system</li>
-                                    </ul>
-                                </div>
-                                <div class="tech-card">
-                                    <h4>Editing Workflow</h4>
-                                    <ul>
-                                        <li>Right Click → Edit → Apply workflow</li>
-                                        <li>Direct editing without external tools</li>
-                                        <li>Seamless pipeline integration</li>
-                                    </ul>
-                                </div>
-                                <div class="tech-card">
-                                    <h4>Save & Data System</h4>
-                                    <ul>
-                                        <li>Auto-save to prevent data loss</li>
-                                        <li>Full project save via .lfs files</li>
-                                        <li>Smart re-editing via .lfsmeta files</li>
-                                        <li>Reopen and continue editing modified images</li>
-                                    </ul>
-                                </div>
-                                <div class="tech-card">
-                                    <h4>Advanced Layer System</h4>
-                                    <ul>
-                                        <li>Multi-layer editing & Layer grouping</li>
-                                        <li>Clipping masks & Layer masks</li>
-                                        <li>Adjustment layers (non-destructive)</li>
-                                        <li>Opacity, blending controls & ordering</li>
-                                    </ul>
-                                </div>
-                                <div class="tech-card">
-                                    <h4>Effects & Tools</h4>
-                                    <ul>
-                                        <li>Blur, Glow, Shadow, Color/Gradient Overlay</li>
-                                        <li>Move (Auto-Select), Brush, Clone Stamp, Smudge</li>
-                                        <li>Shape, Pen, Crop, Marquee/Lasso, Fill, Text</li>
-                                        <li>Transform (move, scale, rotate, perspective warp)</li>
-                                    </ul>
-                                </div>
-                                <div class="tech-card">
-                                    <h4>Compatibility & Performance</h4>
-                                    <ul>
-                                        <li>Optimized GPU-assisted real-time editing</li>
-                                        <li>Works with standard texture formats (PNG, JPEG)</li>
-                                        <li>Compatible with Built-in, URP and HDRP</li>
-                                        <li>Unity Editor tool (no runtime dependency)</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Right Column: Details -->
+                <div class="product-right-col">
+                    <div class="detail-section">
+                        <h3>Description</h3>
+                        <p>Edit, design and enhance your images directly inside Unity — no external tools, no broken
+                            workflow.</p>
+                        <p>Layer Forge Studio is a powerful, layer-based image and texture editor built for Unity. It
+                            allows you to modify, create and refine visuals in real-time without ever leaving the
+                            engine.</p>
+                        <p>Whether you're polishing UI, creating textures, or making quick adjustments to assets, Layer
+                            Forge Studio gives you a fast, intuitive and complete editing workflow.</p>
                     </div>
 
-                    <!-- Right Column: Details -->
-                    <div class="product-right-col">
-                        <div class="detail-section">
-                            <h3>Description</h3>
-                            <p>Edit, design and enhance your images directly inside Unity — no external tools, no broken workflow.</p>
-                            <p>Layer Forge Studio is a powerful, layer-based image and texture editor built for Unity. It allows you to modify, create and refine visuals in real-time without ever leaving the engine.</p>
-                            <p>Whether you're polishing UI, creating textures, or making quick adjustments to assets, Layer Forge Studio gives you a fast, intuitive and complete editing workflow.</p>
-                        </div>
-                        
-                        <div class="detail-section">
-                            <h3>Why Layer Forge Studio?</h3>
-                            <p>Stop switching between external software and Unity.<br>
-                            With Layer Forge Studio, your image editing pipeline stays inside your project from start to finish.<br>
+                    <div class="detail-section">
+                        <h3>Why Layer Forge Studio?</h3>
+                        <p>Stop switching between external software and Unity.<br>
+                            With Layer Forge Studio, your image editing pipeline stays inside your project from start to
+                            finish.<br>
                             <strong>Right Click → Edit → Apply</strong><br>
-                            That is the core workflow.</p>
-                        </div>
+                            That is the core workflow.
+                        </p>
+                    </div>
 
-                        <div class="detail-section">
-                            <h3>Key Features</h3>
-                            <ul class="feature-list">
-                                <li><strong>Real-Time Editing:</strong> See your changes instantly while you work.</li>
-                                <li><strong>Layer-Based Workflow:</strong> Create and edit with a flexible multi-layer system designed for fast iteration.</li>
-                                <li><strong>Advanced Effects:</strong> Add blur, glow, shadow, color overlays and more with full control.</li>
-                                <li><strong>Brush & Paint Tools:</strong> Edit textures directly with intuitive brush-based tools.</li>
-                                <li><strong>One-Click Workflow:</strong> Right-click any supported image, open it in Layer Forge Studio, make your changes and apply them back into your project.</li>
-                                <li><strong>Auto Save & Recovery:</strong> Includes an auto-save system designed for professional workflows, helping protect your work while editing.</li>
-                                <li><strong>.lfs Project Save System:</strong> Save full editable Layer Forge projects as .lfs files for standalone workflows.</li>
-                                <li><strong>.lfsmeta Smart Re-Editing:</strong> Stores editable workflow data, so you can reopen the same image later and continue editing without losing layer setups.</li>
-                                <li><strong>Non-Destructive Continuation:</strong> Your workflow is not limited to a one-time export. Reopen, adjust and continue working whenever you need.</li>
-                                <li><strong>Built for Unity Pipelines:</strong> Designed to fit naturally into Unity-based art and production workflows.</li>
-                            </ul>
-                        </div>
+                    <div class="detail-section">
+                        <h3>Key Features</h3>
+                        <ul class="feature-list">
+                            <li><strong>Real-Time Editing:</strong> See your changes instantly while you work.</li>
+                            <li><strong>Layer-Based Workflow:</strong> Create and edit with a flexible multi-layer
+                                system designed for fast iteration.</li>
+                            <li><strong>Advanced Effects:</strong> Add blur, glow, shadow, color overlays and more with
+                                full control.</li>
+                            <li><strong>Brush & Paint Tools:</strong> Edit textures directly with intuitive brush-based
+                                tools.</li>
+                            <li><strong>One-Click Workflow:</strong> Right-click any supported image, open it in Layer
+                                Forge Studio, make your changes and apply them back into your project.</li>
+                            <li><strong>Auto Save & Recovery:</strong> Includes an auto-save system designed for
+                                professional workflows, helping protect your work while editing.</li>
+                            <li><strong>.lfs Project Save System:</strong> Save full editable Layer Forge projects as
+                                .lfs files for standalone workflows.</li>
+                            <li><strong>.lfsmeta Smart Re-Editing:</strong> Stores editable workflow data, so you can
+                                reopen the same image later and continue editing without losing layer setups.</li>
+                            <li><strong>Non-Destructive Continuation:</strong> Your workflow is not limited to a
+                                one-time export. Reopen, adjust and continue working whenever you need.</li>
+                            <li><strong>Built for Unity Pipelines:</strong> Designed to fit naturally into Unity-based
+                                art and production workflows.</li>
+                        </ul>
+                    </div>
 
-                        <div class="detail-section">
-                            <h3>Use Cases</h3>
-                            <ul class="feature-list">
-                                <li>UI image editing and polishing</li>
-                                <li>Texture refinement and paintovers</li>
-                                <li>Creating stylized visuals directly in-engine</li>
-                                <li>Rapid iteration on imported assets</li>
-                                <li>Re-editable workflow for production assets</li>
-                                <li>Artists and developers who want to stay inside Unity</li>
-                            </ul>
-                        </div>
+                    <div class="detail-section">
+                        <h3>Use Cases</h3>
+                        <ul class="feature-list">
+                            <li>UI image editing and polishing</li>
+                            <li>Texture refinement and paintovers</li>
+                            <li>Creating stylized visuals directly in-engine</li>
+                            <li>Rapid iteration on imported assets</li>
+                            <li>Re-editable workflow for production assets</li>
+                            <li>Artists and developers who want to stay inside Unity</li>
+                        </ul>
+                    </div>
 
-                        <div class="detail-section">
-                            <h3>What Makes It Different</h3>
-                            <p>Layer Forge Studio is not just an image editor. <strong>It is a workflow system.</strong></p>
-                            <p>With .lfs project files, .lfsmeta re-editable asset data, built-in auto-save and direct in-project editing, it gives you a faster and more flexible way to work with visuals inside Unity.</p>
-                            <p>No context switching.<br>
+                    <div class="detail-section">
+                        <h3>What Makes It Different</h3>
+                        <p>Layer Forge Studio is not just an image editor. <strong>It is a workflow system.</strong></p>
+                        <p>With .lfs project files, .lfsmeta re-editable asset data, built-in auto-save and direct
+                            in-project editing, it gives you a faster and more flexible way to work with visuals inside
+                            Unity.</p>
+                        <p>No context switching.<br>
                             No repetitive export/import cycle.<br>
                             Just a faster way to create.</p>
-                        </div>
                     </div>
                 </div>
-
-            </main>
-        </div>
-
-        <!-- Lightbox Modal -->
-        <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox()">
-            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-            <img class="lightbox-content" id="lightbox-img">
-        </div>
-        
-        <!-- Footer -->
-        <footer id="jugas_footer">
-            <div class="copy-container">
-                <div class="footer-social-icons">
-                    <a href="https://x.com/tiergamestudio" target="_blank" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="https://www.facebook.com/people/Tier-Studios/61571678942166/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/tiergamestudio/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.youtube.com/@TierStudioss" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="https://www.linkedin.com/company/107369558/admin/dashboard/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://discord.gg/ESvwrchUwA" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
-                    <a href="https://assetstore.unity.com/publishers/124104" target="_blank" aria-label="Unity Asset Store"><i class="fa-brands fa-unity"></i></a>
-                </div>
-                <div class="jugas_footer_copyright">
-                    &copy; 2026 Tier Studios. All rights reserved.
-                </div>
             </div>
-        </footer>
+
+        </main>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <!-- Footer -->
+    <footer id="jugas_footer">
+        <div class="copy-container">
+            <div class="footer-social-icons">
+                <a href="https://x.com/tiergamestudio" target="_blank" aria-label="X (Twitter)"><i
+                        class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://www.facebook.com/people/Tier-Studios/61571678942166/" target="_blank"
+                    aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/tiergamestudio/" target="_blank" aria-label="Instagram"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@TierStudioss" target="_blank" aria-label="YouTube"><i
+                        class="fab fa-youtube"></i></a>
+                <a href="https://www.linkedin.com/company/107369558/admin/dashboard/" target="_blank"
+                    aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://discord.gg/ESvwrchUwA" target="_blank" aria-label="Discord"><i
+                        class="fab fa-discord"></i></a>
+                <a href="https://assetstore.unity.com/publishers/124104" target="_blank"
+                    aria-label="Unity Asset Store"><i class="fa-brands fa-unity"></i></a>
+            </div>
+            <div class="jugas_footer_copyright">
+                &copy; 2026 Tier Studios. All rights reserved.
+            </div>
+        </div>
+    </footer>
     </div>
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="assets/js/script.js"></script>
-    
+
     <!-- Gallery Script -->
     <script>
         const thumbnails = document.querySelectorAll('.thumb-item');
@@ -305,7 +350,7 @@
             const video = document.getElementById('gallery-video');
             const image = document.getElementById('gallery-image');
             const activeThumb = thumbnails[currentGalleryIndex];
-            
+
             const type = activeThumb.getAttribute('data-type');
             const source = activeThumb.getAttribute('data-src');
 
@@ -317,24 +362,24 @@
             if (type === 'video') {
                 image.style.display = 'none';
                 video.style.display = 'block';
-                if(video.src !== source) video.src = source;
+                if (video.src !== source) video.src = source;
             } else {
                 video.style.display = 'none';
                 const currentSrc = video.src;
                 video.src = ''; // Stop video
                 video.src = currentSrc;
-                
+
                 image.style.display = 'block';
                 image.src = source;
             }
-            
+
             // Scroll thumbnail into view
             activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
 
         function openLightbox() {
             const image = document.getElementById('gallery-image');
-            if(image.style.display !== 'none') {
+            if (image.style.display !== 'none') {
                 document.getElementById('lightbox-img').src = image.src;
                 document.getElementById('lightbox-modal').style.display = 'flex';
             }
@@ -345,4 +390,5 @@
         }
     </script>
 </body>
+
 </html>
