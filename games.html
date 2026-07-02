@@ -137,7 +137,10 @@
 
     <header class="subpage-hero container">
 
-      <h1 class="display reveal" data-delay="100" data-i18n="games.title">Games</h1>
+      <div class="section-head-title reveal" data-delay="100">
+        <span class="section-head-ghost display" aria-hidden="true" data-i18n="games.title">Games</span>
+        <h1 class="display" data-i18n="games.title">Games</h1>
+      </div>
 
       <p class="sub-desc reveal" data-delay="200" data-i18n="games.desc">An independent game studio — we develop original titles, handle publishing, and build Unity tools alongside our games.</p>
 
@@ -147,76 +150,13 @@
 
     <div class="subpage-content container">
 
-      <div class="coming-soon-panel coming-soon-panel--stacked reveal coming-soon-panel--no-count">
-
-        <div class="cs-visual cs-visual--game">
-
-          <div class="cs-visual-overlay"></div>
-
-          <span class="cs-badge display" data-i18n="common.comingSoon">Coming Soon</span>
-
-        </div>
-
-        <div class="cs-body cs-body--games">
-
-          <div class="cs-body-main">
-
-            <span class="label cs-eyebrow" data-i18n="games.flagship">Flagship Title</span>
-
-            <h2 class="display cs-title" data-i18n="games.projectTitle">Tier Game Project</h2>
-
-            <p class="cs-desc" data-i18n="games.projectDesc">Our first game is in active development — a studio-led project built on the same pipeline we use for publishing and Unity tooling. Follow the changelog below for milestones as we move toward launch.</p>
-
+      <div class="game-dev-panel reveal" id="gameDevPanel" data-delay="60" data-i18n-aria="games.panelAria">
+        <div class="game-dev-terminal">
+          <pre class="game-dev-code"><code></code></pre>
+          <div class="game-dev-finale">
+            <h2 class="display game-dev-status" aria-live="polite"></h2>
           </div>
-
         </div>
-
-      </div>
-
-
-
-      <div class="game-updates reveal" data-delay="120">
-
-        <div class="game-updates-head">
-
-          <h2 class="display" data-i18n="games.updates">Updates</h2>
-
-          <span class="label" data-i18n="common.changelog">Changelog</span>
-
-        </div>
-
-        <div class="update-list" data-stagger="90">
-
-          <article class="update-item">
-
-            <div class="update-meta">
-
-              <span class="display update-ver">v1.1</span>
-
-              <span class="label update-date">March 2026</span>
-
-            </div>
-
-            <p class="update-text" data-i18n="games.update.v11">Online integration is complete. Players can now connect to dedicated servers, sync session state across clients, and join matches through a lightweight lobby flow. Matchmaking hooks and basic reconnect handling are in place for the next milestone.</p>
-
-          </article>
-
-          <article class="update-item">
-
-            <div class="update-meta">
-
-              <span class="display update-ver">v1.0</span>
-
-              <span class="label update-date">February 2026</span>
-
-            </div>
-
-            <p class="update-text" data-i18n="games.update.v10">Core UI is done. Main menus, HUD layouts, settings screens, and in-game overlays are wired up with a consistent visual system. Navigation, input feedback, and responsive scaling are working across target resolutions.</p>
-
-          </article>
-
-        </div>
-
       </div>
 
     </div>

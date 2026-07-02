@@ -194,16 +194,7 @@
 
         <div class="hero-sub reveal" data-delay="2000">
           <span class="hero-sub-line" data-i18n="hero.sub1">Game Development · Publishing</span>
-          <span class="hero-sub-line" data-i18n="hero.sub2">Unity Tools</span>
         </div>
-
-        <p class="hero-slogan reveal" data-delay="2300">
-
-          <span data-i18n="hero.slogan1">Independent studio — we develop games, publish titles, and ship Unity assets for production.</span>
-
-          <span class="hi" data-i18n="hero.slogan2">From prototype to launch. Tools and titles, built in-house.</span>
-
-        </p>
 
       </div>
 
@@ -219,32 +210,38 @@
 
       <div class="section-head" data-stagger="90">
 
-        <h2 class="display" data-i18n="index.games.title">Games</h2>
-
-        <a href="games.html" class="label section-link" data-cursor="hover" data-i18n="common.viewAll">View All</a>
-
-      </div>
-
-      <div class="game-promo-panel reveal" data-delay="60">
-
-        <div class="game-promo-visual">
-          <div class="game-promo-overlay" aria-hidden="true"></div>
-          <span class="game-promo-badge display" data-i18n="common.comingSoon">Coming Soon</span>
-        </div>
-
-        <div class="game-promo-body">
-
-          <span class="label game-promo-eyebrow" data-i18n="index.games.eyebrow">Tier Game Project</span>
-
-          <h2 class="display game-promo-title" data-i18n="index.games.promoTitle">Our First Game</h2>
-
-          <p class="game-promo-desc" data-i18n="index.games.promoDesc">A studio-led title in active development — built on the same pipeline we use for publishing and Unity tooling.</p>
-
-          <a href="games.html" class="btn-primary" data-cursor="hover"><span data-i18n="common.learnMore">Learn More</span></a>
-
+        <div class="section-head-title reveal">
+          <span class="section-head-ghost display" aria-hidden="true" data-i18n="index.games.title">Games</span>
+          <h2 class="display" data-i18n="index.games.title">Games</h2>
         </div>
 
       </div>
+
+      <a href="games.html" class="game-teaser reveal" data-delay="60" data-cursor="hover" data-i18n-aria="index.games.teaserAria">
+        <div class="game-teaser-mark" aria-hidden="true">
+          <img src="assets/img/logo-outline.svg" alt="" />
+        </div>
+        <div class="game-teaser-noise" aria-hidden="true"></div>
+        <div class="game-teaser-scan" aria-hidden="true"></div>
+        <div class="game-teaser-wave" aria-hidden="true">
+          <svg class="game-teaser-wave-svg" viewBox="0 0 800 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="game-teaser-wave-path" d="M0 60 C40 20, 80 100, 120 60 S200 20, 240 60 S320 100, 360 60 S440 20, 480 60 S560 100, 600 60 S680 20, 720 60 S760 100, 800 60" />
+          </svg>
+        </div>
+        <span class="game-teaser-corner game-teaser-corner--tl" aria-hidden="true"></span>
+        <span class="game-teaser-corner game-teaser-corner--tr" aria-hidden="true"></span>
+        <span class="game-teaser-corner game-teaser-corner--bl" aria-hidden="true"></span>
+        <span class="game-teaser-corner game-teaser-corner--br" aria-hidden="true"></span>
+        <div class="game-teaser-body">
+          <span class="label game-teaser-status">
+            <span class="game-teaser-rec" aria-hidden="true"></span>
+            <span data-i18n="index.games.status">In Development</span>
+          </span>
+          <h3 class="display game-teaser-title" data-i18n="index.games.teaserTitle">Awaiting Transmission</h3>
+          <p class="game-teaser-desc" data-i18n="index.games.teaserDesc">Details will surface when the time is right.</p>
+          <span class="btn-primary game-teaser-btn" data-i18n="common.learnMore">Learn More</span>
+        </div>
+      </a>
 
     </div>
 
@@ -260,13 +257,10 @@
 
         <div class="section-head" data-stagger="90">
 
-          <h2 class="display" data-i18n="index.featured.title">Featured Assets</h2>
-
-          <a href="assets.html" class="label section-link" data-cursor="hover" data-i18n="common.viewAll">
-
-            View All
-
-          </a>
+          <div class="section-head-title reveal">
+            <span class="section-head-ghost display" aria-hidden="true" data-i18n="index.featured.title">Featured Assets</span>
+            <h2 class="display" data-i18n="index.featured.title">Featured Assets</h2>
+          </div>
 
         </div>
 
@@ -304,7 +298,34 @@
 
           </a>
 
+          <a href="goat-icon-studio.html" class="game-item has-img" data-cursor="hover">
+
+            <span class="gi-img" style="background-image:url('assets/img/goat-icon-studio/Social_Image.PNG')"></span>
+
+            <span class="gi-body">
+
+              <span class="gi-title">Goat Icon Studio</span>
+
+              <span class="gi-tag" data-i18n="asset.goatIcon.desc">Create game-ready 2D icons from 3D prefabs in seconds. Batch export and animation capture.</span>
+
+              <span class="gi-go" data-i18n="common.view">View</span>
+
+            </span>
+
+          </a>
+
         </div>
+
+        <aside class="assets-campaign reveal" data-delay="140" aria-label="Unity Asset Store campaigns">
+          <div class="assets-campaign-inner">
+            <div class="assets-campaign-copy">
+              <span class="label assets-campaign-kicker" data-i18n="assets.campaign.kicker">Campaigns</span>
+              <p class="assets-campaign-title display" data-i18n="assets.campaign.title">Don't miss our campaigns</p>
+              <p class="assets-campaign-desc" data-i18n="assets.campaign.desc">Follow Tier Studios on the Unity Asset Store for seasonal sales and launch discounts.</p>
+            </div>
+            <a href="https://assetstore.unity.com/publishers/124104" target="_blank" rel="noopener" class="btn-primary assets-campaign-btn" data-cursor="hover" data-i18n="assets.campaign.cta">Follow on Asset Store</a>
+          </div>
+        </aside>
 
       </div>
 

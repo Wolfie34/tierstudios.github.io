@@ -1,29 +1,52 @@
 document.addEventListener('DOMContentLoaded', function () {
+  (function navActiveRoute() {
+    var path = window.location.pathname.split('/').pop();
+    if (!path || path === '') path = 'index.html';
+    var assetPages = [
+      'goat-icon-studio.html',
+      'layer-forge-studio.html',
+      'ui-particle-system.html',
+      'layer-forge-docs.html',
+      'ui-particle-docs.html'
+    ];
+    var href = {
+      'assets.html': 'assets.html',
+      'games.html': 'games.html',
+      'team.html': 'team.html',
+      'contact.html': 'contact.html'
+    }[path];
+    if (assetPages.indexOf(path) !== -1) href = 'assets.html';
+    if (!href) return;
+    document.querySelectorAll('#nav .nav-link').forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === href);
+    });
+  })();
+
   (function tierMarkBackground() {
     if (document.querySelector('.tier-bg')) return;
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var narrow = window.matchMedia('(max-width: 900px)').matches;
     var fillConfigs = [
-      { top: '8%', right: '4%', width: 82, depth: 0.55, phase: 0, amp: 16 },
-      { top: '18%', left: '3%', width: 70, depth: 0.48, phase: 1.1, amp: 14 },
-      { top: '32%', right: '10%', width: 64, depth: 0.42, phase: 2.3, amp: 12 },
-      { bottom: '20%', right: '6%', width: 74, depth: 0.5, phase: 3.5, amp: 15 },
-      { bottom: '8%', left: '5%', width: 86, depth: 0.44, phase: 4.7, amp: 16 },
-      { top: '46%', left: '9%', width: 58, depth: 0.38, phase: 0.6, amp: 11 },
-      { top: '56%', right: '14%', width: 62, depth: 0.34, phase: 1.9, amp: 12 },
-      { bottom: '34%', left: '18%', width: 54, depth: 0.3, phase: 2.8, amp: 10 },
-      { top: '68%', right: '22%', width: 52, depth: 0.26, phase: 4.1, amp: 9 }
+      { top: '8%', right: '4%', width: 102, depth: 0.55, phase: 0, amp: 16 },
+      { top: '18%', left: '3%', width: 88, depth: 0.48, phase: 1.1, amp: 14 },
+      { top: '32%', right: '10%', width: 80, depth: 0.42, phase: 2.3, amp: 12 },
+      { bottom: '20%', right: '6%', width: 92, depth: 0.5, phase: 3.5, amp: 15 },
+      { bottom: '8%', left: '5%', width: 108, depth: 0.44, phase: 4.7, amp: 16 },
+      { top: '46%', left: '9%', width: 72, depth: 0.38, phase: 0.6, amp: 11 },
+      { top: '56%', right: '14%', width: 78, depth: 0.34, phase: 1.9, amp: 12 },
+      { bottom: '34%', left: '18%', width: 68, depth: 0.3, phase: 2.8, amp: 10 },
+      { top: '68%', right: '22%', width: 65, depth: 0.26, phase: 4.1, amp: 9 }
     ];
     var outlineConfigs = [
-      { top: '11%', right: '11%', width: 44, depth: 0.6, phase: 0.35, amp: 10 },
-      { top: '21%', left: '9%', width: 38, depth: 0.52, phase: 1.55, amp: 9 },
-      { top: '35%', right: '16%', width: 34, depth: 0.46, phase: 2.65, amp: 8 },
-      { bottom: '23%', right: '12%', width: 40, depth: 0.54, phase: 3.75, amp: 9 },
-      { bottom: '11%', left: '10%', width: 46, depth: 0.48, phase: 4.95, amp: 10 },
-      { top: '49%', left: '13%', width: 32, depth: 0.42, phase: 0.95, amp: 8 },
-      { top: '59%', right: '19%', width: 30, depth: 0.38, phase: 2.15, amp: 7 },
-      { bottom: '37%', left: '23%', width: 28, depth: 0.34, phase: 3.25, amp: 7 },
-      { top: '71%', right: '27%', width: 26, depth: 0.3, phase: 4.45, amp: 6 }
+      { top: '11%', right: '11%', width: 55, depth: 0.6, phase: 0.35, amp: 10 },
+      { top: '21%', left: '9%', width: 48, depth: 0.52, phase: 1.55, amp: 9 },
+      { top: '35%', right: '16%', width: 42, depth: 0.46, phase: 2.65, amp: 8 },
+      { bottom: '23%', right: '12%', width: 50, depth: 0.54, phase: 3.75, amp: 9 },
+      { bottom: '11%', left: '10%', width: 58, depth: 0.48, phase: 4.95, amp: 10 },
+      { top: '49%', left: '13%', width: 40, depth: 0.42, phase: 0.95, amp: 8 },
+      { top: '59%', right: '19%', width: 38, depth: 0.38, phase: 2.15, amp: 7 },
+      { bottom: '37%', left: '23%', width: 35, depth: 0.34, phase: 3.25, amp: 7 },
+      { top: '71%', right: '27%', width: 32, depth: 0.3, phase: 4.45, amp: 6 }
     ];
 
     function tagMarkPaths(svg, variant) {
@@ -240,11 +263,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var TEXT = 'TIER STUDIOS';
     function heroSize() {
       var vw = window.innerWidth || 1200;
-      if (vw < 380) return 50;
-      if (vw < 520) return 60;
-      if (vw < 768) return 72;
-      if (vw < 1024) return 84;
-      return 96;
+      if (vw < 380) return 68;
+      if (vw < 520) return 82;
+      if (vw < 768) return 94;
+      if (vw < 1024) return 100;
+      return 104;
     }
     var SIZE = heroSize();
     var BASE = SIZE * 0.917;
@@ -254,9 +277,7 @@ document.addEventListener('DOMContentLoaded', function () {
     opentype.load(FONT, function (err, font) {
       if (err) return;
       var ns = 'http://www.w3.org/2000/svg';
-      var w = 0;
-      TEXT.split('').forEach(function (c) { w += font.getAdvanceWidth(c, SIZE); });
-      var x = (1200 - w) / 2;
+      var x = 0;
       TEXT.split('').forEach(function (c) {
         var path = font.getPath(c, x, BASE, SIZE);
         var el = document.createElementNS(ns, 'path');
@@ -273,6 +294,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         x += font.getAdvanceWidth(c, SIZE);
       });
+
+      var bbox = g.getBBox();
+      var svg = g.closest('svg');
+      var padX = 10;
+      var padY = 8;
+      if (svg) {
+        svg.setAttribute(
+          'viewBox',
+          (bbox.x - padX) + ' ' + (bbox.y - padY) + ' ' + (bbox.width + padX * 2) + ' ' + (bbox.height + padY * 2)
+        );
+      }
     });
   })();
 
@@ -364,6 +396,183 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 
     els.forEach(function (el) { io.observe(el); });
+  })();
+
+  /* Games page — terminal code sequence */
+  (function gameDevTerminal() {
+    var panel = document.getElementById('gameDevPanel');
+    if (!panel) return;
+
+    var codeEl = panel.querySelector('.game-dev-code code');
+    var finale = panel.querySelector('.game-dev-finale');
+    var statusEl = panel.querySelector('.game-dev-status');
+    if (!codeEl || !finale || !statusEl) return;
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var timer = null;
+    var running = false;
+    var SCRAMBLE_CHARS = '!<>-_\\/[]{}—=+*^?#%&@░▒▓█▄▀■□ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function randomSymbol() {
+      return SCRAMBLE_CHARS.charAt(Math.floor(Math.random() * SCRAMBLE_CHARS.length));
+    }
+
+    function getStatusText() {
+      return window.tierI18n ? window.tierI18n.t('games.devStatus') : 'IN DEVELOPMENT';
+    }
+
+    function reset() {
+      if (timer) clearTimeout(timer);
+      timer = null;
+      running = false;
+      codeEl.textContent = '';
+      statusEl.textContent = '';
+      statusEl.classList.remove('is-scrambling');
+      finale.classList.remove('is-visible');
+    }
+
+    function getLines() {
+      if (!window.tierI18n) return [];
+      return window.tierI18n.t('games.devLines').split('\n').filter(Boolean);
+    }
+
+    function render(lines, index, partial) {
+      var html = '';
+      var i;
+
+      for (i = 0; i < index; i++) {
+        html += '<span class="game-dev-line">' + escapeHtml(lines[i]) + '</span>';
+      }
+
+      if (index < lines.length) {
+        html += '<span class="game-dev-line game-dev-line--active">' +
+          escapeHtml(partial) +
+          '<span class="game-dev-cursor" aria-hidden="true"></span></span>';
+      }
+
+      codeEl.innerHTML = html;
+      codeEl.scrollTop = codeEl.scrollHeight;
+    }
+
+    function scrambleStatus(done) {
+      var target = getStatusText();
+      var locked = 0;
+      var ticks = 0;
+      var maxTicks = target.length * 4 + 12;
+
+      statusEl.classList.add('is-scrambling');
+      panel.setAttribute('aria-label', target);
+
+      function frame() {
+        if (!running) return;
+
+        var output = '';
+        var i;
+
+        for (i = 0; i < target.length; i++) {
+          if (target.charAt(i) === ' ') {
+            output += ' ';
+            continue;
+          }
+          output += i < locked ? target.charAt(i) : randomSymbol();
+        }
+
+        statusEl.textContent = output;
+        ticks++;
+
+        if (ticks % 2 === 0 && locked < target.length) {
+          do {
+            locked++;
+          } while (locked < target.length && target.charAt(locked) === ' ');
+        }
+
+        if (locked >= target.length || ticks >= maxTicks) {
+          statusEl.textContent = target;
+          statusEl.classList.remove('is-scrambling');
+          if (done) done();
+          return;
+        }
+
+        timer = setTimeout(frame, 42 + Math.random() * 28);
+      }
+
+      frame();
+    }
+
+    function showFinale() {
+      timer = setTimeout(function () {
+        requestAnimationFrame(function () {
+          finale.classList.add('is-visible');
+          scrambleStatus();
+        });
+      }, 320);
+    }
+
+    function run() {
+      if (!panel.classList.contains('in')) return;
+
+      reset();
+      var lines = getLines();
+      if (!lines.length) return;
+
+      if (reduced.matches) {
+        codeEl.textContent = lines.join('\n');
+        statusEl.textContent = getStatusText();
+        panel.setAttribute('aria-label', getStatusText());
+        finale.classList.add('is-visible');
+        return;
+      }
+
+      running = true;
+      var lineIndex = 0;
+      var charIndex = 0;
+
+      function step() {
+        if (!running) return;
+
+        if (lineIndex >= lines.length) {
+          codeEl.innerHTML = lines.map(function (line) {
+            return '<span class="game-dev-line">' + escapeHtml(line) + '</span>';
+          }).join('');
+          showFinale();
+          return;
+        }
+
+        var line = lines[lineIndex];
+
+        if (charIndex < line.length) {
+          render(lines, lineIndex, line.slice(0, charIndex + 1));
+          charIndex++;
+          timer = setTimeout(step, 14 + Math.random() * 14);
+          return;
+        }
+
+        lineIndex++;
+        charIndex = 0;
+        render(lines, lineIndex, '');
+        timer = setTimeout(step, 180 + Math.random() * 120);
+      }
+
+      step();
+    }
+
+    var mo = new MutationObserver(function () {
+      if (panel.classList.contains('in')) run();
+    });
+    mo.observe(panel, { attributes: true, attributeFilter: ['class'] });
+
+    if (panel.classList.contains('in')) run();
+
+    window.addEventListener('tier:lang', function () {
+      if (panel.classList.contains('in')) run();
+    });
   })();
 
   /* Nav solidify on scroll */
@@ -546,6 +755,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var pre = codeBlock.parentNode;
     if (pre.parentNode.classList.contains('gemini-code-container')) return;
 
+    var isGameDev = pre.classList.contains('game-dev-code');
     var container = document.createElement('div');
     container.className = 'gemini-code-container';
 
@@ -561,15 +771,18 @@ document.addEventListener('DOMContentLoaded', function () {
       '<span style="display:inline-block;width:10px;height:10px;background:#ff5f56;border-radius:50%;margin-right:6px;"></span>' +
       '<span style="display:inline-block;width:10px;height:10px;background:#ffbd2e;border-radius:50%;margin-right:6px;"></span>' +
       '<span style="display:inline-block;width:10px;height:10px;background:#27c93f;border-radius:50%;"></span>' +
-      '<span style="color:var(--fg-dim);margin-left:10px;font-weight:500;letter-spacing:0.1em;">' + langName + '</span>' +
-      '</div>' +
-      '<button class="gemini-copy-btn" type="button"><i class="fas fa-copy"></i> Copy</button>';
+      '<span style="color:var(--fg-dim);margin-left:10px;font-weight:500;letter-spacing:0.1em;">' +
+      (isGameDev ? 'tier_game_project' : langName) +
+      '</span></div>' +
+      (isGameDev ? '' : '<button class="gemini-copy-btn" type="button"><i class="fas fa-copy"></i> Copy</button>');
 
-    pre.className = 'gemini-code-content';
+    pre.className = isGameDev ? 'game-dev-code gemini-code-content' : 'gemini-code-content';
     pre.removeAttribute('style');
     pre.parentNode.insertBefore(container, pre);
     container.appendChild(header);
     container.appendChild(pre);
+
+    if (isGameDev) return;
 
     var copyBtn = header.querySelector('.gemini-copy-btn');
     copyBtn.addEventListener('click', function () {

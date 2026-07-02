@@ -78,7 +78,10 @@
 
   <div id="outer-wrapper">
     <header class="subpage-hero container">
-      <h1 class="display reveal" data-delay="100" data-i18n="contact.title">Contact</h1>
+      <div class="section-head-title reveal" data-delay="100">
+        <span class="section-head-ghost display" aria-hidden="true" data-i18n="contact.title">Contact</span>
+        <h1 class="display" data-i18n="contact.title">Contact</h1>
+      </div>
       <p class="sub-desc reveal" data-delay="200" data-i18n-html="contact.desc">If there's something you want to tell us, <span class="dim">we're here.</span></p>
     </header>
 
@@ -93,7 +96,7 @@
           <div class="location-card">
             <div class="location-icon"><i class="fas fa-map-marker-alt"></i></div>
             <div class="location-text">
-              <h3>Türkiye / Antalya</h3>
+              <h3 data-i18n="contact.location">Antalya / Türkiye</h3>
               <p data-i18n="contact.hqSub">Our Headquarters</p>
             </div>
           </div>
@@ -139,8 +142,11 @@
             <button type="submit" class="btn" data-cursor="hover">
               <span data-i18n="contact.send">Send Message</span>
             </button>
-            <div id="success-message" class="label" style="display:none;margin-top:16px;color:var(--fg);" data-i18n="contact.success">
+            <div id="success-message" class="label contact-form-feedback contact-form-feedback--success" style="display:none;" data-i18n="contact.success">
               Your message has been sent successfully.
+            </div>
+            <div id="error-message" class="label contact-form-feedback contact-form-feedback--error" style="display:none;" data-i18n="contact.error">
+              An error occurred. Please try again later.
             </div>
           </form>
         </div>
@@ -202,6 +208,8 @@
       e.preventDefault();
       var form = e.target;
       var successMessage = document.getElementById('success-message');
+      var errorMessage = document.getElementById('error-message');
+      errorMessage.style.display = 'none';
       fetch('https://formspree.io/f/xgvkbywq', {
         method: 'POST',
         body: new FormData(form),
@@ -210,12 +218,15 @@
         if (response.ok) {
           form.reset();
           successMessage.style.display = 'block';
+          errorMessage.style.display = 'none';
           setTimeout(function () { successMessage.style.display = 'none'; }, 5000);
         } else {
-          alert(window.tierI18n ? window.tierI18n.t('contact.error') : 'An error occurred. Please try again later.');
+          errorMessage.textContent = window.tierI18n ? window.tierI18n.t('contact.error') : 'An error occurred. Please try again later.';
+          errorMessage.style.display = 'block';
         }
       }).catch(function () {
-        alert(window.tierI18n ? window.tierI18n.t('contact.errorSend') : 'An error occurred while sending the message.');
+        errorMessage.textContent = window.tierI18n ? window.tierI18n.t('contact.errorSend') : 'An error occurred while sending the message.';
+        errorMessage.style.display = 'block';
       });
     });
   </script>
