@@ -187,8 +187,16 @@ document.addEventListener('DOMContentLoaded', function () {
     var g = document.querySelector('.hero-stroke-glyphs');
     if (!g || typeof opentype === 'undefined') return;
     var TEXT = 'TIER STUDIOS';
-    var SIZE = 96;
-    var BASE = 88;
+    function heroSize() {
+      var vw = window.innerWidth || 1200;
+      if (vw < 380) return 50;
+      if (vw < 520) return 60;
+      if (vw < 768) return 72;
+      if (vw < 1024) return 84;
+      return 96;
+    }
+    var SIZE = heroSize();
+    var BASE = SIZE * 0.917;
     var DUR = 1800;
     var FONT = 'https://fonts.gstatic.com/s/archivo/v25/k3k6o8UDI-1M0wlSV9XAw6lQkqWY8Q82sJaRE-NWIDdgffTTnTRp8A.ttf';
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

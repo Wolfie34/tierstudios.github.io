@@ -1072,11 +1072,6 @@ body.menu-open {
 }
 
 @media (max-width: 860px) {
-  .games-grid-featured,
-  .coming-soon-panel {
-    grid-template-columns: 1fr;
-  }
-
   .cs-visual {
     min-height: 220px;
   }
@@ -2371,16 +2366,74 @@ textarea.field {
 }
 
 /* ============================================================================
-   RESPONSIVE
+   RESPONSIVE — tablet & mobile
    ============================================================================ */
+@media (max-width: 1024px) {
+  .section {
+    padding: clamp(64px, 10vw, 100px) 0;
+  }
+
+  .section-compact {
+    padding: clamp(48px, 8vw, 80px) 0;
+  }
+
+  .index-page main > .section-compact:first-child {
+    padding-top: clamp(28px, 4vw, 44px);
+  }
+
+  .section-head {
+    margin-bottom: 40px;
+  }
+
+  .subpage-hero {
+    padding-top: clamp(100px, 14vw, 140px);
+  }
+
+  .games-grid-featured,
+  .coming-soon-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .product-left-col,
+  .product-right-col {
+    max-width: 100%;
+    min-width: 0;
+    flex: 1 1 100%;
+  }
+
+  .product-detail-layout {
+    gap: 32px;
+  }
+
+  .contact-layout {
+    gap: 40px;
+  }
+
+  .coming-soon-panel--stacked .cs-visual {
+    min-height: clamp(200px, 34vw, 300px);
+  }
+
+  .cs-visual {
+    min-height: clamp(200px, 32vw, 260px);
+  }
+}
+
 @media (max-width: 760px) {
   body { cursor: auto; }
   .cur-dot, .cur-ring { display: none; }
 
+  .container {
+    padding: 0 clamp(16px, 4vw, 24px);
+  }
+
+  .nav-inner {
+    height: 64px;
+  }
+
   .nav-links {
     display: none;
     position: fixed;
-    top: 78px;
+    top: 64px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -2402,9 +2455,239 @@ textarea.field {
     display: block;
   }
 
+  .hero {
+    padding-top: 64px;
+    padding-bottom: 16px;
+  }
+
+  .index-page .hero-inner {
+    padding-top: 12px;
+  }
+
+  .hero-title-wrap {
+    padding: clamp(24px, 7vw, 40px) clamp(12px, 3vw, 20px) clamp(18px, 4vw, 28px);
+    gap: 12px;
+  }
+
+  .hero-stroke-svg {
+    width: min(96vw, 1080px);
+  }
+
+  .hero-stroke-path {
+    stroke-width: 1.35;
+  }
+
+  .hero-sub {
+    letter-spacing: 0.1em;
+    text-indent: 0;
+    font-size: clamp(8px, 2.4vw, 10px);
+    line-height: 1.75;
+    max-width: min(100%, 320px);
+    white-space: normal;
+    padding: 0 6px;
+  }
+
+  .hero-slogan {
+    max-width: 100%;
+    padding: 0 4px;
+    font-size: clamp(13px, 3.6vw, 15px);
+    line-height: 1.55;
+  }
+
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(28px, 9vw, 42px);
+  }
+
+  .games-grid,
+  .games-grid-featured {
+    grid-template-columns: 1fr;
+  }
+
+  .coming-soon-panel {
+    min-height: auto;
+  }
+
+  .cs-visual {
+    min-height: clamp(180px, 42vw, 240px);
+  }
+
+  .cs-visual--game {
+    aspect-ratio: 1440 / 740;
+  }
+
+  .cs-badge {
+    font-size: clamp(22px, 7vw, 32px);
+    left: 14px;
+    bottom: 14px;
+  }
+
+  .cs-body,
+  .cs-body--games {
+    padding: 22px 18px;
+  }
+
+  .cs-desc {
+    max-width: none;
+    font-size: 15px;
+  }
+
+  .cs-countdown-wrap {
+    padding-top: 18px;
+    margin-top: 8px;
+  }
+
+  .cs-countdown {
+    gap: 4px 8px;
+  }
+
+  .cs-count-unit {
+    min-width: 44px;
+  }
+
+  .cs-count-num {
+    font-size: clamp(24px, 7.5vw, 36px);
+  }
+
+  .cs-count-sep {
+    font-size: 18px;
+    padding-bottom: 12px;
+  }
+
+  .subpage-hero {
+    padding: clamp(84px, 15vw, 104px) 0 clamp(24px, 5vw, 36px);
+  }
+
+  .subpage-hero h1 {
+    font-size: clamp(34px, 10vw, 52px);
+    margin-bottom: 12px;
+  }
+
+  .subpage-hero .sub-desc {
+    font-size: clamp(15px, 3.8vw, 17px);
+  }
+
+  .subpage-content {
+    padding: clamp(32px, 6vw, 52px) 0;
+  }
+
+  .contact-layout {
+    align-items: start;
+    margin-bottom: 40px;
+    gap: 32px;
+  }
+
+  .contact-globe-container {
+    min-height: auto;
+  }
+
+  .contact-map-stage {
+    min-height: 160px;
+  }
+
+  .contact-map-mount {
+    inset: 8% 5%;
+  }
+
+  .contact-studio-panel {
+    padding: 18px 18px 22px;
+    gap: 18px;
+  }
+
+  .contact-studio-brand p {
+    max-width: none;
+    font-size: 13px;
+  }
+
+  .contact-cards-grid {
+    grid-template-columns: 1fr;
+    margin-bottom: 40px;
+  }
+
+  .contact-card-item {
+    padding: 22px 18px;
+  }
+
+  .contact-form-container h2 {
+    font-size: clamp(24px, 7vw, 32px);
+  }
+
+  .tier-contact-form .btn,
+  .contact-form .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 24px;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .game-updates {
+    margin-top: 40px;
+  }
+
+  .game-updates-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+  }
+
+  .update-item {
+    padding: 18px 16px;
+  }
+
+  .footer {
+    padding: 44px 0 28px;
+  }
+
+  .footer-social {
+    gap: 12px 18px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .footer-bottom {
+    margin-top: 28px;
+    padding-top: 18px;
+  }
+
   .product-left-col,
   .product-right-col {
     max-width: 100%;
+  }
+
+  .product-detail-page #main-wrapper,
+  .docs-page #main-wrapper {
+    padding: clamp(84px, 14vw, 104px) clamp(16px, 4vw, 20px) clamp(36px, 6vw, 52px);
+  }
+
+  .product-detail-header {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+  }
+
+  .gallery-nav {
+    width: 38px;
+    height: 38px;
+  }
+
+  .gallery-nav.prev { left: 8px; }
+  .gallery-nav.next { right: 8px; }
+
+  .thumb-item {
+    width: 96px;
+    height: 54px;
   }
 
   .tech-grid {
@@ -2427,6 +2710,41 @@ textarea.field {
   .nav-word-sub {
     font-size: 9px;
     letter-spacing: 0.22em;
+  }
+
+  .nav-mark {
+    height: 20px;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .hero-sub {
+    letter-spacing: 0.06em;
+    font-size: 8px;
+  }
+
+  .cs-countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px 4px;
+    align-items: end;
+  }
+
+  .cs-count-sep {
+    display: none;
+  }
+
+  .cs-count-unit {
+    min-width: 0;
+  }
+
+  .footer-social {
+    flex-direction: column;
+    gap: 14px;
   }
 }
 
