@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (document.querySelector('.tier-bg')) return;
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var narrow = window.matchMedia('(max-width: 900px)').matches;
-    var orbitConfigs = [
+    var fillConfigs = [
       { top: '8%', right: '4%', width: 82, depth: 0.55, phase: 0, amp: 16 },
       { top: '18%', left: '3%', width: 70, depth: 0.48, phase: 1.1, amp: 14 },
       { top: '32%', right: '10%', width: 64, depth: 0.42, phase: 2.3, amp: 12 },
@@ -14,43 +14,78 @@ document.addEventListener('DOMContentLoaded', function () {
       { bottom: '34%', left: '18%', width: 54, depth: 0.3, phase: 2.8, amp: 10 },
       { top: '68%', right: '22%', width: 52, depth: 0.26, phase: 4.1, amp: 9 }
     ];
+    var outlineConfigs = [
+      { top: '11%', right: '11%', width: 44, depth: 0.6, phase: 0.35, amp: 10 },
+      { top: '21%', left: '9%', width: 38, depth: 0.52, phase: 1.55, amp: 9 },
+      { top: '35%', right: '16%', width: 34, depth: 0.46, phase: 2.65, amp: 8 },
+      { bottom: '23%', right: '12%', width: 40, depth: 0.54, phase: 3.75, amp: 9 },
+      { bottom: '11%', left: '10%', width: 46, depth: 0.48, phase: 4.95, amp: 10 },
+      { top: '49%', left: '13%', width: 32, depth: 0.42, phase: 0.95, amp: 8 },
+      { top: '59%', right: '19%', width: 30, depth: 0.38, phase: 2.15, amp: 7 },
+      { bottom: '37%', left: '23%', width: 28, depth: 0.34, phase: 3.25, amp: 7 },
+      { top: '71%', right: '27%', width: 26, depth: 0.3, phase: 4.45, amp: 6 }
+    ];
 
-    function prepareMarkSvg(svgText) {
-      var doc = new DOMParser().parseFromString(svgText, 'image/svg+xml');
-      var svg = doc.documentElement;
-      svg.removeAttribute('width');
-      svg.removeAttribute('height');
-      svg.setAttribute('aria-hidden', 'true');
+    function tagMarkPaths(svg, variant) {
       var paths = svg.querySelectorAll('path');
       if (paths.length >= 2) {
         paths[0].setAttribute('class', 'tier-mark-bottom');
         paths[1].setAttribute('class', 'tier-mark-top');
       }
       paths.forEach(function (p) {
-        p.setAttribute('fill', 'currentColor');
+        if (variant === 'outline') {
+          p.setAttribute('fill', 'none');
+          p.setAttribute('stroke', 'currentColor');
+          if (!p.getAttribute('stroke-width')) p.setAttribute('stroke-width', '16');
+          p.setAttribute('stroke-linejoin', 'round');
+          p.setAttribute('stroke-linecap', 'round');
+        } else {
+          p.setAttribute('fill', 'currentColor');
+          p.removeAttribute('stroke');
+          p.removeAttribute('stroke-width');
+        }
       });
       return svg.outerHTML;
     }
 
-    function mountBackground(markSvg) {
+    function prepareMarkSvg(svgText, variant) {
+      var doc = new DOMParser().parseFromString(svgText, 'image/svg+xml');
+      var svg = doc.documentElement;
+      svg.removeAttribute('width');
+      svg.removeAttribute('height');
+      svg.setAttribute('aria-hidden', 'true');
+      return tagMarkPaths(svg, variant || 'fill');
+    }
+
+    function mountOrbit(root, cfg, markSvg, variant) {
+      var el = document.createElement('div');
+      el.className = 'tier-bg-orbit tier-bg-orbit--' + variant;
+      el.style.width = cfg.width + 'px';
+      if (cfg.top) el.style.top = cfg.top;
+      if (cfg.bottom) el.style.bottom = cfg.bottom;
+      if (cfg.left) el.style.left = cfg.left;
+      if (cfg.right) el.style.right = cfg.right;
+      el.dataset.depth = cfg.depth;
+      el.dataset.phase = cfg.phase;
+      el.dataset.amp = cfg.amp;
+      el.innerHTML = markSvg;
+      root.appendChild(el);
+    }
+
+    function mountBackground(fillSvg, outlineSvg) {
       var root = document.createElement('div');
       root.className = 'tier-bg';
       root.setAttribute('aria-hidden', 'true');
-      var configs = narrow ? orbitConfigs.slice(0, 3) : orbitConfigs;
 
-      configs.forEach(function (cfg) {
-        var el = document.createElement('div');
-        el.className = 'tier-bg-orbit';
-        el.style.width = cfg.width + 'px';
-        if (cfg.top) el.style.top = cfg.top;
-        if (cfg.bottom) el.style.bottom = cfg.bottom;
-        if (cfg.left) el.style.left = cfg.left;
-        if (cfg.right) el.style.right = cfg.right;
-        el.dataset.depth = cfg.depth;
-        el.dataset.phase = cfg.phase;
-        el.dataset.amp = cfg.amp;
-        el.innerHTML = markSvg;
-        root.appendChild(el);
+      var fills = narrow ? fillConfigs.slice(0, 3) : fillConfigs;
+      var outlines = narrow ? outlineConfigs.slice(0, 2) : outlineConfigs;
+
+      fills.forEach(function (cfg) {
+        mountOrbit(root, cfg, fillSvg, 'fill');
+      });
+
+      outlines.forEach(function (cfg) {
+        mountOrbit(root, cfg, outlineSvg, 'outline');
       });
 
       document.body.insertBefore(root, document.body.firstChild);
@@ -98,13 +133,21 @@ document.addEventListener('DOMContentLoaded', function () {
       raf = requestAnimationFrame(parallax);
     }
 
-    fetch('assets/img/logo.svg')
-      .then(function (res) {
+    Promise.all([
+      fetch('assets/img/logo.svg').then(function (res) {
         if (!res.ok) throw new Error('logo.svg not found');
         return res.text();
+      }),
+      fetch('assets/img/logo-outline.svg').then(function (res) {
+        if (!res.ok) throw new Error('logo-outline.svg not found');
+        return res.text();
       })
-      .then(function (svgText) {
-        mountBackground(prepareMarkSvg(svgText));
+    ])
+      .then(function (results) {
+        mountBackground(
+          prepareMarkSvg(results[0], 'fill'),
+          prepareMarkSvg(results[1], 'outline')
+        );
       })
       .catch(function () {});
   })();
@@ -243,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var w = panel.offsetWidth;
       var h = panel.offsetHeight;
       if (!w || !h) return;
-      var n = Math.min(window.innerWidth < 900 ? 48 : 140, Math.max(window.innerWidth < 900 ? 28 : 50, Math.floor(w * h / (window.innerWidth < 900 ? 9000 : 5500))));
+      var n = Math.min(window.innerWidth < 900 ? 64 : 180, Math.max(window.innerWidth < 900 ? 36 : 70, Math.floor(w * h / (window.innerWidth < 900 ? 8000 : 4800))));
       for (var i = 0; i < n; i++) {
         var p = document.createElement('span');
         p.className = 'hero-particle-dot';
@@ -272,56 +315,54 @@ document.addEventListener('DOMContentLoaded', function () {
   var cpEl = document.getElementById('copyright');
   if (cpEl) cpEl.textContent = '\u00a9 ' + new Date().getFullYear() + ' Tier Studios';
 
-  /* Release countdown */
-  (function releaseCountdown() {
-    var root = document.getElementById('releaseCountdown');
-    if (!root) return;
-    var target = new Date(root.dataset.release || '');
-    if (isNaN(target.getTime())) {
-      target = new Date();
-      target.setMonth(target.getMonth() + 1);
-    }
-    var units = {
-      days: root.querySelector('[data-unit="days"]'),
-      hours: root.querySelector('[data-unit="hours"]'),
-      minutes: root.querySelector('[data-unit="minutes"]'),
-      seconds: root.querySelector('[data-unit="seconds"]')
-    };
-    function pad(n) { return String(n).padStart(2, '0'); }
-    function tick() {
-      var diff = target.getTime() - Date.now();
-      if (diff < 0) diff = 0;
-      var s = Math.floor(diff / 1000);
-      var d = Math.floor(s / 86400); s -= d * 86400;
-      var h = Math.floor(s / 3600); s -= h * 3600;
-      var m = Math.floor(s / 60); s -= m * 60;
-      if (units.days) units.days.textContent = pad(d);
-      if (units.hours) units.hours.textContent = pad(h);
-      if (units.minutes) units.minutes.textContent = pad(m);
-      if (units.seconds) units.seconds.textContent = pad(s);
-    }
-    tick();
-    setInterval(tick, 1000);
-  })();
-
   /* Scroll reveals */
   (function reveals() {
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    document.querySelectorAll('[data-stagger]').forEach(function (wrap) {
+      var step = parseInt(wrap.dataset.stagger, 10) || 100;
+      Array.prototype.forEach.call(wrap.children, function (el, i) {
+        el.classList.add('reveal');
+        var extra = parseInt(el.dataset.delay, 10) || 0;
+        el.style.setProperty('--d', (i * step + extra) + 'ms');
+      });
+    });
+
     var els = document.querySelectorAll('.reveal');
     els.forEach(function (el) {
-      if (el.dataset.delay) el.style.setProperty('--d', el.dataset.delay + 'ms');
+      if (!el.style.getPropertyValue('--d') && el.dataset.delay) {
+        el.style.setProperty('--d', el.dataset.delay + 'ms');
+      }
     });
-    if (!('IntersectionObserver' in window)) {
-      els.forEach(function (el) { el.classList.add('in'); });
+
+    if (reduced) {
+      els.forEach(function (el) {
+        el.classList.add('in');
+        var head = el.closest('.section-head');
+        if (head) head.classList.add('is-in');
+      });
       return;
     }
+
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) {
+        el.classList.add('in');
+        var head = el.closest('.section-head');
+        if (head) head.classList.add('is-in');
+      });
+      return;
+    }
+
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (en.isIntersecting) {
-          en.target.classList.add('in');
-          io.unobserve(en.target);
-        }
+        if (!en.isIntersecting) return;
+        en.target.classList.add('in');
+        var head = en.target.closest('.section-head');
+        if (head) head.classList.add('is-in');
+        io.unobserve(en.target);
       });
-    }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
     els.forEach(function (el) { io.observe(el); });
   })();
 
@@ -332,6 +373,76 @@ document.addEventListener('DOMContentLoaded', function () {
     var onScroll = function () { nav.classList.toggle('solid', window.scrollY > 40); };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+  })();
+
+  /* Desktop nav sliding indicator */
+  (function navIndicator() {
+    var navLinks = document.getElementById('navLinks');
+    if (!navLinks) return;
+
+    var links = navLinks.querySelectorAll('.nav-link');
+    if (!links.length) return;
+
+    var indicator = document.createElement('span');
+    indicator.className = 'nav-indicator';
+    indicator.setAttribute('aria-hidden', 'true');
+    navLinks.appendChild(indicator);
+
+    var padX = 14;
+    var padY = 4;
+    var mqDesktop = window.matchMedia('(min-width: 901px)');
+
+    function isDesktop() {
+      return mqDesktop.matches;
+    }
+
+    function moveTo(link) {
+      if (!link || !isDesktop()) {
+        indicator.style.opacity = '0';
+        navLinks.classList.remove('is-hovering');
+        return;
+      }
+
+      var parentRect = navLinks.getBoundingClientRect();
+      var rect = link.getBoundingClientRect();
+
+      indicator.style.width = (rect.width + padX * 2) + 'px';
+      indicator.style.height = (rect.height + padY * 2) + 'px';
+      indicator.style.transform = 'translate3d(' + (rect.left - parentRect.left - padX) + 'px,' + (rect.top - parentRect.top - padY) + 'px,0)';
+      indicator.style.opacity = '1';
+    }
+
+    function showActive() {
+      var active = navLinks.querySelector('.nav-link.active');
+      if (active && isDesktop()) moveTo(active);
+      else indicator.style.opacity = '0';
+      navLinks.classList.remove('is-hovering');
+    }
+
+    links.forEach(function (link) {
+      link.addEventListener('mouseenter', function () {
+        if (!isDesktop()) return;
+        navLinks.classList.add('is-hovering');
+        moveTo(link);
+      });
+
+      link.addEventListener('focus', function () {
+        if (!isDesktop()) return;
+        navLinks.classList.add('is-hovering');
+        moveTo(link);
+      });
+    });
+
+    navLinks.addEventListener('mouseleave', showActive);
+
+    navLinks.addEventListener('focusout', function (e) {
+      if (!navLinks.contains(e.relatedTarget)) showActive();
+    });
+
+    mqDesktop.addEventListener('change', showActive);
+    window.addEventListener('resize', showActive);
+    window.addEventListener('load', showActive);
+    showActive();
   })();
 
   /* Hero fade on scroll */

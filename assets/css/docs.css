@@ -256,23 +256,29 @@
 /* Fix copy button style on docs page */
 .docs-page .gemini-copy-btn {
     background: transparent !important;
-    color: var(--main-color) !important;
-    border: 1px solid var(--main-color) !important;
-    border-radius: 6px !important;
-    padding: 4px 12px !important;
-    font-size: 12px !important;
-    font-family: 'Inter', sans-serif !important;
-    font-weight: 600 !important;
+    color: var(--fg-dim) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    border-radius: 999px !important;
+    padding: 6px 14px !important;
+    font-size: 11px !important;
+    font-family: 'Hanken Grotesk', sans-serif !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
     cursor: pointer !important;
     display: inline-flex !important;
     align-items: center !important;
     gap: 6px !important;
-    transition: all 0.2s ease !important;
+    transition:
+        color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        background 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .docs-page .gemini-copy-btn:hover {
-    background: var(--main-color) !important;
-    color: #000 !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: var(--fg) !important;
+    border-color: rgba(255, 255, 255, 0.45) !important;
 }
 
 .sidebar-title {
@@ -320,26 +326,32 @@
 }
 
 .sidebar-back-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
     justify-content: center;
+    gap: 8px;
     width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-primary);
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.22);
     text-decoration: none;
-    transition: all 0.3s;
+    transition:
+        color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        background 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sidebar-back-btn:hover {
-    border-color: var(--main-color);
-    color: var(--main-color);
+    color: var(--fg);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.45);
 }
 
 @media (max-width: 1024px) {

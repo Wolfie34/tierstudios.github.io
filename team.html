@@ -51,7 +51,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<body class="subpage team-page">
+<body class="subpage team-page" data-page="team">
   <div class="grain" aria-hidden="true"></div>
   <div class="vignette" aria-hidden="true"></div>
 
@@ -78,36 +78,60 @@
 
   <div id="outer-wrapper">
     <header class="subpage-hero container">
-      <span class="label reveal"><span class="idx">03</span> &nbsp;/&nbsp; The Core</span>
-      <h1 class="display reveal" data-delay="100">Team</h1>
-      <p class="sub-desc reveal" data-delay="200">The people behind the tools — focused, independent, and production-driven.</p>
+      <h1 class="display reveal" data-delay="100" data-i18n="team.title">Team</h1>
+      <p class="sub-desc reveal" data-delay="200" data-i18n="team.desc">The people behind the tools — focused, independent, and production-driven.</p>
     </header>
 
     <div class="subpage-content container">
-      <div class="team-grid">
-        <a href="https://www.linkedin.com/in/mehmet-an%C4%B1l-altunda%C4%9F-b85246193/" target="_blank" rel="noopener" class="team-card reveal" data-cursor="hover">
-          <div class="avatar">
-            <img class="avatar-photo" src="assets/img/team/profile.svg" alt="Tier Studios team member" loading="lazy" />
+      <div class="team-grid" data-stagger="120">
+        <a href="https://www.linkedin.com/in/mehmet-an%C4%B1l-altunda%C4%9F-b85246193/" target="_blank" rel="noopener" class="team-card" data-cursor="hover">
+          <div class="team-card-panel">
+            <div class="team-card-visual">
+              <div class="team-card-photo" aria-hidden="true">
+                <img src="assets/img/logo.svg" alt="" class="team-card-watermark" />
+                <span class="team-card-initials">AA</span>
+              </div>
+            </div>
+            <div class="team-card-body">
+              <h2 class="team-card-name">Anıl Altundağ</h2>
+              <p class="team-card-role label" data-i18n="team.founder">Founder</p>
+              <span class="team-card-cta" data-i18n="common.linkedin">LinkedIn</span>
+            </div>
           </div>
-          <div class="member-name">Anıl Altundağ</div>
-          <div class="label member-role">Founder</div>
         </a>
-        <a href="https://www.linkedin.com/in/arda-topraks%C3%BCren-590388248/" target="_blank" rel="noopener" class="team-card reveal" data-delay="100" data-cursor="hover">
-          <div class="avatar">
-            <img class="avatar-photo" src="assets/img/team/profile.svg" alt="Tier Studios team member" loading="lazy" />
+        <a href="https://www.linkedin.com/in/arda-topraks%C3%BCren-590388248/" target="_blank" rel="noopener" class="team-card" data-cursor="hover">
+          <div class="team-card-panel">
+            <div class="team-card-visual">
+              <div class="team-card-photo" aria-hidden="true">
+                <img src="assets/img/logo.svg" alt="" class="team-card-watermark" />
+                <span class="team-card-initials">AT</span>
+              </div>
+            </div>
+            <div class="team-card-body">
+              <h2 class="team-card-name">Arda Topraksüren</h2>
+              <p class="team-card-role label" data-i18n="team.cofounder">Co-Founder</p>
+              <span class="team-card-cta" data-i18n="common.linkedin">LinkedIn</span>
+            </div>
           </div>
-          <div class="member-name">Arda Topraksüren</div>
-          <div class="label member-role">Co-Founder</div>
         </a>
       </div>
+
+      <section class="team-join-panel reveal" data-i18n-aria="team.join.aria">
+        <h2 class="display team-join-title" data-i18n="team.join.title">Ready to Make the Next Big Hit?</h2>
+        <p class="team-join-desc" data-i18n="team.join.desc">Join our team and create games played by millions worldwide.</p>
+        <a href="mailto:info@tierstudios.com" class="btn-primary" data-cursor="hover"><span data-i18n="team.join.btn">Join Our Team</span></a>
+      </section>
     </div>
 
     <footer class="footer">
       <div class="container">
         <div class="footer-center">
           <div class="footer-title">
-            <span class="display">TIER</span>
-            <span class="nav-word-sub">STUDIOS</span>
+            <img src="assets/img/logo.svg" alt="" class="footer-mark" aria-hidden="true" />
+            <span class="footer-word-wrap">
+              <span class="display">TIER</span>
+              <span class="nav-word-sub">STUDIOS</span>
+            </span>
           </div>
           <div class="footer-social">
             <a href="https://x.com/tiergamestudio" target="_blank" rel="noopener" class="nav-link" data-cursor="hover">Twitter / X</a>
@@ -119,11 +143,13 @@
         </div>
         <div class="footer-bottom">
           <span class="label" id="copyright">&copy; 2026 Tier Studios</span>
+          <p class="team-footer-thanks" data-i18n="team.thanks">We extend our thanks to RestPlay and our sister company The Steelwing Entertainment for their support.</p>
         </div>
       </div>
     </footer>
   </div>
 
+  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/script.js"></script>
 </body>
 </html>
