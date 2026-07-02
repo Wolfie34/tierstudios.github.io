@@ -49,10 +49,6 @@ html {
   filter: invert(1);
 }
 
-:root[data-theme="light"] #nav.solid {
-  background: rgba(243, 242, 239, 0.72);
-}
-
 :root[data-theme="light"] .vignette {
   background: radial-gradient(120% 120% at 50% 40%, transparent 62%, rgba(0, 0, 0, 0.05) 100%);
 }
@@ -69,6 +65,7 @@ html {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -126,7 +123,8 @@ a {
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
-  padding: 0 clamp(20px, 5vw, 64px);
+  padding-left: max(clamp(20px, 5vw, 64px), env(safe-area-inset-left, 0px));
+  padding-right: max(clamp(20px, 5vw, 64px), env(safe-area-inset-right, 0px));
 }
 
 .label {
@@ -204,8 +202,18 @@ a {
   }
 }
 
-@media (max-width: 760px) {
-  .tier-bg-orbit:nth-child(n+7) {
+@media (max-width: 1024px) {
+  .tier-bg-orbit:nth-child(n+5) {
+    display: none;
+  }
+
+  .tier-bg {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .tier-bg-orbit:nth-child(n+3) {
     display: none;
   }
 }
@@ -278,9 +286,23 @@ a {
 
 #nav.solid {
   border-bottom: 1px solid var(--line);
-  background: rgba(7, 7, 7, 0.6);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(7, 7, 7, 0.94);
+}
+
+:root[data-theme="light"] #nav.solid {
+  background: rgba(243, 242, 239, 0.94);
+}
+
+@media (min-width: 901px) {
+  #nav.solid {
+    background: rgba(7, 7, 7, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  :root[data-theme="light"] #nav.solid {
+    background: rgba(243, 242, 239, 0.72);
+  }
 }
 
 .nav-inner {
@@ -401,6 +423,7 @@ a {
   width: 28px;
   height: 18px;
   position: relative;
+  z-index: 403;
   cursor: pointer;
   padding: 0;
 }
@@ -428,6 +451,24 @@ a {
 
 body.menu-open {
   overflow: hidden;
+}
+
+body.menu-open #nav {
+  z-index: 402;
+}
+
+.nav-mobile-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  background: rgba(7, 7, 7, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.nav-mobile-backdrop.active {
+  display: block;
 }
 
 /* ---------- hero ---------- */
@@ -583,12 +624,22 @@ body.menu-open {
 
 .hero-sub {
   margin-top: 0;
-  letter-spacing: 0.55em;
-  text-indent: 0.55em;
-  font-size: clamp(11px, 1.8vw, 14px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.22em;
+  text-indent: 0;
+  text-transform: uppercase;
+  font-size: clamp(10px, 1.6vw, 13px);
   font-weight: 500;
   color: var(--fg);
   opacity: 0.8;
+}
+
+.hero-sub-line {
+  display: block;
+  white-space: nowrap;
 }
 
 .hero-slogan {
@@ -841,6 +892,15 @@ body.menu-open {
   background: rgba(128, 128, 128, 0.04);
 }
 
+.cs-body--games {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(24px, 4vw, 40px);
+  align-items: start;
+  padding: clamp(28px, 5vw, 48px);
+  background: rgba(128, 128, 128, 0.04);
+}
+
 .cs-eyebrow {
   color: var(--fg-faint);
 }
@@ -929,15 +989,7 @@ body.menu-open {
 }
 
 .coming-soon-panel--stacked .cs-visual {
-  min-height: clamp(240px, 38vw, 380px);
   aspect-ratio: 1440 / 740;
-}
-
-.cs-body--games {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: clamp(24px, 4vw, 40px);
-  align-items: start;
 }
 
 .cs-body-main {
@@ -996,8 +1048,6 @@ body.menu-open {
     padding-left: 0;
   }
 }
-
-/* ---------- game updates ---------- */
 
 /* ---------- game updates ---------- */
 .game-updates {
@@ -1415,6 +1465,27 @@ textarea.field {
 
 .subpage-content {
   padding: clamp(50px, 8vw, 100px) 0;
+}
+
+.subpage .subpage-hero.container,
+.subpage .subpage-content.container {
+  --page-gutter: clamp(28px, 6.5vw, 64px);
+  padding-left: max(var(--page-gutter), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--page-gutter), env(safe-area-inset-right, 0px));
+}
+
+.subpage-hero .label {
+  letter-spacing: 0.24em;
+}
+
+.subpage-hero h1,
+.subpage-hero .sub-desc,
+.subpage-content > .game-updates-head,
+.subpage-content > .contact-form-container > :not(form),
+.subpage .team-grid .member-name,
+.subpage .team-grid .member-role {
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
 #outer-wrapper {
@@ -1910,10 +1981,10 @@ textarea.field {
    ============================================================================ */
 .contact-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: clamp(40px, 7vw, 80px);
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
   margin-bottom: 60px;
-  align-items: stretch;
+  align-items: start;
 }
 
 .contact-form-container {
@@ -2063,7 +2134,8 @@ textarea.field {
   box-shadow: none;
   padding: 0;
   overflow: hidden;
-  min-height: 100%;
+  min-height: auto;
+  height: auto;
 }
 
 .contact-map-stage {
@@ -2212,13 +2284,11 @@ textarea.field {
 }
 
 .contact-studio-panel {
-  flex: 1;
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 22px;
   padding: 22px 22px 26px;
-  min-height: 0;
 }
 
 .contact-studio-brand {
@@ -2370,23 +2440,23 @@ textarea.field {
    ============================================================================ */
 @media (max-width: 1024px) {
   .section {
-    padding: clamp(64px, 10vw, 100px) 0;
+    padding: clamp(56px, 9vw, 88px) 0;
   }
 
   .section-compact {
-    padding: clamp(48px, 8vw, 80px) 0;
+    padding: clamp(40px, 7vw, 72px) 0;
   }
 
   .index-page main > .section-compact:first-child {
-    padding-top: clamp(28px, 4vw, 44px);
+    padding-top: clamp(24px, 4vw, 40px);
   }
 
   .section-head {
-    margin-bottom: 40px;
+    margin-bottom: 36px;
   }
 
   .subpage-hero {
-    padding-top: clamp(100px, 14vw, 140px);
+    padding-top: clamp(96px, 13vw, 128px);
   }
 
   .games-grid-featured,
@@ -2405,25 +2475,43 @@ textarea.field {
     gap: 32px;
   }
 
-  .contact-layout {
-    gap: 40px;
+  .coming-soon-panel {
+    min-height: auto;
   }
 
-  .coming-soon-panel--stacked .cs-visual {
-    min-height: clamp(200px, 34vw, 300px);
-  }
-
+  .coming-soon-panel--stacked .cs-visual,
   .cs-visual {
-    min-height: clamp(200px, 32vw, 260px);
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  .cs-visual--game {
+    aspect-ratio: 1440 / 740;
   }
 }
 
-@media (max-width: 760px) {
-  body { cursor: auto; }
-  .cur-dot, .cur-ring { display: none; }
+@media (max-width: 900px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
 
-  .container {
-    padding: 0 clamp(16px, 4vw, 24px);
+  .contact-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-map-mount svg {
+    animation: none;
+  }
+
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .coming-soon-panel > *,
+  .contact-layout > *,
+  .games-grid > * {
+    min-width: 0;
   }
 
   .nav-inner {
@@ -2433,22 +2521,31 @@ textarea.field {
   .nav-links {
     display: none;
     position: fixed;
+    inset: 0;
     top: 64px;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    z-index: 401;
     background: var(--bg);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 32px;
-    font-size: 18px;
+    gap: 28px;
+    font-size: 17px;
     border-top: 1px solid var(--line);
-    z-index: 99;
+    padding: 32px 24px max(32px, env(safe-area-inset-bottom));
   }
 
   .nav-links.active {
-    display: flex;
+    display: flex !important;
+  }
+
+  .nav-links .nav-link {
+    padding: 10px 18px;
+    font-size: 18px;
+  }
+
+  .nav-right {
+    position: relative;
+    z-index: 403;
   }
 
   .mobile-nav-btn {
@@ -2457,274 +2554,98 @@ textarea.field {
 
   .hero {
     padding-top: 64px;
-    padding-bottom: 16px;
+  }
+
+  .subpage-hero {
+    padding-top: clamp(88px, 14vw, 112px);
+  }
+
+  .subpage .subpage-hero.container,
+  .subpage .subpage-content.container {
+    --page-gutter: 32px;
+  }
+}
+
+@media (max-width: 760px) {
+  body { cursor: auto; }
+  .cur-dot, .cur-ring { display: none; }
+
+  .hero {
+    padding-bottom: 12px;
   }
 
   .index-page .hero-inner {
-    padding-top: 12px;
+    padding-top: 8px;
   }
 
   .hero-title-wrap {
-    padding: clamp(24px, 7vw, 40px) clamp(12px, 3vw, 20px) clamp(18px, 4vw, 28px);
-    gap: 12px;
+    padding: clamp(20px, 6vw, 32px) max(20px, env(safe-area-inset-left)) clamp(16px, 4vw, 24px) max(20px, env(safe-area-inset-right));
+    gap: 10px;
   }
 
   .hero-stroke-svg {
-    width: min(96vw, 1080px);
+    width: min(94vw, 1080px);
   }
 
   .hero-stroke-path {
-    stroke-width: 1.35;
+    stroke-width: 1.25;
   }
 
   .hero-sub {
-    letter-spacing: 0.1em;
-    text-indent: 0;
-    font-size: clamp(8px, 2.4vw, 10px);
-    line-height: 1.75;
-    max-width: min(100%, 320px);
+    gap: 5px;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    max-width: 100%;
+    padding: 0 12px;
+  }
+
+  .hero-sub-line {
     white-space: normal;
-    padding: 0 6px;
+    text-align: center;
   }
 
   .hero-slogan {
     max-width: 100%;
-    padding: 0 4px;
-    font-size: clamp(13px, 3.6vw, 15px);
+    padding: 0 12px;
+    font-size: 14px;
     line-height: 1.55;
+  }
+
+  .hero-slogan span {
+    display: block;
   }
 
   .section-head {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 28px;
-    padding-bottom: 16px;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
   }
 
   .section-head h2 {
-    font-size: clamp(28px, 9vw, 42px);
+    font-size: clamp(26px, 8.5vw, 38px);
+    line-height: 1;
   }
 
-  .games-grid,
-  .games-grid-featured {
-    grid-template-columns: 1fr;
+  .section-link {
+    letter-spacing: 0.2em;
+    font-size: 10px;
   }
 
   .coming-soon-panel {
     min-height: auto;
   }
 
-  .cs-visual {
-    min-height: clamp(180px, 42vw, 240px);
-  }
-
-  .cs-visual--game {
-    aspect-ratio: 1440 / 740;
-  }
-
   .cs-badge {
-    font-size: clamp(22px, 7vw, 32px);
-    left: 14px;
-    bottom: 14px;
-  }
-
-  .cs-body,
-  .cs-body--games {
-    padding: 22px 18px;
+    font-size: clamp(20px, 6.5vw, 28px);
+    left: 16px;
+    bottom: 16px;
   }
 
   .cs-desc {
     max-width: none;
-    font-size: 15px;
-  }
-
-  .cs-countdown-wrap {
-    padding-top: 18px;
-    margin-top: 8px;
-  }
-
-  .cs-countdown {
-    gap: 4px 8px;
-  }
-
-  .cs-count-unit {
-    min-width: 44px;
-  }
-
-  .cs-count-num {
-    font-size: clamp(24px, 7.5vw, 36px);
-  }
-
-  .cs-count-sep {
-    font-size: 18px;
-    padding-bottom: 12px;
-  }
-
-  .subpage-hero {
-    padding: clamp(84px, 15vw, 104px) 0 clamp(24px, 5vw, 36px);
-  }
-
-  .subpage-hero h1 {
-    font-size: clamp(34px, 10vw, 52px);
-    margin-bottom: 12px;
-  }
-
-  .subpage-hero .sub-desc {
-    font-size: clamp(15px, 3.8vw, 17px);
-  }
-
-  .subpage-content {
-    padding: clamp(32px, 6vw, 52px) 0;
-  }
-
-  .contact-layout {
-    align-items: start;
-    margin-bottom: 40px;
-    gap: 32px;
-  }
-
-  .contact-globe-container {
-    min-height: auto;
-  }
-
-  .contact-map-stage {
-    min-height: 160px;
-  }
-
-  .contact-map-mount {
-    inset: 8% 5%;
-  }
-
-  .contact-studio-panel {
-    padding: 18px 18px 22px;
-    gap: 18px;
-  }
-
-  .contact-studio-brand p {
-    max-width: none;
-    font-size: 13px;
-  }
-
-  .contact-cards-grid {
-    grid-template-columns: 1fr;
-    margin-bottom: 40px;
-  }
-
-  .contact-card-item {
-    padding: 22px 18px;
-  }
-
-  .contact-form-container h2 {
-    font-size: clamp(24px, 7vw, 32px);
-  }
-
-  .tier-contact-form .btn,
-  .contact-form .btn {
-    width: 100%;
-    justify-content: center;
-    padding: 16px 24px;
-  }
-
-  .team-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .game-updates {
-    margin-top: 40px;
-  }
-
-  .game-updates-head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 24px;
-    padding-bottom: 18px;
-  }
-
-  .update-item {
-    padding: 18px 16px;
-  }
-
-  .footer {
-    padding: 44px 0 28px;
-  }
-
-  .footer-social {
-    gap: 12px 18px;
-    font-size: 12px;
-    line-height: 1.5;
-  }
-
-  .footer-bottom {
-    margin-top: 28px;
-    padding-top: 18px;
-  }
-
-  .product-left-col,
-  .product-right-col {
-    max-width: 100%;
-  }
-
-  .product-detail-page #main-wrapper,
-  .docs-page #main-wrapper {
-    padding: clamp(84px, 14vw, 104px) clamp(16px, 4vw, 20px) clamp(36px, 6vw, 52px);
-  }
-
-  .product-detail-header {
-    margin-bottom: 32px;
-    padding-bottom: 24px;
-  }
-
-  .gallery-nav {
-    width: 38px;
-    height: 38px;
-  }
-
-  .gallery-nav.prev { left: 8px; }
-  .gallery-nav.next { right: 8px; }
-
-  .thumb-item {
-    width: 96px;
-    height: 54px;
-  }
-
-  .tech-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 520px) {
-  .nav-word-wrap {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1px;
-  }
-
-  .nav-word {
-    font-size: 16px;
-    line-height: 1;
-  }
-
-  .nav-word-sub {
-    font-size: 9px;
-    letter-spacing: 0.22em;
-  }
-
-  .nav-mark {
-    height: 20px;
-  }
-
-  .team-grid {
-    grid-template-columns: 1fr;
-    max-width: 260px;
-    margin: 0 auto;
-  }
-
-  .hero-sub {
-    letter-spacing: 0.06em;
-    font-size: 8px;
+    font-size: 14px;
   }
 
   .cs-countdown {
@@ -2742,9 +2663,188 @@ textarea.field {
     min-width: 0;
   }
 
+  .cs-count-num {
+    font-size: clamp(22px, 7vw, 32px);
+  }
+
+  .cs-body,
+  .cs-body--games {
+    padding: 24px 24px;
+  }
+
+  .cs-focus-list li {
+    padding: 14px 8px 14px 0;
+  }
+
+  .update-item {
+    padding: 18px 22px;
+  }
+
+  .subpage-hero h1 {
+    font-size: clamp(32px, 9.5vw, 48px);
+    margin-bottom: 10px;
+  }
+
+  .subpage-hero .sub-desc {
+    font-size: 15px;
+  }
+
+  .subpage-content {
+    padding: clamp(28px, 5vw, 44px) 0;
+  }
+
+  .contact-layout {
+    margin-bottom: 32px;
+    gap: 28px;
+  }
+
+  .contact-map-stage {
+    min-height: 0;
+    aspect-ratio: 784 / 401;
+  }
+
+  .contact-studio-panel {
+    padding: 20px 24px 24px;
+    gap: 16px;
+  }
+
+  .location-card {
+    padding: 16px 24px;
+  }
+
+  .contact-studio-brand p {
+    max-width: none;
+    font-size: 13px;
+  }
+
+  .contact-form-container {
+    padding: 0 4px;
+  }
+
+  .contact-form-container h2 {
+    font-size: clamp(22px, 6.5vw, 28px);
+  }
+
+  .contact-cards-grid {
+    grid-template-columns: 1fr;
+    margin-bottom: 32px;
+  }
+
+  .contact-card-item {
+    padding: 22px 20px;
+  }
+
+  .tier-contact-form .btn,
+  .contact-form .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 20px;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+    max-width: 300px;
+    margin: 0 auto;
+    gap: 16px;
+  }
+
+  .game-updates {
+    margin-top: 36px;
+  }
+
+  .game-updates-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+  }
+
+  .member-name,
+  .member-role {
+    padding: 0 6px;
+  }
+
+  .subpage-hero {
+    padding: clamp(80px, 14vw, 96px) 0 clamp(20px, 4vw, 32px);
+  }
+
+  .subpage .subpage-hero.container,
+  .subpage .subpage-content.container {
+    --page-gutter: 32px;
+  }
+
+  .subpage-hero .label {
+    letter-spacing: 0.16em;
+  }
+
+  .footer {
+    padding: 40px 0 24px;
+  }
+
   .footer-social {
     flex-direction: column;
     gap: 14px;
+    font-size: 12px;
+  }
+
+  .footer-bottom {
+    margin-top: 24px;
+    padding-top: 16px;
+  }
+
+  .product-detail-page #main-wrapper,
+  .docs-page #main-wrapper {
+    padding: clamp(80px, 13vw, 96px) max(20px, env(safe-area-inset-left)) clamp(32px, 5vw, 48px) max(20px, env(safe-area-inset-right));
+  }
+
+  .product-detail-header {
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+  }
+
+  .gallery-nav {
+    width: 36px;
+    height: 36px;
+  }
+
+  .gallery-nav.prev { left: 6px; }
+  .gallery-nav.next { right: 6px; }
+
+  .thumb-item {
+    width: 88px;
+    height: 50px;
+  }
+
+  .tech-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .nav-word-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+  }
+
+  .nav-word {
+    font-size: 15px;
+    line-height: 1;
+  }
+
+  .nav-word-sub {
+    font-size: 8px;
+    letter-spacing: 0.18em;
+  }
+
+  .nav-mark {
+    height: 18px;
+  }
+
+  .hero-sub {
+    font-size: 8px;
+    letter-spacing: 0.1em;
   }
 }
 

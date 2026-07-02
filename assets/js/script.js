@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   (function tierMarkBackground() {
     if (document.querySelector('.tier-bg')) return;
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var narrow = window.matchMedia('(max-width: 900px)').matches;
     var orbitConfigs = [
       { top: '8%', right: '4%', width: 82, depth: 0.55, phase: 0, amp: 16 },
       { top: '18%', left: '3%', width: 70, depth: 0.48, phase: 1.1, amp: 14 },
@@ -35,8 +36,9 @@ document.addEventListener('DOMContentLoaded', function () {
       var root = document.createElement('div');
       root.className = 'tier-bg';
       root.setAttribute('aria-hidden', 'true');
+      var configs = narrow ? orbitConfigs.slice(0, 3) : orbitConfigs;
 
-      orbitConfigs.forEach(function (cfg) {
+      configs.forEach(function (cfg) {
         var el = document.createElement('div');
         el.className = 'tier-bg-orbit';
         el.style.width = cfg.width + 'px';
@@ -61,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var py = 0;
       var tx = 0;
       var ty = 0;
+      var coarse = window.matchMedia('(pointer: coarse)').matches;
 
       function parallax() {
         var t = Date.now() * 0.001;
@@ -69,10 +72,10 @@ document.addEventListener('DOMContentLoaded', function () {
         orbitNodes.forEach(function (node) {
           var depth = parseFloat(node.dataset.depth) || 0.3;
           var phase = parseFloat(node.dataset.phase) || 0;
-          var amp = parseFloat(node.dataset.amp) || 10;
+          var amp = narrow ? (parseFloat(node.dataset.amp) || 10) * 0.6 : (parseFloat(node.dataset.amp) || 10);
           var idleX = Math.sin(t * 0.55 + phase) * amp;
           var idleY = Math.cos(t * 0.48 + phase * 1.3) * amp;
-          var rot = Math.sin(t * 0.35 + phase) * 3.5;
+          var rot = Math.sin(t * 0.35 + phase) * (narrow ? 2 : 3.5);
           var mx = tx * depth + idleX;
           var my = ty * depth + idleY;
           node.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0) rotate(' + rot + 'deg)';
@@ -81,10 +84,12 @@ document.addEventListener('DOMContentLoaded', function () {
         raf = requestAnimationFrame(parallax);
       }
 
-      window.addEventListener('mousemove', function (e) {
-        px = (e.clientX / window.innerWidth - 0.5) * 56;
-        py = (e.clientY / window.innerHeight - 0.5) * 44;
-      }, { passive: true });
+      if (!coarse && !narrow) {
+        window.addEventListener('mousemove', function (e) {
+          px = (e.clientX / window.innerWidth - 0.5) * 56;
+          py = (e.clientY / window.innerHeight - 0.5) * 44;
+        }, { passive: true });
+      }
 
       window.addEventListener('scroll', function () {
         root.style.setProperty('--tier-scroll', window.scrollY + 'px');
@@ -166,19 +171,22 @@ document.addEventListener('DOMContentLoaded', function () {
           });
         }
 
-        var stage = mount.closest('.contact-map-stage');
-        if (!stage || reduced) return;
-        stage.addEventListener('mousemove', function (e) {
-          var rect = stage.getBoundingClientRect();
-          var nx = (e.clientX - rect.left) / rect.width - 0.5;
-          var ny = (e.clientY - rect.top) / rect.height - 0.5;
-          mount.style.setProperty('--map-mx', (nx * 12) + 'px');
-          mount.style.setProperty('--map-my', (ny * 8) + 'px');
-        }, { passive: true });
-        stage.addEventListener('mouseleave', function () {
-          mount.style.setProperty('--map-mx', '0px');
-          mount.style.setProperty('--map-my', '0px');
-        });
+        if (!reduced && window.innerWidth >= 768) {
+          var stage = mount.closest('.contact-map-stage');
+          if (stage) {
+            stage.addEventListener('mousemove', function (e) {
+              var rect = stage.getBoundingClientRect();
+              var nx = (e.clientX - rect.left) / rect.width - 0.5;
+              var ny = (e.clientY - rect.top) / rect.height - 0.5;
+              mount.style.setProperty('--map-mx', (nx * 12) + 'px');
+              mount.style.setProperty('--map-my', (ny * 8) + 'px');
+            }, { passive: true });
+            stage.addEventListener('mouseleave', function () {
+              mount.style.setProperty('--map-mx', '0px');
+              mount.style.setProperty('--map-my', '0px');
+            });
+          }
+        }
       })
       .catch(function () {});
   })();
@@ -235,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var w = panel.offsetWidth;
       var h = panel.offsetHeight;
       if (!w || !h) return;
-      var n = Math.min(140, Math.max(50, Math.floor(w * h / 5500)));
+      var n = Math.min(window.innerWidth < 900 ? 48 : 140, Math.max(window.innerWidth < 900 ? 28 : 50, Math.floor(w * h / (window.innerWidth < 900 ? 9000 : 5500))));
       for (var i = 0; i < n; i++) {
         var p = document.createElement('span');
         p.className = 'hero-particle-dot';
@@ -344,21 +352,77 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* Mobile nav */
   (function mobileNav() {
+    var nav = document.getElementById('nav');
     var btn = document.getElementById('mobileNavBtn');
     var links = document.getElementById('navLinks');
     if (!btn || !links) return;
-    btn.addEventListener('click', function () {
-      btn.classList.toggle('active');
-      links.classList.toggle('active');
-      document.body.classList.toggle('menu-open');
+
+    var navRight = btn.parentElement;
+    var backdrop = document.createElement('div');
+    backdrop.className = 'nav-mobile-backdrop';
+    backdrop.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(backdrop);
+
+    function isMobileNav() {
+      return window.matchMedia('(max-width: 900px)').matches;
+    }
+
+    function dockLinks() {
+      if (isMobileNav()) {
+        if (links.parentElement !== document.body) {
+          document.body.appendChild(links);
+        }
+      } else {
+        closeMenu();
+        if (navRight && links.parentElement !== navRight) {
+          navRight.insertBefore(links, btn);
+        }
+      }
+    }
+
+    function closeMenu() {
+      btn.classList.remove('active');
+      links.classList.remove('active');
+      backdrop.classList.remove('active');
+      document.body.classList.remove('menu-open');
+      if (nav) nav.classList.remove('menu-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    function openMenu() {
+      if (!isMobileNav()) return;
+      dockLinks();
+      btn.classList.add('active');
+      links.classList.add('active');
+      backdrop.classList.add('active');
+      document.body.classList.add('menu-open');
+      if (nav) nav.classList.add('menu-open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', 'navLinks');
+    btn.setAttribute('type', 'button');
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (links.classList.contains('active')) closeMenu();
+      else openMenu();
     });
+
+    backdrop.addEventListener('click', closeMenu);
+
     links.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        btn.classList.remove('active');
-        links.classList.remove('active');
-        document.body.classList.remove('menu-open');
-      });
+      a.addEventListener('click', closeMenu);
     });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    window.addEventListener('resize', dockLinks);
+    dockLinks();
   })();
 
   /* Code highlighting & copy (docs pages) */
