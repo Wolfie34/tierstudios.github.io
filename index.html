@@ -1,197 +1,281 @@
 <!DOCTYPE html>
+
 <html lang="en" data-theme="dark">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Tier Studios</title>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700|Open+Sans:400,700,400italic" rel="stylesheet"
-        type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <!-- Highlight.js -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
-        rel="stylesheet">
-    <link rel="icon" type="image/png" href="assets/img/icon.png">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Tier Studios — Elevate Every Experience</title>
+
+  <meta name="description" content="Tier Studios — independent game development, publishing, and Unity production tools." />
+
+  <meta name="theme-color" content="#070707" />
+
+  <link rel="icon" type="image/png" href="assets/img/icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+
 </head>
 
-<body class="index">
-    <div id="outer-wrapper">
-        <!-- Navigation -->
-        <nav class="tm-menu">
-            <div class="menu-wrap">
-                <div class="logo">
-                    <a href="index.html"><img id="site-logo" src="assets/img/logo_light.png" alt="Tier Studios"
-                            style="height: 40px;"></a>
-                </div>
-                <div class="menu-right">
-                    <ul id="menu-items">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="#">Assets <i class="fas fa-angle-down"></i></a>
-                            <ul class="submenu">
-                                <li><a href="ui-particle-system.html">UI Particle System</a></li>
-                                <li><a href="goat-icon-studio.html">Goat Icon Studio</a></li>
-                                <li><a href="layer-forge-studio.html">Layer Forge Studio</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="company.html">Company</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                    <div id="mobile-menu-toggle" class="mobile-menu-toggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-            </div>
-    </div>
-    </nav>
-    <div class="tm-menu2"></div> <!-- Spacer for fixed nav -->
+<body class="index-page">
 
-    <!-- Header -->
-    <header id="header">
-        <div id="header-inner">
-            <div class="animated-title-container" style="margin-bottom: 10px;">
-                <h1 class="animated-title" style="font-size: clamp(30px, 8vw, 80px);">
-                    <span class="letter">T</span>
-                    <span class="letter">I</span>
-                    <span class="letter">E</span>
-                    <span class="letter">R</span>
-                    <span class="letter">&nbsp;</span>
-                    <span class="letter">S</span>
-                    <span class="letter">T</span>
-                    <span class="letter">U</span>
-                    <span class="letter">D</span>
-                    <span class="letter">I</span>
-                    <span class="letter">O</span>
-                    <span class="letter">S</span>
-                </h1>
-            </div>
-            <p class="description">Elevate Every Experience.</p>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="vignette" aria-hidden="true"></div>
+
+
+
+  <nav id="nav">
+
+    <div class="container nav-inner">
+
+      <a href="index.html" class="nav-brand" data-cursor="hover">
+
+        <img src="assets/img/logo.svg" alt="" class="nav-mark" aria-hidden="true" />
+
+        <span class="nav-word-wrap">
+
+          <span class="display nav-word">TIER</span>
+
+          <span class="nav-word-sub">STUDIOS</span>
+
+        </span>
+
+      </a>
+
+      <div class="nav-right">
+
+        <div class="nav-links" id="navLinks">
+
+          <a href="assets.html" class="nav-link" data-cursor="hover">Assets</a>
+
+          <a href="games.html" class="nav-link" data-cursor="hover">Games</a>
+
+          <a href="team.html" class="nav-link" data-cursor="hover">Team</a>
+
+          <a href="contact.html" class="nav-link" data-cursor="hover">Contact</a>
+
         </div>
-    </header>
 
-    <!-- Main Content Wrapper -->
-    <div id="content-wrapper" class="row">
-        <!-- Main Content -->
-        <main id="main-wrapper">
-            <div class="product-showcase">
-                <!-- Product 1: Layer Forge Studio -->
-                <article class="product-card">
-                    <div class="product-image">
-                        <a href="layer-forge-studio.html">
-                            <img src="assets/img/layer-forge-studio/Social_Image.png" alt="Layer Forge Studio">
-                        </a>
-                    </div>
-                    <div class="product-content">
-                        <h2><a href="layer-forge-studio.html">Layer Forge Studio</a></h2>
-                        <div class="product-stats">
-                            <span class="badge stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                    class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                5.0</span>
-                            <span class="badge users"><i class="fas fa-users"></i> 0+ Users</span>
-                            <span class="badge favorites"><i class="fas fa-heart"></i> 0+ Favorites</span>
-                        </div>
-                        <p class="product-desc">Layer-based image & texture editor inside Unity. Edit, design and
-                            enhance visuals in real-time with brushes, effects and one-click workflow.</p>
-                        <div class="product-actions">
-                            <a href="https://assetstore.unity.com/packages/tools/painting/layer-forge-studio-370200"
-                                class="btn-primary"><i class="fa-brands fa-unity"></i> Asset Store</a>
-                        </div>
-                    </div>
-                </article>
+        <button class="mobile-nav-btn" id="mobileNavBtn" aria-label="Menu" data-cursor="hover">
 
-                <!-- Product 2: Goat Icon Studio -->
-                <article class="product-card">
-                    <div class="product-image">
-                        <a href="goat-icon-studio.html">
-                            <img src="assets/img/goat-icon-studio/Social_Image.PNG" alt="Goat Icon Studio">
-                        </a>
-                    </div>
-                    <div class="product-content">
-                        <h2><a href="goat-icon-studio.html">Goat Icon Studio</a></h2>
-                        <div class="product-stats">
-                            <span class="badge stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                    class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                5.0</span>
-                            <span class="badge users"><i class="fas fa-users"></i> 10+ Users</span>
-                            <span class="badge favorites"><i class="fas fa-heart"></i> 1+ Favorites</span>
-                        </div>
-                        <p class="product-desc">Create game-ready 2D icons from 3D prefabs in seconds. Batch export,
-                            animation capture, multi-object setup, and real-time preview.</p>
-                        <div class="product-actions">
-                            <a href="https://assetstore.unity.com/packages/2d/gui/goat-icon-studio-3d-to-2d-icon-generator-351870"
-                                class="btn-primary" target="_blank"><i class="fa-brands fa-unity"></i> Asset Store</a>
-                        </div>
-                    </div>
-                </article>
+          <span></span><span></span>
 
-                <!-- Product 3: UI Particle System -->
-                <article class="product-card">
-                    <div class="product-image">
-                        <a href="ui-particle-system.html">
-                            <img src="assets/img/ui-particle-system/Social_Image.JPG" alt="UI Particle System">
-                        </a>
-                    </div>
-                    <div class="product-content">
-                        <h2><a href="ui-particle-system.html">UI Particle System</a></h2>
-                        <div class="product-stats">
-                            <span class="badge stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                    class="fas fa-star-half-alt"></i> 4.6</span>
-                            <span class="badge users"><i class="fas fa-users"></i> 150+ Users</span>
-                            <span class="badge favorites"><i class="fas fa-heart"></i> 40+ Favorites</span>
-                        </div>
-                        <p class="product-desc">Create UI particle effects directly on Canvas. No sorting issues, mobile
-                            optimized, easy setup, built-in sound support, and familiar workflow for fast UI VFX
-                            creation.</p>
-                        <div class="product-actions">
-                            <a href="https://assetstore.unity.com/packages/tools/gui/ui-particle-system-native-canvas-vfx-337750"
-                                class="btn-primary" target="_blank"><i class="fa-brands fa-unity"></i> Asset Store</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
+        </button>
 
+      </div>
 
-        </main>
     </div>
 
-    <!-- Footer -->
-    <footer id="jugas_footer">
-        <div class="copy-container">
-            <div class="footer-social-icons">
-                <a href="https://x.com/tiergamestudio" target="_blank" aria-label="X (Twitter)"><i
-                        class="fa-brands fa-x-twitter"></i></a>
-                <a href="https://www.facebook.com/people/Tier-Studios/61571678942166/" target="_blank"
-                    aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/tiergamestudio/" target="_blank" aria-label="Instagram"><i
-                        class="fab fa-instagram"></i></a>
-                <a href="https://www.youtube.com/@TierStudioss" target="_blank" aria-label="YouTube"><i
-                        class="fab fa-youtube"></i></a>
-                <a href="https://www.linkedin.com/company/107369558/admin/dashboard/" target="_blank"
-                    aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://discord.gg/ESvwrchUwA" target="_blank" aria-label="Discord"><i
-                        class="fab fa-discord"></i></a>
-                <a href="https://assetstore.unity.com/publishers/124104" target="_blank"
-                    aria-label="Unity Asset Store"><i class="fa-brands fa-unity"></i></a>
-            </div>
-            <div class="jugas_footer_copyright">
-                &copy; 2026 Tier Studios. All rights reserved.
-            </div>
+  </nav>
+
+
+
+  <header id="top" class="hero">
+
+    <div class="hero-inner" id="heroInner">
+
+      <div class="hero-title-wrap">
+
+        <div class="hero-title-panel" aria-hidden="true">
+
+          <div class="hero-panel-grid"></div>
+
+          <div class="hero-panel-particles"></div>
+
         </div>
-    </footer>
+
+        <svg class="hero-stroke-svg" viewBox="0 0 1200 120" aria-label="TIER STUDIOS" role="img">
+
+          <g class="hero-stroke-glyphs"></g>
+
+        </svg>
+
+        <div class="label hero-sub reveal" data-delay="2000">GAME DEVELOPMENT · PUBLISHING · UNITY TOOLS</div>
+
+        <p class="hero-slogan reveal" data-delay="2300">
+
+          <span>Independent studio — we develop games, publish titles, and ship Unity assets for production.</span>
+
+          <span class="hi">From prototype to launch. Tools and titles, built in-house.</span>
+
+        </p>
+
+      </div>
+
     </div>
 
-    <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
-    <script src="assets/js/script.js"></script>
+  </header>
+
+
+
+  <main>
+
+    <section class="section section-compact">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="display reveal">Upcoming Game</h2>
+          <a href="games.html" class="label section-link reveal" data-delay="120" data-cursor="hover">
+            <span class="idx">01</span> &nbsp;/&nbsp; View Games →
+          </a>
+        </div>
+        <div class="coming-soon-panel reveal">
+          <div class="cs-visual cs-visual--game">
+            <div class="cs-visual-overlay"></div>
+            <span class="cs-badge display">Coming Soon</span>
+          </div>
+          <div class="cs-body">
+            <span class="label cs-eyebrow">New Game</span>
+            <h2 class="display cs-title">Tier Game Project</h2>
+            <p class="cs-desc">Our first game is in active development. The countdown to launch has started — stay tuned for updates on the Games page.</p>
+            <div class="cs-countdown-wrap">
+              <span class="label cs-countdown-label">Release Date</span>
+              <div class="cs-countdown" id="releaseCountdown" data-release="2026-08-02T12:00:00">
+                <div class="cs-count-unit">
+                  <span class="cs-count-num" data-unit="days">00</span>
+                  <span class="label cs-count-lbl">Days</span>
+                </div>
+                <span class="cs-count-sep">:</span>
+                <div class="cs-count-unit">
+                  <span class="cs-count-num" data-unit="hours">00</span>
+                  <span class="label cs-count-lbl">Hours</span>
+                </div>
+                <span class="cs-count-sep">:</span>
+                <div class="cs-count-unit">
+                  <span class="cs-count-num" data-unit="minutes">00</span>
+                  <span class="label cs-count-lbl">Minutes</span>
+                </div>
+                <span class="cs-count-sep">:</span>
+                <div class="cs-count-unit">
+                  <span class="cs-count-num" data-unit="seconds">00</span>
+                  <span class="label cs-count-lbl">Seconds</span>
+                </div>
+              </div>
+            </div>
+            <a href="games.html" class="label section-link cs-more-link" data-cursor="hover">View development updates →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-compact">
+
+      <div class="container">
+
+        <div class="section-head">
+
+          <h2 class="display reveal">Featured Assets</h2>
+
+          <a href="assets.html" class="label section-link reveal" data-delay="120" data-cursor="hover">
+
+            <span class="idx">02</span> &nbsp;/&nbsp; View All →
+
+          </a>
+
+        </div>
+
+        <div class="games-grid games-grid-featured reveal">
+
+          <a href="layer-forge-studio.html" class="game-item has-img" data-cursor="hover">
+
+            <span class="gi-img" style="background-image:url('assets/img/layer-forge-studio/Social_Image.png')"></span>
+
+            <span class="gi-body">
+
+              <span class="gi-title">Layer Forge Studio</span>
+
+              <span class="gi-tag">Layer-based image &amp; texture editor inside Unity. Real-time brushes, effects, and one-click workflow.</span>
+
+              <span class="gi-go"><span>View</span> →</span>
+
+            </span>
+
+          </a>
+
+          <a href="ui-particle-system.html" class="game-item has-img" data-cursor="hover">
+
+            <span class="gi-img" style="background-image:url('assets/img/ui-particle-system/Social_Image.JPG')"></span>
+
+            <span class="gi-body">
+
+              <span class="gi-title">UI Particle System</span>
+
+              <span class="gi-tag">Native Canvas VFX with no sorting issues. Mobile optimized, easy setup, built-in sound support.</span>
+
+              <span class="gi-go"><span>View</span> →</span>
+
+            </span>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <footer class="footer">
+
+    <div class="container">
+
+      <div class="footer-center">
+
+        <div class="footer-title">
+
+          <span class="display">TIER</span>
+
+          <span class="nav-word-sub">STUDIOS</span>
+
+        </div>
+
+        <div class="footer-social">
+
+          <a href="https://x.com/tiergamestudio" target="_blank" rel="noopener" class="nav-link" data-cursor="hover">Twitter / X</a>
+
+          <a href="https://www.instagram.com/tiergamestudio/" target="_blank" rel="noopener" class="nav-link" data-cursor="hover">Instagram</a>
+
+          <a href="https://www.youtube.com/@TierStudioss" target="_blank" rel="noopener" class="nav-link" data-cursor="hover">YouTube</a>
+
+          <a href="https://discord.gg/ESvwrchUwA" target="_blank" rel="noopener" class="nav-link" data-cursor="hover">Discord</a>
+
+          <a href="https://assetstore.unity.com/publishers/124104" target="_blank" rel="noopener" class="nav-link" data-cursor="hover">Unity</a>
+
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+
+        <span class="label" id="copyright">&copy; 2026 Tier Studios</span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js"></script>
+
+  <script src="assets/js/script.js"></script>
+
 </body>
 
 </html>
+

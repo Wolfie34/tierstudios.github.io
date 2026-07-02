@@ -2,44 +2,39 @@
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Layer Forge Studio - How To Use Guide - Tier Studios</title>
-    <style>html, body { overflow-x: clip !important; }</style>
-    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700|Open+Sans:400,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layer Forge Studio — How To Use Guide — Tier Studios</title>
+        <style>html, body { overflow-x: clip !important; }</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/img/icon.png">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/docs.css">
 </head>
-<body class="docs-page">
-<div id="outer-wrapper">
-<nav class="tm-menu">
-  <div class="menu-wrap">
-    <div class="logo"><a href="index.html"><img id="site-logo" src="assets/img/logo_light.png" alt="Tier Studios" style="height:40px;"></a></div>
-    <div class="menu-right">
-      <ul id="menu-items">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="#">Assets <i class="fas fa-angle-down"></i></a>
-          <ul class="submenu">
-            <li><a href="ui-particle-system.html">UI Particle System</a></li>
-            <li><a href="goat-icon-studio.html">Goat Icon Studio</a></li>
-            <li><a href="layer-forge-studio.html">Layer Forge Studio</a></li>
-          </ul>
-        </li>
-        <li><a href="company.html">Company</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <div id="mobile-menu-toggle" class="mobile-menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
+<body class="docs-page subpage">
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<nav id="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand" data-cursor="hover">
+      <img src="assets/img/logo.svg" alt="" class="nav-mark" aria-hidden="true" />
+      <span class="nav-word-wrap"><span class="display nav-word">TIER</span><span class="nav-word-sub">STUDIOS</span></span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links" id="navLinks">
+        <a href="assets.html" class="nav-link" data-cursor="hover">Assets</a>
+        <a href="games.html" class="nav-link" data-cursor="hover">Games</a>
+        <a href="team.html" class="nav-link" data-cursor="hover">Team</a>
+        <a href="contact.html" class="nav-link" data-cursor="hover">Contact</a>
       </div>
+      <button class="mobile-nav-btn" id="mobileNavBtn" aria-label="Menu" data-cursor="hover"><span></span><span></span></button>
     </div>
   </div>
 </nav>
-<div class="tm-menu2"></div>
+<div id="outer-wrapper">
 <div class="docs-layout">
   <!-- Main Content -->
   <main class="docs-content" id="docs-content">
@@ -564,19 +559,27 @@
   </aside>
 </div>
 
-<footer id="jugas_footer">
-  <div class="copy-container">
-    <div class="footer-social-icons">
-      <a href="https://x.com/tiergamestudio" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-      <a href="https://www.instagram.com/tiergamestudio/" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://discord.gg/ESvwrchUwA" target="_blank"><i class="fab fa-discord"></i></a>
-      <a href="https://assetstore.unity.com/publishers/124104" target="_blank"><i class="fa-brands fa-unity"></i></a>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-center">
+      <div class="footer-title">
+        <span class="display">TIER</span>
+        <span class="nav-word-sub">STUDIOS</span>
+      </div>
+      <div class="footer-social">
+        <a href="https://x.com/tiergamestudio" target="_blank" rel="noopener" class="nav-link" data-cursor="hover">Twitter / X</a>
+        <a href="https://discord.gg/ESvwrchUwA" target="_blank" rel="noopener" class="nav-link" data-cursor="hover">Discord</a>
+        <a href="https://assetstore.unity.com/publishers/124104" target="_blank" rel="noopener" class="nav-link" data-cursor="hover">Unity</a>
+      </div>
     </div>
-    <div class="jugas_footer_copyright">&copy; 2026 Tier Studios. All rights reserved.</div>
+    <div class="footer-bottom">
+      <span class="label" id="copyright">&copy; 2026 Tier Studios</span>
+    </div>
   </div>
 </footer>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
 <script src="assets/js/script.js"></script>
 <script>
   const sections = document.querySelectorAll('.docs-section');
