@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /company.html
+
+# Docs are indexed via sitemap with lower priority
+
+Sitemap: https://tierstudios.com/sitemap.xml
