@@ -106,7 +106,16 @@
       '404.label': '404',
       '404.title': 'Page not found',
       '404.desc': 'The page you are looking for does not exist or has been moved.',
-      '404.btn': 'Back to Home'
+      '404.btn': 'Back to Home',
+      'footer.shortcutsAria': 'Site shortcuts',
+      'footer.explore': 'Explore',
+      'footer.tools': 'Unity Tools',
+      'footer.resources': 'Resources',
+      'footer.home': 'Home',
+      'footer.layerForgeDocs': 'Layer Forge Docs',
+      'footer.uiParticleDocs': 'UI Particle Docs',
+      'footer.assetStore': 'Unity Asset Store',
+      'footer.discord': 'Discord Community'
     },
     tr: {
       'nav.assets': 'Varlıklar',
@@ -212,7 +221,16 @@
       '404.label': '404',
       '404.title': 'Sayfa bulunamadı',
       '404.desc': 'Aradığınız sayfa mevcut değil veya taşınmış olabilir.',
-      '404.btn': 'Ana Sayfaya Dön'
+      '404.btn': 'Ana Sayfaya Dön',
+      'footer.shortcutsAria': 'Site kısayolları',
+      'footer.explore': 'Keşfet',
+      'footer.tools': 'Unity Araçları',
+      'footer.resources': 'Kaynaklar',
+      'footer.home': 'Ana Sayfa',
+      'footer.layerForgeDocs': 'Layer Forge Dokümantasyon',
+      'footer.uiParticleDocs': 'UI Particle Dokümantasyon',
+      'footer.assetStore': 'Unity Asset Store',
+      'footer.discord': 'Discord Topluluğu'
     }
   };
 
@@ -344,6 +362,7 @@
   window.tierI18n = {
     getLang: getLang,
     setLang: setLang,
+    applyLang: function () { applyLang(getLang()); },
     t: function (key) { return t(getLang(), key); }
   };
 

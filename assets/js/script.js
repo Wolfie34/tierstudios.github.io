@@ -1,4 +1,51 @@
 document.addEventListener('DOMContentLoaded', function () {
+  (function footerShortcuts() {
+    document.querySelectorAll('.footer .footer-center').forEach(function (center) {
+      if (center.querySelector('.footer-shortcuts')) return;
+
+      var title = center.querySelector('.footer-title');
+      if (!title) return;
+
+      var nav = document.createElement('nav');
+      nav.className = 'footer-shortcuts reveal reveal-fade';
+      nav.setAttribute('data-i18n-aria', 'footer.shortcutsAria');
+      nav.innerHTML =
+        '<div class="footer-shortcuts-group">' +
+          '<span class="label footer-shortcuts-label" data-i18n="footer.explore">Explore</span>' +
+          '<ul class="footer-shortcuts-list">' +
+            '<li><a href="index.html" data-cursor="hover" data-i18n="footer.home">Home</a></li>' +
+            '<li><a href="assets.html" data-cursor="hover" data-i18n="nav.assets">Assets</a></li>' +
+            '<li><a href="games.html" data-cursor="hover" data-i18n="nav.games">Games</a></li>' +
+            '<li><a href="team.html" data-cursor="hover" data-i18n="nav.team">Team</a></li>' +
+            '<li><a href="contact.html" data-cursor="hover" data-i18n="nav.contact">Contact</a></li>' +
+          '</ul>' +
+        '</div>' +
+        '<div class="footer-shortcuts-group">' +
+          '<span class="label footer-shortcuts-label" data-i18n="footer.tools">Unity Tools</span>' +
+          '<ul class="footer-shortcuts-list">' +
+            '<li><a href="layer-forge-studio.html" data-cursor="hover">Layer Forge Studio</a></li>' +
+            '<li><a href="goat-icon-studio.html" data-cursor="hover">Goat Icon Studio</a></li>' +
+            '<li><a href="ui-particle-system.html" data-cursor="hover">UI Particle System</a></li>' +
+          '</ul>' +
+        '</div>' +
+        '<div class="footer-shortcuts-group">' +
+          '<span class="label footer-shortcuts-label" data-i18n="footer.resources">Resources</span>' +
+          '<ul class="footer-shortcuts-list">' +
+            '<li><a href="layer-forge-docs.html" data-cursor="hover" data-i18n="footer.layerForgeDocs">Layer Forge Docs</a></li>' +
+            '<li><a href="ui-particle-docs.html" data-cursor="hover" data-i18n="footer.uiParticleDocs">UI Particle Docs</a></li>' +
+            '<li><a href="https://assetstore.unity.com/publishers/124104" target="_blank" rel="noopener" data-cursor="hover" data-i18n="footer.assetStore">Unity Asset Store</a></li>' +
+            '<li><a href="https://discord.gg/ESvwrchUwA" target="_blank" rel="noopener" data-cursor="hover" data-i18n="footer.discord">Discord Community</a></li>' +
+          '</ul>' +
+        '</div>';
+
+      title.insertAdjacentElement('afterend', nav);
+    });
+
+    if (window.tierI18n && window.tierI18n.applyLang) {
+      window.tierI18n.applyLang();
+    }
+  })();
+
   (function navActiveRoute() {
     var path = window.location.pathname.split('/').pop();
     if (!path || path === '') path = 'index.html';
@@ -660,8 +707,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!inner) return;
     var raf;
     var update = function () {
-      var fade = Math.max(0, 1 - window.scrollY / 500);
-      inner.style.opacity = fade;
+      var y = window.scrollY;
+      var fade = Math.max(0, 1 - y / 480);
+      inner.style.opacity = String(fade);
+      inner.style.transform = 'translate3d(0,' + (y * 0.14) + 'px,0)';
     };
     window.addEventListener('scroll', function () {
       cancelAnimationFrame(raf);
@@ -806,3 +855,89 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+
+(function tierAmbience() {
+  if (!document.body || document.querySelector('.tier-ambience-canvas')) return;
+  if (document.documentElement.getAttribute('data-theme') === 'light') return;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var narrow = window.matchMedia('(max-width: 900px)').matches;
+  var canvas = document.createElement('canvas');
+  canvas.className = 'tier-ambience-canvas';
+  canvas.setAttribute('aria-hidden', 'true');
+  document.body.insertBefore(canvas, document.body.firstChild);
+
+  var ctx = canvas.getContext('2d', { alpha: false });
+  if (!ctx) return;
+
+  var blobs = [
+    { ax: 0.52, ay: 0.18, rx: 0.52, ry: 0.38, phase: 0, speed: 0.055, alpha: 0.085 },
+    { ax: 0.82, ay: 0.48, rx: 0.42, ry: 0.46, phase: 2.4, speed: 0.042, alpha: 0.055 },
+    { ax: 0.18, ay: 0.58, rx: 0.44, ry: 0.4, phase: 4.1, speed: 0.048, alpha: 0.05 },
+    { ax: 0.48, ay: 0.82, rx: 0.48, ry: 0.34, phase: 1.2, speed: 0.038, alpha: 0.042 },
+    { ax: 0.62, ay: 0.38, rx: 0.28, ry: 0.26, phase: 3.6, speed: 0.062, alpha: 0.035 }
+  ];
+
+  if (narrow) blobs = blobs.slice(0, 3);
+
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.max(1, Math.floor(window.innerWidth * dpr));
+    canvas.height = Math.max(1, Math.floor(window.innerHeight * dpr));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function blobAt(blob, t, w, h) {
+    var drift = reduced ? 0 : t;
+    return {
+      x: (blob.ax + Math.sin(drift * blob.speed + blob.phase) * 0.09) * w,
+      y: (blob.ay + Math.cos(drift * blob.speed * 0.82 + blob.phase * 1.15) * 0.07) * h,
+      rx: blob.rx * w * (1 + Math.sin(drift * 0.12 + blob.phase) * 0.06),
+      ry: blob.ry * h * (1 + Math.cos(drift * 0.1 + blob.phase) * 0.05)
+    };
+  }
+
+  function paint() {
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    var t = Date.now() * 0.001;
+
+    ctx.fillStyle = '#070707';
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.globalCompositeOperation = 'lighter';
+    blobs.forEach(function (blob) {
+      var p = blobAt(blob, t, w, h);
+      var radius = Math.max(p.rx, p.ry);
+      var grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius);
+      grad.addColorStop(0, 'rgba(255, 255, 255, ' + blob.alpha + ')');
+      grad.addColorStop(0.42, 'rgba(210, 210, 210, ' + (blob.alpha * 0.28) + ')');
+      grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.ellipse(p.x, p.y, p.rx, p.ry, 0, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.globalCompositeOperation = 'source-over';
+
+    var keyLight = ctx.createRadialGradient(w * 0.5, h * 0.08, 0, w * 0.5, h * 0.42, w * 0.72);
+    keyLight.addColorStop(0, 'rgba(255, 255, 255, 0.055)');
+    keyLight.addColorStop(0.45, 'rgba(255, 255, 255, 0.018)');
+    keyLight.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    ctx.fillStyle = keyLight;
+    ctx.fillRect(0, 0, w, h);
+
+    var vignette = ctx.createRadialGradient(w * 0.5, h * 0.4, w * 0.12, w * 0.5, h * 0.4, w * 0.82);
+    vignette.addColorStop(0, 'rgba(7, 7, 7, 0)');
+    vignette.addColorStop(0.65, 'rgba(7, 7, 7, 0.22)');
+    vignette.addColorStop(1, 'rgba(7, 7, 7, 0.72)');
+    ctx.fillStyle = vignette;
+    ctx.fillRect(0, 0, w, h);
+
+    requestAnimationFrame(paint);
+  }
+
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+  requestAnimationFrame(paint);
+})();

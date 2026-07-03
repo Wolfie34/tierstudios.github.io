@@ -79,10 +79,13 @@ html {
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
+  isolation: isolate;
+  min-height: 100%;
+  background: var(--bg);
 }
 
 body {
-  background: var(--bg);
+  background: transparent;
   color: var(--fg);
   font-family: 'Hanken Grotesk', system-ui, sans-serif;
   font-weight: 400;
@@ -162,6 +165,23 @@ a {
 }
 
 /* ---------- decorative layers ---------- */
+.tier-ambience-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+:root[data-theme="light"] body {
+  background: var(--bg);
+}
+
+:root[data-theme="light"] .tier-ambience-canvas {
+  display: none;
+}
+
 .tier-bg {
   position: fixed;
   inset: 0;
@@ -279,6 +299,21 @@ a {
   background: radial-gradient(120% 120% at 50% 40%, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.45);
+  outline-offset: 3px;
+}
+
+:root[data-theme="light"] a:focus-visible,
+:root[data-theme="light"] button:focus-visible,
+:root[data-theme="light"] input:focus-visible,
+:root[data-theme="light"] textarea:focus-visible {
+  outline-color: rgba(0, 0, 0, 0.45);
+}
+
 /* ---------- custom cursor ---------- */
 .cur-dot,
 .cur-ring {
@@ -353,6 +388,11 @@ a {
   gap: 8px;
   text-decoration: none;
   color: var(--fg);
+  transition: opacity 0.35s var(--ease);
+}
+
+.nav-brand:hover {
+  opacity: 0.88;
 }
 
 .nav-mark {
@@ -360,6 +400,11 @@ a {
   width: auto;
   display: block;
   flex-shrink: 0;
+  transition: transform 0.45s var(--ease);
+}
+
+.nav-brand:hover .nav-mark {
+  transform: scale(1.07);
 }
 
 .nav-word {
@@ -666,6 +711,7 @@ body.menu-open #nav {
   width: 100%;
   max-width: none;
   padding: clamp(20px, 3vh, 36px) 0 0;
+  will-change: opacity, transform;
 }
 
 .hero-inner {
@@ -1024,6 +1070,7 @@ body.menu-open #nav {
   border-color: var(--fg);
   background: rgba(128, 128, 128, 0.06);
   transform: translateY(-3px);
+  box-shadow: 0 18px 52px rgba(0, 0, 0, 0.32);
 }
 
 .gi-img {
@@ -1034,6 +1081,22 @@ body.menu-open #nav {
   background-position: center;
   filter: contrast(1.02) brightness(0.98);
   transition: filter 0.6s var(--ease), transform 0.8s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.gi-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 35%, rgba(7, 7, 7, 0.55) 100%);
+  opacity: 0.55;
+  transition: opacity 0.55s var(--ease);
+  pointer-events: none;
+}
+
+.game-item:hover .gi-img::after {
+  opacity: 0.75;
 }
 
 .game-item.in .gi-img {
@@ -1086,12 +1149,36 @@ body.menu-open #nav {
   font-size: 11px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  transition: color 0.4s var(--ease), letter-spacing 0.45s var(--ease);
+  transition: color 0.4s var(--ease), letter-spacing 0.45s var(--ease), gap 0.4s var(--ease);
+  gap: 0;
+}
+
+.gi-go::after {
+  content: '→';
+  display: inline-block;
+  margin-left: 0;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateX(-4px);
+  transition:
+    max-width 0.45s var(--ease),
+    opacity 0.35s var(--ease),
+    transform 0.45s var(--ease),
+    margin-left 0.45s var(--ease);
 }
 
 .game-item:hover .gi-go {
   color: var(--fg);
-  letter-spacing: 0.32em;
+  letter-spacing: 0.28em;
+  gap: 2px;
+}
+
+.game-item:hover .gi-go::after {
+  max-width: 1.2em;
+  opacity: 1;
+  margin-left: 8px;
+  transform: translateX(0);
 }
 
 .section-compact {
@@ -1674,6 +1761,18 @@ body.menu-open #nav {
   border: 1px solid var(--line);
   border-radius: var(--radius-panel);
   background: rgba(128, 128, 128, 0.03);
+  transition:
+    border-color 0.5s var(--ease),
+    background 0.5s var(--ease),
+    transform 0.5s var(--ease),
+    box-shadow 0.5s var(--ease);
+}
+
+.assets-campaign-inner:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(128, 128, 128, 0.055);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
 }
 
 .assets-campaign-copy {
@@ -1861,8 +1960,93 @@ textarea.field {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
+  gap: 36px;
   text-align: center;
+}
+
+.footer-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 5vw, 56px);
+  width: 100%;
+  max-width: 780px;
+  margin-inline: auto;
+  padding: 4px 0 8px;
+  text-align: left;
+}
+
+.footer-shortcuts-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.footer-shortcuts-label {
+  color: var(--fg-faint);
+  letter-spacing: 0.28em;
+}
+
+.footer-shortcuts-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-shortcuts-list a {
+  display: inline-flex;
+  align-items: center;
+  color: var(--fg-dim);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.4;
+  text-decoration: none;
+  transition:
+    color 0.35s var(--ease),
+    transform 0.35s var(--ease);
+}
+
+.footer-shortcuts-list a:hover {
+  color: var(--fg);
+  transform: translateX(4px);
+}
+
+.footer-shortcuts-list a[target="_blank"]::after {
+  content: '↗';
+  margin-left: 6px;
+  font-size: 0.78em;
+  opacity: 0.45;
+  transform: translateX(0);
+  transition: opacity 0.35s var(--ease);
+}
+
+.footer-shortcuts-list a[target="_blank"]:hover::after {
+  opacity: 0.85;
+}
+
+@media (max-width: 720px) {
+  .footer-shortcuts {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 24px;
+  }
+
+  .footer-shortcuts-group:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-shortcuts {
+    grid-template-columns: 1fr;
+    max-width: 280px;
+  }
+
+  .footer-shortcuts-group:last-child {
+    grid-column: auto;
+  }
 }
 
 .footer-title {
@@ -1907,6 +2091,34 @@ textarea.field {
   font-size: 13px;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.footer-social a {
+  position: relative;
+  color: var(--fg-dim);
+  text-decoration: none;
+  transition: color 0.35s var(--ease);
+}
+
+.footer-social a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 1px;
+  background: var(--fg);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.4s var(--ease);
+}
+
+.footer-social a:hover {
+  color: var(--fg);
+}
+
+.footer-social a:hover::after {
+  transform: scaleX(1);
 }
 
 .footer-bottom {
@@ -2246,6 +2458,12 @@ textarea.field {
   background: var(--fg);
   border-color: var(--fg);
   transform: translateY(-1px);
+  box-shadow: 0 10px 32px rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .btn-secondary {
