@@ -626,7 +626,7 @@ document.addEventListener('DOMContentLoaded', function () {
   (function navSolid() {
     var nav = document.getElementById('nav');
     if (!nav) return;
-    var onScroll = function () { nav.classList.toggle('solid', window.scrollY > 40); };
+    var onScroll = function () { nav.classList.toggle('solid', window.scrollY > 24); };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   })();
@@ -644,8 +644,8 @@ document.addEventListener('DOMContentLoaded', function () {
     indicator.setAttribute('aria-hidden', 'true');
     navLinks.appendChild(indicator);
 
-    var padX = 14;
-    var padY = 4;
+    var padX = 0;
+    var padY = 0;
     var mqDesktop = window.matchMedia('(min-width: 901px)');
 
     function isDesktop() {
