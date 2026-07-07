@@ -831,13 +831,13 @@ body.menu-open #nav {
 }
 
 .index-page .hero {
-  padding-bottom: clamp(12px, 2vh, 24px);
+  padding-bottom: 0;
 }
 
 .index-page .hero-title-wrap {
-  padding: clamp(48px, 8vw, 88px) clamp(20px, 5vw, 64px) clamp(44px, 7vw, 72px);
-  min-height: clamp(340px, 48vh, 520px);
-  gap: clamp(8px, 1.2vw, 14px);
+  padding: clamp(40px, 7vw, 72px) clamp(20px, 5vw, 64px) clamp(28px, 4vw, 44px);
+  min-height: clamp(260px, 38vh, 420px);
+  gap: clamp(10px, 1.4vw, 14px);
 }
 
 .index-page .hero-slogan {
@@ -1126,12 +1126,18 @@ body.menu-open #nav {
 }
 
 /* ---------- studio pillars (index) ---------- */
+.index-page {
+  --index-space: clamp(52px, 7.5vw, 80px);
+}
+
 .studio-pillars {
   position: relative;
   z-index: 2;
-  padding-top: 0;
-  padding-bottom: clamp(48px, 8vw, 72px);
   overflow: hidden;
+}
+
+.index-page .studio-pillars.section-compact {
+  padding: var(--index-space) 0 0;
 }
 
 .studio-pillars-head {
@@ -1141,7 +1147,7 @@ body.menu-open #nav {
   gap: clamp(8px, 1.2vw, 12px);
   max-width: 52ch;
   margin-inline: auto;
-  margin-bottom: clamp(28px, 4.5vw, 40px);
+  margin-bottom: clamp(24px, 3.5vw, 36px);
   text-align: center;
 }
 
@@ -1231,82 +1237,6 @@ body.menu-open #nav {
   letter-spacing: 0.08em;
   color: var(--fg);
   font-size: 10px;
-}
-
-/* ---------- studio news (index) ---------- */
-.studio-news {
-  position: relative;
-  z-index: 2;
-  padding-top: clamp(48px, 8vw, 80px);
-}
-
-.studio-news-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.studio-news-item {
-  display: grid;
-  grid-template-columns: clamp(56px, 8vw, 88px) 1fr;
-  gap: clamp(16px, 3vw, 28px);
-  align-items: start;
-  padding: clamp(20px, 3vw, 28px) 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.studio-news-item:first-child {
-  border-top: 1px solid var(--line);
-}
-
-.studio-news-date {
-  margin: 0;
-  padding-top: 4px;
-  letter-spacing: 0.24em;
-  color: var(--fg-faint);
-}
-
-.studio-news-body {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(6px, 1vw, 10px);
-  min-width: 0;
-}
-
-.studio-news-title {
-  margin: 0;
-  font-size: clamp(18px, 2.4vw, 22px);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-.studio-news-desc {
-  margin: 0;
-  font-size: clamp(14px, 1.6vw, 15px);
-  font-weight: 300;
-  line-height: 1.6;
-  color: var(--fg-dim);
-  max-width: 58ch;
-}
-
-.studio-news-link {
-  align-self: flex-start;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--fg-dim);
-  padding: 4px 0;
-  transition: color 0.45s var(--ease), letter-spacing 0.45s var(--ease);
-}
-
-.studio-news-link:hover {
-  color: var(--fg);
-  letter-spacing: 0.26em;
 }
 
 .reveal {
@@ -1596,14 +1526,22 @@ body.menu-open #nav {
   user-select: none;
 }
 
-.index-page main > .section-compact:first-child {
-  padding-top: clamp(32px, 5vw, 56px);
-  padding-bottom: 0;
+.index-page main > .section.section-compact {
+  padding: var(--index-space) 0;
 }
 
 .index-page .assets-campaign {
-  margin-top: clamp(40px, 6vw, 56px);
-  margin-bottom: clamp(40px, 6vw, 56px);
+  margin-top: clamp(28px, 4vw, 40px);
+  margin-bottom: 0;
+}
+
+.index-page .section-head {
+  margin-bottom: clamp(24px, 3.5vw, 36px);
+  padding-bottom: 0;
+}
+
+.index-page .section-foot {
+  margin-top: clamp(20px, 3vw, 28px);
 }
 
 
@@ -2535,31 +2473,13 @@ textarea.field {
 }
 
 .footer-social a {
-  position: relative;
   color: var(--fg-dim);
   text-decoration: none;
   transition: color 0.35s var(--ease);
 }
 
-.footer-social a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -5px;
-  height: 1px;
-  background: var(--fg);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.4s var(--ease);
-}
-
 .footer-social a:hover {
   color: var(--fg);
-}
-
-.footer-social a:hover::after {
-  transform: scaleX(1);
 }
 
 .footer-bottom {
@@ -3660,14 +3580,17 @@ textarea.field {
     padding: clamp(40px, 7vw, 72px) 0;
   }
 
-  .index-page main > .section-compact:first-child {
-    padding-top: clamp(28px, 5vw, 40px);
-    padding-bottom: 0;
+  .index-page {
+    --index-space: clamp(40px, 6vw, 56px);
+  }
+
+  .index-page main > .section.section-compact {
+    padding: var(--index-space) 0;
   }
 
   .index-page .assets-campaign {
-    margin-top: clamp(28px, 5vw, 40px);
-    margin-bottom: clamp(28px, 5vw, 40px);
+    margin-top: clamp(24px, 4vw, 32px);
+    margin-bottom: 0;
   }
 
   .section-head {
@@ -3821,17 +3744,13 @@ textarea.field {
   body { cursor: auto; }
   .cur-dot, .cur-ring { display: none; }
 
-  .hero {
-    padding-bottom: 12px;
-  }
-
   .index-page .hero-inner {
     padding-top: 8px;
   }
 
   .index-page .hero-title-wrap {
-    padding: clamp(36px, 7vw, 56px) max(10px, env(safe-area-inset-left)) clamp(32px, 6vw, 48px) max(10px, env(safe-area-inset-right));
-    min-height: clamp(280px, 42vh, 420px);
+    padding: clamp(32px, 6vw, 48px) max(10px, env(safe-area-inset-left)) clamp(24px, 4vw, 36px) max(10px, env(safe-area-inset-right));
+    min-height: clamp(240px, 36vh, 360px);
     gap: 10px;
   }
 
@@ -4154,21 +4073,16 @@ textarea.field {
     grid-template-columns: 1fr;
   }
 
-  .studio-pillars {
-    padding-bottom: clamp(32px, 6vw, 48px);
-  }
-
-  .studio-news-item {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
   .studio-pillars-lead {
     font-size: 14px;
   }
 
   .studio-pillar {
     padding: 18px 16px;
+  }
+
+  .index-page {
+    --index-space: clamp(32px, 5.5vw, 44px);
   }
 
   .subpage-hero .label {
@@ -4242,11 +4156,12 @@ textarea.field {
 }
 
 .game-promo .section-head {
-  margin-bottom: clamp(32px, 5vw, 48px);
+  margin-bottom: clamp(24px, 3.5vw, 36px);
+  padding-bottom: 0;
 }
 
 .index-page .game-promo.section-compact {
-  padding-top: clamp(28px, 4vw, 44px);
+  padding: var(--index-space) 0 0;
 }
 
 .studio-cta {
@@ -4254,7 +4169,7 @@ textarea.field {
   align-items: center;
   justify-content: space-between;
   gap: clamp(20px, 4vw, 32px);
-  margin-top: clamp(20px, 3vw, 28px);
+  margin-top: clamp(16px, 2.5vw, 24px);
   padding: clamp(20px, 3.5vw, 28px) clamp(22px, 4vw, 32px);
   border-radius: var(--radius-panel);
   background: var(--surface);
