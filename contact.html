@@ -6,23 +6,24 @@
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-90BT2P55DJ"></script>
   <script src="/assets/js/analytics.js"></script>
-  <title>Contact — Tier Studios</title>
-  <meta name="description" content="Get in touch with Tier Studios — game development, publishing, and Unity tools from Antalya, Türkiye." />
+  <title>Contact · Tier Studios</title>
+  <meta name="description" content="Get in touch with Tier Studios · game development, publishing, and Unity tools from Antalya, Türkiye." />
   <link rel="canonical" href="https://tierstudios.com/contact.html" />
-  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/icon-48.png" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/icon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Tier Studios" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="Contact — Tier Studios" />
-  <meta property="og:description" content="Get in touch with Tier Studios — game development, publishing, and Unity tools from Antalya, Türkiye." />
+  <meta property="og:title" content="Contact · Tier Studios" />
+  <meta property="og:description" content="Get in touch with Tier Studios · game development, publishing, and Unity tools from Antalya, Türkiye." />
   <meta property="og:url" content="https://tierstudios.com/contact.html" />
   <meta property="og:image" content="https://tierstudios.com/assets/img/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Contact — Tier Studios" />
+  <meta name="twitter:title" content="Contact · Tier Studios" />
   <meta name="twitter:description" content="Contact Tier Studios for game development, publishing, and Unity tools." />
   <meta name="twitter:image" content="https://tierstudios.com/assets/img/og-image.png" />
   <script type="application/ld+json">
@@ -38,7 +39,7 @@
       },
       {
         "@type": "ContactPage",
-        "name": "Contact — Tier Studios",
+        "name": "Contact · Tier Studios",
         "url": "https://tierstudios.com/contact.html",
         "description": "Contact Tier Studios for partnerships, support, and inquiries.",
         "isPartOf": { "@id": "https://tierstudios.com/#website" },
@@ -105,7 +106,7 @@
           <div class="contact-studio-panel">
             <div class="contact-studio-brand">
               <img src="assets/img/logo.svg" alt="" class="contact-studio-mark" aria-hidden="true" />
-              <p data-i18n="contact.studioDesc">Independent studio — Unity assets, original game development, and publishing.</p>
+              <p data-i18n="contact.studioDesc">Independent studio · Unity assets, original game development, and publishing.</p>
             </div>
             <ul class="contact-studio-facts">
               <li>
@@ -209,9 +210,14 @@
     document.getElementById('contact-form').addEventListener('submit', function (e) {
       e.preventDefault();
       var form = e.target;
+      var submitBtn = form.querySelector('button[type="submit"]');
       var successMessage = document.getElementById('success-message');
       var errorMessage = document.getElementById('error-message');
       errorMessage.style.display = 'none';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.classList.add('is-loading');
+      }
       fetch('https://formspree.io/f/xgvkbywq', {
         method: 'POST',
         body: new FormData(form),
@@ -221,6 +227,9 @@
           form.reset();
           successMessage.style.display = 'block';
           errorMessage.style.display = 'none';
+          if (window.tierAnalytics) {
+            window.tierAnalytics.track('contact_form_submit', { form_name: 'contact' });
+          }
           setTimeout(function () { successMessage.style.display = 'none'; }, 5000);
         } else {
           errorMessage.textContent = window.tierI18n ? window.tierI18n.t('contact.error') : 'An error occurred. Please try again later.';
@@ -229,6 +238,11 @@
       }).catch(function () {
         errorMessage.textContent = window.tierI18n ? window.tierI18n.t('contact.errorSend') : 'An error occurred while sending the message.';
         errorMessage.style.display = 'block';
+      }).finally(function () {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('is-loading');
+        }
       });
     });
   </script>

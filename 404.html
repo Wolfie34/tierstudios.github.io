@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
@@ -6,10 +6,11 @@
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-90BT2P55DJ"></script>
   <script src="/assets/js/analytics.js"></script>
-  <title>Page Not Found — Tier Studios</title>
+  <title>Page Not Found · Tier Studios</title>
   <meta name="robots" content="noindex, follow" />
-  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/icon-48.png" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/icon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -45,10 +46,21 @@
   <div id="outer-wrapper">
     <main class="section not-found-main">
       <div class="container not-found-inner">
-        <p class="label" data-i18n="404.label">404</p>
-        <h1 class="display not-found-title" data-i18n="404.title">Page not found</h1>
-        <p class="not-found-desc" data-i18n="404.desc">The page you are looking for does not exist or has been moved.</p>
-        <a href="/index.html" class="btn-primary" data-cursor="hover"><span data-i18n="404.btn">Back to Home</span></a>
+        <div class="not-found-visual reveal" aria-hidden="true">
+          <span class="not-found-pulse"></span>
+          <img src="/assets/img/logo-outline.svg" alt="" class="not-found-mark" />
+        </div>
+        <p class="label not-found-code" data-i18n="404.label">404 · Signal Lost</p>
+        <h1 class="display not-found-title" data-i18n="404.title">Frequency not found</h1>
+        <p class="not-found-desc" data-i18n="404.desc">This channel doesn't exist or was moved. Return to base or explore our worlds.</p>
+        <div class="not-found-actions reveal" data-delay="80">
+          <a href="/index.html" class="btn-primary" data-cursor="hover"><span data-i18n="404.btn">Back to Home</span></a>
+          <div class="not-found-links">
+            <a href="/games.html" class="not-found-link" data-cursor="hover" data-i18n="404.games">Games</a>
+            <span class="not-found-sep" aria-hidden="true">·</span>
+            <a href="/assets.html" class="not-found-link" data-cursor="hover" data-i18n="404.assets">Assets</a>
+          </div>
+        </div>
       </div>
     </main>
   </div>

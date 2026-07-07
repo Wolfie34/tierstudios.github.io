@@ -1,4 +1,57 @@
 document.addEventListener('DOMContentLoaded', function () {
+  (function skipToContent() {
+    var target = document.querySelector('main') || document.getElementById('outer-wrapper');
+    if (!target) return;
+    if (!target.id) target.id = 'main-content';
+    if (document.querySelector('.skip-link')) return;
+    var link = document.createElement('a');
+    link.className = 'skip-link';
+    link.href = '#' + target.id;
+    link.textContent = 'Skip to content';
+    link.setAttribute('data-i18n', 'common.skipToContent');
+    document.body.insertBefore(link, document.body.firstChild);
+    if (window.tierI18n && window.tierI18n.applyLang) window.tierI18n.applyLang();
+  })();
+
+  (function assetBadges() {
+    document.querySelectorAll('.game-item.has-img .gi-body').forEach(function (body) {
+      if (body.querySelector('.gi-badge')) return;
+      var badge = document.createElement('span');
+      badge.className = 'label gi-badge';
+      badge.setAttribute('data-i18n', 'common.unityAsset');
+      body.insertBefore(badge, body.firstChild);
+    });
+    if (window.tierI18n && window.tierI18n.applyLang) window.tierI18n.applyLang();
+  })();
+
+  (function tierAnalyticsEvents() {
+    if (!window.tierAnalytics) return;
+
+    window.addEventListener('tier:lang', function (e) {
+      window.tierAnalytics.track('language_change', { language: e.detail && e.detail.lang });
+    });
+
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('a[href]');
+      if (!link) return;
+      var url;
+      try {
+        url = new URL(link.href, window.location.href);
+      } catch (err) {
+        return;
+      }
+      if (url.origin === window.location.origin && !link.hasAttribute('data-analytics')) return;
+      if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
+      var label = link.getAttribute('data-analytics-label')
+        || (link.textContent && link.textContent.trim().slice(0, 48))
+        || url.hostname;
+      window.tierAnalytics.track('outbound_click', {
+        link_url: link.href,
+        link_text: label
+      });
+    });
+  })();
+
   (function footerShortcuts() {
     document.querySelectorAll('.footer .footer-center').forEach(function (center) {
       if (center.querySelector('.footer-shortcuts')) return;
@@ -458,7 +511,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     var timer = null;
     var running = false;
-    var SCRAMBLE_CHARS = '!<>-_\\/[]{}—=+*^?#%&@░▒▓█▄▀■□ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var SCRAMBLE_CHARS = '!<>-_\\/[]{}=+*^?#%&@░▒▓█▄▀■□ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
     function escapeHtml(str) {
       return str
@@ -644,8 +697,8 @@ document.addEventListener('DOMContentLoaded', function () {
     indicator.setAttribute('aria-hidden', 'true');
     navLinks.appendChild(indicator);
 
-    var padX = 0;
-    var padY = 0;
+    var padX = 8;
+    var padY = 2;
     var mqDesktop = window.matchMedia('(min-width: 901px)');
 
     function isDesktop() {

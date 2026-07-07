@@ -1,35 +1,42 @@
 /* ==========================================
-   CSS sticky requires overflow:visible on all parents.
-   Override the global overflow-x:hidden for docs pages.
+   Docs pages — overflow: sticky needs visible
+   on desktop only; clip on mobile prevents breakage.
 ========================================== */
-.docs-page html,
-.docs-page body {
-    overflow-x: visible !important;
+.docs-page {
+  overflow-x: clip;
 }
 
-/* Ensure CSS sticky works - no parent can have overflow hidden */
-.docs-page #outer-wrapper,
-.docs-page #content-wrapper,
-.docs-page #main-wrapper {
+.docs-page #outer-wrapper {
+  overflow-x: clip;
+}
+
+@media (min-width: 1025px) {
+  .docs-page {
+    overflow-x: visible;
+  }
+
+  .docs-page #outer-wrapper {
     overflow: visible !important;
+  }
 }
 
 /* ==========================================
-   Documentation Page Layout - matches working Blogger implementation
+   Documentation Page Layout
 ========================================== */
 .docs-layout {
-    display: flex;
-    gap: 40px;
-    max-width: 1240px;
-    margin: 0 auto;
-    padding: clamp(110px, 14vw, 150px) clamp(20px, 5vw, 64px) 60px;
-    position: relative;
-    z-index: 2;
+  display: flex;
+  gap: 40px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(110px, 14vw, 150px) clamp(20px, 5vw, 64px) 60px;
+  position: relative;
+  z-index: 2;
+  align-items: flex-start;
 }
 
 .docs-content {
-    flex: 1;
-    min-width: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 .docs-sidebar {
@@ -136,6 +143,7 @@
     margin-bottom: 12px;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 12px;
 }
 
@@ -168,8 +176,9 @@
 /* Code blocks */
 .docs-section pre {
     border-radius: 12px;
-    overflow: hidden;
+    overflow-x: auto;
     border: 1px solid var(--border-color);
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Summary Grid */
@@ -245,6 +254,8 @@
     margin: 0;
     border-radius: 0;
     border: none;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .docs-page .gemini-code-content code {
@@ -355,15 +366,207 @@
 }
 
 @media (max-width: 1024px) {
-    .docs-sidebar {
-        float: none;
-        width: 100%;
-        margin-left: 0;
-        margin-bottom: 30px;
+    .docs-layout {
+        flex-direction: column;
+        gap: 28px;
+        padding: clamp(88px, 12vw, 110px) max(20px, env(safe-area-inset-left)) 48px max(20px, env(safe-area-inset-right));
     }
+
+    .docs-sidebar {
+        order: -1;
+        float: none;
+        position: static;
+        top: auto;
+        width: 100%;
+        max-height: none;
+        margin: 0;
+        overflow: visible;
+    }
+
+    .sidebar-inner {
+        padding: 18px 16px;
+    }
+
     .toc-nav {
         flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        margin-bottom: 16px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .toc-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .toc-link {
+        flex-shrink: 0;
+        white-space: nowrap;
+        border-left: none;
+        border: 1px solid var(--border-color);
+        border-radius: 999px;
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+
+    .toc-link:hover,
+    .toc-link.active {
+        border-left: none;
+        border-color: var(--main-color);
+    }
+
+    .docs-hero {
+        margin-bottom: 36px;
+        padding-bottom: 28px;
+    }
+
+    .docs-hero h1 {
+        font-size: clamp(28px, 7vw, 44px);
+    }
+
+    .docs-intro {
+        font-size: 16px;
+        line-height: 1.65;
+    }
+
+    .docs-section {
+        margin-bottom: 48px;
+        scroll-margin-top: 88px;
+    }
+
+    .docs-section h2 {
+        font-size: 22px;
+    }
+
+    .docs-card-grid,
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .docs-shortcut-table {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 760px) {
+    .docs-layout {
+        gap: 24px;
+        padding: clamp(80px, 14vw, 96px) max(16px, env(safe-area-inset-left)) 40px max(16px, env(safe-area-inset-right));
+    }
+
+    .docs-badge {
+        font-size: 10px;
+        letter-spacing: 0.22em;
+        padding: 5px 12px;
+        margin-bottom: 14px;
+    }
+
+    .docs-hero {
+        margin-bottom: 28px;
+        padding-bottom: 22px;
+    }
+
+    .docs-hero h1 {
+        font-size: clamp(26px, 8vw, 36px);
+    }
+
+    .docs-intro {
+        font-size: 15px;
+    }
+
+    .docs-alert {
+        flex-direction: column;
+        gap: 10px;
+        padding: 16px 18px;
+        font-size: 14px;
+    }
+
+    .docs-section h2 {
+        font-size: 20px;
+        gap: 8px;
+    }
+
+    .section-num {
+        font-size: 18px;
+    }
+
+    .docs-section > p,
+    .docs-info-card ul,
+    .docs-info-card ol,
+    .docs-info-card p {
+        font-size: 14px;
+    }
+
+    .docs-info-card,
+    .summary-card {
+        padding: 18px;
+    }
+
+    .docs-sub-heading {
+        font-size: 15px;
+        margin: 20px 0 10px;
+    }
+
+    .tool-item {
+        flex-direction: column;
+        gap: 12px;
+        padding: 14px;
+    }
+
+    .blend-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .docs-final-card {
+        padding: 28px 20px;
+    }
+
+    .docs-final-tagline {
+        font-size: 20px;
+        letter-spacing: 1px;
+    }
+
+    .shortcut-row {
         flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    kbd {
+        white-space: normal;
+    }
+
+    .docs-page .gemini-code-header {
+        padding: 8px 12px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .docs-page .gemini-code-content code {
+        font-size: 12px;
+    }
+
+    .docs-page .gemini-copy-btn {
+        padding: 5px 10px !important;
+        font-size: 10px !important;
+    }
+}
+
+@media (max-width: 520px) {
+    .docs-layout {
+        padding-top: clamp(76px, 18vw, 88px);
+    }
+
+    .sidebar-title {
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+
+    .sidebar-back-btn {
+        padding: 11px 16px;
+        font-size: 11px;
     }
 }
 
