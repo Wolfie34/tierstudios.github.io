@@ -923,12 +923,17 @@ document.addEventListener('DOMContentLoaded', function () {
   var ctx = canvas.getContext('2d', { alpha: false });
   if (!ctx) return;
 
+  // Faint teal tint across every page.
+  var glowInner = '150, 210, 202';
+  var glowMid = '70, 150, 143';
+  var keyTint = '170, 220, 212';
+
   var blobs = [
-    { ax: 0.52, ay: 0.18, rx: 0.52, ry: 0.38, phase: 0, speed: 0.055, alpha: 0.085 },
-    { ax: 0.82, ay: 0.48, rx: 0.42, ry: 0.46, phase: 2.4, speed: 0.042, alpha: 0.055 },
-    { ax: 0.18, ay: 0.58, rx: 0.44, ry: 0.4, phase: 4.1, speed: 0.048, alpha: 0.05 },
-    { ax: 0.48, ay: 0.82, rx: 0.48, ry: 0.34, phase: 1.2, speed: 0.038, alpha: 0.042 },
-    { ax: 0.62, ay: 0.38, rx: 0.28, ry: 0.26, phase: 3.6, speed: 0.062, alpha: 0.035 }
+    { ax: 0.52, ay: 0.18, rx: 0.52, ry: 0.38, phase: 0, speed: 0.055, alpha: 0.055 },
+    { ax: 0.82, ay: 0.48, rx: 0.42, ry: 0.46, phase: 2.4, speed: 0.042, alpha: 0.036 },
+    { ax: 0.18, ay: 0.58, rx: 0.44, ry: 0.4, phase: 4.1, speed: 0.048, alpha: 0.032 },
+    { ax: 0.48, ay: 0.82, rx: 0.48, ry: 0.34, phase: 1.2, speed: 0.038, alpha: 0.028 },
+    { ax: 0.62, ay: 0.38, rx: 0.28, ry: 0.26, phase: 3.6, speed: 0.062, alpha: 0.024 }
   ];
 
   if (narrow) blobs = blobs.slice(0, 3);
@@ -963,9 +968,9 @@ document.addEventListener('DOMContentLoaded', function () {
       var p = blobAt(blob, t, w, h);
       var radius = Math.max(p.rx, p.ry);
       var grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius);
-      grad.addColorStop(0, 'rgba(255, 255, 255, ' + blob.alpha + ')');
-      grad.addColorStop(0.42, 'rgba(210, 210, 210, ' + (blob.alpha * 0.28) + ')');
-      grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      grad.addColorStop(0, 'rgba(' + glowInner + ', ' + blob.alpha + ')');
+      grad.addColorStop(0.42, 'rgba(' + glowMid + ', ' + (blob.alpha * 0.28) + ')');
+      grad.addColorStop(1, 'rgba(' + glowInner + ', 0)');
       ctx.fillStyle = grad;
       ctx.beginPath();
       ctx.ellipse(p.x, p.y, p.rx, p.ry, 0, 0, Math.PI * 2);
@@ -974,9 +979,9 @@ document.addEventListener('DOMContentLoaded', function () {
     ctx.globalCompositeOperation = 'source-over';
 
     var keyLight = ctx.createRadialGradient(w * 0.5, h * 0.08, 0, w * 0.5, h * 0.42, w * 0.72);
-    keyLight.addColorStop(0, 'rgba(255, 255, 255, 0.055)');
-    keyLight.addColorStop(0.45, 'rgba(255, 255, 255, 0.018)');
-    keyLight.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    keyLight.addColorStop(0, 'rgba(' + keyTint + ', 0.038)');
+    keyLight.addColorStop(0.45, 'rgba(' + keyTint + ', 0.012)');
+    keyLight.addColorStop(1, 'rgba(' + keyTint + ', 0)');
     ctx.fillStyle = keyLight;
     ctx.fillRect(0, 0, w, h);
 
