@@ -712,12 +712,27 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      var parentRect = navLinks.getBoundingClientRect();
-      var rect = link.getBoundingClientRect();
+      var left = link.offsetLeft - padX;
+      var top = link.offsetTop - padY;
+      var width = link.offsetWidth + padX * 2;
+      var height = link.offsetHeight + padY * 2;
+      var maxW = navLinks.clientWidth;
+      var maxH = navLinks.clientHeight;
 
-      indicator.style.width = (rect.width + padX * 2) + 'px';
-      indicator.style.height = (rect.height + padY * 2) + 'px';
-      indicator.style.transform = 'translate3d(' + (rect.left - parentRect.left - padX) + 'px,' + (rect.top - parentRect.top - padY) + 'px,0)';
+      if (left < 0) {
+        width += left;
+        left = 0;
+      }
+      if (top < 0) {
+        height += top;
+        top = 0;
+      }
+      if (left + width > maxW) width = Math.max(0, maxW - left);
+      if (top + height > maxH) height = Math.max(0, maxH - top);
+
+      indicator.style.width = width + 'px';
+      indicator.style.height = height + 'px';
+      indicator.style.transform = 'translate3d(' + left + 'px,' + top + 'px,0)';
       indicator.style.opacity = '1';
     }
 
@@ -726,6 +741,12 @@ document.addEventListener('DOMContentLoaded', function () {
       if (active && isDesktop()) moveTo(active);
       else indicator.style.opacity = '0';
       navLinks.classList.remove('is-hovering');
+    }
+
+    function refreshIndicator() {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(showActive);
+      });
     }
 
     links.forEach(function (link) {
@@ -751,7 +772,8 @@ document.addEventListener('DOMContentLoaded', function () {
     mqDesktop.addEventListener('change', showActive);
     window.addEventListener('resize', showActive);
     window.addEventListener('load', showActive);
-    showActive();
+    window.addEventListener('tier:lang', refreshIndicator);
+    refreshIndicator();
   })();
 
   /* Hero fade on scroll */
@@ -923,10 +945,10 @@ document.addEventListener('DOMContentLoaded', function () {
   var ctx = canvas.getContext('2d', { alpha: false });
   if (!ctx) return;
 
-  // Faint teal tint across every page.
-  var glowInner = '150, 210, 202';
-  var glowMid = '70, 150, 143';
-  var keyTint = '170, 220, 212';
+  // Soft purple ambience across every page.
+  var glowInner = '180, 140, 255';
+  var glowMid = '100, 60, 180';
+  var keyTint = '190, 160, 255';
 
   var blobs = [
     { ax: 0.52, ay: 0.18, rx: 0.52, ry: 0.38, phase: 0, speed: 0.055, alpha: 0.055 },

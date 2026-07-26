@@ -43,14 +43,14 @@
       'index.cta.title': 'Join our Discord',
       'index.cta.desc': 'Game updates, asset releases, and studio news · straight from the team.',
       'index.cta.btn': 'Join Discord',
-      'index.games.eyebrow': 'Tier Game Project',
       'index.games.status': 'In Development',
+      'index.games.steamSoon': 'Coming soon to Steam',
       'index.games.releaseLabel': 'Release',
       'index.games.releaseValue': 'To be announced',
-      'index.games.promoTitle': 'Our First Game',
-      'index.games.teaserTitle': 'Awaiting Transmission',
-      'index.games.teaserDesc': 'A studio-led world in active development · more transmissions incoming.',
-      'index.games.teaserAria': 'Games · In Development',
+      'index.games.promoTitle': 'Keep Chaos',
+      'index.games.teaserTitle': 'Keep Chaos',
+      'index.games.teaserDesc': 'Our debut title · more transmissions incoming.',
+      'index.games.teaserAria': 'Keep Chaos · In Development',
       'index.games.promoDesc': 'A studio-led title in active development · built on the same pipeline we use for publishing and Unity tooling.',
       'index.featured.layerForgeRating': '5.0 · Asset Store',
       'asset.layerForge.desc': 'Layer-based image & texture editor inside Unity. Real-time brushes, effects, and one-click workflow.',
@@ -82,7 +82,7 @@
       'team.join.aria': 'Join the team',
       'team.thanks': 'We extend our thanks to RestPlay and our sister company The Steelwing Entertainment for their support.',
       'contact.title': 'Contact',
-      'contact.desc': 'If there\'s something you want to tell us, <span class="dim">we\'re here.</span>',
+      'contact.desc': 'If there\'s something you want to tell us, <span class="dim">we\'re here.</span> Ran into an issue or bug with our assets or games? Email us.',
       'contact.hqSub': 'Our Headquarters',
       'contact.location': 'Antalya / Türkiye',
       'contact.studioDesc': 'Independent studio · Unity assets, original game development, and publishing.',
@@ -176,14 +176,14 @@
       'index.cta.title': 'Discord\'a katıl',
       'index.cta.desc': 'Oyun güncellemeleri, asset duyuruları ve stüdyo haberleri · doğrudan ekipten.',
       'index.cta.btn': 'Discord\'a Katıl',
-      'index.games.eyebrow': 'Tier Game Project',
-      'index.games.status': 'Geliştirmede',
+      'index.games.status': 'Geliştiriliyor',
+      'index.games.steamSoon': 'Çok yakında Steam\'de',
       'index.games.releaseLabel': 'Çıkış',
       'index.games.releaseValue': 'Duyurulacak',
-      'index.games.promoTitle': 'İlk Oyunumuz',
-      'index.games.teaserTitle': 'Yayın Bekleniyor',
-      'index.games.teaserDesc': 'Aktif geliştirmedeki stüdyo dünyası · yeni sinyaller yolda.',
-      'index.games.teaserAria': 'Oyunlar · Geliştiriliyor',
+      'index.games.promoTitle': 'Keep Chaos',
+      'index.games.teaserTitle': 'Keep Chaos',
+      'index.games.teaserDesc': 'İlk oyunumuz · yeni sinyaller yolda.',
+      'index.games.teaserAria': 'Keep Chaos · Geliştiriliyor',
       'index.games.promoDesc': 'Aktif geliştirmede olan bir stüdyo oyunu · yayıncılık ve Unity araçları için kullandığımız aynı pipeline üzerinde inşa edildi.',
       'index.featured.layerForgeRating': '5.0 · Asset Store',
       'asset.layerForge.desc': 'Unity içinde katman tabanlı görsel ve doku editörü. Gerçek zamanlı fırçalar, efektler ve tek tıkla iş akışı.',
@@ -215,7 +215,7 @@
       'team.join.aria': 'Ekibe katılın',
       'team.thanks': 'Destekleri için RestPlay\'e ve kardeş firmamız olan The Steelwing Entertainment\'a teşekkürlerimizi sunarız.',
       'contact.title': 'İletişim',
-      'contact.desc': 'Bize söylemek istediğiniz bir şey varsa, <span class="dim">buradayız.</span>',
+      'contact.desc': 'Bize söylemek istediğiniz bir şey varsa, <span class="dim">buradayız.</span> Assetlerimizde veya yaptığımız oyunlarda bir sorun ya da bug ile karşılaşırsanız bize e-posta gönderin.',
       'contact.hqSub': 'Merkez Ofisimiz',
       'contact.location': 'Antalya / Türkiye',
       'contact.studioDesc': 'Bağımsız stüdyo · Unity varlıkları, özgün oyun geliştirme ve yayıncılık.',
@@ -392,7 +392,9 @@
       btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
     if (wrap) wrap.setAttribute('aria-label', lang === 'tr' ? 'Dil' : 'Language');
-    requestAnimationFrame(updateLangIndicator);
+    requestAnimationFrame(function () {
+      requestAnimationFrame(updateLangIndicator);
+    });
   }
 
   window.tierI18n = {
