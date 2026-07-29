@@ -525,7 +525,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function getStatusText() {
-      return window.tierI18n ? window.tierI18n.t('games.devStatus') : 'IN DEVELOPMENT';
+      return (window.tierI18n && window.tierI18n.t('games.devStatus')) || 'IN DEVELOPMENT';
     }
 
     function reset() {
@@ -539,8 +539,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function getLines() {
-      if (!window.tierI18n) return [];
-      return window.tierI18n.t('games.devLines').split('\n').filter(Boolean);
+      if (!window.tierI18n || !window.tierI18n.t) return [];
+      var raw = window.tierI18n.t('games.devLines');
+      return raw ? raw.split('\n').filter(Boolean) : [];
     }
 
     function render(lines, index, partial) {
@@ -1128,7 +1129,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function t(key, fallback) {
-      return window.tierI18n && window.tierI18n.t ? window.tierI18n.t(key) : fallback;
+      var val = window.tierI18n && window.tierI18n.t ? window.tierI18n.t(key) : null;
+      return val != null ? val : fallback;
     }
 
     function syncUi() {

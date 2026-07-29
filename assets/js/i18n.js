@@ -71,11 +71,11 @@
       'games.projectDesc': 'Our first game is in active development · a studio-led project built on the same pipeline we use for publishing and Unity tooling.',
       'games.kc.tagline': 'Draw your swords, let spells fill the air · the Middle Ages have never been this chaotic!',
       'games.kc.p1': 'Keep Chaos is a fast-paced TPS / Bullet Hell Rogue-Lite with low-poly 3D visuals · where death and pure fun walk the same line. Play solo or stand shoulder to shoulder with friends in local or online co-op (PvE) for up to 4 players, fight enemy swarms that barely fit the screen, and drown the kingdom in chaos!',
-      'games.kc.p2': 'Before the fight, find the hero that fits you. Pick one of 8 classes, each with its own skills and playstyle: hold the frontline with a massive mace, rain arrows across the screen, or set everything ablaze with magic.',
+      'games.kc.p2': 'Before the fight, find the hero that fits you. Pick a class, each with its own skills and playstyle: hold the frontline with a massive mace, rain arrows across the screen, or set everything ablaze with magic.',
       'games.kc.featuresTitle': 'Key Features',
       'games.kc.f1': '<strong>Third-Person (TPS) Bullet Hell Action:</strong> Experience classic bullet-hell through a third-person camera. Slip through hundreds of rushing enemies, dodge attacks, and survive!',
       'games.kc.f2': '<strong>Solo or 4-Player Co-op (PvE):</strong> Write your own legend alone, or build a squad with friends on the same couch (Local) or online and race from castle to castle.',
-      'games.kc.f3': '<strong>8 Classes &amp; Team Synergy:</strong> Mix different classes into unstoppable combinations. Each class skill can change the fate of the team.',
+      'games.kc.f3': '<strong>Classes &amp; Team Synergy:</strong> Mix different classes into unstoppable combinations. Each class skill can change the fate of the team.',
       'games.kc.f4': '<strong>Rogue-Lite Progression:</strong> Discover new spells, weapons, and passive upgrades every run. Even when you fall, use your loot to power up characters and start the next run ready.',
       'games.kc.f5': '<strong>Charming Low-Poly Medieval World:</strong> Enjoy fluid action in a colorful, dynamic, and merciless Middle Ages atmosphere.',
       'games.kc.cta': 'Gear up, gather your friends, and try to keep chaos under control · or surrender to it completely!',
@@ -219,11 +219,11 @@
       'games.projectDesc': 'İlk oyunumuz aktif geliştirmede · yayıncılık ve Unity araçları için kullandığımız aynı pipeline üzerinde inşa edilen bir stüdyo projesi.',
       'games.kc.tagline': 'Kılıçlar çekilsin, büyüler havada uçuşsun; Orta Çağ hiç bu kadar kaotik olmamıştı!',
       'games.kc.p1': 'Keep Chaos, ucunda ölümün ve katıksız eğlencenin olduğu hızlı tempolu, Low-Poly 3D grafiklere sahip bir TPS / Bullet Hell Rogue-Lite oyunudur. İster tek başına ister 4 kişiye kadar yerel veya çevrim içi kooperatif (PvE) modda arkadaşlarınla omuz omuza ver, ekrana sığmayan düşman sürüleriyle savaş ve krallığı baştan aşağı kaosa boğ!',
-      'games.kc.p2': 'Savaşa girmeden önce kendine uygun kahramanı bul. Her biri kendine has becerilere ve oyun tarzına sahip 8 farklı sınıftan birini seç: İster devasa bir gürzle cephenin en önünde barikat ol, ister oklarınla ekranı dolduran mermi yağmurları yağdır ya da büyülerinle ortalığı ateşe ver.',
+      'games.kc.p2': 'Savaşa girmeden önce kendine uygun kahramanı bul. Her biri kendine has becerilere ve oyun tarzına sahip farklı sınıflardan birini seç: İster devasa bir gürzle cephenin en önünde barikat ol, ister oklarınla ekranı dolduran mermi yağmurları yağdır ya da büyülerinle ortalığı ateşe ver.',
       'games.kc.featuresTitle': 'Öne Çıkan Özellikler',
       'games.kc.f1': '<strong>Omuz Üstü (TPS) Bullet Hell Aksiyonu:</strong> Klasik mermi cehennemi mantığını 3. şahıs kamera açısıyla deneyimle. Üzerine akın eden yüzlerce düşmanın arasından sıyrıl, saldırılardan kaç ve hayatta kal!',
       'games.kc.f2': '<strong>Solo veya 4 Kişilik Koop (PvE):</strong> İster tek başına destan yaz, ister arkadaşlarınla aynı koltukta (Yerel) veya internet üzerinden (Çevrim İçi) ekibini kurup kaleden kaleye koş.',
-      'games.kc.f3': '<strong>8 Farklı Sınıf &amp; Takım Sinerjisi:</strong> Farklı sınıfları bir araya getirerek durdurulamaz kombinasyonlar oluştur. Her sınıfın yetenekleri, takımın kaderini değiştirebilir.',
+      'games.kc.f3': '<strong>Farklı Sınıf &amp; Takım Sinerjisi:</strong> Farklı sınıfları bir araya getirerek durdurulamaz kombinasyonlar oluştur. Her sınıfın yetenekleri, takımın kaderini değiştirebilir.',
       'games.kc.f4': '<strong>Rogue-Lite İlerleme:</strong> Her denemede yeni büyüler, silahlar ve pasif geliştirmeler keşfet. Ölsen bile elde ettiğin ganimetlerle karakterlerini güçlendirip bir sonraki tura daha hazır başla.',
       'games.kc.f5': '<strong>Sevimli ve Canlı Low-Poly Orta Çağ Dünyası:</strong> Renkli, dinamik ve bir o kadar da acımasız bir Orta Çağ atmosferinde akıcı aksiyonun tadını çıkar.',
       'games.kc.cta': 'Silahını kuşan, arkadaşlarını topla ve kaosu kontrol altında tutmaya çalış — ya da tamamen teslim ol!',
@@ -323,7 +323,9 @@
 
   function t(lang, key) {
     var pack = T[lang] || T.en;
-    return pack[key] != null ? pack[key] : (T.en[key] || key);
+    if (pack[key] != null) return pack[key];
+    if (T.en[key] != null) return T.en[key];
+    return null;
   }
 
   function tagNavLinks() {
@@ -337,23 +339,30 @@
     tagNavLinks();
 
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
-      el.textContent = t(lang, el.dataset.i18n);
+      var val = t(lang, el.dataset.i18n);
+      if (val != null) el.textContent = val;
     });
 
     document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
-      el.innerHTML = t(lang, el.dataset.i18nHtml);
+      var val = t(lang, el.dataset.i18nHtml);
+      if (val != null) el.innerHTML = val;
     });
 
     document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
-      el.placeholder = t(lang, el.dataset.i18nPlaceholder);
+      var val = t(lang, el.dataset.i18nPlaceholder);
+      if (val != null) el.placeholder = val;
     });
 
     document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
-      el.setAttribute('aria-label', t(lang, el.dataset.i18nAria));
+      var val = t(lang, el.dataset.i18nAria);
+      if (val != null) el.setAttribute('aria-label', val);
     });
 
     var menuBtn = document.getElementById('mobileNavBtn');
-    if (menuBtn) menuBtn.setAttribute('aria-label', t(lang, 'common.menu'));
+    if (menuBtn) {
+      var menuLabel = t(lang, 'common.menu');
+      if (menuLabel != null) menuBtn.setAttribute('aria-label', menuLabel);
+    }
 
     var page = document.body && document.body.dataset.page;
     if (page) {

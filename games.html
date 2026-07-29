@@ -138,14 +138,21 @@
   <div id="outer-wrapper">
 
     <section class="games-video-banner" aria-label="Keep Chaos">
-      <video
+      <img
         class="games-video-banner-media"
+        src="assets/img/game/keep-chaos-banner.png"
+        alt=""
+        width="1600"
+        height="640"
+      />
+      <video
+        class="games-video-banner-media games-video-banner-video"
         autoplay
         muted
         loop
         playsinline
         preload="metadata"
-        poster="assets/img/game/keep-chaos-logo.png"
+        poster="assets/img/game/keep-chaos-banner.png"
       >
         <source src="assets/video/keep-chaos.mp4" type="video/mp4" />
       </video>
@@ -163,26 +170,40 @@
     <div class="subpage-content container games-content">
 
       <section class="games-pitch reveal" data-delay="40" aria-labelledby="keepChaosTitle">
-        <h2 class="display games-pitch-title" id="keepChaosTitle">Keep Chaos</h2>
+        <header class="games-pitch-intro">
+          <p class="label games-pitch-kicker" id="keepChaosTitle">Keep Chaos</p>
+          <p class="display games-pitch-lead" data-i18n="games.kc.tagline">Kılıçlar çekilsin, büyüler havada uçuşsun; Orta Çağ hiç bu kadar kaotik olmamıştı!</p>
+        </header>
 
-        <div class="games-pitch-body">
-          <p class="games-pitch-lead" data-i18n="games.kc.tagline">Kılıçlar çekilsin, büyüler havada uçuşsun; Orta Çağ hiç bu kadar kaotik olmamıştı!</p>
-
+        <div class="games-pitch-story">
           <p data-i18n="games.kc.p1">Keep Chaos, ucunda ölümün ve katıksız eğlencenin olduğu hızlı tempolu, Low-Poly 3D grafiklere sahip bir TPS / Bullet Hell Rogue-Lite oyunudur. İster tek başına ister 4 kişiye kadar yerel veya çevrim içi kooperatif (PvE) modda arkadaşlarınla omuz omuza ver, ekrana sığmayan düşman sürüleriyle savaş ve krallığı baştan aşağı kaosa boğ!</p>
-
-          <p data-i18n="games.kc.p2">Savaşa girmeden önce kendine uygun kahramanı bul. Her biri kendine has becerilere ve oyun tarzına sahip 8 farklı sınıftan birini seç: İster devasa bir gürzle cephenin en önünde barikat ol, ister oklarınla ekranı dolduran mermi yağmurları yağdır ya da büyülerinle ortalığı ateşe ver.</p>
-
-          <h3 class="games-pitch-features-title" data-i18n="games.kc.featuresTitle">Öne Çıkan Özellikler</h3>
-          <ul class="games-pitch-features">
-            <li data-i18n-html="games.kc.f1"><strong>Omuz Üstü (TPS) Bullet Hell Aksiyonu:</strong> Klasik mermi cehennemi mantığını 3. şahıs kamera açısıyla deneyimle. Üzerine akın eden yüzlerce düşmanın arasından sıyrıl, saldırılardan kaç ve hayatta kal!</li>
-            <li data-i18n-html="games.kc.f2"><strong>Solo veya 4 Kişilik Koop (PvE):</strong> İster tek başına destan yaz, ister arkadaşlarınla aynı koltukta (Yerel) veya internet üzerinden (Çevrim İçi) ekibini kurup kaleden kaleye koş.</li>
-            <li data-i18n-html="games.kc.f3"><strong>8 Farklı Sınıf &amp; Takım Sinerjisi:</strong> Farklı sınıfları bir araya getirerek durdurulamaz kombinasyonlar oluştur. Her sınıfın yetenekleri, takımın kaderini değiştirebilir.</li>
-            <li data-i18n-html="games.kc.f4"><strong>Rogue-Lite İlerleme:</strong> Her denemede yeni büyüler, silahlar ve pasif geliştirmeler keşfet. Ölsen bile elde ettiğin ganimetlerle karakterlerini güçlendirip bir sonraki tura daha hazır başla.</li>
-            <li data-i18n-html="games.kc.f5"><strong>Sevimli ve Canlı Low-Poly Orta Çağ Dünyası:</strong> Renkli, dinamik ve bir o kadar da acımasız bir Orta Çağ atmosferinde akıcı aksiyonun tadını çıkar.</li>
-          </ul>
-
-          <p class="games-pitch-cta" data-i18n="games.kc.cta">Silahını kuşan, arkadaşlarını topla ve kaosu kontrol altında tutmaya çalış — ya da tamamen teslim ol!</p>
+          <p data-i18n="games.kc.p2">Savaşa girmeden önce kendine uygun kahramanı bul. Her biri kendine has becerilere ve oyun tarzına sahip farklı sınıflardan birini seç: İster devasa bir gürzle cephenin en önünde barikat ol, ister oklarınla ekranı dolduran mermi yağmurları yağdır ya da büyülerinle ortalığı ateşe ver.</p>
         </div>
+
+        <div class="games-pitch-features-block">
+          <div class="games-pitch-features-head">
+            <span class="label games-pitch-features-kicker" data-i18n="games.kc.featuresTitle">Öne Çıkan Özellikler</span>
+          </div>
+          <ul class="games-pitch-features">
+            <li class="games-pitch-feature">
+              <div class="games-pitch-feature-copy" data-i18n-html="games.kc.f1"><strong>Omuz Üstü (TPS) Bullet Hell Aksiyonu:</strong> Klasik mermi cehennemi mantığını 3. şahıs kamera açısıyla deneyimle. Üzerine akın eden yüzlerce düşmanın arasından sıyrıl, saldırılardan kaç ve hayatta kal!</div>
+            </li>
+            <li class="games-pitch-feature">
+              <div class="games-pitch-feature-copy" data-i18n-html="games.kc.f2"><strong>Solo veya 4 Kişilik Koop (PvE):</strong> İster tek başına destan yaz, ister arkadaşlarınla aynı koltukta (Yerel) veya internet üzerinden (Çevrim İçi) ekibini kurup kaleden kaleye koş.</div>
+            </li>
+            <li class="games-pitch-feature">
+              <div class="games-pitch-feature-copy" data-i18n-html="games.kc.f3"><strong>Farklı Sınıf &amp; Takım Sinerjisi:</strong> Farklı sınıfları bir araya getirerek durdurulamaz kombinasyonlar oluştur. Her sınıfın yetenekleri, takımın kaderini değiştirebilir.</div>
+            </li>
+            <li class="games-pitch-feature">
+              <div class="games-pitch-feature-copy" data-i18n-html="games.kc.f4"><strong>Rogue-Lite İlerleme:</strong> Her denemede yeni büyüler, silahlar ve pasif geliştirmeler keşfet. Ölsen bile elde ettiğin ganimetlerle karakterlerini güçlendirip bir sonraki tura daha hazır başla.</div>
+            </li>
+            <li class="games-pitch-feature">
+              <div class="games-pitch-feature-copy" data-i18n-html="games.kc.f5"><strong>Sevimli ve Canlı Low-Poly Orta Çağ Dünyası:</strong> Renkli, dinamik ve bir o kadar da acımasız bir Orta Çağ atmosferinde akıcı aksiyonun tadını çıkar.</div>
+            </li>
+          </ul>
+        </div>
+
+        <p class="display games-pitch-cta" data-i18n="games.kc.cta">Silahını kuşan, arkadaşlarını topla ve kaosu kontrol altında tutmaya çalış — ya da tamamen teslim ol!</p>
       </section>
 
     </div>
@@ -244,9 +265,9 @@
     </div>
   </div>
 
-  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/i18n.js?v=20260730b"></script>
 
-  <script src="assets/js/script.js"></script>
+  <script src="assets/js/script.js?v=20260730b"></script>
 
 </body>
 
