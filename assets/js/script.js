@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (assetPages.indexOf(path) !== -1) href = 'assets.html';
     if (!href) return;
     document.querySelectorAll('#nav .nav-link').forEach(function (a) {
-      a.classList.toggle('active', a.getAttribute('href') === href);
+      a.classList.toggle('active', a.getAttribute('href') === href || a.getAttribute('href') === '/' + href);
     });
   })();
 
@@ -712,10 +712,12 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      var left = link.offsetLeft - padX;
-      var top = link.offsetTop - padY;
-      var width = link.offsetWidth + padX * 2;
-      var height = link.offsetHeight + padY * 2;
+      var parentRect = navLinks.getBoundingClientRect();
+      var rect = link.getBoundingClientRect();
+      var left = rect.left - parentRect.left - padX;
+      var top = rect.top - parentRect.top - padY;
+      var width = rect.width + padX * 2;
+      var height = rect.height + padY * 2;
       var maxW = navLinks.clientWidth;
       var maxH = navLinks.clientHeight;
 
@@ -1020,4 +1022,196 @@ document.addEventListener('DOMContentLoaded', function () {
   resize();
   window.addEventListener('resize', resize, { passive: true });
   requestAnimationFrame(paint);
+})();
+
+/* Games page gallery + ambient audio */
+(function gamesPageMedia() {
+  if (!document.body || !document.body.classList.contains('games-page')) return;
+
+  (function gallery() {
+    var root = document.getElementById('gamesGallery');
+    var main = document.getElementById('gamesGalleryMain');
+    var thumbsWrap = root && root.querySelector('.games-gallery-thumbs');
+    if (!root || !main || !thumbsWrap) return;
+
+    var candidates = [
+      { src: 'assets/img/game/keep-chaos-logo.png', alt: 'Keep Chaos', label: 'Keep Chaos logo' },
+      { src: 'assets/img/game/game-visual.svg', alt: 'Keep Chaos visual', label: 'Keep Chaos visual' },
+      { src: 'assets/img/game/keep-chaos-1.png', alt: 'Keep Chaos', label: 'Keep Chaos 1' },
+      { src: 'assets/img/game/keep-chaos-2.png', alt: 'Keep Chaos', label: 'Keep Chaos 2' },
+      { src: 'assets/img/game/keep-chaos-3.png', alt: 'Keep Chaos', label: 'Keep Chaos 3' },
+      { src: 'assets/img/game/keep-chaos-1.jpg', alt: 'Keep Chaos', label: 'Keep Chaos 1' },
+      { src: 'assets/img/game/keep-chaos-2.jpg', alt: 'Keep Chaos', label: 'Keep Chaos 2' },
+      { src: 'assets/img/game/keep-chaos-3.jpg', alt: 'Keep Chaos', label: 'Keep Chaos 3' }
+    ];
+
+    function probe(item) {
+      return new Promise(function (resolve) {
+        var img = new Image();
+        img.onload = function () { resolve(item); };
+        img.onerror = function () { resolve(null); };
+        img.src = item.src;
+      });
+    }
+
+    function setActive(btn) {
+      if (!btn || !btn.dataset.src) return;
+      var stage = root.querySelector('.games-gallery-stage');
+      thumbsWrap.querySelectorAll('.games-gallery-thumb').forEach(function (el) {
+        var on = el === btn;
+        el.classList.toggle('is-active', on);
+        el.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      if (stage) stage.classList.add('is-switching');
+      window.setTimeout(function () {
+        main.src = btn.dataset.src;
+        main.alt = btn.dataset.alt || 'Keep Chaos';
+        if (stage) stage.classList.remove('is-switching');
+      }, 160);
+    }
+
+    function render(items) {
+      if (!items.length) return;
+      thumbsWrap.innerHTML = '';
+      items.forEach(function (item, index) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'games-gallery-thumb' + (index === 0 ? ' is-active' : '');
+        btn.setAttribute('role', 'listitem');
+        btn.setAttribute('data-cursor', 'hover');
+        btn.dataset.src = item.src;
+        btn.dataset.alt = item.alt;
+        btn.setAttribute('aria-label', item.label);
+        btn.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
+        btn.innerHTML = '<img src="' + item.src + '" alt="" loading="lazy" />';
+        btn.addEventListener('click', function () { setActive(btn); });
+        thumbsWrap.appendChild(btn);
+      });
+      main.src = items[0].src;
+      main.alt = items[0].alt;
+    }
+
+    Promise.all(candidates.map(probe)).then(function (results) {
+      var seen = {};
+      var items = results.filter(function (item) {
+        if (!item || seen[item.src]) return false;
+        seen[item.src] = true;
+        return true;
+      });
+      render(items);
+    });
+  })();
+
+  (function audioDock() {
+    var wrap = document.getElementById('gamesAudio');
+    var audio = document.getElementById('gamesTheme');
+    var muteBtn = document.getElementById('gamesAudioMute');
+    var volumeInput = document.getElementById('gamesAudioVolume');
+    if (!wrap || !audio || !muteBtn || !volumeInput) return;
+
+    var storageKey = 'tier-games-audio';
+    var muted = true;
+    var volume = 0.4;
+    var ready = false;
+    var icon = muteBtn.querySelector('i');
+
+    try {
+      var saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+      if (typeof saved.volume === 'number') volume = Math.min(1, Math.max(0, saved.volume));
+      if (typeof saved.muted === 'boolean') muted = saved.muted;
+    } catch (err) {}
+
+    function save() {
+      try {
+        localStorage.setItem(storageKey, JSON.stringify({ volume: volume, muted: muted }));
+      } catch (err) {}
+    }
+
+    function t(key, fallback) {
+      return window.tierI18n && window.tierI18n.t ? window.tierI18n.t(key) : fallback;
+    }
+
+    function syncUi() {
+      volumeInput.value = String(Math.round(volume * 100));
+      muteBtn.setAttribute('aria-pressed', muted || volume === 0 ? 'true' : 'false');
+      muteBtn.setAttribute(
+        'aria-label',
+        muted || volume === 0 ? t('games.audioUnmute', 'Unmute music') : t('games.audioMute', 'Mute music')
+      );
+      if (icon) {
+        icon.className = muted || volume === 0 ? 'fas fa-volume-xmark' : (volume < 0.35 ? 'fas fa-volume-low' : 'fas fa-volume-high');
+      }
+    }
+
+    function applyVolume() {
+      audio.volume = muted ? 0 : volume;
+    }
+
+    function playSafe() {
+      if (!ready || muted || volume === 0) return;
+      var playPromise = audio.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(function () {});
+      }
+    }
+
+    function reveal() {
+      wrap.hidden = false;
+    }
+
+    function markReady() {
+      ready = true;
+      reveal();
+      playSafe();
+    }
+
+    audio.loop = true;
+    applyVolume();
+    syncUi();
+    reveal();
+
+    audio.addEventListener('loadeddata', markReady);
+    audio.addEventListener('canplay', markReady);
+
+    audio.addEventListener('error', function () {
+      ready = false;
+      reveal();
+    });
+
+    if (audio.readyState >= 2) markReady();
+    else {
+      try { audio.load(); } catch (err) {}
+    }
+
+    muteBtn.addEventListener('click', function () {
+      muted = !(muted || volume === 0);
+      if (!muted && volume === 0) volume = 0.4;
+      applyVolume();
+      syncUi();
+      save();
+      if (!muted) {
+        // Browser autoplay policy: start only after user gesture
+        ready = true;
+        playSafe();
+      } else {
+        audio.pause();
+      }
+    });
+
+    volumeInput.addEventListener('input', function () {
+      volume = Math.min(1, Math.max(0, Number(volumeInput.value) / 100));
+      muted = volume === 0;
+      applyVolume();
+      syncUi();
+      save();
+      if (!muted) {
+        ready = true;
+        playSafe();
+      } else {
+        audio.pause();
+      }
+    });
+
+    window.addEventListener('tier:lang', syncUi);
+  })();
 })();

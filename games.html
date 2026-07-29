@@ -137,29 +137,53 @@
 
   <div id="outer-wrapper">
 
-    <header class="subpage-hero container">
-
-      <div class="section-head-title reveal" data-delay="100">
-        <span class="section-head-ghost display" aria-hidden="true" data-i18n="games.title">Games</span>
-        <h1 class="display" data-i18n="games.title">Games</h1>
+    <section class="games-video-banner" aria-label="Keep Chaos">
+      <video
+        class="games-video-banner-media"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="assets/img/game/keep-chaos-logo.png"
+      >
+        <source src="assets/video/keep-chaos.mp4" type="video/mp4" />
+      </video>
+      <div class="games-video-banner-shade" aria-hidden="true"></div>
+      <div class="games-video-banner-copy">
+        <span class="label games-video-banner-kicker" data-i18n="games.flagship">Flagship Title</span>
+        <h1 class="display games-video-banner-title">Keep Chaos</h1>
+        <p class="games-video-banner-status label">
+          <span class="game-teaser-rec" aria-hidden="true"></span>
+          <span data-i18n="index.games.status">In Development</span>
+        </p>
       </div>
+    </section>
 
-      <p class="sub-desc reveal" data-delay="200" data-i18n="games.desc">An independent game studio · we develop original titles, handle publishing, and build Unity tools alongside our games.</p>
+    <div class="subpage-content container games-content">
 
-    </header>
+      <section class="games-pitch reveal" data-delay="40" aria-labelledby="keepChaosTitle">
+        <h2 class="display games-pitch-title" id="keepChaosTitle">Keep Chaos</h2>
 
+        <div class="games-pitch-body">
+          <p class="games-pitch-lead" data-i18n="games.kc.tagline">Kılıçlar çekilsin, büyüler havada uçuşsun; Orta Çağ hiç bu kadar kaotik olmamıştı!</p>
 
+          <p data-i18n="games.kc.p1">Keep Chaos, ucunda ölümün ve katıksız eğlencenin olduğu hızlı tempolu, Low-Poly 3D grafiklere sahip bir TPS / Bullet Hell Rogue-Lite oyunudur. İster tek başına ister 4 kişiye kadar yerel veya çevrim içi kooperatif (PvE) modda arkadaşlarınla omuz omuza ver, ekrana sığmayan düşman sürüleriyle savaş ve krallığı baştan aşağı kaosa boğ!</p>
 
-    <div class="subpage-content container">
+          <p data-i18n="games.kc.p2">Savaşa girmeden önce kendine uygun kahramanı bul. Her biri kendine has becerilere ve oyun tarzına sahip 8 farklı sınıftan birini seç: İster devasa bir gürzle cephenin en önünde barikat ol, ister oklarınla ekranı dolduran mermi yağmurları yağdır ya da büyülerinle ortalığı ateşe ver.</p>
 
-      <div class="game-dev-panel reveal" id="gameDevPanel" data-delay="60" data-i18n-aria="games.panelAria">
-        <div class="game-dev-terminal">
-          <pre class="game-dev-code"><code></code></pre>
-          <div class="game-dev-finale">
-            <h2 class="display game-dev-status" aria-live="polite"></h2>
-          </div>
+          <h3 class="games-pitch-features-title" data-i18n="games.kc.featuresTitle">Öne Çıkan Özellikler</h3>
+          <ul class="games-pitch-features">
+            <li data-i18n-html="games.kc.f1"><strong>Omuz Üstü (TPS) Bullet Hell Aksiyonu:</strong> Klasik mermi cehennemi mantığını 3. şahıs kamera açısıyla deneyimle. Üzerine akın eden yüzlerce düşmanın arasından sıyrıl, saldırılardan kaç ve hayatta kal!</li>
+            <li data-i18n-html="games.kc.f2"><strong>Solo veya 4 Kişilik Koop (PvE):</strong> İster tek başına destan yaz, ister arkadaşlarınla aynı koltukta (Yerel) veya internet üzerinden (Çevrim İçi) ekibini kurup kaleden kaleye koş.</li>
+            <li data-i18n-html="games.kc.f3"><strong>8 Farklı Sınıf &amp; Takım Sinerjisi:</strong> Farklı sınıfları bir araya getirerek durdurulamaz kombinasyonlar oluştur. Her sınıfın yetenekleri, takımın kaderini değiştirebilir.</li>
+            <li data-i18n-html="games.kc.f4"><strong>Rogue-Lite İlerleme:</strong> Her denemede yeni büyüler, silahlar ve pasif geliştirmeler keşfet. Ölsen bile elde ettiğin ganimetlerle karakterlerini güçlendirip bir sonraki tura daha hazır başla.</li>
+            <li data-i18n-html="games.kc.f5"><strong>Sevimli ve Canlı Low-Poly Orta Çağ Dünyası:</strong> Renkli, dinamik ve bir o kadar da acımasız bir Orta Çağ atmosferinde akıcı aksiyonun tadını çıkar.</li>
+          </ul>
+
+          <p class="games-pitch-cta" data-i18n="games.kc.cta">Silahını kuşan, arkadaşlarını topla ve kaosu kontrol altında tutmaya çalış — ya da tamamen teslim ol!</p>
         </div>
-      </div>
+      </section>
 
     </div>
 
@@ -207,7 +231,18 @@
 
   </div>
 
-
+  <div class="games-audio" id="gamesAudio" hidden>
+    <audio id="gamesTheme" src="assets/audio/KeepChaos_MainTheme_1.wav" loop preload="metadata"></audio>
+    <div class="games-audio-panel" role="group" data-i18n-aria="games.audioAria">
+      <button type="button" class="games-audio-mute" id="gamesAudioMute" data-cursor="hover" aria-pressed="true" data-i18n-aria="games.audioUnmute">
+        <i class="fas fa-volume-xmark" aria-hidden="true"></i>
+      </button>
+      <label class="games-audio-volume">
+        <span class="sr-only" data-i18n="games.audioVolume">Volume</span>
+        <input type="range" id="gamesAudioVolume" min="0" max="100" value="40" step="1" />
+      </label>
+    </div>
+  </div>
 
   <script src="assets/js/i18n.js"></script>
 
