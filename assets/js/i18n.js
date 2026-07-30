@@ -148,7 +148,7 @@
       'contact.linkedinDesc': 'Connect with us',
       'contact.error': 'An error occurred. Please try again later.',
       'contact.errorSend': 'An error occurred while sending the message.',
-      'title.index': 'Tier Studios · Independent Worlds & Unity Tools',
+      'title.index': 'Tier Studios · Independent Game Development Studio',
       'title.assets': 'Assets · Tier Studios',
       'title.games': 'Keep Chaos · Games · Tier Studios',
       'title.team': 'Team · Tier Studios',
@@ -321,7 +321,7 @@
       'contact.linkedinDesc': 'Bizimle bağlantı kurun',
       'contact.error': 'Bir hata oluştu. Lütfen daha sonra tekrar deneyin.',
       'contact.errorSend': 'Mesaj gönderilirken bir hata oluştu.',
-      'title.index': 'Tier Studios · Bağımsız Dünyalar ve Unity Araçları',
+      'title.index': 'Tier Studios · Bağımsız Oyun Geliştirme Stüdyosu',
       'title.assets': 'Varlıklar · Tier Studios',
       'title.games': 'Keep Chaos · Oyunlar · Tier Studios',
       'title.team': 'Ekip · Tier Studios',
@@ -351,18 +351,14 @@
   };
 
   var NAV_MAP = {
-    '/tools/': 'nav.assets',
     '/tools': 'nav.assets',
-    '/games/': 'nav.games',
     '/games': 'nav.games',
-    '/team/': 'nav.team',
     '/team': 'nav.team',
-    '/contact/': 'nav.contact',
     '/contact': 'nav.contact',
-    'tools': 'nav.assets',
-    'games': 'nav.games',
-    'team': 'nav.team',
-    'contact': 'nav.contact'
+    tools: 'nav.assets',
+    games: 'nav.games',
+    team: 'nav.team',
+    contact: 'nav.contact'
   };
 
   function getLang() {

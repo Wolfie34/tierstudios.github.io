@@ -67,25 +67,25 @@ document.addEventListener('DOMContentLoaded', function () {
           '<span class="label footer-shortcuts-label" data-i18n="footer.explore">Explore</span>' +
           '<ul class="footer-shortcuts-list">' +
             '<li><a href="/" data-cursor="hover" data-i18n="footer.home">Home</a></li>' +
-            '<li><a href="/tools/" data-cursor="hover" data-i18n="nav.assets">Assets</a></li>' +
-            '<li><a href="/games/" data-cursor="hover" data-i18n="nav.games">Games</a></li>' +
-            '<li><a href="/team/" data-cursor="hover" data-i18n="nav.team">Team</a></li>' +
-            '<li><a href="/contact/" data-cursor="hover" data-i18n="nav.contact">Contact</a></li>' +
+            '<li><a href="/tools" data-cursor="hover" data-i18n="nav.assets">Assets</a></li>' +
+            '<li><a href="/games" data-cursor="hover" data-i18n="nav.games">Games</a></li>' +
+            '<li><a href="/team" data-cursor="hover" data-i18n="nav.team">Team</a></li>' +
+            '<li><a href="/contact" data-cursor="hover" data-i18n="nav.contact">Contact</a></li>' +
           '</ul>' +
         '</div>' +
         '<div class="footer-shortcuts-group">' +
           '<span class="label footer-shortcuts-label" data-i18n="footer.tools">Unity Tools</span>' +
           '<ul class="footer-shortcuts-list">' +
-            '<li><a href="/layer-forge-studio/" data-cursor="hover">Layer Forge Studio</a></li>' +
-            '<li><a href="/goat-icon-studio/" data-cursor="hover">Goat Icon Studio</a></li>' +
-            '<li><a href="/ui-particle-system/" data-cursor="hover">UI Particle System</a></li>' +
+            '<li><a href="/layer-forge-studio" data-cursor="hover">Layer Forge Studio</a></li>' +
+            '<li><a href="/goat-icon-studio" data-cursor="hover">Goat Icon Studio</a></li>' +
+            '<li><a href="/ui-particle-system" data-cursor="hover">UI Particle System</a></li>' +
           '</ul>' +
         '</div>' +
         '<div class="footer-shortcuts-group">' +
           '<span class="label footer-shortcuts-label" data-i18n="footer.resources">Resources</span>' +
           '<ul class="footer-shortcuts-list">' +
-            '<li><a href="/layer-forge-docs/" data-cursor="hover" data-i18n="footer.layerForgeDocs">Layer Forge Docs</a></li>' +
-            '<li><a href="/ui-particle-docs/" data-cursor="hover" data-i18n="footer.uiParticleDocs">UI Particle Docs</a></li>' +
+            '<li><a href="/layer-forge-docs" data-cursor="hover" data-i18n="footer.layerForgeDocs">Layer Forge Docs</a></li>' +
+            '<li><a href="/ui-particle-docs" data-cursor="hover" data-i18n="footer.uiParticleDocs">UI Particle Docs</a></li>' +
             '<li><a href="https://assetstore.unity.com/publishers/124104" target="_blank" rel="noopener" data-cursor="hover" data-i18n="footer.assetStore">Unity Asset Store</a></li>' +
             '<li><a href="https://discord.gg/ESvwrchUwA" target="_blank" rel="noopener" data-cursor="hover" data-i18n="footer.discord">Discord Community</a></li>' +
           '</ul>' +
@@ -104,22 +104,33 @@ document.addEventListener('DOMContentLoaded', function () {
     var seg = raw.split('/').filter(Boolean);
     var key = seg.length ? seg[0] : '';
     var hrefMap = {
-      tools: '/tools/',
-      games: '/games/',
-      team: '/team/',
-      contact: '/contact/',
-      'layer-forge-studio': '/tools/',
-      'goat-icon-studio': '/tools/',
-      'ui-particle-system': '/tools/',
-      'layer-forge-docs': '/tools/',
-      'ui-particle-docs': '/tools/'
+      tools: '/tools',
+      games: '/games',
+      team: '/team',
+      contact: '/contact',
+      'layer-forge-studio': '/tools',
+      'goat-icon-studio': '/tools',
+      'ui-particle-system': '/tools',
+      'layer-forge-docs': '/tools',
+      'ui-particle-docs': '/tools'
     };
     var href = hrefMap[key];
     if (!href) return;
     document.querySelectorAll('#nav .nav-link').forEach(function (a) {
-      var link = a.getAttribute('href') || '';
-      a.classList.toggle('active', link === href || link.replace(/\/+$/, '') === href.replace(/\/+$/, ''));
+      var link = (a.getAttribute('href') || '').replace(/\/+$/, '');
+      a.classList.toggle('active', link === href);
     });
+  })();
+
+  /* Adres çubuğunda /contact/ yerine /contact göster (GitHub Pages klasör yapısı) */
+  (function stripTrailingSlash() {
+    var path = window.location.pathname || '';
+    if (path.length > 1 && path.endsWith('/')) {
+      var next = path.replace(/\/+$/, '') + window.location.search + window.location.hash;
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', next);
+      }
+    }
   })();
 
   (function tierMarkBackground() {
@@ -257,11 +268,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     Promise.all([
-      fetch('assets/img/logo.svg').then(function (res) {
+      fetch('/assets/img/logo.svg').then(function (res) {
         if (!res.ok) throw new Error('logo.svg not found');
         return res.text();
       }),
-      fetch('assets/img/logo-outline.svg').then(function (res) {
+      fetch('/assets/img/logo-outline.svg').then(function (res) {
         if (!res.ok) throw new Error('logo-outline.svg not found');
         return res.text();
       })
@@ -309,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return { html: svg.outerHTML, paths: paths };
     }
 
-    fetch('assets/img/world-map.svg')
+    fetch('/assets/img/world-map.svg')
       .then(function (res) {
         if (!res.ok) throw new Error('world-map.svg not found');
         return res.text();
