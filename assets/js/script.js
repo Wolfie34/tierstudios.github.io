@@ -1036,7 +1036,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!root || !main || !thumbsWrap) return;
 
     var candidates = [
-      { src: 'assets/img/game/keep-chaos-logo.png', alt: 'Keep Chaos', label: 'Keep Chaos logo' },
+      { src: 'assets/img/game/keep-chaos-logo.svg', alt: 'Keep Chaos', label: 'Keep Chaos logo' },
       { src: 'assets/img/game/game-visual.svg', alt: 'Keep Chaos visual', label: 'Keep Chaos visual' },
       { src: 'assets/img/game/keep-chaos-1.png', alt: 'Keep Chaos', label: 'Keep Chaos 1' },
       { src: 'assets/img/game/keep-chaos-2.png', alt: 'Keep Chaos', label: 'Keep Chaos 2' },
@@ -1110,21 +1110,20 @@ document.addEventListener('DOMContentLoaded', function () {
     var volumeInput = document.getElementById('gamesAudioVolume');
     if (!wrap || !audio || !muteBtn || !volumeInput) return;
 
-    var storageKey = 'tier-games-audio';
+    var storageKey = 'tier-games-audio-volume';
     var muted = true;
     var volume = 0.4;
     var ready = false;
     var icon = muteBtn.querySelector('i');
 
     try {
-      var saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
-      if (typeof saved.volume === 'number') volume = Math.min(1, Math.max(0, saved.volume));
-      if (typeof saved.muted === 'boolean') muted = saved.muted;
+      var saved = Number(localStorage.getItem(storageKey));
+      if (!isNaN(saved) && saved > 0 && saved <= 1) volume = saved;
     } catch (err) {}
 
-    function save() {
+    function saveVolume() {
       try {
-        localStorage.setItem(storageKey, JSON.stringify({ volume: volume, muted: muted }));
+        localStorage.setItem(storageKey, String(volume));
       } catch (err) {}
     }
 
@@ -1157,6 +1156,11 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
+    function stopAudio() {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+
     function reveal() {
       wrap.hidden = false;
     }
@@ -1164,12 +1168,21 @@ document.addEventListener('DOMContentLoaded', function () {
     function markReady() {
       ready = true;
       reveal();
-      playSafe();
+    }
+
+    /* Her ziyarette kapalı başla — mute tercihi saklanmaz, sadece volume hatırlanır */
+    function resetMutedEntry() {
+      muted = true;
+      audio.muted = true;
+      applyVolume();
+      stopAudio();
+      syncUi();
     }
 
     audio.loop = true;
-    applyVolume();
-    syncUi();
+    audio.autoplay = false;
+    audio.muted = true;
+    resetMutedEntry();
     reveal();
 
     audio.addEventListener('loadeddata', markReady);
@@ -1185,32 +1198,38 @@ document.addEventListener('DOMContentLoaded', function () {
       try { audio.load(); } catch (err) {}
     }
 
+    /* Geri/ileri cache ile dönüşte de kapalı ikon + sessiz kalsın */
+    window.addEventListener('pageshow', function () {
+      resetMutedEntry();
+    });
+
     muteBtn.addEventListener('click', function () {
       muted = !(muted || volume === 0);
       if (!muted && volume === 0) volume = 0.4;
+      audio.muted = muted;
       applyVolume();
       syncUi();
-      save();
+      saveVolume();
       if (!muted) {
-        // Browser autoplay policy: start only after user gesture
         ready = true;
         playSafe();
       } else {
-        audio.pause();
+        stopAudio();
       }
     });
 
     volumeInput.addEventListener('input', function () {
       volume = Math.min(1, Math.max(0, Number(volumeInput.value) / 100));
       muted = volume === 0;
+      audio.muted = muted;
       applyVolume();
       syncUi();
-      save();
+      if (volume > 0) saveVolume();
       if (!muted) {
         ready = true;
         playSafe();
       } else {
-        audio.pause();
+        stopAudio();
       }
     });
 
