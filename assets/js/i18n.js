@@ -351,10 +351,18 @@
   };
 
   var NAV_MAP = {
-    'assets.html': 'nav.assets',
-    'games.html': 'nav.games',
-    'team.html': 'nav.team',
-    'contact.html': 'nav.contact'
+    '/tools/': 'nav.assets',
+    '/tools': 'nav.assets',
+    '/games/': 'nav.games',
+    '/games': 'nav.games',
+    '/team/': 'nav.team',
+    '/team': 'nav.team',
+    '/contact/': 'nav.contact',
+    '/contact': 'nav.contact',
+    'tools': 'nav.assets',
+    'games': 'nav.games',
+    'team': 'nav.team',
+    'contact': 'nav.contact'
   };
 
   function getLang() {

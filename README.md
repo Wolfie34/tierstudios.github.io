@@ -7,10 +7,10 @@ We develop original games (flagship: **Keep Chaos**), publish titles, and ship U
 ## Links
 
 - Website: https://tierstudios.com/
-- Games / Keep Chaos: https://tierstudios.com/games.html
-- Assets: https://tierstudios.com/assets.html
-- Team: https://tierstudios.com/team.html
-- Contact: https://tierstudios.com/contact.html
+- Games / Keep Chaos: https://tierstudios.com/games/
+- Assets: https://tierstudios.com/tools/
+- Team: https://tierstudios.com/team/
+- Contact: https://tierstudios.com/contact/
 - AI brief (`llms.txt`): https://tierstudios.com/llms.txt
 - Discord: https://discord.gg/ESvwrchUwA
 

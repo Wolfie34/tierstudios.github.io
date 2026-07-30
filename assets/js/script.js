@@ -66,26 +66,26 @@ document.addEventListener('DOMContentLoaded', function () {
         '<div class="footer-shortcuts-group">' +
           '<span class="label footer-shortcuts-label" data-i18n="footer.explore">Explore</span>' +
           '<ul class="footer-shortcuts-list">' +
-            '<li><a href="index.html" data-cursor="hover" data-i18n="footer.home">Home</a></li>' +
-            '<li><a href="assets.html" data-cursor="hover" data-i18n="nav.assets">Assets</a></li>' +
-            '<li><a href="games.html" data-cursor="hover" data-i18n="nav.games">Games</a></li>' +
-            '<li><a href="team.html" data-cursor="hover" data-i18n="nav.team">Team</a></li>' +
-            '<li><a href="contact.html" data-cursor="hover" data-i18n="nav.contact">Contact</a></li>' +
+            '<li><a href="/" data-cursor="hover" data-i18n="footer.home">Home</a></li>' +
+            '<li><a href="/tools/" data-cursor="hover" data-i18n="nav.assets">Assets</a></li>' +
+            '<li><a href="/games/" data-cursor="hover" data-i18n="nav.games">Games</a></li>' +
+            '<li><a href="/team/" data-cursor="hover" data-i18n="nav.team">Team</a></li>' +
+            '<li><a href="/contact/" data-cursor="hover" data-i18n="nav.contact">Contact</a></li>' +
           '</ul>' +
         '</div>' +
         '<div class="footer-shortcuts-group">' +
           '<span class="label footer-shortcuts-label" data-i18n="footer.tools">Unity Tools</span>' +
           '<ul class="footer-shortcuts-list">' +
-            '<li><a href="layer-forge-studio.html" data-cursor="hover">Layer Forge Studio</a></li>' +
-            '<li><a href="goat-icon-studio.html" data-cursor="hover">Goat Icon Studio</a></li>' +
-            '<li><a href="ui-particle-system.html" data-cursor="hover">UI Particle System</a></li>' +
+            '<li><a href="/layer-forge-studio/" data-cursor="hover">Layer Forge Studio</a></li>' +
+            '<li><a href="/goat-icon-studio/" data-cursor="hover">Goat Icon Studio</a></li>' +
+            '<li><a href="/ui-particle-system/" data-cursor="hover">UI Particle System</a></li>' +
           '</ul>' +
         '</div>' +
         '<div class="footer-shortcuts-group">' +
           '<span class="label footer-shortcuts-label" data-i18n="footer.resources">Resources</span>' +
           '<ul class="footer-shortcuts-list">' +
-            '<li><a href="layer-forge-docs.html" data-cursor="hover" data-i18n="footer.layerForgeDocs">Layer Forge Docs</a></li>' +
-            '<li><a href="ui-particle-docs.html" data-cursor="hover" data-i18n="footer.uiParticleDocs">UI Particle Docs</a></li>' +
+            '<li><a href="/layer-forge-docs/" data-cursor="hover" data-i18n="footer.layerForgeDocs">Layer Forge Docs</a></li>' +
+            '<li><a href="/ui-particle-docs/" data-cursor="hover" data-i18n="footer.uiParticleDocs">UI Particle Docs</a></li>' +
             '<li><a href="https://assetstore.unity.com/publishers/124104" target="_blank" rel="noopener" data-cursor="hover" data-i18n="footer.assetStore">Unity Asset Store</a></li>' +
             '<li><a href="https://discord.gg/ESvwrchUwA" target="_blank" rel="noopener" data-cursor="hover" data-i18n="footer.discord">Discord Community</a></li>' +
           '</ul>' +
@@ -100,25 +100,25 @@ document.addEventListener('DOMContentLoaded', function () {
   })();
 
   (function navActiveRoute() {
-    var path = window.location.pathname.split('/').pop();
-    if (!path || path === '') path = 'index.html';
-    var assetPages = [
-      'goat-icon-studio.html',
-      'layer-forge-studio.html',
-      'ui-particle-system.html',
-      'layer-forge-docs.html',
-      'ui-particle-docs.html'
-    ];
-    var href = {
-      'assets.html': 'assets.html',
-      'games.html': 'games.html',
-      'team.html': 'team.html',
-      'contact.html': 'contact.html'
-    }[path];
-    if (assetPages.indexOf(path) !== -1) href = 'assets.html';
+    var raw = (window.location.pathname || '/').replace(/\/+$/, '');
+    var seg = raw.split('/').filter(Boolean);
+    var key = seg.length ? seg[0] : '';
+    var hrefMap = {
+      tools: '/tools/',
+      games: '/games/',
+      team: '/team/',
+      contact: '/contact/',
+      'layer-forge-studio': '/tools/',
+      'goat-icon-studio': '/tools/',
+      'ui-particle-system': '/tools/',
+      'layer-forge-docs': '/tools/',
+      'ui-particle-docs': '/tools/'
+    };
+    var href = hrefMap[key];
     if (!href) return;
     document.querySelectorAll('#nav .nav-link').forEach(function (a) {
-      a.classList.toggle('active', a.getAttribute('href') === href || a.getAttribute('href') === '/' + href);
+      var link = a.getAttribute('href') || '';
+      a.classList.toggle('active', link === href || link.replace(/\/+$/, '') === href.replace(/\/+$/, ''));
     });
   })();
 
