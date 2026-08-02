@@ -122,17 +122,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   })();
 
-  /* Adres çubuğunda /contact/ yerine /contact göster (GitHub Pages klasör yapısı) */
-  (function stripTrailingSlash() {
-    var path = window.location.pathname || '';
-    if (path.length > 1 && path.endsWith('/')) {
-      var next = path.replace(/\/+$/, '') + window.location.search + window.location.hash;
-      if (window.history && window.history.replaceState) {
-        window.history.replaceState(null, '', next);
-      }
-    }
-  })();
-
   (function tierMarkBackground() {
     if (document.querySelector('.tier-bg')) return;
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
