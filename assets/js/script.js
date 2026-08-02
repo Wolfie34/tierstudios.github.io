@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
             '<li><a href="/layer-forge-docs" data-cursor="hover" data-i18n="footer.layerForgeDocs">Layer Forge Docs</a></li>' +
             '<li><a href="/ui-particle-docs" data-cursor="hover" data-i18n="footer.uiParticleDocs">UI Particle Docs</a></li>' +
             '<li><a href="https://assetstore.unity.com/publishers/124104" target="_blank" rel="noopener" data-cursor="hover" data-i18n="footer.assetStore">Unity Asset Store</a></li>' +
-            '<li><a href="https://discord.gg/ESvwrchUwA" target="_blank" rel="noopener" data-cursor="hover" data-i18n="footer.discord">Discord Community</a></li>' +
+            '<li><a href="https://discord.gg/keepchaos" target="_blank" rel="noopener" data-cursor="hover" data-i18n="footer.discord">Discord Community</a></li>' +
           '</ul>' +
         '</div>';
 
@@ -1044,18 +1044,21 @@ document.addEventListener('DOMContentLoaded', function () {
     var root = document.getElementById('gamesGallery');
     var main = document.getElementById('gamesGalleryMain');
     var thumbsWrap = root && root.querySelector('.games-gallery-thumbs');
+    var progressBar = document.getElementById('gamesGalleryProgress');
     if (!root || !main || !thumbsWrap) return;
 
     var candidates = [
-      { src: 'assets/img/game/keep-chaos-logo.svg', alt: 'Keep Chaos', label: 'Keep Chaos logo' },
-      { src: 'assets/img/game/game-visual.svg', alt: 'Keep Chaos visual', label: 'Keep Chaos visual' },
-      { src: 'assets/img/game/keep-chaos-1.png', alt: 'Keep Chaos', label: 'Keep Chaos 1' },
-      { src: 'assets/img/game/keep-chaos-2.png', alt: 'Keep Chaos', label: 'Keep Chaos 2' },
-      { src: 'assets/img/game/keep-chaos-3.png', alt: 'Keep Chaos', label: 'Keep Chaos 3' },
-      { src: 'assets/img/game/keep-chaos-1.jpg', alt: 'Keep Chaos', label: 'Keep Chaos 1' },
-      { src: 'assets/img/game/keep-chaos-2.jpg', alt: 'Keep Chaos', label: 'Keep Chaos 2' },
-      { src: 'assets/img/game/keep-chaos-3.jpg', alt: 'Keep Chaos', label: 'Keep Chaos 3' }
+      { src: '/assets/img/game/keep-chaos-ss-1.png', alt: 'Keep Chaos — nighttime forest combat with wolf-hooded hero', label: 'Screenshot 1' },
+      { src: '/assets/img/game/keep-chaos-ss-2.png', alt: 'Keep Chaos — swarm combat around a stone pillar', label: 'Screenshot 2' },
+      { src: '/assets/img/game/keep-chaos-ss-3.png', alt: 'Keep Chaos — co-op bullet hell with damage numbers', label: 'Screenshot 3' },
+      { src: '/assets/img/game/keep-chaos-ss-4.png', alt: 'Keep Chaos — ability ring and magenta dash trail', label: 'Screenshot 4' },
+      { src: '/assets/img/game/keep-chaos-ss-5.png', alt: 'Keep Chaos — fighting ghosts with AOE circles', label: 'Screenshot 5' },
+      { src: '/assets/img/game/keep-chaos-ss-6.png', alt: 'Keep Chaos — Wishlist now on Steam', label: 'Wishlist' }
     ];
+    var AUTO_MS = 5000;
+    var autoTimer = null;
+    var activeIndex = 0;
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function probe(item) {
       return new Promise(function (resolve) {
@@ -1066,10 +1069,36 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    function setActive(btn) {
+    function thumbs() {
+      return thumbsWrap.querySelectorAll('.games-gallery-thumb');
+    }
+
+    function resetProgress() {
+      if (!progressBar) return;
+      progressBar.classList.remove('is-running');
+      progressBar.style.removeProperty('--auto-ms');
+      void progressBar.offsetWidth;
+    }
+
+    function restartProgress() {
+      if (!progressBar) return;
+      resetProgress();
+      if (reduced || document.hidden || thumbs().length < 2) return;
+      progressBar.style.setProperty('--auto-ms', AUTO_MS + 'ms');
+      progressBar.classList.add('is-running');
+    }
+
+    function setActive(btn, index) {
       if (!btn || !btn.dataset.src) return;
       var stage = root.querySelector('.games-gallery-stage');
-      thumbsWrap.querySelectorAll('.games-gallery-thumb').forEach(function (el) {
+      var list = thumbs();
+      if (typeof index === 'number') activeIndex = index;
+      else {
+        for (var i = 0; i < list.length; i++) {
+          if (list[i] === btn) { activeIndex = i; break; }
+        }
+      }
+      list.forEach(function (el) {
         var on = el === btn;
         el.classList.toggle('is-active', on);
         el.setAttribute('aria-pressed', on ? 'true' : 'false');
@@ -1080,6 +1109,29 @@ document.addEventListener('DOMContentLoaded', function () {
         main.alt = btn.dataset.alt || 'Keep Chaos';
         if (stage) stage.classList.remove('is-switching');
       }, 160);
+    }
+
+    function nextSlide() {
+      var list = thumbs();
+      if (list.length < 2) return;
+      var next = (activeIndex + 1) % list.length;
+      setActive(list[next], next);
+      restartProgress();
+    }
+
+    function stopAuto() {
+      if (autoTimer) {
+        window.clearInterval(autoTimer);
+        autoTimer = null;
+      }
+      resetProgress();
+    }
+
+    function startAuto() {
+      stopAuto();
+      if (reduced || document.hidden || thumbs().length < 2) return;
+      restartProgress();
+      autoTimer = window.setInterval(nextSlide, AUTO_MS);
     }
 
     function render(items) {
@@ -1096,12 +1148,22 @@ document.addEventListener('DOMContentLoaded', function () {
         btn.setAttribute('aria-label', item.label);
         btn.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
         btn.innerHTML = '<img src="' + item.src + '" alt="" loading="lazy" />';
-        btn.addEventListener('click', function () { setActive(btn); });
+        btn.addEventListener('click', function () {
+          setActive(btn, index);
+          startAuto();
+        });
         thumbsWrap.appendChild(btn);
       });
+      activeIndex = 0;
       main.src = items[0].src;
       main.alt = items[0].alt;
+      startAuto();
     }
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stopAuto();
+      else startAuto();
+    });
 
     Promise.all(candidates.map(probe)).then(function (results) {
       var seen = {};
