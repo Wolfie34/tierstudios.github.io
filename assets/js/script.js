@@ -68,9 +68,15 @@ document.addEventListener('DOMContentLoaded', function () {
           '<ul class="footer-shortcuts-list">' +
             '<li><a href="/" data-cursor="hover" data-i18n="footer.home">Home</a></li>' +
             '<li><a href="/tools" data-cursor="hover" data-i18n="nav.assets">Assets</a></li>' +
-            '<li><a href="/games" data-cursor="hover" data-i18n="nav.games">Games</a></li>' +
             '<li><a href="/team" data-cursor="hover" data-i18n="nav.team">Team</a></li>' +
             '<li><a href="/contact" data-cursor="hover" data-i18n="nav.contact">Contact</a></li>' +
+          '</ul>' +
+        '</div>' +
+        '<div class="footer-shortcuts-group">' +
+          '<span class="label footer-shortcuts-label" data-i18n="footer.games">Games</span>' +
+          '<ul class="footer-shortcuts-list">' +
+            '<li><a href="/games" data-cursor="hover" data-i18n="nav.keepChaos">Keep Chaos</a></li>' +
+            '<li><a href="/games/stats" data-cursor="hover" data-i18n="footer.leaderboard">Leaderboard</a></li>' +
           '</ul>' +
         '</div>' +
         '<div class="footer-shortcuts-group">' +
@@ -1297,6 +1303,342 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.addEventListener('tier:lang', syncUi);
   })();
+})();
+
+/* Keep Chaos press kit previews (/games) */
+(function gamesPressPreview() {
+  var root = document.querySelector('.games-press-media');
+  var lightbox = document.getElementById('gamesPressLightbox');
+  if (!root || !lightbox) return;
+
+  var imgEl = document.getElementById('gamesPressLightboxImg');
+  var titleEl = document.getElementById('gamesPressLightboxTitle');
+  var sizeEl = document.getElementById('gamesPressLightboxSize');
+  var dlEl = document.getElementById('gamesPressLightboxDl');
+  var openBtn = null;
+  var imageCache = {};
+
+  function t(key, fallback) {
+    return (window.tierI18n && window.tierI18n.t(key)) || fallback;
+  }
+
+  function toneLabel(tone) {
+    return tone === 'black' ? 'Black' : 'White';
+  }
+
+  function fileNameFor(base, tone) {
+    return base + '-' + toneLabel(tone) + '.png';
+  }
+
+  function variantFileName(base, variant) {
+    return base + '-' + variant + '.png';
+  }
+
+  function setAssetVariant(asset, variant) {
+    var preview = asset.querySelector('.games-press-preview');
+    var img = preview && preview.querySelector('.games-press-preview-img');
+    var dl = asset.querySelector('.games-press-asset-dl');
+    var base = preview && preview.getAttribute('data-press-filename');
+    var src = preview && preview.getAttribute('data-press-src-' + variant);
+    if (!preview || !src || !base) return;
+
+    preview.setAttribute('data-press-variant', variant);
+    preview.setAttribute('data-press-src', src);
+    if (img) img.src = src;
+
+    asset.querySelectorAll('[data-press-variant]').forEach(function (btn) {
+      if (!btn.classList.contains('games-press-tone')) return;
+      var active = btn.getAttribute('data-press-variant') === variant;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+
+    if (dl) {
+      dl.href = src;
+      dl.setAttribute('download', variantFileName(base, variant));
+    }
+
+    if (openBtn === preview && imgEl) {
+      imgEl.src = src;
+      imgEl.classList.remove('is-tone-black');
+      if (dlEl) {
+        dlEl.href = src;
+        dlEl.setAttribute('download', variantFileName(base, variant));
+        dlEl.removeAttribute('data-press-colored-dl');
+      }
+    }
+  }
+
+  function loadImage(src) {
+    if (imageCache[src]) return imageCache[src];
+    imageCache[src] = new Promise(function (resolve, reject) {
+      var img = new Image();
+      img.decoding = 'async';
+      img.onload = function () { resolve(img); };
+      img.onerror = reject;
+      img.src = src;
+    });
+    return imageCache[src];
+  }
+
+  function recolorLogo(img, tone) {
+    var canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth || img.width;
+    canvas.height = img.naturalHeight || img.height;
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return null;
+    ctx.drawImage(img, 0, 0);
+    var data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    var pixels = data.data;
+    var target = tone === 'black' ? 0 : 255;
+    for (var i = 0; i < pixels.length; i += 4) {
+      var lum = (pixels[i] + pixels[i + 1] + pixels[i + 2]) / 3;
+      var alpha = Math.max(0, Math.min(255, (lum - 18) * (255 / 210)));
+      pixels[i] = target;
+      pixels[i + 1] = target;
+      pixels[i + 2] = target;
+      pixels[i + 3] = Math.round(alpha * (pixels[i + 3] / 255));
+    }
+    ctx.putImageData(data, 0, 0);
+    return canvas;
+  }
+
+  function downloadCanvas(canvas, filename) {
+    return new Promise(function (resolve) {
+      if (canvas.toBlob) {
+        canvas.toBlob(function (blob) {
+          if (!blob) {
+            resolve(false);
+            return;
+          }
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+          resolve(true);
+        }, 'image/png');
+        return;
+      }
+      var a = document.createElement('a');
+      a.href = canvas.toDataURL('image/png');
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      resolve(true);
+    });
+  }
+
+  function revokePreviewUrl(preview) {
+    var url = preview.getAttribute('data-press-preview-url');
+    if (!url) return;
+    URL.revokeObjectURL(url);
+    preview.removeAttribute('data-press-preview-url');
+  }
+
+  function applyTonePreview(preview, tone) {
+    var img = preview.querySelector('.games-press-preview-img');
+    var src = preview.getAttribute('data-press-src');
+    if (!img || !src) return Promise.resolve(null);
+
+    return loadImage(src).then(function (sourceImg) {
+      var canvas = recolorLogo(sourceImg, tone);
+      if (!canvas || !canvas.toBlob) return null;
+      return new Promise(function (resolve) {
+        canvas.toBlob(function (blob) {
+          if (!blob) {
+            resolve(null);
+            return;
+          }
+          revokePreviewUrl(preview);
+          var url = URL.createObjectURL(blob);
+          preview.setAttribute('data-press-preview-url', url);
+          img.src = url;
+          img.style.filter = 'none';
+          resolve(url);
+        }, 'image/png');
+      });
+    }).catch(function () {
+      return null;
+    });
+  }
+
+  function setAssetTone(asset, tone) {
+    var preview = asset.querySelector('.games-press-preview');
+    var dl = asset.querySelector('.games-press-asset-dl');
+    var base = preview && preview.getAttribute('data-press-filename');
+    if (!preview || !base) return;
+
+    preview.setAttribute('data-press-color', tone);
+    preview.classList.toggle('is-tone-white', tone === 'white');
+    preview.classList.toggle('is-tone-black', tone === 'black');
+
+    asset.querySelectorAll('.games-press-tone').forEach(function (btn) {
+      var active = btn.getAttribute('data-press-tone') === tone;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+
+    if (dl) dl.setAttribute('download', fileNameFor(base, tone));
+
+    applyTonePreview(preview, tone).then(function (url) {
+      if (openBtn !== preview || !imgEl) return;
+      if (url) imgEl.src = url;
+      imgEl.classList.toggle('is-on-light', tone === 'black');
+      imgEl.classList.remove('is-tone-black');
+      if (dlEl) dlEl.setAttribute('download', fileNameFor(base, tone));
+    });
+  }
+
+  function close() {
+    if (lightbox.hidden) return;
+    lightbox.hidden = true;
+    document.body.classList.remove('is-press-lightbox-open');
+    if (imgEl) {
+      imgEl.removeAttribute('src');
+      imgEl.alt = '';
+      imgEl.classList.remove('is-tone-black');
+      imgEl.classList.remove('is-on-light');
+    }
+    if (openBtn) {
+      openBtn.focus();
+      openBtn = null;
+    }
+  }
+
+  function openFrom(btn) {
+    var src = btn.getAttribute('data-press-src');
+    if (!src || !imgEl || !dlEl || !titleEl) return;
+    var titleKey = btn.getAttribute('data-press-title-key') || '';
+    var fallbackTitle =
+      titleKey === 'games.press.dlStudioLogo' ? 'Tier Studios logo' :
+      titleKey === 'games.press.dlLogo' ? 'Keep Chaos logo' :
+      'Key art';
+    var title = t(titleKey, fallbackTitle);
+    var tone = btn.getAttribute('data-press-color') || 'white';
+    var variant = btn.getAttribute('data-press-variant') || '';
+    var base = btn.getAttribute('data-press-filename') || '';
+    var colorable = !!btn.closest('[data-press-colorable]');
+    var variantable = !!btn.closest('[data-press-variantable]');
+    var previewUrl = btn.getAttribute('data-press-preview-url');
+    var downloadHref = btn.getAttribute('data-press-download') || src;
+    var filename = '';
+    if (colorable && base) filename = fileNameFor(base, tone);
+    else if (variantable && base && variant) filename = variantFileName(base, variant);
+    else if (base && base.indexOf('.png') !== -1) filename = base;
+
+    openBtn = btn;
+    titleEl.textContent = title;
+    if (sizeEl) {
+      var size = btn.getAttribute('data-press-size') || '';
+      sizeEl.textContent = size;
+      sizeEl.hidden = !size;
+    }
+    imgEl.src = (colorable && previewUrl) ? previewUrl : src;
+    imgEl.alt = title;
+    imgEl.classList.remove('is-tone-black');
+    imgEl.classList.toggle('is-on-light', colorable && tone === 'black');
+    dlEl.href = downloadHref;
+    if (filename) dlEl.setAttribute('download', filename);
+    else dlEl.removeAttribute('download');
+    dlEl.textContent = t('games.press.download', 'Download');
+    dlEl.toggleAttribute('data-press-colored-dl', colorable);
+
+    lightbox.hidden = false;
+    document.body.classList.add('is-press-lightbox-open');
+    var closeBtn = lightbox.querySelector('[data-press-close].games-press-lightbox-close');
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function handleColoredDownload(link, asset) {
+    var preview = asset.querySelector('.games-press-preview');
+    if (!preview) return false;
+    var src = preview.getAttribute('data-press-src');
+    var base = preview.getAttribute('data-press-filename');
+    var tone = preview.getAttribute('data-press-color') || 'white';
+    if (!src || !base) return false;
+
+    link.setAttribute('aria-busy', 'true');
+    loadImage(src).then(function (img) {
+      var canvas = recolorLogo(img, tone);
+      if (!canvas) return false;
+      return downloadCanvas(canvas, fileNameFor(base, tone));
+    }).catch(function () {
+      return false;
+    }).then(function (ok) {
+      link.removeAttribute('aria-busy');
+      if (!ok) {
+        // Fallback: original file
+        var a = document.createElement('a');
+        a.href = src;
+        a.download = fileNameFor(base, tone);
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
+    });
+    return true;
+  }
+
+  root.addEventListener('click', function (e) {
+    var variantBtn = e.target.closest('[data-press-variant].games-press-tone');
+    if (variantBtn && root.contains(variantBtn)) {
+      e.preventDefault();
+      var variantAsset = variantBtn.closest('[data-press-variantable]');
+      var variant = variantBtn.getAttribute('data-press-variant');
+      if (variantAsset && variant) setAssetVariant(variantAsset, variant);
+      return;
+    }
+
+    var toneBtn = e.target.closest('[data-press-tone]');
+    if (toneBtn && root.contains(toneBtn)) {
+      e.preventDefault();
+      var asset = toneBtn.closest('[data-press-colorable]');
+      var tone = toneBtn.getAttribute('data-press-tone');
+      if (asset && tone) setAssetTone(asset, tone);
+      return;
+    }
+
+    var dl = e.target.closest('.games-press-asset-dl');
+    if (dl && root.contains(dl)) {
+      var coloredAsset = dl.closest('[data-press-colorable]');
+      if (coloredAsset) {
+        e.preventDefault();
+        handleColoredDownload(dl, coloredAsset);
+        return;
+      }
+    }
+
+    var btn = e.target.closest('.games-press-preview');
+    if (!btn || !root.contains(btn)) return;
+    openFrom(btn);
+  });
+
+  lightbox.addEventListener('click', function (e) {
+    if (e.target.closest('[data-press-close]')) {
+      close();
+      return;
+    }
+    if (e.target.closest('#gamesPressLightboxDl') && openBtn) {
+      var asset = openBtn.closest('[data-press-colorable]');
+      if (asset) {
+        e.preventDefault();
+        handleColoredDownload(dlEl, asset);
+      }
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') close();
+  });
+
+  root.querySelectorAll('[data-press-colorable]').forEach(function (asset) {
+    setAssetTone(asset, 'white');
+  });
 })();
 
 /* Keep Chaos leaderboard (/games/stats) */

@@ -4,7 +4,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://tierstudios.com/</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -16,7 +16,7 @@
     <image:image>
       <image:loc>https://tierstudios.com/assets/img/game/keep-chaos-keyart.png</image:loc>
       <image:title>Keep Chaos</image:title>
-      <image:caption>Keep Chaos · TPS Bullet Hell Rogue-Lite by Tier Studios</image:caption>
+      <image:caption>Keep Chaos · online co-op TPS survivor-like / bullet heaven by Tier Studios</image:caption>
     </image:image>
   </url>
   <url>
