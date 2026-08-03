@@ -1298,3 +1298,337 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('tier:lang', syncUi);
   })();
 })();
+
+/* Keep Chaos leaderboard (/games/stats) */
+(function gamesLeaderboard() {
+  if (!document.body || !document.body.classList.contains('games-stats-page')) return;
+
+  var listEl = document.getElementById('gamesLbList');
+  var emptyEl = document.getElementById('gamesLbEmpty');
+  var demoEl = document.getElementById('gamesLbDemo');
+  var podiumEl = document.getElementById('gamesLbPodium');
+  var timerValueEl = document.getElementById('gamesLbTimerValue');
+  var refreshValueEl = document.getElementById('gamesLbRefreshValue');
+  var tabs = document.querySelectorAll('.games-lb-tab');
+  if (!listEl || !tabs.length) return;
+
+  var NAME_CYCLE_MS = 3000;
+  var DEFAULT_CYCLE_HOURS = 150;
+  var DEFAULT_REFRESH_HOURS = 24;
+  var data = null;
+  var activeBoard = 'squad';
+  var nameTimer = null;
+  var nameTick = 0;
+  var countdownTimer = null;
+  var lastCycleIndex = -1;
+  var lastRefreshIndex = -1;
+  var cycleMs = DEFAULT_CYCLE_HOURS * 60 * 60 * 1000;
+  var cycleAnchorMs = Date.now();
+  var refreshMs = DEFAULT_REFRESH_HOURS * 60 * 60 * 1000;
+  var refreshAnchorMs = Date.now();
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var loading = false;
+
+  var AVATAR_HUES = [18, 210, 32, 280, 145, 0, 190, 55, 320, 95];
+
+  function t(key, fallback) {
+    return (window.tierI18n && window.tierI18n.t(key)) || fallback;
+  }
+
+  function escapeHtml(str) {
+    return String(str == null ? '' : str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function formatScore(n) {
+    var num = Number(n);
+    if (!isFinite(num)) return '—';
+    return Math.round(num).toLocaleString('en-US');
+  }
+
+  function pad2(n) {
+    return (n < 10 ? '0' : '') + n;
+  }
+
+  function formatCountdown(ms) {
+    var total = Math.max(0, Math.floor(ms / 1000));
+    var h = Math.floor(total / 3600);
+    var m = Math.floor((total % 3600) / 60);
+    var s = total % 60;
+    return h + ':' + pad2(m) + ':' + pad2(s);
+  }
+
+  function hueFor(name, index) {
+    var s = String(name || '');
+    var h = 0;
+    for (var i = 0; i < s.length; i++) h = (h + s.charCodeAt(i) * (i + 1)) % 360;
+    return AVATAR_HUES[index % AVATAR_HUES.length] != null ? AVATAR_HUES[index % AVATAR_HUES.length] : h;
+  }
+
+  function initial(name) {
+    var s = String(name || '?').trim();
+    return (s.charAt(0) || '?').toUpperCase();
+  }
+
+  function syncCycleFromData(json) {
+    var hours = Number(json && json.cycleHours);
+    if (!isFinite(hours) || hours <= 0) hours = DEFAULT_CYCLE_HOURS;
+    cycleMs = hours * 60 * 60 * 1000;
+    var anchor = json && json.cycleAnchor ? Date.parse(json.cycleAnchor) : NaN;
+    cycleAnchorMs = isFinite(anchor) ? anchor : Date.now();
+
+    var refreshHours = Number(json && json.refreshHours);
+    if (!isFinite(refreshHours) || refreshHours <= 0) refreshHours = DEFAULT_REFRESH_HOURS;
+    refreshMs = refreshHours * 60 * 60 * 1000;
+    var refreshAnchor = json && json.refreshAnchor ? Date.parse(json.refreshAnchor) : NaN;
+    refreshAnchorMs = isFinite(refreshAnchor) ? refreshAnchor : cycleAnchorMs;
+  }
+
+  function cycleState(now) {
+    var elapsed = Math.max(0, now - cycleAnchorMs);
+    var index = Math.floor(elapsed / cycleMs);
+    var into = elapsed % cycleMs;
+    var remaining = into === 0 && elapsed > 0 ? 0 : (cycleMs - into);
+    if (elapsed === 0) remaining = cycleMs;
+    return { index: index, remaining: remaining };
+  }
+
+  function refreshState(now) {
+    var elapsed = Math.max(0, now - refreshAnchorMs);
+    var index = Math.floor(elapsed / refreshMs);
+    var into = elapsed % refreshMs;
+    var remaining = into === 0 && elapsed > 0 ? 0 : (refreshMs - into);
+    if (elapsed === 0) remaining = refreshMs;
+    return { index: index, remaining: remaining };
+  }
+
+  function updateCountdown() {
+    var now = Date.now();
+    var state = cycleState(now);
+    var refresh = refreshState(now);
+
+    if (timerValueEl) {
+      timerValueEl.textContent = formatCountdown(state.remaining);
+      timerValueEl.setAttribute('datetime', new Date(now + state.remaining).toISOString());
+    }
+    if (refreshValueEl) {
+      refreshValueEl.textContent = formatCountdown(refresh.remaining);
+      refreshValueEl.setAttribute('datetime', new Date(now + refresh.remaining).toISOString());
+    }
+
+    var shouldReload = false;
+    if (lastCycleIndex >= 0 && state.index !== lastCycleIndex) shouldReload = true;
+    if (lastRefreshIndex >= 0 && refresh.index !== lastRefreshIndex) shouldReload = true;
+    lastCycleIndex = state.index;
+    lastRefreshIndex = refresh.index;
+    if (shouldReload) loadBoard(true);
+  }
+
+  function stopNameCycle() {
+    if (nameTimer) {
+      window.clearInterval(nameTimer);
+      nameTimer = null;
+    }
+  }
+
+  function syncVisibleNames() {
+    document.querySelectorAll('.games-lb-row, .games-lb-podium-card').forEach(function (row) {
+      var raw = row.getAttribute('data-names') || '';
+      var names = raw ? raw.split('\u001f') : [];
+      if (!names.length) return;
+      var idx = names.length > 1 ? (nameTick % names.length) : 0;
+      var nameEl = row.querySelector('.games-lb-name, .games-lb-podium-name');
+      if (nameEl) nameEl.textContent = names[idx];
+      row.querySelectorAll('.games-lb-avatar').forEach(function (av, i) {
+        av.classList.toggle('is-focus', names.length > 1 && i === idx);
+      });
+    });
+  }
+
+  function startNameCycle() {
+    stopNameCycle();
+    nameTick = 0;
+    syncVisibleNames();
+    if (reduced) return;
+    var needsCycle = false;
+    document.querySelectorAll('.games-lb-row, .games-lb-podium-card').forEach(function (row) {
+      var raw = row.getAttribute('data-names') || '';
+      if (raw.split('\u001f').length > 1) needsCycle = true;
+    });
+    if (!needsCycle) return;
+    nameTimer = window.setInterval(function () {
+      nameTick += 1;
+      syncVisibleNames();
+    }, NAME_CYCLE_MS);
+  }
+
+  function playerBits(row, i) {
+    var rank = row.rank != null ? Number(row.rank) : (i + 1);
+    var players = Array.isArray(row.players) ? row.players : [];
+    if (!players.length && row.name) players = [{ name: row.name }];
+    var names = players.map(function (p) { return (p && p.name) || '—'; });
+    var avatars = players.map(function (p, pi) {
+      var name = (p && p.name) || '?';
+      var src = p && p.avatar;
+      if (src) {
+        return '<span class="games-lb-avatar" title="' + escapeHtml(name) + '">' +
+          '<img src="' + escapeHtml(src) + '" alt="" loading="lazy" /></span>';
+      }
+      return '<span class="games-lb-avatar games-lb-avatar--initial" title="' + escapeHtml(name) + '" style="--av-hue:' + hueFor(name, pi) + '">' +
+        escapeHtml(initial(name)) + '</span>';
+    }).join('');
+    return { rank: rank, players: players, names: names, avatars: avatars };
+  }
+
+  function renderPodium(entries) {
+    if (!podiumEl) return;
+    var top = entries.slice(0, 3);
+    if (top.length < 1) {
+      podiumEl.hidden = true;
+      podiumEl.innerHTML = '';
+      return;
+    }
+
+    var byRank = { 1: null, 2: null, 3: null };
+    top.forEach(function (row, i) {
+      var bits = playerBits(row, i);
+      byRank[bits.rank] = { row: row, bits: bits };
+    });
+
+    // Visual order: 2 | 1 | 3
+    var order = [2, 1, 3];
+    var html = order.map(function (rank, orderIndex) {
+      var item = byRank[rank];
+      if (!item) return '';
+      var bits = item.bits;
+      var tone = rank === 1 ? 'is-gold' : rank === 2 ? 'is-silver' : 'is-bronze';
+      return (
+        '<article class="games-lb-podium-card ' + tone + '" style="--podium-i:' + orderIndex + '" data-names="' + escapeHtml(bits.names.join('\u001f')) + '">' +
+          '<div class="games-lb-podium-avatars" aria-hidden="true">' + bits.avatars + '</div>' +
+          '<p class="games-lb-podium-name">' + escapeHtml(bits.names[0] || '—') + '</p>' +
+          '<p class="games-lb-podium-score">' + escapeHtml(formatScore(item.row.score)) + '</p>' +
+          '<div class="games-lb-podium-stand">' +
+            (rank === 1 ? '<span class="games-lb-podium-rays" aria-hidden="true"></span>' : '') +
+            '<span class="games-lb-podium-rank">' + escapeHtml(rank) + '</span>' +
+          '</div>' +
+        '</article>'
+      );
+    }).join('');
+
+    podiumEl.classList.remove('is-ready');
+    podiumEl.innerHTML = html;
+    podiumEl.hidden = !html;
+    if (html) {
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function () {
+          podiumEl.classList.add('is-ready');
+        });
+      });
+    }
+  }
+
+  function renderBoard(key) {
+    activeBoard = key;
+    var entries = (data && data.boards && data.boards[key]) || [];
+    entries = entries.slice().sort(function (a, b) {
+      return (Number(a.rank) || 999) - (Number(b.rank) || 999);
+    }).slice(0, 100);
+
+    tabs.forEach(function (tab) {
+      var on = tab.getAttribute('data-board') === key;
+      tab.classList.toggle('is-active', on);
+      tab.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+
+    if (!entries.length) {
+      stopNameCycle();
+      listEl.innerHTML = '';
+      listEl.hidden = true;
+      if (podiumEl) {
+        podiumEl.hidden = true;
+        podiumEl.innerHTML = '';
+        podiumEl.classList.remove('is-ready');
+      }
+      if (emptyEl) emptyEl.hidden = false;
+      return;
+    }
+
+    listEl.hidden = false;
+    if (emptyEl) emptyEl.hidden = true;
+    renderPodium(entries);
+
+    listEl.innerHTML = entries.map(function (row, i) {
+      var bits = playerBits(row, i);
+      var tone = bits.rank === 1 ? ' is-gold' : bits.rank === 2 ? ' is-silver' : bits.rank === 3 ? ' is-bronze' : '';
+      return (
+        '<li class="games-lb-row' + tone + '" data-names="' + escapeHtml(bits.names.join('\u001f')) + '">' +
+          '<span class="games-lb-rank">' + escapeHtml(bits.rank) + '</span>' +
+          '<div class="games-lb-avatars" aria-hidden="true">' + bits.avatars + '</div>' +
+          '<span class="games-lb-name">' + escapeHtml(bits.names[0] || '—') + '</span>' +
+          '<span class="games-lb-score">' + escapeHtml(formatScore(row.score)) + '</span>' +
+        '</li>'
+      );
+    }).join('');
+
+    startNameCycle();
+  }
+
+  function startCountdown() {
+    if (countdownTimer) window.clearInterval(countdownTimer);
+    updateCountdown();
+    countdownTimer = window.setInterval(updateCountdown, 1000);
+  }
+
+  function loadBoard(isReset) {
+    if (loading) return;
+    loading = true;
+    fetch('/assets/data/keep-chaos-leaderboard.json?v=' + Date.now())
+      .then(function (res) { return res.ok ? res.json() : Promise.reject(); })
+      .then(function (json) {
+        data = json;
+        syncCycleFromData(json);
+        if (demoEl) demoEl.hidden = !json.demo;
+        renderBoard(activeBoard);
+        if (isReset) {
+          var now = Date.now();
+          lastCycleIndex = cycleState(now).index;
+          lastRefreshIndex = refreshState(now).index;
+        }
+        startCountdown();
+      })
+      .catch(function () {
+        if (!data) {
+          listEl.innerHTML = '';
+          listEl.hidden = true;
+          if (emptyEl) {
+            emptyEl.hidden = false;
+            emptyEl.textContent = t('games.stats.empty', 'The board is empty for now · top scores will appear here when runs start counting.');
+          }
+        }
+        startCountdown();
+      })
+      .then(function () { loading = false; });
+  }
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var key = tab.getAttribute('data-board');
+      if (!key || key === activeBoard) return;
+      renderBoard(key);
+    });
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      stopNameCycle();
+    } else {
+      startNameCycle();
+      updateCountdown();
+    }
+  });
+
+  loadBoard(false);
+})();

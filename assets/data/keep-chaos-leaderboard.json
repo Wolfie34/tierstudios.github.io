@@ -1,0 +1,5419 @@
+{
+  "game": "Keep Chaos",
+  "updated": "2026-08-03",
+  "demo": true,
+  "cycleHours": 150,
+  "cycleAnchor": "2026-08-03T11:30:00.000+03:00",
+  "refreshHours": 24,
+  "refreshAnchor": "2026-08-03T11:30:00.000+03:00",
+  "boards": {
+    "solo": [
+      {
+        "rank": 1,
+        "score": 1245574,
+        "players": [
+          {
+            "name": "Torv"
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "score": 1234515,
+        "players": [
+          {
+            "name": "Rook"
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "score": 1223456,
+        "players": [
+          {
+            "name": "Flint"
+          }
+        ]
+      },
+      {
+        "rank": 4,
+        "score": 1212397,
+        "players": [
+          {
+            "name": "Frost"
+          }
+        ]
+      },
+      {
+        "rank": 5,
+        "score": 1201338,
+        "players": [
+          {
+            "name": "Quartz"
+          }
+        ]
+      },
+      {
+        "rank": 6,
+        "score": 1190279,
+        "players": [
+          {
+            "name": "Bloom"
+          }
+        ]
+      },
+      {
+        "rank": 7,
+        "score": 1180179,
+        "players": [
+          {
+            "name": "Mire"
+          }
+        ]
+      },
+      {
+        "rank": 8,
+        "score": 1169120,
+        "players": [
+          {
+            "name": "Brim"
+          }
+        ]
+      },
+      {
+        "rank": 9,
+        "score": 1158061,
+        "players": [
+          {
+            "name": "Pike"
+          }
+        ]
+      },
+      {
+        "rank": 10,
+        "score": 1147002,
+        "players": [
+          {
+            "name": "Nox"
+          }
+        ]
+      },
+      {
+        "rank": 11,
+        "score": 1135943,
+        "players": [
+          {
+            "name": "Dale"
+          }
+        ]
+      },
+      {
+        "rank": 12,
+        "score": 1124884,
+        "players": [
+          {
+            "name": "Opal"
+          }
+        ]
+      },
+      {
+        "rank": 13,
+        "score": 1114981,
+        "players": [
+          {
+            "name": "Zeal"
+          }
+        ]
+      },
+      {
+        "rank": 14,
+        "score": 1104881,
+        "players": [
+          {
+            "name": "Keep"
+          }
+        ]
+      },
+      {
+        "rank": 15,
+        "score": 1093822,
+        "players": [
+          {
+            "name": "Orin"
+          }
+        ]
+      },
+      {
+        "rank": 16,
+        "score": 1082763,
+        "players": [
+          {
+            "name": "Korr"
+          }
+        ]
+      },
+      {
+        "rank": 17,
+        "score": 1071704,
+        "players": [
+          {
+            "name": "Haze"
+          }
+        ]
+      },
+      {
+        "rank": 18,
+        "score": 1060645,
+        "players": [
+          {
+            "name": "Bram"
+          }
+        ]
+      },
+      {
+        "rank": 19,
+        "score": 1049586,
+        "players": [
+          {
+            "name": "Moth"
+          }
+        ]
+      },
+      {
+        "rank": 20,
+        "score": 1038527,
+        "players": [
+          {
+            "name": "Xylo"
+          }
+        ]
+      },
+      {
+        "rank": 21,
+        "score": 1028427,
+        "players": [
+          {
+            "name": "Ivy"
+          }
+        ]
+      },
+      {
+        "rank": 22,
+        "score": 1017368,
+        "players": [
+          {
+            "name": "RuneFox"
+          }
+        ]
+      },
+      {
+        "rank": 23,
+        "score": 1006309,
+        "players": [
+          {
+            "name": "Wisp"
+          }
+        ]
+      },
+      {
+        "rank": 24,
+        "score": 995250,
+        "players": [
+          {
+            "name": "Onyx"
+          }
+        ]
+      },
+      {
+        "rank": 25,
+        "score": 984191,
+        "players": [
+          {
+            "name": "Vow"
+          }
+        ]
+      },
+      {
+        "rank": 26,
+        "score": 974289,
+        "players": [
+          {
+            "name": "Knot"
+          }
+        ]
+      },
+      {
+        "rank": 27,
+        "score": 963230,
+        "players": [
+          {
+            "name": "Veil"
+          }
+        ]
+      },
+      {
+        "rank": 28,
+        "score": 953130,
+        "players": [
+          {
+            "name": "Glow"
+          }
+        ]
+      },
+      {
+        "rank": 29,
+        "score": 942071,
+        "players": [
+          {
+            "name": "Kaelthorn"
+          }
+        ]
+      },
+      {
+        "rank": 30,
+        "score": 931012,
+        "players": [
+          {
+            "name": "Noct"
+          }
+        ]
+      },
+      {
+        "rank": 31,
+        "score": 919953,
+        "players": [
+          {
+            "name": "Crux"
+          }
+        ]
+      },
+      {
+        "rank": 32,
+        "score": 908894,
+        "players": [
+          {
+            "name": "Prism"
+          }
+        ]
+      },
+      {
+        "rank": 33,
+        "score": 897835,
+        "players": [
+          {
+            "name": "Iris"
+          }
+        ]
+      },
+      {
+        "rank": 34,
+        "score": 886776,
+        "players": [
+          {
+            "name": "Tide"
+          }
+        ]
+      },
+      {
+        "rank": 35,
+        "score": 876676,
+        "players": [
+          {
+            "name": "Elm"
+          }
+        ]
+      },
+      {
+        "rank": 36,
+        "score": 865616,
+        "players": [
+          {
+            "name": "Ashward"
+          }
+        ]
+      },
+      {
+        "rank": 37,
+        "score": 854557,
+        "players": [
+          {
+            "name": "Eira"
+          }
+        ]
+      },
+      {
+        "rank": 38,
+        "score": 843498,
+        "players": [
+          {
+            "name": "Jade"
+          }
+        ]
+      },
+      {
+        "rank": 39,
+        "score": 833596,
+        "players": [
+          {
+            "name": "Gale"
+          }
+        ]
+      },
+      {
+        "rank": 40,
+        "score": 822537,
+        "players": [
+          {
+            "name": "Glyph"
+          }
+        ]
+      },
+      {
+        "rank": 41,
+        "score": 811478,
+        "players": [
+          {
+            "name": "Rift"
+          }
+        ]
+      },
+      {
+        "rank": 42,
+        "score": 801378,
+        "players": [
+          {
+            "name": "Cove"
+          }
+        ]
+      },
+      {
+        "rank": 43,
+        "score": 790319,
+        "players": [
+          {
+            "name": "Reich"
+          }
+        ]
+      },
+      {
+        "rank": 44,
+        "score": 779260,
+        "players": [
+          {
+            "name": "Lira"
+          }
+        ]
+      },
+      {
+        "rank": 45,
+        "score": 768201,
+        "players": [
+          {
+            "name": "Moss"
+          }
+        ]
+      },
+      {
+        "rank": 46,
+        "score": 757142,
+        "players": [
+          {
+            "name": "Ember"
+          }
+        ]
+      },
+      {
+        "rank": 47,
+        "score": 746083,
+        "players": [
+          {
+            "name": "Echo"
+          }
+        ]
+      },
+      {
+        "rank": 48,
+        "score": 735024,
+        "players": [
+          {
+            "name": "Prow"
+          }
+        ]
+      },
+      {
+        "rank": 49,
+        "score": 724924,
+        "players": [
+          {
+            "name": "Apex"
+          }
+        ]
+      },
+      {
+        "rank": 50,
+        "score": 713865,
+        "players": [
+          {
+            "name": "Lark"
+          }
+        ]
+      },
+      {
+        "rank": 51,
+        "score": 702806,
+        "players": [
+          {
+            "name": "Sable"
+          }
+        ]
+      },
+      {
+        "rank": 52,
+        "score": 692904,
+        "players": [
+          {
+            "name": "Yale"
+          }
+        ]
+      },
+      {
+        "rank": 53,
+        "score": 681845,
+        "players": [
+          {
+            "name": "Drift"
+          }
+        ]
+      },
+      {
+        "rank": 54,
+        "score": 670786,
+        "players": [
+          {
+            "name": "Cinder"
+          }
+        ]
+      },
+      {
+        "rank": 55,
+        "score": 659727,
+        "players": [
+          {
+            "name": "Nail"
+          }
+        ]
+      },
+      {
+        "rank": 56,
+        "score": 649627,
+        "players": [
+          {
+            "name": "Yarn"
+          }
+        ]
+      },
+      {
+        "rank": 57,
+        "score": 638568,
+        "players": [
+          {
+            "name": "Jade"
+          }
+        ]
+      },
+      {
+        "rank": 58,
+        "score": 627509,
+        "players": [
+          {
+            "name": "DuskPike"
+          }
+        ]
+      },
+      {
+        "rank": 59,
+        "score": 616449,
+        "players": [
+          {
+            "name": "Fenn"
+          }
+        ]
+      },
+      {
+        "rank": 60,
+        "score": 605390,
+        "players": [
+          {
+            "name": "Quill"
+          }
+        ]
+      },
+      {
+        "rank": 61,
+        "score": 594331,
+        "players": [
+          {
+            "name": "Kite"
+          }
+        ]
+      },
+      {
+        "rank": 62,
+        "score": 583272,
+        "players": [
+          {
+            "name": "Loom"
+          }
+        ]
+      },
+      {
+        "rank": 63,
+        "score": 573172,
+        "players": [
+          {
+            "name": "Wren"
+          }
+        ]
+      },
+      {
+        "rank": 64,
+        "score": 562113,
+        "players": [
+          {
+            "name": "Husk"
+          }
+        ]
+      },
+      {
+        "rank": 65,
+        "score": 552211,
+        "players": [
+          {
+            "name": "MiraSol"
+          }
+        ]
+      },
+      {
+        "rank": 66,
+        "score": 541152,
+        "players": [
+          {
+            "name": "Grit"
+          }
+        ]
+      },
+      {
+        "rank": 67,
+        "score": 530093,
+        "players": [
+          {
+            "name": "Vex"
+          }
+        ]
+      },
+      {
+        "rank": 68,
+        "score": 519034,
+        "players": [
+          {
+            "name": "Shard"
+          }
+        ]
+      },
+      {
+        "rank": 69,
+        "score": 507975,
+        "players": [
+          {
+            "name": "Jolt"
+          }
+        ]
+      },
+      {
+        "rank": 70,
+        "score": 497875,
+        "players": [
+          {
+            "name": "Ulna"
+          }
+        ]
+      },
+      {
+        "rank": 71,
+        "score": 486816,
+        "players": [
+          {
+            "name": "Fang"
+          }
+        ]
+      },
+      {
+        "rank": 72,
+        "score": 475757,
+        "players": [
+          {
+            "name": "Vesper"
+          }
+        ]
+      },
+      {
+        "rank": 73,
+        "score": 464698,
+        "players": [
+          {
+            "name": "Hexa"
+          }
+        ]
+      },
+      {
+        "rank": 74,
+        "score": 453639,
+        "players": [
+          {
+            "name": "Bolt"
+          }
+        ]
+      },
+      {
+        "rank": 75,
+        "score": 442580,
+        "players": [
+          {
+            "name": "Iota"
+          }
+        ]
+      },
+      {
+        "rank": 76,
+        "score": 431521,
+        "players": [
+          {
+            "name": "Hawk"
+          }
+        ]
+      },
+      {
+        "rank": 77,
+        "score": 421421,
+        "players": [
+          {
+            "name": "Spire"
+          }
+        ]
+      },
+      {
+        "rank": 78,
+        "score": 411519,
+        "players": [
+          {
+            "name": "Dusk"
+          }
+        ]
+      },
+      {
+        "rank": 79,
+        "score": 400460,
+        "players": [
+          {
+            "name": "NyxBlade"
+          }
+        ]
+      },
+      {
+        "rank": 80,
+        "score": 389401,
+        "players": [
+          {
+            "name": "Torv"
+          }
+        ]
+      },
+      {
+        "rank": 81,
+        "score": 378342,
+        "players": [
+          {
+            "name": "Rook"
+          }
+        ]
+      },
+      {
+        "rank": 82,
+        "score": 367282,
+        "players": [
+          {
+            "name": "Flint"
+          }
+        ]
+      },
+      {
+        "rank": 83,
+        "score": 356223,
+        "players": [
+          {
+            "name": "Frost"
+          }
+        ]
+      },
+      {
+        "rank": 84,
+        "score": 346123,
+        "players": [
+          {
+            "name": "Quartz"
+          }
+        ]
+      },
+      {
+        "rank": 85,
+        "score": 335064,
+        "players": [
+          {
+            "name": "Bloom"
+          }
+        ]
+      },
+      {
+        "rank": 86,
+        "score": 324005,
+        "players": [
+          {
+            "name": "Mire"
+          }
+        ]
+      },
+      {
+        "rank": 87,
+        "score": 312946,
+        "players": [
+          {
+            "name": "Brim"
+          }
+        ]
+      },
+      {
+        "rank": 88,
+        "score": 301887,
+        "players": [
+          {
+            "name": "Pike"
+          }
+        ]
+      },
+      {
+        "rank": 89,
+        "score": 290828,
+        "players": [
+          {
+            "name": "Nox"
+          }
+        ]
+      },
+      {
+        "rank": 90,
+        "score": 279769,
+        "players": [
+          {
+            "name": "Dale"
+          }
+        ]
+      },
+      {
+        "rank": 91,
+        "score": 270826,
+        "players": [
+          {
+            "name": "Opal"
+          }
+        ]
+      },
+      {
+        "rank": 92,
+        "score": 259767,
+        "players": [
+          {
+            "name": "Zeal"
+          }
+        ]
+      },
+      {
+        "rank": 93,
+        "score": 248708,
+        "players": [
+          {
+            "name": "Keep"
+          }
+        ]
+      },
+      {
+        "rank": 94,
+        "score": 237649,
+        "players": [
+          {
+            "name": "Orin"
+          }
+        ]
+      },
+      {
+        "rank": 95,
+        "score": 226590,
+        "players": [
+          {
+            "name": "Korr"
+          }
+        ]
+      },
+      {
+        "rank": 96,
+        "score": 215531,
+        "players": [
+          {
+            "name": "Haze"
+          }
+        ]
+      },
+      {
+        "rank": 97,
+        "score": 204472,
+        "players": [
+          {
+            "name": "Bram"
+          }
+        ]
+      },
+      {
+        "rank": 98,
+        "score": 194372,
+        "players": [
+          {
+            "name": "Moth"
+          }
+        ]
+      },
+      {
+        "rank": 99,
+        "score": 183313,
+        "players": [
+          {
+            "name": "Xylo"
+          }
+        ]
+      },
+      {
+        "rank": 100,
+        "score": 172254,
+        "players": [
+          {
+            "name": "Ivy"
+          }
+        ]
+      }
+    ],
+    "duo": [
+      {
+        "rank": 1,
+        "score": 1323874,
+        "players": [
+          {
+            "name": "Eira"
+          },
+          {
+            "name": "Yale"
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "score": 1312134,
+        "players": [
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Drift"
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "score": 1300394,
+        "players": [
+          {
+            "name": "Gale"
+          },
+          {
+            "name": "Cinder"
+          }
+        ]
+      },
+      {
+        "rank": 4,
+        "score": 1288654,
+        "players": [
+          {
+            "name": "Glyph"
+          },
+          {
+            "name": "Nail"
+          }
+        ]
+      },
+      {
+        "rank": 5,
+        "score": 1276914,
+        "players": [
+          {
+            "name": "Rift"
+          },
+          {
+            "name": "Yarn"
+          }
+        ]
+      },
+      {
+        "rank": 6,
+        "score": 1265174,
+        "players": [
+          {
+            "name": "Cove"
+          },
+          {
+            "name": "Jade"
+          }
+        ]
+      },
+      {
+        "rank": 7,
+        "score": 1254394,
+        "players": [
+          {
+            "name": "Reich"
+          },
+          {
+            "name": "DuskPike"
+          }
+        ]
+      },
+      {
+        "rank": 8,
+        "score": 1242654,
+        "players": [
+          {
+            "name": "Lira"
+          },
+          {
+            "name": "Fenn"
+          }
+        ]
+      },
+      {
+        "rank": 9,
+        "score": 1230914,
+        "players": [
+          {
+            "name": "Moss"
+          },
+          {
+            "name": "Quill"
+          }
+        ]
+      },
+      {
+        "rank": 10,
+        "score": 1219174,
+        "players": [
+          {
+            "name": "Ember"
+          },
+          {
+            "name": "Kite"
+          }
+        ]
+      },
+      {
+        "rank": 11,
+        "score": 1207434,
+        "players": [
+          {
+            "name": "Echo"
+          },
+          {
+            "name": "Loom"
+          }
+        ]
+      },
+      {
+        "rank": 12,
+        "score": 1195694,
+        "players": [
+          {
+            "name": "Prow"
+          },
+          {
+            "name": "Wren"
+          }
+        ]
+      },
+      {
+        "rank": 13,
+        "score": 1185111,
+        "players": [
+          {
+            "name": "Apex"
+          },
+          {
+            "name": "Husk"
+          }
+        ]
+      },
+      {
+        "rank": 14,
+        "score": 1174330,
+        "players": [
+          {
+            "name": "Lark"
+          },
+          {
+            "name": "MiraSol"
+          }
+        ]
+      },
+      {
+        "rank": 15,
+        "score": 1162590,
+        "players": [
+          {
+            "name": "Sable"
+          },
+          {
+            "name": "Grit"
+          }
+        ]
+      },
+      {
+        "rank": 16,
+        "score": 1150850,
+        "players": [
+          {
+            "name": "Yale"
+          },
+          {
+            "name": "Vex"
+          }
+        ]
+      },
+      {
+        "rank": 17,
+        "score": 1139110,
+        "players": [
+          {
+            "name": "Drift"
+          },
+          {
+            "name": "Shard"
+          }
+        ]
+      },
+      {
+        "rank": 18,
+        "score": 1127370,
+        "players": [
+          {
+            "name": "Cinder"
+          },
+          {
+            "name": "Jolt"
+          }
+        ]
+      },
+      {
+        "rank": 19,
+        "score": 1115631,
+        "players": [
+          {
+            "name": "Nail"
+          },
+          {
+            "name": "Ulna"
+          }
+        ]
+      },
+      {
+        "rank": 20,
+        "score": 1103891,
+        "players": [
+          {
+            "name": "Yarn"
+          },
+          {
+            "name": "Fang"
+          }
+        ]
+      },
+      {
+        "rank": 21,
+        "score": 1093110,
+        "players": [
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Vesper"
+          }
+        ]
+      },
+      {
+        "rank": 22,
+        "score": 1081370,
+        "players": [
+          {
+            "name": "DuskPike"
+          },
+          {
+            "name": "Hexa"
+          }
+        ]
+      },
+      {
+        "rank": 23,
+        "score": 1069630,
+        "players": [
+          {
+            "name": "Fenn"
+          },
+          {
+            "name": "Bolt"
+          }
+        ]
+      },
+      {
+        "rank": 24,
+        "score": 1057890,
+        "players": [
+          {
+            "name": "Quill"
+          },
+          {
+            "name": "Iota"
+          }
+        ]
+      },
+      {
+        "rank": 25,
+        "score": 1046150,
+        "players": [
+          {
+            "name": "Kite"
+          },
+          {
+            "name": "Hawk"
+          }
+        ]
+      },
+      {
+        "rank": 26,
+        "score": 1035567,
+        "players": [
+          {
+            "name": "Loom"
+          },
+          {
+            "name": "Spire"
+          }
+        ]
+      },
+      {
+        "rank": 27,
+        "score": 1023827,
+        "players": [
+          {
+            "name": "Wren"
+          },
+          {
+            "name": "Dusk"
+          }
+        ]
+      },
+      {
+        "rank": 28,
+        "score": 1013046,
+        "players": [
+          {
+            "name": "Husk"
+          },
+          {
+            "name": "NyxBlade"
+          }
+        ]
+      },
+      {
+        "rank": 29,
+        "score": 1001306,
+        "players": [
+          {
+            "name": "MiraSol"
+          },
+          {
+            "name": "Torv"
+          }
+        ]
+      },
+      {
+        "rank": 30,
+        "score": 989567,
+        "players": [
+          {
+            "name": "Grit"
+          },
+          {
+            "name": "Rook"
+          }
+        ]
+      },
+      {
+        "rank": 31,
+        "score": 977827,
+        "players": [
+          {
+            "name": "Vex"
+          },
+          {
+            "name": "Flint"
+          }
+        ]
+      },
+      {
+        "rank": 32,
+        "score": 966087,
+        "players": [
+          {
+            "name": "Shard"
+          },
+          {
+            "name": "Frost"
+          }
+        ]
+      },
+      {
+        "rank": 33,
+        "score": 954347,
+        "players": [
+          {
+            "name": "Jolt"
+          },
+          {
+            "name": "Quartz"
+          }
+        ]
+      },
+      {
+        "rank": 34,
+        "score": 942607,
+        "players": [
+          {
+            "name": "Ulna"
+          },
+          {
+            "name": "Bloom"
+          }
+        ]
+      },
+      {
+        "rank": 35,
+        "score": 931826,
+        "players": [
+          {
+            "name": "Fang"
+          },
+          {
+            "name": "Mire"
+          }
+        ]
+      },
+      {
+        "rank": 36,
+        "score": 920086,
+        "players": [
+          {
+            "name": "Vesper"
+          },
+          {
+            "name": "Brim"
+          }
+        ]
+      },
+      {
+        "rank": 37,
+        "score": 908346,
+        "players": [
+          {
+            "name": "Hexa"
+          },
+          {
+            "name": "Pike"
+          }
+        ]
+      },
+      {
+        "rank": 38,
+        "score": 896606,
+        "players": [
+          {
+            "name": "Bolt"
+          },
+          {
+            "name": "Nox"
+          }
+        ]
+      },
+      {
+        "rank": 39,
+        "score": 886023,
+        "players": [
+          {
+            "name": "Iota"
+          },
+          {
+            "name": "Dale"
+          }
+        ]
+      },
+      {
+        "rank": 40,
+        "score": 874283,
+        "players": [
+          {
+            "name": "Hawk"
+          },
+          {
+            "name": "Opal"
+          }
+        ]
+      },
+      {
+        "rank": 41,
+        "score": 862543,
+        "players": [
+          {
+            "name": "Spire"
+          },
+          {
+            "name": "Zeal"
+          }
+        ]
+      },
+      {
+        "rank": 42,
+        "score": 851763,
+        "players": [
+          {
+            "name": "Dusk"
+          },
+          {
+            "name": "Keep"
+          }
+        ]
+      },
+      {
+        "rank": 43,
+        "score": 840023,
+        "players": [
+          {
+            "name": "NyxBlade"
+          },
+          {
+            "name": "Orin"
+          }
+        ]
+      },
+      {
+        "rank": 44,
+        "score": 828283,
+        "players": [
+          {
+            "name": "Torv"
+          },
+          {
+            "name": "Korr"
+          }
+        ]
+      },
+      {
+        "rank": 45,
+        "score": 816543,
+        "players": [
+          {
+            "name": "Rook"
+          },
+          {
+            "name": "Haze"
+          }
+        ]
+      },
+      {
+        "rank": 46,
+        "score": 804803,
+        "players": [
+          {
+            "name": "Flint"
+          },
+          {
+            "name": "Bram"
+          }
+        ]
+      },
+      {
+        "rank": 47,
+        "score": 793063,
+        "players": [
+          {
+            "name": "Frost"
+          },
+          {
+            "name": "Moth"
+          }
+        ]
+      },
+      {
+        "rank": 48,
+        "score": 781323,
+        "players": [
+          {
+            "name": "Quartz"
+          },
+          {
+            "name": "Xylo"
+          }
+        ]
+      },
+      {
+        "rank": 49,
+        "score": 770542,
+        "players": [
+          {
+            "name": "Bloom"
+          },
+          {
+            "name": "Ivy"
+          }
+        ]
+      },
+      {
+        "rank": 50,
+        "score": 758802,
+        "players": [
+          {
+            "name": "Mire"
+          },
+          {
+            "name": "RuneFox"
+          }
+        ]
+      },
+      {
+        "rank": 51,
+        "score": 747062,
+        "players": [
+          {
+            "name": "Brim"
+          },
+          {
+            "name": "Wisp"
+          }
+        ]
+      },
+      {
+        "rank": 52,
+        "score": 736479,
+        "players": [
+          {
+            "name": "Pike"
+          },
+          {
+            "name": "Onyx"
+          }
+        ]
+      },
+      {
+        "rank": 53,
+        "score": 724740,
+        "players": [
+          {
+            "name": "Nox"
+          },
+          {
+            "name": "Vow"
+          }
+        ]
+      },
+      {
+        "rank": 54,
+        "score": 713000,
+        "players": [
+          {
+            "name": "Dale"
+          },
+          {
+            "name": "Knot"
+          }
+        ]
+      },
+      {
+        "rank": 55,
+        "score": 701260,
+        "players": [
+          {
+            "name": "Opal"
+          },
+          {
+            "name": "Veil"
+          }
+        ]
+      },
+      {
+        "rank": 56,
+        "score": 690479,
+        "players": [
+          {
+            "name": "Zeal"
+          },
+          {
+            "name": "Glow"
+          }
+        ]
+      },
+      {
+        "rank": 57,
+        "score": 678739,
+        "players": [
+          {
+            "name": "Keep"
+          },
+          {
+            "name": "Kaelthorn"
+          }
+        ]
+      },
+      {
+        "rank": 58,
+        "score": 666999,
+        "players": [
+          {
+            "name": "Orin"
+          },
+          {
+            "name": "Noct"
+          }
+        ]
+      },
+      {
+        "rank": 59,
+        "score": 655259,
+        "players": [
+          {
+            "name": "Korr"
+          },
+          {
+            "name": "Crux"
+          }
+        ]
+      },
+      {
+        "rank": 60,
+        "score": 643519,
+        "players": [
+          {
+            "name": "Haze"
+          },
+          {
+            "name": "Prism"
+          }
+        ]
+      },
+      {
+        "rank": 61,
+        "score": 631779,
+        "players": [
+          {
+            "name": "Bram"
+          },
+          {
+            "name": "Iris"
+          }
+        ]
+      },
+      {
+        "rank": 62,
+        "score": 620039,
+        "players": [
+          {
+            "name": "Moth"
+          },
+          {
+            "name": "Tide"
+          }
+        ]
+      },
+      {
+        "rank": 63,
+        "score": 609258,
+        "players": [
+          {
+            "name": "Xylo"
+          },
+          {
+            "name": "Elm"
+          }
+        ]
+      },
+      {
+        "rank": 64,
+        "score": 597518,
+        "players": [
+          {
+            "name": "Ivy"
+          },
+          {
+            "name": "Ashward"
+          }
+        ]
+      },
+      {
+        "rank": 65,
+        "score": 586936,
+        "players": [
+          {
+            "name": "RuneFox"
+          },
+          {
+            "name": "Eira"
+          }
+        ]
+      },
+      {
+        "rank": 66,
+        "score": 575196,
+        "players": [
+          {
+            "name": "Wisp"
+          },
+          {
+            "name": "Jade"
+          }
+        ]
+      },
+      {
+        "rank": 67,
+        "score": 563456,
+        "players": [
+          {
+            "name": "Onyx"
+          },
+          {
+            "name": "Gale"
+          }
+        ]
+      },
+      {
+        "rank": 68,
+        "score": 551716,
+        "players": [
+          {
+            "name": "Vow"
+          },
+          {
+            "name": "Glyph"
+          }
+        ]
+      },
+      {
+        "rank": 69,
+        "score": 539976,
+        "players": [
+          {
+            "name": "Knot"
+          },
+          {
+            "name": "Rift"
+          }
+        ]
+      },
+      {
+        "rank": 70,
+        "score": 529195,
+        "players": [
+          {
+            "name": "Veil"
+          },
+          {
+            "name": "Cove"
+          }
+        ]
+      },
+      {
+        "rank": 71,
+        "score": 517455,
+        "players": [
+          {
+            "name": "Glow"
+          },
+          {
+            "name": "Reich"
+          }
+        ]
+      },
+      {
+        "rank": 72,
+        "score": 505715,
+        "players": [
+          {
+            "name": "Kaelthorn"
+          },
+          {
+            "name": "Lira"
+          }
+        ]
+      },
+      {
+        "rank": 73,
+        "score": 493975,
+        "players": [
+          {
+            "name": "Noct"
+          },
+          {
+            "name": "Moss"
+          }
+        ]
+      },
+      {
+        "rank": 74,
+        "score": 482235,
+        "players": [
+          {
+            "name": "Crux"
+          },
+          {
+            "name": "Ember"
+          }
+        ]
+      },
+      {
+        "rank": 75,
+        "score": 470495,
+        "players": [
+          {
+            "name": "Prism"
+          },
+          {
+            "name": "Echo"
+          }
+        ]
+      },
+      {
+        "rank": 76,
+        "score": 458756,
+        "players": [
+          {
+            "name": "Iris"
+          },
+          {
+            "name": "Prow"
+          }
+        ]
+      },
+      {
+        "rank": 77,
+        "score": 447975,
+        "players": [
+          {
+            "name": "Tide"
+          },
+          {
+            "name": "Apex"
+          }
+        ]
+      },
+      {
+        "rank": 78,
+        "score": 437392,
+        "players": [
+          {
+            "name": "Elm"
+          },
+          {
+            "name": "Lark"
+          }
+        ]
+      },
+      {
+        "rank": 79,
+        "score": 425652,
+        "players": [
+          {
+            "name": "Ashward"
+          },
+          {
+            "name": "Sable"
+          }
+        ]
+      },
+      {
+        "rank": 80,
+        "score": 413912,
+        "players": [
+          {
+            "name": "Eira"
+          },
+          {
+            "name": "Yale"
+          }
+        ]
+      },
+      {
+        "rank": 81,
+        "score": 402172,
+        "players": [
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Drift"
+          }
+        ]
+      },
+      {
+        "rank": 82,
+        "score": 390432,
+        "players": [
+          {
+            "name": "Gale"
+          },
+          {
+            "name": "Cinder"
+          }
+        ]
+      },
+      {
+        "rank": 83,
+        "score": 378692,
+        "players": [
+          {
+            "name": "Glyph"
+          },
+          {
+            "name": "Nail"
+          }
+        ]
+      },
+      {
+        "rank": 84,
+        "score": 367911,
+        "players": [
+          {
+            "name": "Rift"
+          },
+          {
+            "name": "Yarn"
+          }
+        ]
+      },
+      {
+        "rank": 85,
+        "score": 356171,
+        "players": [
+          {
+            "name": "Cove"
+          },
+          {
+            "name": "Jade"
+          }
+        ]
+      },
+      {
+        "rank": 86,
+        "score": 344431,
+        "players": [
+          {
+            "name": "Reich"
+          },
+          {
+            "name": "DuskPike"
+          }
+        ]
+      },
+      {
+        "rank": 87,
+        "score": 332691,
+        "players": [
+          {
+            "name": "Lira"
+          },
+          {
+            "name": "Fenn"
+          }
+        ]
+      },
+      {
+        "rank": 88,
+        "score": 320952,
+        "players": [
+          {
+            "name": "Moss"
+          },
+          {
+            "name": "Quill"
+          }
+        ]
+      },
+      {
+        "rank": 89,
+        "score": 309212,
+        "players": [
+          {
+            "name": "Ember"
+          },
+          {
+            "name": "Kite"
+          }
+        ]
+      },
+      {
+        "rank": 90,
+        "score": 297472,
+        "players": [
+          {
+            "name": "Echo"
+          },
+          {
+            "name": "Loom"
+          }
+        ]
+      },
+      {
+        "rank": 91,
+        "score": 287848,
+        "players": [
+          {
+            "name": "Prow"
+          },
+          {
+            "name": "Wren"
+          }
+        ]
+      },
+      {
+        "rank": 92,
+        "score": 276108,
+        "players": [
+          {
+            "name": "Apex"
+          },
+          {
+            "name": "Husk"
+          }
+        ]
+      },
+      {
+        "rank": 93,
+        "score": 264368,
+        "players": [
+          {
+            "name": "Lark"
+          },
+          {
+            "name": "MiraSol"
+          }
+        ]
+      },
+      {
+        "rank": 94,
+        "score": 252628,
+        "players": [
+          {
+            "name": "Sable"
+          },
+          {
+            "name": "Grit"
+          }
+        ]
+      },
+      {
+        "rank": 95,
+        "score": 240888,
+        "players": [
+          {
+            "name": "Yale"
+          },
+          {
+            "name": "Vex"
+          }
+        ]
+      },
+      {
+        "rank": 96,
+        "score": 229148,
+        "players": [
+          {
+            "name": "Drift"
+          },
+          {
+            "name": "Shard"
+          }
+        ]
+      },
+      {
+        "rank": 97,
+        "score": 217408,
+        "players": [
+          {
+            "name": "Cinder"
+          },
+          {
+            "name": "Jolt"
+          }
+        ]
+      },
+      {
+        "rank": 98,
+        "score": 206627,
+        "players": [
+          {
+            "name": "Nail"
+          },
+          {
+            "name": "Ulna"
+          }
+        ]
+      },
+      {
+        "rank": 99,
+        "score": 194888,
+        "players": [
+          {
+            "name": "Yarn"
+          },
+          {
+            "name": "Fang"
+          }
+        ]
+      },
+      {
+        "rank": 100,
+        "score": 183148,
+        "players": [
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Vesper"
+          }
+        ]
+      }
+    ],
+    "trio": [
+      {
+        "rank": 1,
+        "score": 1412374,
+        "players": [
+          {
+            "name": "Hexa"
+          },
+          {
+            "name": "Pike"
+          },
+          {
+            "name": "Onyx"
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "score": 1399865,
+        "players": [
+          {
+            "name": "Bolt"
+          },
+          {
+            "name": "Nox"
+          },
+          {
+            "name": "Vow"
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "score": 1387355,
+        "players": [
+          {
+            "name": "Iota"
+          },
+          {
+            "name": "Dale"
+          },
+          {
+            "name": "Knot"
+          }
+        ]
+      },
+      {
+        "rank": 4,
+        "score": 1374846,
+        "players": [
+          {
+            "name": "Hawk"
+          },
+          {
+            "name": "Opal"
+          },
+          {
+            "name": "Veil"
+          }
+        ]
+      },
+      {
+        "rank": 5,
+        "score": 1362336,
+        "players": [
+          {
+            "name": "Spire"
+          },
+          {
+            "name": "Zeal"
+          },
+          {
+            "name": "Glow"
+          }
+        ]
+      },
+      {
+        "rank": 6,
+        "score": 1349827,
+        "players": [
+          {
+            "name": "Dusk"
+          },
+          {
+            "name": "Keep"
+          },
+          {
+            "name": "Kaelthorn"
+          }
+        ]
+      },
+      {
+        "rank": 7,
+        "score": 1338276,
+        "players": [
+          {
+            "name": "NyxBlade"
+          },
+          {
+            "name": "Orin"
+          },
+          {
+            "name": "Noct"
+          }
+        ]
+      },
+      {
+        "rank": 8,
+        "score": 1325767,
+        "players": [
+          {
+            "name": "Torv"
+          },
+          {
+            "name": "Korr"
+          },
+          {
+            "name": "Crux"
+          }
+        ]
+      },
+      {
+        "rank": 9,
+        "score": 1313257,
+        "players": [
+          {
+            "name": "Rook"
+          },
+          {
+            "name": "Haze"
+          },
+          {
+            "name": "Prism"
+          }
+        ]
+      },
+      {
+        "rank": 10,
+        "score": 1300748,
+        "players": [
+          {
+            "name": "Flint"
+          },
+          {
+            "name": "Bram"
+          },
+          {
+            "name": "Iris"
+          }
+        ]
+      },
+      {
+        "rank": 11,
+        "score": 1288238,
+        "players": [
+          {
+            "name": "Frost"
+          },
+          {
+            "name": "Moth"
+          },
+          {
+            "name": "Tide"
+          }
+        ]
+      },
+      {
+        "rank": 12,
+        "score": 1275729,
+        "players": [
+          {
+            "name": "Quartz"
+          },
+          {
+            "name": "Xylo"
+          },
+          {
+            "name": "Elm"
+          }
+        ]
+      },
+      {
+        "rank": 13,
+        "score": 1264376,
+        "players": [
+          {
+            "name": "Bloom"
+          },
+          {
+            "name": "Ivy"
+          },
+          {
+            "name": "Ashward"
+          }
+        ]
+      },
+      {
+        "rank": 14,
+        "score": 1252826,
+        "players": [
+          {
+            "name": "Mire"
+          },
+          {
+            "name": "RuneFox"
+          },
+          {
+            "name": "Eira"
+          }
+        ]
+      },
+      {
+        "rank": 15,
+        "score": 1240316,
+        "players": [
+          {
+            "name": "Brim"
+          },
+          {
+            "name": "Wisp"
+          },
+          {
+            "name": "Jade"
+          }
+        ]
+      },
+      {
+        "rank": 16,
+        "score": 1227807,
+        "players": [
+          {
+            "name": "Pike"
+          },
+          {
+            "name": "Onyx"
+          },
+          {
+            "name": "Gale"
+          }
+        ]
+      },
+      {
+        "rank": 17,
+        "score": 1215297,
+        "players": [
+          {
+            "name": "Nox"
+          },
+          {
+            "name": "Vow"
+          },
+          {
+            "name": "Glyph"
+          }
+        ]
+      },
+      {
+        "rank": 18,
+        "score": 1202788,
+        "players": [
+          {
+            "name": "Dale"
+          },
+          {
+            "name": "Knot"
+          },
+          {
+            "name": "Rift"
+          }
+        ]
+      },
+      {
+        "rank": 19,
+        "score": 1190278,
+        "players": [
+          {
+            "name": "Opal"
+          },
+          {
+            "name": "Veil"
+          },
+          {
+            "name": "Cove"
+          }
+        ]
+      },
+      {
+        "rank": 20,
+        "score": 1177769,
+        "players": [
+          {
+            "name": "Zeal"
+          },
+          {
+            "name": "Glow"
+          },
+          {
+            "name": "Reich"
+          }
+        ]
+      },
+      {
+        "rank": 21,
+        "score": 1166218,
+        "players": [
+          {
+            "name": "Keep"
+          },
+          {
+            "name": "Kaelthorn"
+          },
+          {
+            "name": "Lira"
+          }
+        ]
+      },
+      {
+        "rank": 22,
+        "score": 1153709,
+        "players": [
+          {
+            "name": "Orin"
+          },
+          {
+            "name": "Noct"
+          },
+          {
+            "name": "Moss"
+          }
+        ]
+      },
+      {
+        "rank": 23,
+        "score": 1141199,
+        "players": [
+          {
+            "name": "Korr"
+          },
+          {
+            "name": "Crux"
+          },
+          {
+            "name": "Ember"
+          }
+        ]
+      },
+      {
+        "rank": 24,
+        "score": 1128690,
+        "players": [
+          {
+            "name": "Haze"
+          },
+          {
+            "name": "Prism"
+          },
+          {
+            "name": "Echo"
+          }
+        ]
+      },
+      {
+        "rank": 25,
+        "score": 1116181,
+        "players": [
+          {
+            "name": "Bram"
+          },
+          {
+            "name": "Iris"
+          },
+          {
+            "name": "Prow"
+          }
+        ]
+      },
+      {
+        "rank": 26,
+        "score": 1104828,
+        "players": [
+          {
+            "name": "Moth"
+          },
+          {
+            "name": "Tide"
+          },
+          {
+            "name": "Apex"
+          }
+        ]
+      },
+      {
+        "rank": 27,
+        "score": 1092319,
+        "players": [
+          {
+            "name": "Xylo"
+          },
+          {
+            "name": "Elm"
+          },
+          {
+            "name": "Lark"
+          }
+        ]
+      },
+      {
+        "rank": 28,
+        "score": 1080768,
+        "players": [
+          {
+            "name": "Ivy"
+          },
+          {
+            "name": "Ashward"
+          },
+          {
+            "name": "Sable"
+          }
+        ]
+      },
+      {
+        "rank": 29,
+        "score": 1068259,
+        "players": [
+          {
+            "name": "RuneFox"
+          },
+          {
+            "name": "Eira"
+          },
+          {
+            "name": "Yale"
+          }
+        ]
+      },
+      {
+        "rank": 30,
+        "score": 1055749,
+        "players": [
+          {
+            "name": "Wisp"
+          },
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Drift"
+          }
+        ]
+      },
+      {
+        "rank": 31,
+        "score": 1043240,
+        "players": [
+          {
+            "name": "Onyx"
+          },
+          {
+            "name": "Gale"
+          },
+          {
+            "name": "Cinder"
+          }
+        ]
+      },
+      {
+        "rank": 32,
+        "score": 1030730,
+        "players": [
+          {
+            "name": "Vow"
+          },
+          {
+            "name": "Glyph"
+          },
+          {
+            "name": "Nail"
+          }
+        ]
+      },
+      {
+        "rank": 33,
+        "score": 1018221,
+        "players": [
+          {
+            "name": "Knot"
+          },
+          {
+            "name": "Rift"
+          },
+          {
+            "name": "Yarn"
+          }
+        ]
+      },
+      {
+        "rank": 34,
+        "score": 1005711,
+        "players": [
+          {
+            "name": "Veil"
+          },
+          {
+            "name": "Cove"
+          },
+          {
+            "name": "Jade"
+          }
+        ]
+      },
+      {
+        "rank": 35,
+        "score": 994161,
+        "players": [
+          {
+            "name": "Glow"
+          },
+          {
+            "name": "Reich"
+          },
+          {
+            "name": "DuskPike"
+          }
+        ]
+      },
+      {
+        "rank": 36,
+        "score": 981651,
+        "players": [
+          {
+            "name": "Kaelthorn"
+          },
+          {
+            "name": "Lira"
+          },
+          {
+            "name": "Fenn"
+          }
+        ]
+      },
+      {
+        "rank": 37,
+        "score": 969142,
+        "players": [
+          {
+            "name": "Noct"
+          },
+          {
+            "name": "Moss"
+          },
+          {
+            "name": "Quill"
+          }
+        ]
+      },
+      {
+        "rank": 38,
+        "score": 956632,
+        "players": [
+          {
+            "name": "Crux"
+          },
+          {
+            "name": "Ember"
+          },
+          {
+            "name": "Kite"
+          }
+        ]
+      },
+      {
+        "rank": 39,
+        "score": 945280,
+        "players": [
+          {
+            "name": "Prism"
+          },
+          {
+            "name": "Echo"
+          },
+          {
+            "name": "Loom"
+          }
+        ]
+      },
+      {
+        "rank": 40,
+        "score": 932770,
+        "players": [
+          {
+            "name": "Iris"
+          },
+          {
+            "name": "Prow"
+          },
+          {
+            "name": "Wren"
+          }
+        ]
+      },
+      {
+        "rank": 41,
+        "score": 920261,
+        "players": [
+          {
+            "name": "Tide"
+          },
+          {
+            "name": "Apex"
+          },
+          {
+            "name": "Husk"
+          }
+        ]
+      },
+      {
+        "rank": 42,
+        "score": 908710,
+        "players": [
+          {
+            "name": "Elm"
+          },
+          {
+            "name": "Lark"
+          },
+          {
+            "name": "MiraSol"
+          }
+        ]
+      },
+      {
+        "rank": 43,
+        "score": 896201,
+        "players": [
+          {
+            "name": "Ashward"
+          },
+          {
+            "name": "Sable"
+          },
+          {
+            "name": "Grit"
+          }
+        ]
+      },
+      {
+        "rank": 44,
+        "score": 883691,
+        "players": [
+          {
+            "name": "Eira"
+          },
+          {
+            "name": "Yale"
+          },
+          {
+            "name": "Vex"
+          }
+        ]
+      },
+      {
+        "rank": 45,
+        "score": 871182,
+        "players": [
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Drift"
+          },
+          {
+            "name": "Shard"
+          }
+        ]
+      },
+      {
+        "rank": 46,
+        "score": 858672,
+        "players": [
+          {
+            "name": "Gale"
+          },
+          {
+            "name": "Cinder"
+          },
+          {
+            "name": "Jolt"
+          }
+        ]
+      },
+      {
+        "rank": 47,
+        "score": 846163,
+        "players": [
+          {
+            "name": "Glyph"
+          },
+          {
+            "name": "Nail"
+          },
+          {
+            "name": "Ulna"
+          }
+        ]
+      },
+      {
+        "rank": 48,
+        "score": 833654,
+        "players": [
+          {
+            "name": "Rift"
+          },
+          {
+            "name": "Yarn"
+          },
+          {
+            "name": "Fang"
+          }
+        ]
+      },
+      {
+        "rank": 49,
+        "score": 822103,
+        "players": [
+          {
+            "name": "Cove"
+          },
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Vesper"
+          }
+        ]
+      },
+      {
+        "rank": 50,
+        "score": 809594,
+        "players": [
+          {
+            "name": "Reich"
+          },
+          {
+            "name": "DuskPike"
+          },
+          {
+            "name": "Hexa"
+          }
+        ]
+      },
+      {
+        "rank": 51,
+        "score": 797084,
+        "players": [
+          {
+            "name": "Lira"
+          },
+          {
+            "name": "Fenn"
+          },
+          {
+            "name": "Bolt"
+          }
+        ]
+      },
+      {
+        "rank": 52,
+        "score": 785732,
+        "players": [
+          {
+            "name": "Moss"
+          },
+          {
+            "name": "Quill"
+          },
+          {
+            "name": "Iota"
+          }
+        ]
+      },
+      {
+        "rank": 53,
+        "score": 773222,
+        "players": [
+          {
+            "name": "Ember"
+          },
+          {
+            "name": "Kite"
+          },
+          {
+            "name": "Hawk"
+          }
+        ]
+      },
+      {
+        "rank": 54,
+        "score": 760713,
+        "players": [
+          {
+            "name": "Echo"
+          },
+          {
+            "name": "Loom"
+          },
+          {
+            "name": "Spire"
+          }
+        ]
+      },
+      {
+        "rank": 55,
+        "score": 748203,
+        "players": [
+          {
+            "name": "Prow"
+          },
+          {
+            "name": "Wren"
+          },
+          {
+            "name": "Dusk"
+          }
+        ]
+      },
+      {
+        "rank": 56,
+        "score": 736653,
+        "players": [
+          {
+            "name": "Apex"
+          },
+          {
+            "name": "Husk"
+          },
+          {
+            "name": "NyxBlade"
+          }
+        ]
+      },
+      {
+        "rank": 57,
+        "score": 724143,
+        "players": [
+          {
+            "name": "Lark"
+          },
+          {
+            "name": "MiraSol"
+          },
+          {
+            "name": "Torv"
+          }
+        ]
+      },
+      {
+        "rank": 58,
+        "score": 711634,
+        "players": [
+          {
+            "name": "Sable"
+          },
+          {
+            "name": "Grit"
+          },
+          {
+            "name": "Rook"
+          }
+        ]
+      },
+      {
+        "rank": 59,
+        "score": 699124,
+        "players": [
+          {
+            "name": "Yale"
+          },
+          {
+            "name": "Vex"
+          },
+          {
+            "name": "Flint"
+          }
+        ]
+      },
+      {
+        "rank": 60,
+        "score": 686615,
+        "players": [
+          {
+            "name": "Drift"
+          },
+          {
+            "name": "Shard"
+          },
+          {
+            "name": "Frost"
+          }
+        ]
+      },
+      {
+        "rank": 61,
+        "score": 674105,
+        "players": [
+          {
+            "name": "Cinder"
+          },
+          {
+            "name": "Jolt"
+          },
+          {
+            "name": "Quartz"
+          }
+        ]
+      },
+      {
+        "rank": 62,
+        "score": 661596,
+        "players": [
+          {
+            "name": "Nail"
+          },
+          {
+            "name": "Ulna"
+          },
+          {
+            "name": "Bloom"
+          }
+        ]
+      },
+      {
+        "rank": 63,
+        "score": 650045,
+        "players": [
+          {
+            "name": "Yarn"
+          },
+          {
+            "name": "Fang"
+          },
+          {
+            "name": "Mire"
+          }
+        ]
+      },
+      {
+        "rank": 64,
+        "score": 637536,
+        "players": [
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Vesper"
+          },
+          {
+            "name": "Brim"
+          }
+        ]
+      },
+      {
+        "rank": 65,
+        "score": 626183,
+        "players": [
+          {
+            "name": "DuskPike"
+          },
+          {
+            "name": "Hexa"
+          },
+          {
+            "name": "Pike"
+          }
+        ]
+      },
+      {
+        "rank": 66,
+        "score": 613674,
+        "players": [
+          {
+            "name": "Fenn"
+          },
+          {
+            "name": "Bolt"
+          },
+          {
+            "name": "Nox"
+          }
+        ]
+      },
+      {
+        "rank": 67,
+        "score": 601164,
+        "players": [
+          {
+            "name": "Quill"
+          },
+          {
+            "name": "Iota"
+          },
+          {
+            "name": "Dale"
+          }
+        ]
+      },
+      {
+        "rank": 68,
+        "score": 588655,
+        "players": [
+          {
+            "name": "Kite"
+          },
+          {
+            "name": "Hawk"
+          },
+          {
+            "name": "Opal"
+          }
+        ]
+      },
+      {
+        "rank": 69,
+        "score": 576145,
+        "players": [
+          {
+            "name": "Loom"
+          },
+          {
+            "name": "Spire"
+          },
+          {
+            "name": "Zeal"
+          }
+        ]
+      },
+      {
+        "rank": 70,
+        "score": 564595,
+        "players": [
+          {
+            "name": "Wren"
+          },
+          {
+            "name": "Dusk"
+          },
+          {
+            "name": "Keep"
+          }
+        ]
+      },
+      {
+        "rank": 71,
+        "score": 552086,
+        "players": [
+          {
+            "name": "Husk"
+          },
+          {
+            "name": "NyxBlade"
+          },
+          {
+            "name": "Orin"
+          }
+        ]
+      },
+      {
+        "rank": 72,
+        "score": 539576,
+        "players": [
+          {
+            "name": "MiraSol"
+          },
+          {
+            "name": "Torv"
+          },
+          {
+            "name": "Korr"
+          }
+        ]
+      },
+      {
+        "rank": 73,
+        "score": 527067,
+        "players": [
+          {
+            "name": "Grit"
+          },
+          {
+            "name": "Rook"
+          },
+          {
+            "name": "Haze"
+          }
+        ]
+      },
+      {
+        "rank": 74,
+        "score": 514557,
+        "players": [
+          {
+            "name": "Vex"
+          },
+          {
+            "name": "Flint"
+          },
+          {
+            "name": "Bram"
+          }
+        ]
+      },
+      {
+        "rank": 75,
+        "score": 502048,
+        "players": [
+          {
+            "name": "Shard"
+          },
+          {
+            "name": "Frost"
+          },
+          {
+            "name": "Moth"
+          }
+        ]
+      },
+      {
+        "rank": 76,
+        "score": 489538,
+        "players": [
+          {
+            "name": "Jolt"
+          },
+          {
+            "name": "Quartz"
+          },
+          {
+            "name": "Xylo"
+          }
+        ]
+      },
+      {
+        "rank": 77,
+        "score": 477988,
+        "players": [
+          {
+            "name": "Ulna"
+          },
+          {
+            "name": "Bloom"
+          },
+          {
+            "name": "Ivy"
+          }
+        ]
+      },
+      {
+        "rank": 78,
+        "score": 466635,
+        "players": [
+          {
+            "name": "Fang"
+          },
+          {
+            "name": "Mire"
+          },
+          {
+            "name": "RuneFox"
+          }
+        ]
+      },
+      {
+        "rank": 79,
+        "score": 454126,
+        "players": [
+          {
+            "name": "Vesper"
+          },
+          {
+            "name": "Brim"
+          },
+          {
+            "name": "Wisp"
+          }
+        ]
+      },
+      {
+        "rank": 80,
+        "score": 441616,
+        "players": [
+          {
+            "name": "Hexa"
+          },
+          {
+            "name": "Pike"
+          },
+          {
+            "name": "Onyx"
+          }
+        ]
+      },
+      {
+        "rank": 81,
+        "score": 429107,
+        "players": [
+          {
+            "name": "Bolt"
+          },
+          {
+            "name": "Nox"
+          },
+          {
+            "name": "Vow"
+          }
+        ]
+      },
+      {
+        "rank": 82,
+        "score": 416597,
+        "players": [
+          {
+            "name": "Iota"
+          },
+          {
+            "name": "Dale"
+          },
+          {
+            "name": "Knot"
+          }
+        ]
+      },
+      {
+        "rank": 83,
+        "score": 404088,
+        "players": [
+          {
+            "name": "Hawk"
+          },
+          {
+            "name": "Opal"
+          },
+          {
+            "name": "Veil"
+          }
+        ]
+      },
+      {
+        "rank": 84,
+        "score": 392537,
+        "players": [
+          {
+            "name": "Spire"
+          },
+          {
+            "name": "Zeal"
+          },
+          {
+            "name": "Glow"
+          }
+        ]
+      },
+      {
+        "rank": 85,
+        "score": 380028,
+        "players": [
+          {
+            "name": "Dusk"
+          },
+          {
+            "name": "Keep"
+          },
+          {
+            "name": "Kaelthorn"
+          }
+        ]
+      },
+      {
+        "rank": 86,
+        "score": 367518,
+        "players": [
+          {
+            "name": "NyxBlade"
+          },
+          {
+            "name": "Orin"
+          },
+          {
+            "name": "Noct"
+          }
+        ]
+      },
+      {
+        "rank": 87,
+        "score": 355009,
+        "players": [
+          {
+            "name": "Torv"
+          },
+          {
+            "name": "Korr"
+          },
+          {
+            "name": "Crux"
+          }
+        ]
+      },
+      {
+        "rank": 88,
+        "score": 342499,
+        "players": [
+          {
+            "name": "Rook"
+          },
+          {
+            "name": "Haze"
+          },
+          {
+            "name": "Prism"
+          }
+        ]
+      },
+      {
+        "rank": 89,
+        "score": 329990,
+        "players": [
+          {
+            "name": "Flint"
+          },
+          {
+            "name": "Bram"
+          },
+          {
+            "name": "Iris"
+          }
+        ]
+      },
+      {
+        "rank": 90,
+        "score": 317480,
+        "players": [
+          {
+            "name": "Frost"
+          },
+          {
+            "name": "Moth"
+          },
+          {
+            "name": "Tide"
+          }
+        ]
+      },
+      {
+        "rank": 91,
+        "score": 307087,
+        "players": [
+          {
+            "name": "Quartz"
+          },
+          {
+            "name": "Xylo"
+          },
+          {
+            "name": "Elm"
+          }
+        ]
+      },
+      {
+        "rank": 92,
+        "score": 294577,
+        "players": [
+          {
+            "name": "Bloom"
+          },
+          {
+            "name": "Ivy"
+          },
+          {
+            "name": "Ashward"
+          }
+        ]
+      },
+      {
+        "rank": 93,
+        "score": 282068,
+        "players": [
+          {
+            "name": "Mire"
+          },
+          {
+            "name": "RuneFox"
+          },
+          {
+            "name": "Eira"
+          }
+        ]
+      },
+      {
+        "rank": 94,
+        "score": 269559,
+        "players": [
+          {
+            "name": "Brim"
+          },
+          {
+            "name": "Wisp"
+          },
+          {
+            "name": "Jade"
+          }
+        ]
+      },
+      {
+        "rank": 95,
+        "score": 257049,
+        "players": [
+          {
+            "name": "Pike"
+          },
+          {
+            "name": "Onyx"
+          },
+          {
+            "name": "Gale"
+          }
+        ]
+      },
+      {
+        "rank": 96,
+        "score": 244540,
+        "players": [
+          {
+            "name": "Nox"
+          },
+          {
+            "name": "Vow"
+          },
+          {
+            "name": "Glyph"
+          }
+        ]
+      },
+      {
+        "rank": 97,
+        "score": 232030,
+        "players": [
+          {
+            "name": "Dale"
+          },
+          {
+            "name": "Knot"
+          },
+          {
+            "name": "Rift"
+          }
+        ]
+      },
+      {
+        "rank": 98,
+        "score": 220480,
+        "players": [
+          {
+            "name": "Opal"
+          },
+          {
+            "name": "Veil"
+          },
+          {
+            "name": "Cove"
+          }
+        ]
+      },
+      {
+        "rank": 99,
+        "score": 207970,
+        "players": [
+          {
+            "name": "Zeal"
+          },
+          {
+            "name": "Glow"
+          },
+          {
+            "name": "Reich"
+          }
+        ]
+      },
+      {
+        "rank": 100,
+        "score": 195461,
+        "players": [
+          {
+            "name": "Keep"
+          },
+          {
+            "name": "Kaelthorn"
+          },
+          {
+            "name": "Lira"
+          }
+        ]
+      }
+    ],
+    "squad": [
+      {
+        "rank": 1,
+        "score": 1245574,
+        "players": [
+          {
+            "name": "Noct"
+          },
+          {
+            "name": "Moss"
+          },
+          {
+            "name": "Quill"
+          },
+          {
+            "name": "Iota"
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "score": 1234515,
+        "players": [
+          {
+            "name": "Crux"
+          },
+          {
+            "name": "Ember"
+          },
+          {
+            "name": "Kite"
+          },
+          {
+            "name": "Hawk"
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "score": 1223456,
+        "players": [
+          {
+            "name": "Prism"
+          },
+          {
+            "name": "Echo"
+          },
+          {
+            "name": "Loom"
+          },
+          {
+            "name": "Spire"
+          }
+        ]
+      },
+      {
+        "rank": 4,
+        "score": 1212397,
+        "players": [
+          {
+            "name": "Iris"
+          },
+          {
+            "name": "Prow"
+          },
+          {
+            "name": "Wren"
+          },
+          {
+            "name": "Dusk"
+          }
+        ]
+      },
+      {
+        "rank": 5,
+        "score": 1201338,
+        "players": [
+          {
+            "name": "Tide"
+          },
+          {
+            "name": "Apex"
+          },
+          {
+            "name": "Husk"
+          },
+          {
+            "name": "NyxBlade"
+          }
+        ]
+      },
+      {
+        "rank": 6,
+        "score": 1190279,
+        "players": [
+          {
+            "name": "Elm"
+          },
+          {
+            "name": "Lark"
+          },
+          {
+            "name": "MiraSol"
+          },
+          {
+            "name": "Torv"
+          }
+        ]
+      },
+      {
+        "rank": 7,
+        "score": 1180179,
+        "players": [
+          {
+            "name": "Ashward"
+          },
+          {
+            "name": "Sable"
+          },
+          {
+            "name": "Grit"
+          },
+          {
+            "name": "Rook"
+          }
+        ]
+      },
+      {
+        "rank": 8,
+        "score": 1169120,
+        "players": [
+          {
+            "name": "Eira"
+          },
+          {
+            "name": "Yale"
+          },
+          {
+            "name": "Vex"
+          },
+          {
+            "name": "Flint"
+          }
+        ]
+      },
+      {
+        "rank": 9,
+        "score": 1158061,
+        "players": [
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Drift"
+          },
+          {
+            "name": "Shard"
+          },
+          {
+            "name": "Frost"
+          }
+        ]
+      },
+      {
+        "rank": 10,
+        "score": 1147002,
+        "players": [
+          {
+            "name": "Gale"
+          },
+          {
+            "name": "Cinder"
+          },
+          {
+            "name": "Jolt"
+          },
+          {
+            "name": "Quartz"
+          }
+        ]
+      },
+      {
+        "rank": 11,
+        "score": 1135943,
+        "players": [
+          {
+            "name": "Glyph"
+          },
+          {
+            "name": "Nail"
+          },
+          {
+            "name": "Ulna"
+          },
+          {
+            "name": "Bloom"
+          }
+        ]
+      },
+      {
+        "rank": 12,
+        "score": 1124884,
+        "players": [
+          {
+            "name": "Rift"
+          },
+          {
+            "name": "Yarn"
+          },
+          {
+            "name": "Fang"
+          },
+          {
+            "name": "Mire"
+          }
+        ]
+      },
+      {
+        "rank": 13,
+        "score": 1114981,
+        "players": [
+          {
+            "name": "Cove"
+          },
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Vesper"
+          },
+          {
+            "name": "Brim"
+          }
+        ]
+      },
+      {
+        "rank": 14,
+        "score": 1104881,
+        "players": [
+          {
+            "name": "Reich"
+          },
+          {
+            "name": "DuskPike"
+          },
+          {
+            "name": "Hexa"
+          },
+          {
+            "name": "Pike"
+          }
+        ]
+      },
+      {
+        "rank": 15,
+        "score": 1093822,
+        "players": [
+          {
+            "name": "Lira"
+          },
+          {
+            "name": "Fenn"
+          },
+          {
+            "name": "Bolt"
+          },
+          {
+            "name": "Nox"
+          }
+        ]
+      },
+      {
+        "rank": 16,
+        "score": 1082763,
+        "players": [
+          {
+            "name": "Moss"
+          },
+          {
+            "name": "Quill"
+          },
+          {
+            "name": "Iota"
+          },
+          {
+            "name": "Dale"
+          }
+        ]
+      },
+      {
+        "rank": 17,
+        "score": 1071704,
+        "players": [
+          {
+            "name": "Ember"
+          },
+          {
+            "name": "Kite"
+          },
+          {
+            "name": "Hawk"
+          },
+          {
+            "name": "Opal"
+          }
+        ]
+      },
+      {
+        "rank": 18,
+        "score": 1060645,
+        "players": [
+          {
+            "name": "Echo"
+          },
+          {
+            "name": "Loom"
+          },
+          {
+            "name": "Spire"
+          },
+          {
+            "name": "Zeal"
+          }
+        ]
+      },
+      {
+        "rank": 19,
+        "score": 1049586,
+        "players": [
+          {
+            "name": "Prow"
+          },
+          {
+            "name": "Wren"
+          },
+          {
+            "name": "Dusk"
+          },
+          {
+            "name": "Keep"
+          }
+        ]
+      },
+      {
+        "rank": 20,
+        "score": 1038527,
+        "players": [
+          {
+            "name": "Apex"
+          },
+          {
+            "name": "Husk"
+          },
+          {
+            "name": "NyxBlade"
+          },
+          {
+            "name": "Orin"
+          }
+        ]
+      },
+      {
+        "rank": 21,
+        "score": 1028427,
+        "players": [
+          {
+            "name": "Lark"
+          },
+          {
+            "name": "MiraSol"
+          },
+          {
+            "name": "Torv"
+          },
+          {
+            "name": "Korr"
+          }
+        ]
+      },
+      {
+        "rank": 22,
+        "score": 1017368,
+        "players": [
+          {
+            "name": "Sable"
+          },
+          {
+            "name": "Grit"
+          },
+          {
+            "name": "Rook"
+          },
+          {
+            "name": "Haze"
+          }
+        ]
+      },
+      {
+        "rank": 23,
+        "score": 1006309,
+        "players": [
+          {
+            "name": "Yale"
+          },
+          {
+            "name": "Vex"
+          },
+          {
+            "name": "Flint"
+          },
+          {
+            "name": "Bram"
+          }
+        ]
+      },
+      {
+        "rank": 24,
+        "score": 995250,
+        "players": [
+          {
+            "name": "Drift"
+          },
+          {
+            "name": "Shard"
+          },
+          {
+            "name": "Frost"
+          },
+          {
+            "name": "Moth"
+          }
+        ]
+      },
+      {
+        "rank": 25,
+        "score": 984191,
+        "players": [
+          {
+            "name": "Cinder"
+          },
+          {
+            "name": "Jolt"
+          },
+          {
+            "name": "Quartz"
+          },
+          {
+            "name": "Xylo"
+          }
+        ]
+      },
+      {
+        "rank": 26,
+        "score": 974289,
+        "players": [
+          {
+            "name": "Nail"
+          },
+          {
+            "name": "Ulna"
+          },
+          {
+            "name": "Bloom"
+          },
+          {
+            "name": "Ivy"
+          }
+        ]
+      },
+      {
+        "rank": 27,
+        "score": 963230,
+        "players": [
+          {
+            "name": "Yarn"
+          },
+          {
+            "name": "Fang"
+          },
+          {
+            "name": "Mire"
+          },
+          {
+            "name": "RuneFox"
+          }
+        ]
+      },
+      {
+        "rank": 28,
+        "score": 953130,
+        "players": [
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Vesper"
+          },
+          {
+            "name": "Brim"
+          },
+          {
+            "name": "Wisp"
+          }
+        ]
+      },
+      {
+        "rank": 29,
+        "score": 942071,
+        "players": [
+          {
+            "name": "DuskPike"
+          },
+          {
+            "name": "Hexa"
+          },
+          {
+            "name": "Pike"
+          },
+          {
+            "name": "Onyx"
+          }
+        ]
+      },
+      {
+        "rank": 30,
+        "score": 931012,
+        "players": [
+          {
+            "name": "Fenn"
+          },
+          {
+            "name": "Bolt"
+          },
+          {
+            "name": "Nox"
+          },
+          {
+            "name": "Vow"
+          }
+        ]
+      },
+      {
+        "rank": 31,
+        "score": 919953,
+        "players": [
+          {
+            "name": "Quill"
+          },
+          {
+            "name": "Iota"
+          },
+          {
+            "name": "Dale"
+          },
+          {
+            "name": "Knot"
+          }
+        ]
+      },
+      {
+        "rank": 32,
+        "score": 908894,
+        "players": [
+          {
+            "name": "Kite"
+          },
+          {
+            "name": "Hawk"
+          },
+          {
+            "name": "Opal"
+          },
+          {
+            "name": "Veil"
+          }
+        ]
+      },
+      {
+        "rank": 33,
+        "score": 897835,
+        "players": [
+          {
+            "name": "Loom"
+          },
+          {
+            "name": "Spire"
+          },
+          {
+            "name": "Zeal"
+          },
+          {
+            "name": "Glow"
+          }
+        ]
+      },
+      {
+        "rank": 34,
+        "score": 886776,
+        "players": [
+          {
+            "name": "Wren"
+          },
+          {
+            "name": "Dusk"
+          },
+          {
+            "name": "Keep"
+          },
+          {
+            "name": "Kaelthorn"
+          }
+        ]
+      },
+      {
+        "rank": 35,
+        "score": 876676,
+        "players": [
+          {
+            "name": "Husk"
+          },
+          {
+            "name": "NyxBlade"
+          },
+          {
+            "name": "Orin"
+          },
+          {
+            "name": "Noct"
+          }
+        ]
+      },
+      {
+        "rank": 36,
+        "score": 865616,
+        "players": [
+          {
+            "name": "MiraSol"
+          },
+          {
+            "name": "Torv"
+          },
+          {
+            "name": "Korr"
+          },
+          {
+            "name": "Crux"
+          }
+        ]
+      },
+      {
+        "rank": 37,
+        "score": 854557,
+        "players": [
+          {
+            "name": "Grit"
+          },
+          {
+            "name": "Rook"
+          },
+          {
+            "name": "Haze"
+          },
+          {
+            "name": "Prism"
+          }
+        ]
+      },
+      {
+        "rank": 38,
+        "score": 843498,
+        "players": [
+          {
+            "name": "Vex"
+          },
+          {
+            "name": "Flint"
+          },
+          {
+            "name": "Bram"
+          },
+          {
+            "name": "Iris"
+          }
+        ]
+      },
+      {
+        "rank": 39,
+        "score": 833596,
+        "players": [
+          {
+            "name": "Shard"
+          },
+          {
+            "name": "Frost"
+          },
+          {
+            "name": "Moth"
+          },
+          {
+            "name": "Tide"
+          }
+        ]
+      },
+      {
+        "rank": 40,
+        "score": 822537,
+        "players": [
+          {
+            "name": "Jolt"
+          },
+          {
+            "name": "Quartz"
+          },
+          {
+            "name": "Xylo"
+          },
+          {
+            "name": "Elm"
+          }
+        ]
+      },
+      {
+        "rank": 41,
+        "score": 811478,
+        "players": [
+          {
+            "name": "Ulna"
+          },
+          {
+            "name": "Bloom"
+          },
+          {
+            "name": "Ivy"
+          },
+          {
+            "name": "Ashward"
+          }
+        ]
+      },
+      {
+        "rank": 42,
+        "score": 801378,
+        "players": [
+          {
+            "name": "Fang"
+          },
+          {
+            "name": "Mire"
+          },
+          {
+            "name": "RuneFox"
+          },
+          {
+            "name": "Eira"
+          }
+        ]
+      },
+      {
+        "rank": 43,
+        "score": 790319,
+        "players": [
+          {
+            "name": "Vesper"
+          },
+          {
+            "name": "Brim"
+          },
+          {
+            "name": "Wisp"
+          },
+          {
+            "name": "Jade"
+          }
+        ]
+      },
+      {
+        "rank": 44,
+        "score": 779260,
+        "players": [
+          {
+            "name": "Hexa"
+          },
+          {
+            "name": "Pike"
+          },
+          {
+            "name": "Onyx"
+          },
+          {
+            "name": "Gale"
+          }
+        ]
+      },
+      {
+        "rank": 45,
+        "score": 768201,
+        "players": [
+          {
+            "name": "Bolt"
+          },
+          {
+            "name": "Nox"
+          },
+          {
+            "name": "Vow"
+          },
+          {
+            "name": "Glyph"
+          }
+        ]
+      },
+      {
+        "rank": 46,
+        "score": 757142,
+        "players": [
+          {
+            "name": "Iota"
+          },
+          {
+            "name": "Dale"
+          },
+          {
+            "name": "Knot"
+          },
+          {
+            "name": "Rift"
+          }
+        ]
+      },
+      {
+        "rank": 47,
+        "score": 746083,
+        "players": [
+          {
+            "name": "Hawk"
+          },
+          {
+            "name": "Opal"
+          },
+          {
+            "name": "Veil"
+          },
+          {
+            "name": "Cove"
+          }
+        ]
+      },
+      {
+        "rank": 48,
+        "score": 735024,
+        "players": [
+          {
+            "name": "Spire"
+          },
+          {
+            "name": "Zeal"
+          },
+          {
+            "name": "Glow"
+          },
+          {
+            "name": "Reich"
+          }
+        ]
+      },
+      {
+        "rank": 49,
+        "score": 724924,
+        "players": [
+          {
+            "name": "Dusk"
+          },
+          {
+            "name": "Keep"
+          },
+          {
+            "name": "Kaelthorn"
+          },
+          {
+            "name": "Lira"
+          }
+        ]
+      },
+      {
+        "rank": 50,
+        "score": 713865,
+        "players": [
+          {
+            "name": "NyxBlade"
+          },
+          {
+            "name": "Orin"
+          },
+          {
+            "name": "Noct"
+          },
+          {
+            "name": "Moss"
+          }
+        ]
+      },
+      {
+        "rank": 51,
+        "score": 702806,
+        "players": [
+          {
+            "name": "Torv"
+          },
+          {
+            "name": "Korr"
+          },
+          {
+            "name": "Crux"
+          },
+          {
+            "name": "Ember"
+          }
+        ]
+      },
+      {
+        "rank": 52,
+        "score": 692904,
+        "players": [
+          {
+            "name": "Rook"
+          },
+          {
+            "name": "Haze"
+          },
+          {
+            "name": "Prism"
+          },
+          {
+            "name": "Echo"
+          }
+        ]
+      },
+      {
+        "rank": 53,
+        "score": 681845,
+        "players": [
+          {
+            "name": "Flint"
+          },
+          {
+            "name": "Bram"
+          },
+          {
+            "name": "Iris"
+          },
+          {
+            "name": "Prow"
+          }
+        ]
+      },
+      {
+        "rank": 54,
+        "score": 670786,
+        "players": [
+          {
+            "name": "Frost"
+          },
+          {
+            "name": "Moth"
+          },
+          {
+            "name": "Tide"
+          },
+          {
+            "name": "Apex"
+          }
+        ]
+      },
+      {
+        "rank": 55,
+        "score": 659727,
+        "players": [
+          {
+            "name": "Quartz"
+          },
+          {
+            "name": "Xylo"
+          },
+          {
+            "name": "Elm"
+          },
+          {
+            "name": "Lark"
+          }
+        ]
+      },
+      {
+        "rank": 56,
+        "score": 649627,
+        "players": [
+          {
+            "name": "Bloom"
+          },
+          {
+            "name": "Ivy"
+          },
+          {
+            "name": "Ashward"
+          },
+          {
+            "name": "Sable"
+          }
+        ]
+      },
+      {
+        "rank": 57,
+        "score": 638568,
+        "players": [
+          {
+            "name": "Mire"
+          },
+          {
+            "name": "RuneFox"
+          },
+          {
+            "name": "Eira"
+          },
+          {
+            "name": "Yale"
+          }
+        ]
+      },
+      {
+        "rank": 58,
+        "score": 627509,
+        "players": [
+          {
+            "name": "Brim"
+          },
+          {
+            "name": "Wisp"
+          },
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Drift"
+          }
+        ]
+      },
+      {
+        "rank": 59,
+        "score": 616449,
+        "players": [
+          {
+            "name": "Pike"
+          },
+          {
+            "name": "Onyx"
+          },
+          {
+            "name": "Gale"
+          },
+          {
+            "name": "Cinder"
+          }
+        ]
+      },
+      {
+        "rank": 60,
+        "score": 605390,
+        "players": [
+          {
+            "name": "Nox"
+          },
+          {
+            "name": "Vow"
+          },
+          {
+            "name": "Glyph"
+          },
+          {
+            "name": "Nail"
+          }
+        ]
+      },
+      {
+        "rank": 61,
+        "score": 594331,
+        "players": [
+          {
+            "name": "Dale"
+          },
+          {
+            "name": "Knot"
+          },
+          {
+            "name": "Rift"
+          },
+          {
+            "name": "Yarn"
+          }
+        ]
+      },
+      {
+        "rank": 62,
+        "score": 583272,
+        "players": [
+          {
+            "name": "Opal"
+          },
+          {
+            "name": "Veil"
+          },
+          {
+            "name": "Cove"
+          },
+          {
+            "name": "Jade"
+          }
+        ]
+      },
+      {
+        "rank": 63,
+        "score": 573172,
+        "players": [
+          {
+            "name": "Zeal"
+          },
+          {
+            "name": "Glow"
+          },
+          {
+            "name": "Reich"
+          },
+          {
+            "name": "DuskPike"
+          }
+        ]
+      },
+      {
+        "rank": 64,
+        "score": 562113,
+        "players": [
+          {
+            "name": "Keep"
+          },
+          {
+            "name": "Kaelthorn"
+          },
+          {
+            "name": "Lira"
+          },
+          {
+            "name": "Fenn"
+          }
+        ]
+      },
+      {
+        "rank": 65,
+        "score": 552211,
+        "players": [
+          {
+            "name": "Orin"
+          },
+          {
+            "name": "Noct"
+          },
+          {
+            "name": "Moss"
+          },
+          {
+            "name": "Quill"
+          }
+        ]
+      },
+      {
+        "rank": 66,
+        "score": 541152,
+        "players": [
+          {
+            "name": "Korr"
+          },
+          {
+            "name": "Crux"
+          },
+          {
+            "name": "Ember"
+          },
+          {
+            "name": "Kite"
+          }
+        ]
+      },
+      {
+        "rank": 67,
+        "score": 530093,
+        "players": [
+          {
+            "name": "Haze"
+          },
+          {
+            "name": "Prism"
+          },
+          {
+            "name": "Echo"
+          },
+          {
+            "name": "Loom"
+          }
+        ]
+      },
+      {
+        "rank": 68,
+        "score": 519034,
+        "players": [
+          {
+            "name": "Bram"
+          },
+          {
+            "name": "Iris"
+          },
+          {
+            "name": "Prow"
+          },
+          {
+            "name": "Wren"
+          }
+        ]
+      },
+      {
+        "rank": 69,
+        "score": 507975,
+        "players": [
+          {
+            "name": "Moth"
+          },
+          {
+            "name": "Tide"
+          },
+          {
+            "name": "Apex"
+          },
+          {
+            "name": "Husk"
+          }
+        ]
+      },
+      {
+        "rank": 70,
+        "score": 497875,
+        "players": [
+          {
+            "name": "Xylo"
+          },
+          {
+            "name": "Elm"
+          },
+          {
+            "name": "Lark"
+          },
+          {
+            "name": "MiraSol"
+          }
+        ]
+      },
+      {
+        "rank": 71,
+        "score": 486816,
+        "players": [
+          {
+            "name": "Ivy"
+          },
+          {
+            "name": "Ashward"
+          },
+          {
+            "name": "Sable"
+          },
+          {
+            "name": "Grit"
+          }
+        ]
+      },
+      {
+        "rank": 72,
+        "score": 475757,
+        "players": [
+          {
+            "name": "RuneFox"
+          },
+          {
+            "name": "Eira"
+          },
+          {
+            "name": "Yale"
+          },
+          {
+            "name": "Vex"
+          }
+        ]
+      },
+      {
+        "rank": 73,
+        "score": 464698,
+        "players": [
+          {
+            "name": "Wisp"
+          },
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Drift"
+          },
+          {
+            "name": "Shard"
+          }
+        ]
+      },
+      {
+        "rank": 74,
+        "score": 453639,
+        "players": [
+          {
+            "name": "Onyx"
+          },
+          {
+            "name": "Gale"
+          },
+          {
+            "name": "Cinder"
+          },
+          {
+            "name": "Jolt"
+          }
+        ]
+      },
+      {
+        "rank": 75,
+        "score": 442580,
+        "players": [
+          {
+            "name": "Vow"
+          },
+          {
+            "name": "Glyph"
+          },
+          {
+            "name": "Nail"
+          },
+          {
+            "name": "Ulna"
+          }
+        ]
+      },
+      {
+        "rank": 76,
+        "score": 431521,
+        "players": [
+          {
+            "name": "Knot"
+          },
+          {
+            "name": "Rift"
+          },
+          {
+            "name": "Yarn"
+          },
+          {
+            "name": "Fang"
+          }
+        ]
+      },
+      {
+        "rank": 77,
+        "score": 421421,
+        "players": [
+          {
+            "name": "Veil"
+          },
+          {
+            "name": "Cove"
+          },
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Vesper"
+          }
+        ]
+      },
+      {
+        "rank": 78,
+        "score": 411519,
+        "players": [
+          {
+            "name": "Glow"
+          },
+          {
+            "name": "Reich"
+          },
+          {
+            "name": "DuskPike"
+          },
+          {
+            "name": "Hexa"
+          }
+        ]
+      },
+      {
+        "rank": 79,
+        "score": 400460,
+        "players": [
+          {
+            "name": "Kaelthorn"
+          },
+          {
+            "name": "Lira"
+          },
+          {
+            "name": "Fenn"
+          },
+          {
+            "name": "Bolt"
+          }
+        ]
+      },
+      {
+        "rank": 80,
+        "score": 389401,
+        "players": [
+          {
+            "name": "Noct"
+          },
+          {
+            "name": "Moss"
+          },
+          {
+            "name": "Quill"
+          },
+          {
+            "name": "Iota"
+          }
+        ]
+      },
+      {
+        "rank": 81,
+        "score": 378342,
+        "players": [
+          {
+            "name": "Crux"
+          },
+          {
+            "name": "Ember"
+          },
+          {
+            "name": "Kite"
+          },
+          {
+            "name": "Hawk"
+          }
+        ]
+      },
+      {
+        "rank": 82,
+        "score": 367282,
+        "players": [
+          {
+            "name": "Prism"
+          },
+          {
+            "name": "Echo"
+          },
+          {
+            "name": "Loom"
+          },
+          {
+            "name": "Spire"
+          }
+        ]
+      },
+      {
+        "rank": 83,
+        "score": 356223,
+        "players": [
+          {
+            "name": "Iris"
+          },
+          {
+            "name": "Prow"
+          },
+          {
+            "name": "Wren"
+          },
+          {
+            "name": "Dusk"
+          }
+        ]
+      },
+      {
+        "rank": 84,
+        "score": 346123,
+        "players": [
+          {
+            "name": "Tide"
+          },
+          {
+            "name": "Apex"
+          },
+          {
+            "name": "Husk"
+          },
+          {
+            "name": "NyxBlade"
+          }
+        ]
+      },
+      {
+        "rank": 85,
+        "score": 335064,
+        "players": [
+          {
+            "name": "Elm"
+          },
+          {
+            "name": "Lark"
+          },
+          {
+            "name": "MiraSol"
+          },
+          {
+            "name": "Torv"
+          }
+        ]
+      },
+      {
+        "rank": 86,
+        "score": 324005,
+        "players": [
+          {
+            "name": "Ashward"
+          },
+          {
+            "name": "Sable"
+          },
+          {
+            "name": "Grit"
+          },
+          {
+            "name": "Rook"
+          }
+        ]
+      },
+      {
+        "rank": 87,
+        "score": 312946,
+        "players": [
+          {
+            "name": "Eira"
+          },
+          {
+            "name": "Yale"
+          },
+          {
+            "name": "Vex"
+          },
+          {
+            "name": "Flint"
+          }
+        ]
+      },
+      {
+        "rank": 88,
+        "score": 301887,
+        "players": [
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Drift"
+          },
+          {
+            "name": "Shard"
+          },
+          {
+            "name": "Frost"
+          }
+        ]
+      },
+      {
+        "rank": 89,
+        "score": 290828,
+        "players": [
+          {
+            "name": "Gale"
+          },
+          {
+            "name": "Cinder"
+          },
+          {
+            "name": "Jolt"
+          },
+          {
+            "name": "Quartz"
+          }
+        ]
+      },
+      {
+        "rank": 90,
+        "score": 279769,
+        "players": [
+          {
+            "name": "Glyph"
+          },
+          {
+            "name": "Nail"
+          },
+          {
+            "name": "Ulna"
+          },
+          {
+            "name": "Bloom"
+          }
+        ]
+      },
+      {
+        "rank": 91,
+        "score": 270826,
+        "players": [
+          {
+            "name": "Rift"
+          },
+          {
+            "name": "Yarn"
+          },
+          {
+            "name": "Fang"
+          },
+          {
+            "name": "Mire"
+          }
+        ]
+      },
+      {
+        "rank": 92,
+        "score": 259767,
+        "players": [
+          {
+            "name": "Cove"
+          },
+          {
+            "name": "Jade"
+          },
+          {
+            "name": "Vesper"
+          },
+          {
+            "name": "Brim"
+          }
+        ]
+      },
+      {
+        "rank": 93,
+        "score": 248708,
+        "players": [
+          {
+            "name": "Reich"
+          },
+          {
+            "name": "DuskPike"
+          },
+          {
+            "name": "Hexa"
+          },
+          {
+            "name": "Pike"
+          }
+        ]
+      },
+      {
+        "rank": 94,
+        "score": 237649,
+        "players": [
+          {
+            "name": "Lira"
+          },
+          {
+            "name": "Fenn"
+          },
+          {
+            "name": "Bolt"
+          },
+          {
+            "name": "Nox"
+          }
+        ]
+      },
+      {
+        "rank": 95,
+        "score": 226590,
+        "players": [
+          {
+            "name": "Moss"
+          },
+          {
+            "name": "Quill"
+          },
+          {
+            "name": "Iota"
+          },
+          {
+            "name": "Dale"
+          }
+        ]
+      },
+      {
+        "rank": 96,
+        "score": 215531,
+        "players": [
+          {
+            "name": "Ember"
+          },
+          {
+            "name": "Kite"
+          },
+          {
+            "name": "Hawk"
+          },
+          {
+            "name": "Opal"
+          }
+        ]
+      },
+      {
+        "rank": 97,
+        "score": 204472,
+        "players": [
+          {
+            "name": "Echo"
+          },
+          {
+            "name": "Loom"
+          },
+          {
+            "name": "Spire"
+          },
+          {
+            "name": "Zeal"
+          }
+        ]
+      },
+      {
+        "rank": 98,
+        "score": 194372,
+        "players": [
+          {
+            "name": "Prow"
+          },
+          {
+            "name": "Wren"
+          },
+          {
+            "name": "Dusk"
+          },
+          {
+            "name": "Keep"
+          }
+        ]
+      },
+      {
+        "rank": 99,
+        "score": 183313,
+        "players": [
+          {
+            "name": "Apex"
+          },
+          {
+            "name": "Husk"
+          },
+          {
+            "name": "NyxBlade"
+          },
+          {
+            "name": "Orin"
+          }
+        ]
+      },
+      {
+        "rank": 100,
+        "score": 172254,
+        "players": [
+          {
+            "name": "Lark"
+          },
+          {
+            "name": "MiraSol"
+          },
+          {
+            "name": "Torv"
+          },
+          {
+            "name": "Korr"
+          }
+        ]
+      }
+    ]
+  }
+}
