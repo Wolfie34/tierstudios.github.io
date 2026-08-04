@@ -5055,9 +5055,11 @@ textarea.field {
 }
 
 .games-steam-btn.is-soon {
-  opacity: 0.72;
-  cursor: default;
+  opacity: 0.55;
+  cursor: not-allowed;
   pointer-events: none;
+  box-shadow: none;
+  filter: grayscale(0.15);
 }
 
 .games-steam-btn .fa-steam {

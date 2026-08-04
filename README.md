@@ -1,6 +1,6 @@
 # Tier Studios
 
-Independent game studio in **Antalya, Türkiye**.
+Independent game studio.
 
 We develop original games (flagship: **Keep Chaos**), publish titles, and ship Unity production tools on the [Asset Store](https://assetstore.unity.com/publishers/124104).
 
