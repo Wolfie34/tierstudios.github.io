@@ -1924,11 +1924,29 @@ document.addEventListener('DOMContentLoaded', function () {
     countdownTimer = window.setInterval(updateCountdown, 1000);
   }
 
+  function fetchLeaderboardJson() {
+    var liveUrl = 'https://api.tierstudios.com/leaderboard';
+    var demoUrl = '/assets/data/keep-chaos-leaderboard.json?v=' + Date.now();
+    return fetch(liveUrl, { credentials: 'omit' })
+      .then(function (res) {
+        if (!res.ok) return Promise.reject(new Error('live_' + res.status));
+        return res.json().then(function (json) {
+          if (!json || !json.boards) return Promise.reject(new Error('live_shape'));
+          return json;
+        });
+      })
+      .catch(function () {
+        return fetch(demoUrl).then(function (res) {
+          if (!res.ok) return Promise.reject(new Error('demo_' + res.status));
+          return res.json();
+        });
+      });
+  }
+
   function loadBoard(isReset) {
     if (loading) return;
     loading = true;
-    fetch('/assets/data/keep-chaos-leaderboard.json?v=' + Date.now())
-      .then(function (res) { return res.ok ? res.json() : Promise.reject(); })
+    fetchLeaderboardJson()
       .then(function (json) {
         data = json;
         syncCycleFromData(json);
