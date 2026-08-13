@@ -1,6 +1,4 @@
 (function () {
-  var STORAGE_KEY = 'tier-lang';
-
   var T = {
     en: {
       'nav.assets': 'Assets',
@@ -86,10 +84,6 @@
       'games.devLines': '> initializing tier_game_project...\n> loading render pipeline...\n> compiling gameplay systems...\n> binding input maps · ok\n> loading audio buses...\n> shader variants: 142 compiled\n> physics world · synced\n> syncing studio assets · ok\n> navmesh bake queued\n> ai behavior trees loaded\n> playtest build: internal\n> telemetry handshake · active\n> encrypting build manifest...\n> release channel: pending\n> status flag check...',
       'games.devStatus': 'ON STEAM',
       'games.panelAria': 'On Steam',
-      'games.audioAria': 'Game page music',
-      'games.audioMute': 'Mute music',
-      'games.audioUnmute': 'Unmute music',
-      'games.audioVolume': 'Volume',
       'games.shots.kicker': 'Screenshots',
       'games.shots.title': 'Keep Chaos',
       'games.shots.desc': 'Low-poly chaos from active builds · combat, co-op, and the night forest.',
@@ -116,6 +110,10 @@
       'games.press.dlLogo': 'Keep Chaos logo',
       'games.press.dlKeyArt': 'Key art',
       'games.press.download': 'Download',
+      'games.press.downloadAll': 'Download all (.zip)',
+      'games.press.downloadAllHint': 'Includes white & black logos and both key art versions.',
+      'games.press.downloadAllBusy': 'Preparing zip…',
+      'games.press.downloadAllError': 'Could not build the zip. Try again.',
       'games.press.toneWhite': 'White',
       'games.press.toneBlack': 'Black',
       'games.press.toneAria': 'Logo color',
@@ -165,7 +163,6 @@
       'team.join.desc': 'Join our team and create games played by millions worldwide.',
       'team.join.btn': 'Join Our Team',
       'team.join.aria': 'Join the team',
-      'team.thanks': 'We extend our thanks to RestPlay and our sister company The Steelwing Entertainment for their support.',
       'contact.title': 'Contact',
       'contact.desc': 'If there\'s something you want to tell us, <span class="dim">we\'re here.</span> Ran into an issue or bug with our assets or games? Email us.',
       'contact.hqSub': 'Our Headquarters',
@@ -203,6 +200,9 @@
       'title.uiParticle': 'UI Particle System · Tier Studios',
       'title.layerForgeDocs': 'Layer Forge Studio · Documentation · Tier Studios',
       'title.uiParticleDocs': 'UI Particle System · API Docs · Tier Studios',
+      'title.press': 'Press Kit · Tier Studios',
+      'title.privacy': 'Privacy · Tier Studios',
+      'title.cookies': 'Cookie Policy · Tier Studios',
       'title.notFound': 'Page Not Found · Tier Studios',
       '404.label': '404 · Signal Lost',
       '404.title': 'Frequency not found',
@@ -220,7 +220,51 @@
       'footer.layerForgeDocs': 'Layer Forge Docs',
       'footer.uiParticleDocs': 'UI Particle Docs',
       'footer.assetStore': 'Unity Asset Store',
-      'footer.discord': 'Discord Community'
+      'footer.discord': 'Discord Community',
+      'footer.pressKit': 'Press Kit',
+      'footer.privacy': 'Privacy',
+      'footer.cookies': 'Cookie Policy',
+      'footer.cookieSettings': 'Cookie Settings',
+      'footer.lang': 'Language',
+      'footer.langAuto': 'Auto',
+      'privacy.title': 'Privacy',
+      'privacy.desc': 'How this site handles information when you visit, write to us, or pick a language.',
+      'privacy.updated': 'Last updated · 13 August 2026',
+      'privacy.s1.title': 'Who we are',
+      'privacy.s1.body': 'Tier Studios is an independent game studio. This notice covers tierstudios.com and related pages we publish. For privacy questions, write to info@tierstudios.com.',
+      'privacy.s2.title': 'What we collect',
+      'privacy.s2.body': 'If you use the contact form, we receive the name, email, subject, and message you send. We use that only to reply. The site also stores your language choice in the browser so the interface stays in the language you picked.',
+      'privacy.s3.title': 'Cookies',
+      'privacy.s3.body': 'We use necessary storage for language and your cookie choice. Analytics cookies run only if you allow them in Cookie Settings. Details are on the <a href="/cookies">cookie policy</a>.',
+      'privacy.s4.title': 'Third parties',
+      'privacy.s4.body': 'The contact form is delivered through Formspree. Outbound links (Discord, Steam, Unity Asset Store, social accounts) are run by those services. We do not sell personal data.',
+      'privacy.s5.title': 'Your choices',
+      'privacy.s5.body': 'You can change analytics cookies anytime from <button type="button" class="legal-text-btn" data-cookie-settings>Cookie Settings</button>. You can also ask us to delete a message you sent, or clear site data in your browser.',
+      'privacy.s6.title': 'Contact',
+      'privacy.s6.body': 'Questions: <a href="mailto:info@tierstudios.com">info@tierstudios.com</a> · or the <a href="/contact">contact page</a>.',
+      'cookies.title': 'Cookies',
+      'cookies.desc': 'What this site stores in your browser, and how you can change it.',
+      'cookies.updated': 'Last updated · 13 August 2026',
+      'cookies.s1.title': 'Necessary',
+      'cookies.s1.body': 'Language (tier-lang) and your cookie choice (tier-cookies) are stored locally so the site remembers them. These are required for the site to work as you set it. They are not used for ads.',
+      'cookies.s2.title': 'Analytics',
+      'cookies.s2.body': 'If you allow analytics, we use Google Analytics to see which pages are visited. This is off until you turn it on in Cookie Settings. You can switch it off again at any time.',
+      'cookies.s3.title': 'How to change',
+      'cookies.s3.body': 'Open <button type="button" class="legal-text-btn" data-cookie-settings>Cookie Settings</button> from the footer, or from this page. You can also clear site data in your browser. See also the <a href="/privacy">privacy notice</a>.',
+      'cookies.panel.title': 'Cookie Settings',
+      'cookies.panel.desc': 'Choose what this site may store besides what it needs to run.',
+      'cookies.panel.necessary': 'Necessary',
+      'cookies.panel.necessaryDesc': 'Language and your cookie choice. Always on.',
+      'cookies.panel.analytics': 'Analytics',
+      'cookies.panel.analyticsDesc': 'Google Analytics · pages visited, only if you allow it.',
+      'cookies.panel.save': 'Save',
+      'cookies.panel.accept': 'Allow analytics',
+      'cookies.panel.reject': 'Reject analytics',
+      'cookies.panel.policy': 'Cookie policy',
+      'cookies.panel.close': 'Close',
+      'cookies.bar.text': 'Necessary storage is always on. Analytics only if you allow it.',
+      'cookies.bar.accept': 'Accept',
+      'cookies.bar.reject': 'Reject'
     },
     tr: {
       'nav.assets': 'Varlıklar',
@@ -306,10 +350,6 @@
       'games.devLines': '> tier_game_project başlatılıyor...\n> render pipeline yükleniyor...\n> oynanış sistemleri derleniyor...\n> input haritaları bağlanıyor · tamam\n> ses busları yükleniyor...\n> shader varyantları: 142 derlendi\n> fizik dünyası · senkronize\n> stüdyo varlıkları senkronize · tamam\n> navmesh bake kuyruğa alındı\n> ai davranış ağaçları yüklendi\n> playtest build: dahili\n> telemetri el sıkışması · aktif\n> build manifest şifreleniyor...\n> yayın kanalı: beklemede\n> durum bayrağı kontrol ediliyor...',
       'games.devStatus': 'STEAM\'DE',
       'games.panelAria': 'Steam\'de',
-      'games.audioAria': 'Oyun sayfası müziği',
-      'games.audioMute': 'Müziği kapat',
-      'games.audioUnmute': 'Müziği aç',
-      'games.audioVolume': 'Ses seviyesi',
       'games.shots.kicker': 'Ekran görüntüleri',
       'games.shots.title': 'Keep Chaos',
       'games.shots.desc': 'Aktif build\'lerden low-poly kaos · savaş, koop ve gece ormanı.',
@@ -336,6 +376,10 @@
       'games.press.dlLogo': 'Keep Chaos logo',
       'games.press.dlKeyArt': 'Key art',
       'games.press.download': 'İndir',
+      'games.press.downloadAll': 'Tümünü indir (.zip)',
+      'games.press.downloadAllHint': 'Beyaz ve siyah logolar ile her iki key art dahil.',
+      'games.press.downloadAllBusy': 'Zip hazırlanıyor…',
+      'games.press.downloadAllError': 'Zip oluşturulamadı. Tekrar dene.',
       'games.press.toneWhite': 'Beyaz',
       'games.press.toneBlack': 'Siyah',
       'games.press.toneAria': 'Logo rengi',
@@ -385,7 +429,6 @@
       'team.join.desc': 'Ekibimize katılın ve dünya çapında milyonlarca kişi tarafından oynanan oyunlar yaratın.',
       'team.join.btn': 'Ekibimize Katılın',
       'team.join.aria': 'Ekibe katılın',
-      'team.thanks': 'Destekleri için RestPlay\'e ve kardeş firmamız olan The Steelwing Entertainment\'a teşekkürlerimizi sunarız.',
       'contact.title': 'İletişim',
       'contact.desc': 'Bize söylemek istediğiniz bir şey varsa, <span class="dim">buradayız.</span> Assetlerimizde veya yaptığımız oyunlarda bir sorun ya da bug ile karşılaşırsanız bize e-posta gönderin.',
       'contact.hqSub': 'Merkez Ofisimiz',
@@ -423,6 +466,9 @@
       'title.uiParticle': 'UI Particle System · Tier Studios',
       'title.layerForgeDocs': 'Layer Forge Studio · Dokümantasyon · Tier Studios',
       'title.uiParticleDocs': 'UI Particle System · API Dokümantasyonu · Tier Studios',
+      'title.press': 'Press Kit · Tier Studios',
+      'title.privacy': 'Gizlilik · Tier Studios',
+      'title.cookies': 'Çerez Politikası · Tier Studios',
       'title.notFound': 'Sayfa Bulunamadı · Tier Studios',
       '404.label': '404 · Sinyal Kayboldu',
       '404.title': 'Frekans bulunamadı',
@@ -440,7 +486,51 @@
       'footer.layerForgeDocs': 'Layer Forge Dokümantasyon',
       'footer.uiParticleDocs': 'UI Particle Dokümantasyon',
       'footer.assetStore': 'Unity Asset Store',
-      'footer.discord': 'Discord Topluluğu'
+      'footer.discord': 'Discord Topluluğu',
+      'footer.pressKit': 'Press Kit',
+      'footer.privacy': 'Gizlilik',
+      'footer.cookies': 'Çerez Politikası',
+      'footer.cookieSettings': 'Çerez Ayarları',
+      'footer.lang': 'Dil',
+      'footer.langAuto': 'Otomatik',
+      'privacy.title': 'Gizlilik',
+      'privacy.desc': 'Siteyi ziyaret ettiğinde, bize yazdığında veya dil seçtiğinde bilgilerin nasıl işlendiği.',
+      'privacy.updated': 'Son güncelleme · 13 Ağustos 2026',
+      'privacy.s1.title': 'Biz kimiz',
+      'privacy.s1.body': 'Tier Studios bağımsız bir oyun stüdyosudur. Bu metin tierstudios.com ve yayınladığımız ilgili sayfaları kapsar. Gizlilik için info@tierstudios.com adresine yazabilirsin.',
+      'privacy.s2.title': 'Neyi topluyoruz',
+      'privacy.s2.body': 'İletişim formunu kullanırsan gönderdiğin ad, e-posta, konu ve mesaj bize ulaşır. Bunları yalnızca yanıtlamak için kullanırız. Site ayrıca seçtiğin dili tarayıcıda tutar ki arayüz aynı dilde kalsın.',
+      'privacy.s3.title': 'Çerezler',
+      'privacy.s3.body': 'Dil ve çerez tercihin için gerekli depolama kullanırız. Analitik çerezleri yalnızca Çerez Ayarları’nda izin verirsen çalışır. Ayrıntılar <a href="/cookies">çerez politikasında</a>.',
+      'privacy.s4.title': 'Üçüncü taraflar',
+      'privacy.s4.body': 'İletişim formu Formspree üzerinden iletilir. Dış bağlantılar (Discord, Steam, Unity Asset Store, sosyal hesaplar) o servislerin kendi siteleridir. Kişisel veri satmayız.',
+      'privacy.s5.title': 'Seçeneklerin',
+      'privacy.s5.body': 'Analitik çerezlerini istediğin zaman <button type="button" class="legal-text-btn" data-cookie-settings>Çerez Ayarları</button>’ndan değiştirebilirsin. Gönderdiğin bir mesajın silinmesini de isteyebilir veya tarayıcıda site verisini temizleyebilirsin.',
+      'privacy.s6.title': 'İletişim',
+      'privacy.s6.body': 'Sorular: <a href="mailto:info@tierstudios.com">info@tierstudios.com</a> · veya <a href="/contact">iletişim sayfası</a>.',
+      'cookies.title': 'Çerezler',
+      'cookies.desc': 'Bu sitenin tarayıcıda ne tuttuğu ve bunu nasıl değiştirebileceğin.',
+      'cookies.updated': 'Son güncelleme · 13 Ağustos 2026',
+      'cookies.s1.title': 'Gerekli',
+      'cookies.s1.body': 'Dil (tier-lang) ve çerez tercihin (tier-cookies) yerelde saklanır ki site onları hatırlasın. Sitenin senin ayarınla çalışması için gerekir. Reklam için kullanılmaz.',
+      'cookies.s2.title': 'Analitik',
+      'cookies.s2.body': 'Analitiğe izin verirsen hangi sayfaların açıldığını görmek için Google Analytics kullanırız. Çerez Ayarları’nda açana kadar kapalıdır. İstediğin zaman tekrar kapatabilirsin.',
+      'cookies.s3.title': 'Nasıl değiştirilir',
+      'cookies.s3.body': 'Alt bardan veya bu sayfadan <button type="button" class="legal-text-btn" data-cookie-settings>Çerez Ayarları</button>’nı aç. Tarayıcıda site verisini de temizleyebilirsin. Ayrıca <a href="/privacy">gizlilik metni</a>.',
+      'cookies.panel.title': 'Çerez Ayarları',
+      'cookies.panel.desc': 'Sitenin çalışması için gerekenlerin dışında neyin saklanabileceğini seç.',
+      'cookies.panel.necessary': 'Gerekli',
+      'cookies.panel.necessaryDesc': 'Dil ve çerez tercihin. Her zaman açık.',
+      'cookies.panel.analytics': 'Analitik',
+      'cookies.panel.analyticsDesc': 'Google Analytics · ziyaret edilen sayfalar, yalnızca izin verirsen.',
+      'cookies.panel.save': 'Kaydet',
+      'cookies.panel.accept': 'Analitiğe izin ver',
+      'cookies.panel.reject': 'Analitiği reddet',
+      'cookies.panel.policy': 'Çerez politikası',
+      'cookies.panel.close': 'Kapat',
+      'cookies.bar.text': 'Gerekli veriler her zaman açık. Analitik yalnızca izin verirsen.',
+      'cookies.bar.accept': 'Kabul et',
+      'cookies.bar.reject': 'Reddet'
     }
   };
 
@@ -455,18 +545,112 @@
     contact: 'nav.contact'
   };
 
-  function getLang() {
-    var saved = localStorage.getItem(STORAGE_KEY);
-    if (saved === 'tr' || saved === 'en') return saved;
+  var STORAGE_KEY = 'tier-lang';
+
+  var SUPPORTED = {
+    en: 1, tr: 1, fr: 1, de: 1, ja: 1, ko: 1, ru: 1, uk: 1,
+    it: 1, es: 1, 'zh-Hans': 1, 'zh-Hant': 1, pl: 1, 'pt-PT': 1, th: 1
+  };
+
+  var LANG_OPTIONS = [
+    { id: 'auto', label: 'Auto' },
+    { id: 'tr', label: 'Türkçe' },
+    { id: 'en', label: 'English' },
+    { id: 'fr', label: 'Français' },
+    { id: 'de', label: 'Deutsch' },
+    { id: 'ja', label: '日本語' },
+    { id: 'ko', label: '한국어' },
+    { id: 'ru', label: 'Русский' },
+    { id: 'uk', label: 'Українська' },
+    { id: 'it', label: 'Italiano' },
+    { id: 'es', label: 'Español' },
+    { id: 'zh-Hans', label: '简体中文' },
+    { id: 'zh-Hant', label: '繁體中文' },
+    { id: 'pl', label: 'Polski' },
+    { id: 'pt-PT', label: 'Português' },
+    { id: 'th', label: 'ไทย' }
+  ];
+
+  function mapBrowserTag(tag) {
+    if (!tag) return null;
+    var raw = String(tag).replace(/_/g, '-').toLowerCase();
+    if (
+      raw === 'zh-hant' || raw.indexOf('zh-hant') === 0 ||
+      raw === 'zh-tw' || raw.indexOf('zh-tw') === 0 ||
+      raw === 'zh-hk' || raw.indexOf('zh-hk') === 0 ||
+      raw === 'zh-mo' || raw.indexOf('zh-mo') === 0
+    ) return 'zh-Hant';
+    if (raw === 'zh' || raw.indexOf('zh-') === 0) return 'zh-Hans';
+    if (raw === 'pt-pt' || raw.indexOf('pt-pt') === 0 || raw === 'pt' || raw.indexOf('pt-') === 0) return 'pt-PT';
+    if (raw.indexOf('es') === 0) return 'es';
+    var primary = raw.split('-')[0];
+    if (SUPPORTED[primary]) return primary;
+    return null;
+  }
+
+  function detectLang() {
+    var tags = [];
+    try {
+      if (navigator.languages && navigator.languages.length) {
+        for (var i = 0; i < navigator.languages.length; i++) tags.push(navigator.languages[i]);
+      }
+      if (navigator.language) tags.push(navigator.language);
+    } catch (err) {}
+    for (var n = 0; n < tags.length; n++) {
+      var mapped = mapBrowserTag(tags[n]);
+      if (mapped) return mapped;
+    }
     return 'en';
   }
 
+  function htmlLang(lang) {
+    if (lang === 'zh-Hans') return 'zh-Hans';
+    if (lang === 'zh-Hant') return 'zh-Hant';
+    if (lang === 'pt-PT') return 'pt';
+    return lang;
+  }
+
+  var currentLang = 'en';
+
+  function getSavedLang() {
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && SUPPORTED[saved]) return saved;
+    } catch (err) {}
+    return null;
+  }
+
+  function getLang() {
+    return currentLang || getSavedLang() || detectLang();
+  }
+
+  function loadPack(lang) {
+    if (T[lang]) return Promise.resolve(lang);
+    var url = '/assets/js/locales/' + encodeURIComponent(lang) + '.json?v=20260813langf';
+    return fetch(url)
+      .then(function (res) { return res.ok ? res.json() : Promise.reject(); })
+      .then(function (pack) {
+        T[lang] = pack;
+        return lang;
+      })
+      .catch(function () { return 'en'; });
+  }
+
   function setLang(lang) {
-    localStorage.setItem(STORAGE_KEY, lang);
-    document.documentElement.lang = lang;
-    applyLang(lang);
-    updateSwitcher(lang);
-    window.dispatchEvent(new CustomEvent('tier:lang', { detail: { lang: lang } }));
+    if (!lang || lang === 'auto') {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (err) {}
+      lang = detectLang();
+    } else if (SUPPORTED[lang]) {
+      try { localStorage.setItem(STORAGE_KEY, lang); } catch (err) {}
+    } else {
+      lang = 'en';
+    }
+    document.documentElement.lang = htmlLang(lang);
+    loadPack(lang).then(function (ready) {
+      applyLang(ready);
+      updateSwitcher();
+      window.dispatchEvent(new CustomEvent('tier:lang', { detail: { lang: ready } }));
+    });
   }
 
   function t(lang, key) {
@@ -484,6 +668,7 @@
   }
 
   function applyLang(lang) {
+    currentLang = lang;
     tagNavLinks();
 
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
@@ -515,87 +700,162 @@
     var page = document.body && document.body.dataset.page;
     if (page) {
       var titleKey = 'title.' + page;
-      if (T[lang][titleKey]) document.title = T[lang][titleKey];
+      var pack = T[lang] || T.en;
+      if (pack[titleKey]) document.title = pack[titleKey];
     }
+
+    updateSwitcher();
+  }
+
+  function optionLabel(id) {
+    if (id === 'auto') return t(currentLang || 'en', 'footer.langAuto') || 'Auto';
+    for (var i = 0; i < LANG_OPTIONS.length; i++) {
+      if (LANG_OPTIONS[i].id === id) return LANG_OPTIONS[i].label;
+    }
+    return id;
+  }
+
+  function closeLangMenus(except) {
+    document.querySelectorAll('.footer-lang.is-open').forEach(function (wrap) {
+      if (wrap === except) return;
+      wrap.classList.remove('is-open');
+      var btn = wrap.querySelector('.footer-lang-btn');
+      var panel = wrap.querySelector('.footer-lang-panel');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+      if (panel) panel.hidden = true;
+    });
+  }
+
+  function toggleLangMenu(wrap) {
+    var open = wrap.classList.contains('is-open');
+    closeLangMenus();
+    if (open) return;
+    wrap.classList.add('is-open');
+    var btn = wrap.querySelector('.footer-lang-btn');
+    var panel = wrap.querySelector('.footer-lang-panel');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+    if (panel) panel.hidden = false;
+  }
+
+  function bindLangUi() {
+    if (bindLangUi.bound) return;
+    bindLangUi.bound = true;
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('.footer-lang')) return;
+      closeLangMenus();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLangMenus();
+    });
+  }
+
+  function mountFooterLang(bottom) {
+    if (bottom.querySelector('.footer-lang')) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'footer-lang';
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'footer-lang-btn';
+    btn.setAttribute('data-cursor', 'hover');
+    btn.setAttribute('aria-haspopup', 'listbox');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('data-i18n-aria', 'footer.lang');
+    btn.setAttribute('aria-label', t(currentLang || 'en', 'footer.lang') || 'Language');
+    btn.innerHTML =
+      '<span class="footer-lang-copy">' +
+        '<span class="footer-lang-kicker"></span>' +
+        '<span class="footer-lang-value"></span>' +
+      '</span>' +
+      '<span class="footer-lang-caret" aria-hidden="true"></span>';
+
+    var panel = document.createElement('div');
+    panel.className = 'footer-lang-panel';
+    panel.setAttribute('role', 'listbox');
+    panel.hidden = true;
+
+    LANG_OPTIONS.forEach(function (opt) {
+      var item = document.createElement('button');
+      item.type = 'button';
+      item.className = 'footer-lang-opt' + (opt.id === 'auto' ? ' is-auto' : '');
+      item.setAttribute('role', 'option');
+      item.setAttribute('data-lang', opt.id);
+      item.setAttribute('data-cursor', 'hover');
+      item.textContent = opt.id === 'auto' ? (t(currentLang || 'en', 'footer.langAuto') || opt.label) : opt.label;
+      item.addEventListener('click', function () {
+        setLang(opt.id);
+        closeLangMenus();
+      });
+      panel.appendChild(item);
+    });
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      toggleLangMenu(wrap);
+    });
+
+    wrap.appendChild(btn);
+    wrap.appendChild(panel);
+    bottom.appendChild(wrap);
   }
 
   function mountLangSwitcher() {
-    var navRight = document.querySelector('#nav .nav-right');
-    if (!navRight || document.getElementById('navLang')) return;
+    var oldNav = document.getElementById('navLang');
+    if (oldNav) oldNav.remove();
+    document.querySelectorAll('#nav .nav-lang').forEach(function (el) { el.remove(); });
 
-    var wrap = document.createElement('div');
-    wrap.className = 'nav-lang';
-    wrap.id = 'navLang';
-    wrap.setAttribute('role', 'group');
-    wrap.setAttribute('aria-label', 'Language');
-
-    var indicator = document.createElement('span');
-    indicator.className = 'nav-lang-indicator';
-    indicator.setAttribute('aria-hidden', 'true');
-    wrap.appendChild(indicator);
-
-    ['en', 'tr'].forEach(function (code) {
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'nav-lang-btn';
-      btn.dataset.lang = code;
-      btn.textContent = code.toUpperCase();
-      btn.setAttribute('aria-pressed', 'false');
-      wrap.appendChild(btn);
-    });
-
-    var navLinks = navRight.querySelector('.nav-links');
-    navRight.insertBefore(wrap, navLinks);
-
-    wrap.addEventListener('click', function (e) {
-      var btn = e.target.closest('.nav-lang-btn');
-      if (!btn) return;
-      setLang(btn.dataset.lang);
-    });
-
-    window.addEventListener('resize', updateLangIndicator);
+    document.querySelectorAll('.footer-bottom').forEach(mountFooterLang);
+    bindLangUi();
+    updateSwitcher();
   }
 
-  function updateLangIndicator() {
-    var wrap = document.getElementById('navLang');
-    if (!wrap) return;
-    var indicator = wrap.querySelector('.nav-lang-indicator');
-    var active = wrap.querySelector('.nav-lang-btn.is-active');
-    if (!indicator || !active) {
-      if (indicator) indicator.style.opacity = '0';
-      return;
-    }
-    indicator.style.width = active.offsetWidth + 'px';
-    indicator.style.height = active.offsetHeight + 'px';
-    indicator.style.transform = 'translate3d(' + active.offsetLeft + 'px,' + active.offsetTop + 'px,0)';
-    indicator.style.opacity = '1';
-  }
-
-  function updateSwitcher(lang) {
-    var wrap = document.getElementById('navLang');
-    document.querySelectorAll('.nav-lang-btn').forEach(function (btn) {
-      var active = btn.dataset.lang === lang;
-      btn.classList.toggle('is-active', active);
-      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
-    });
-    if (wrap) wrap.setAttribute('aria-label', lang === 'tr' ? 'Dil' : 'Language');
-    requestAnimationFrame(function () {
-      requestAnimationFrame(updateLangIndicator);
+  function updateSwitcher() {
+    var saved = getSavedLang() || 'auto';
+    var kicker = t(currentLang || 'en', 'footer.lang') || 'Language';
+    var autoLabel = t(currentLang || 'en', 'footer.langAuto') || 'Auto';
+    var current = optionLabel(saved);
+    document.querySelectorAll('.footer-lang').forEach(function (wrap) {
+      var btn = wrap.querySelector('.footer-lang-btn');
+      var kickerEl = wrap.querySelector('.footer-lang-kicker');
+      var valueEl = wrap.querySelector('.footer-lang-value');
+      if (btn) {
+        btn.setAttribute('aria-label', kicker + ' · ' + current);
+      }
+      if (kickerEl) kickerEl.textContent = kicker;
+      if (valueEl) valueEl.textContent = current;
+      wrap.querySelectorAll('.footer-lang-opt').forEach(function (item) {
+        var id = item.getAttribute('data-lang');
+        var on = id === saved;
+        item.classList.toggle('is-active', on);
+        item.setAttribute('aria-selected', on ? 'true' : 'false');
+        if (id === 'auto') item.textContent = autoLabel;
+      });
     });
   }
 
   window.tierI18n = {
     getLang: getLang,
     setLang: setLang,
-    applyLang: function () { applyLang(getLang()); },
-    t: function (key) { return t(getLang(), key); }
+    applyLang: function () { applyLang(currentLang || getSavedLang() || detectLang()); },
+    t: function (key) { return t(currentLang || getSavedLang() || detectLang(), key); },
+    mountLangSwitcher: mountLangSwitcher
   };
 
   document.addEventListener('DOMContentLoaded', function () {
     mountLangSwitcher();
-    var lang = getLang();
-    document.documentElement.lang = lang;
-    applyLang(lang);
-    updateSwitcher(lang);
+    var lang = getSavedLang() || detectLang();
+    currentLang = lang;
+    document.documentElement.lang = htmlLang(lang);
+    updateSwitcher();
+    if (lang === 'en' || lang === 'tr') {
+      applyLang(lang);
+      window.dispatchEvent(new CustomEvent('tier:lang', { detail: { lang: lang } }));
+      return;
+    }
+    loadPack(lang).then(function (ready) {
+      document.documentElement.lang = htmlLang(ready);
+      applyLang(ready);
+      window.dispatchEvent(new CustomEvent('tier:lang', { detail: { lang: ready } }));
+    });
   });
 })();

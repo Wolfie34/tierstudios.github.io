@@ -1,3 +1,102 @@
+(function tierScrollTopLock() {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+  function pinTop() {
+    if (window.location.hash) return;
+    var html = document.documentElement;
+    var prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    html.style.scrollBehavior = prev;
+  }
+
+  window.tierPinTop = pinTop;
+  pinTop();
+  document.addEventListener('DOMContentLoaded', pinTop);
+  window.addEventListener('load', pinTop);
+  window.addEventListener('pageshow', function () {
+    pinTop();
+  });
+  document.addEventListener('pointerdown', function () {
+    document.documentElement.classList.add('tier-smooth');
+  }, { once: true, passive: true });
+})();
+
+(function tierPageLifecycle() {
+  var cleanups = [];
+  window.tierOnPageLeave = function (fn) {
+    if (typeof fn === 'function') cleanups.push(fn);
+  };
+  window.tierTeardownPage = function () {
+    if (window.tierParkGamesVideo) window.tierParkGamesVideo();
+    var fns = cleanups.splice(0, cleanups.length);
+    for (var i = 0; i < fns.length; i++) {
+      try { fns[i](); } catch (err) {}
+    }
+    document.querySelectorAll('audio, video').forEach(function (media) {
+      if (media.id === 'gamesVideoWarm') return;
+      try { media.pause(); } catch (err) {}
+    });
+    document.body.classList.remove('is-press-lightbox-open');
+  };
+})();
+
+(function gamesVideoWarm() {
+  var SRC = '/assets/video/keep-chaos.mp4?v=20260802a';
+  var POSTER = '/assets/img/game/keep-chaos-banner.png';
+
+  function park(video) {
+    if (!video) return;
+    try { video.pause(); } catch (err) {}
+    video.className = 'games-video-warm';
+    video.id = 'gamesVideoWarm';
+    if (video.parentNode !== document.body) document.body.appendChild(video);
+  }
+
+  function create() {
+    var video = document.createElement('video');
+    video.id = 'gamesVideoWarm';
+    video.muted = true;
+    video.defaultMuted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.preload = 'auto';
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('poster', POSTER);
+    video.src = SRC;
+    park(video);
+    try { video.load(); } catch (err) {}
+    return video;
+  }
+
+  function get() {
+    return document.getElementById('gamesVideoWarm') || create();
+  }
+
+  function mount() {
+    var banner = document.querySelector('.games-video-banner');
+    if (!banner) return get();
+    var video = get();
+    var slot = banner.querySelector('video.games-video-banner-video, video.games-video-warm');
+    video.className = 'games-video-banner-media games-video-banner-video';
+    video.id = 'gamesVideoWarm';
+    video.setAttribute('poster', POSTER);
+    if (slot && slot !== video) slot.replaceWith(video);
+    else if (video.parentNode !== banner) {
+      var shade = banner.querySelector('.games-video-banner-shade');
+      banner.insertBefore(video, shade || banner.firstChild);
+    }
+    return video;
+  }
+
+  window.tierWarmGamesVideo = get;
+  window.tierMountGamesVideo = mount;
+  window.tierParkGamesVideo = function () {
+    park(document.getElementById('gamesVideoWarm'));
+  };
+})();
+
 document.addEventListener('DOMContentLoaded', function () {
   (function skipToContent() {
     var target = document.querySelector('main') || document.getElementById('outer-wrapper');
@@ -13,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.tierI18n && window.tierI18n.applyLang) window.tierI18n.applyLang();
   })();
 
-  (function assetBadges() {
+  function assetBadges() {
     document.querySelectorAll('.game-item.has-img .gi-body').forEach(function (body) {
       if (body.querySelector('.gi-badge')) return;
       var badge = document.createElement('span');
@@ -22,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
       body.insertBefore(badge, body.firstChild);
     });
     if (window.tierI18n && window.tierI18n.applyLang) window.tierI18n.applyLang();
-  })();
+  }
 
   (function tierAnalyticsEvents() {
     if (!window.tierAnalytics) return;
@@ -52,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   })();
 
-  (function footerShortcuts() {
+  function footerShortcuts() {
     document.querySelectorAll('.footer .footer-center').forEach(function (center) {
       if (center.querySelector('.footer-shortcuts')) return;
 
@@ -94,18 +193,25 @@ document.addEventListener('DOMContentLoaded', function () {
             '<li><a href="/ui-particle-docs" data-cursor="hover" data-i18n="footer.uiParticleDocs">UI Particle Docs</a></li>' +
             '<li><a href="https://assetstore.unity.com/publishers/124104" target="_blank" rel="noopener" data-cursor="hover" data-i18n="footer.assetStore">Unity Asset Store</a></li>' +
             '<li><a href="https://discord.gg/keepchaos" target="_blank" rel="noopener" data-cursor="hover" data-i18n="footer.discord">Discord Community</a></li>' +
+            '<li><a href="/press" data-cursor="hover" data-i18n="footer.pressKit">Press Kit</a></li>' +
+            '<li><a href="/privacy" data-cursor="hover" data-i18n="footer.privacy">Privacy</a></li>' +
+            '<li><a href="/cookies" data-cursor="hover" data-i18n="footer.cookies">Cookie Policy</a></li>' +
+            '<li><button type="button" class="footer-text-btn" data-cookie-settings data-cursor="hover" data-i18n="footer.cookieSettings">Cookie Settings</button></li>' +
           '</ul>' +
         '</div>';
 
       title.insertAdjacentElement('afterend', nav);
     });
 
+    if (window.tierI18n && window.tierI18n.mountLangSwitcher) {
+      window.tierI18n.mountLangSwitcher();
+    }
     if (window.tierI18n && window.tierI18n.applyLang) {
       window.tierI18n.applyLang();
     }
-  })();
+  }
 
-  (function navActiveRoute() {
+  function navActiveRoute() {
     var raw = (window.location.pathname || '/').replace(/\/+$/, '');
     var seg = raw.split('/').filter(Boolean);
     var key = seg.length ? seg[0] : '';
@@ -121,167 +227,13 @@ document.addEventListener('DOMContentLoaded', function () {
       'ui-particle-docs': '/tools'
     };
     var href = hrefMap[key];
-    if (!href) return;
     document.querySelectorAll('#nav .nav-link').forEach(function (a) {
       var link = (a.getAttribute('href') || '').replace(/\/+$/, '');
-      a.classList.toggle('active', link === href);
+      a.classList.toggle('active', !!href && link === href);
     });
-  })();
+  }
 
-  (function tierMarkBackground() {
-    if (document.querySelector('.tier-bg')) return;
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var narrow = window.matchMedia('(max-width: 900px)').matches;
-    var fillConfigs = [
-      { top: '8%', right: '4%', width: 102, depth: 0.55, phase: 0, amp: 16 },
-      { top: '18%', left: '3%', width: 88, depth: 0.48, phase: 1.1, amp: 14 },
-      { top: '32%', right: '10%', width: 80, depth: 0.42, phase: 2.3, amp: 12 },
-      { bottom: '20%', right: '6%', width: 92, depth: 0.5, phase: 3.5, amp: 15 },
-      { bottom: '8%', left: '5%', width: 108, depth: 0.44, phase: 4.7, amp: 16 },
-      { top: '46%', left: '9%', width: 72, depth: 0.38, phase: 0.6, amp: 11 },
-      { top: '56%', right: '14%', width: 78, depth: 0.34, phase: 1.9, amp: 12 },
-      { bottom: '34%', left: '18%', width: 68, depth: 0.3, phase: 2.8, amp: 10 },
-      { top: '68%', right: '22%', width: 65, depth: 0.26, phase: 4.1, amp: 9 }
-    ];
-    var outlineConfigs = [
-      { top: '11%', right: '11%', width: 55, depth: 0.6, phase: 0.35, amp: 10 },
-      { top: '21%', left: '9%', width: 48, depth: 0.52, phase: 1.55, amp: 9 },
-      { top: '35%', right: '16%', width: 42, depth: 0.46, phase: 2.65, amp: 8 },
-      { bottom: '23%', right: '12%', width: 50, depth: 0.54, phase: 3.75, amp: 9 },
-      { bottom: '11%', left: '10%', width: 58, depth: 0.48, phase: 4.95, amp: 10 },
-      { top: '49%', left: '13%', width: 40, depth: 0.42, phase: 0.95, amp: 8 },
-      { top: '59%', right: '19%', width: 38, depth: 0.38, phase: 2.15, amp: 7 },
-      { bottom: '37%', left: '23%', width: 35, depth: 0.34, phase: 3.25, amp: 7 },
-      { top: '71%', right: '27%', width: 32, depth: 0.3, phase: 4.45, amp: 6 }
-    ];
-
-    function tagMarkPaths(svg, variant) {
-      var paths = svg.querySelectorAll('path');
-      if (paths.length >= 2) {
-        paths[0].setAttribute('class', 'tier-mark-bottom');
-        paths[1].setAttribute('class', 'tier-mark-top');
-      }
-      paths.forEach(function (p) {
-        if (variant === 'outline') {
-          p.setAttribute('fill', 'none');
-          p.setAttribute('stroke', 'currentColor');
-          if (!p.getAttribute('stroke-width')) p.setAttribute('stroke-width', '16');
-          p.setAttribute('stroke-linejoin', 'round');
-          p.setAttribute('stroke-linecap', 'round');
-        } else {
-          p.setAttribute('fill', 'currentColor');
-          p.removeAttribute('stroke');
-          p.removeAttribute('stroke-width');
-        }
-      });
-      return svg.outerHTML;
-    }
-
-    function prepareMarkSvg(svgText, variant) {
-      var doc = new DOMParser().parseFromString(svgText, 'image/svg+xml');
-      var svg = doc.documentElement;
-      svg.removeAttribute('width');
-      svg.removeAttribute('height');
-      svg.setAttribute('aria-hidden', 'true');
-      return tagMarkPaths(svg, variant || 'fill');
-    }
-
-    function mountOrbit(root, cfg, markSvg, variant) {
-      var el = document.createElement('div');
-      el.className = 'tier-bg-orbit tier-bg-orbit--' + variant;
-      el.style.width = cfg.width + 'px';
-      if (cfg.top) el.style.top = cfg.top;
-      if (cfg.bottom) el.style.bottom = cfg.bottom;
-      if (cfg.left) el.style.left = cfg.left;
-      if (cfg.right) el.style.right = cfg.right;
-      el.dataset.depth = cfg.depth;
-      el.dataset.phase = cfg.phase;
-      el.dataset.amp = cfg.amp;
-      el.innerHTML = markSvg;
-      root.appendChild(el);
-    }
-
-    function mountBackground(fillSvg, outlineSvg) {
-      var root = document.createElement('div');
-      root.className = 'tier-bg';
-      root.setAttribute('aria-hidden', 'true');
-
-      var fills = narrow ? fillConfigs.slice(0, 3) : fillConfigs;
-      var outlines = narrow ? outlineConfigs.slice(0, 2) : outlineConfigs;
-
-      fills.forEach(function (cfg) {
-        mountOrbit(root, cfg, fillSvg, 'fill');
-      });
-
-      outlines.forEach(function (cfg) {
-        mountOrbit(root, cfg, outlineSvg, 'outline');
-      });
-
-      document.body.insertBefore(root, document.body.firstChild);
-
-      if (reduced) return;
-
-      var orbitNodes = root.querySelectorAll('.tier-bg-orbit');
-      var raf;
-      var px = 0;
-      var py = 0;
-      var tx = 0;
-      var ty = 0;
-      var coarse = window.matchMedia('(pointer: coarse)').matches;
-
-      function parallax() {
-        var t = Date.now() * 0.001;
-        tx += (px - tx) * 0.09;
-        ty += (py - ty) * 0.09;
-        orbitNodes.forEach(function (node) {
-          var depth = parseFloat(node.dataset.depth) || 0.3;
-          var phase = parseFloat(node.dataset.phase) || 0;
-          var amp = narrow ? (parseFloat(node.dataset.amp) || 10) * 0.6 : (parseFloat(node.dataset.amp) || 10);
-          var idleX = Math.sin(t * 0.55 + phase) * amp;
-          var idleY = Math.cos(t * 0.48 + phase * 1.3) * amp;
-          var rot = Math.sin(t * 0.35 + phase) * (narrow ? 2 : 3.5);
-          var mx = tx * depth + idleX;
-          var my = ty * depth + idleY;
-          node.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0) rotate(' + rot + 'deg)';
-        });
-        root.style.setProperty('--tier-scroll', window.scrollY + 'px');
-        raf = requestAnimationFrame(parallax);
-      }
-
-      if (!coarse && !narrow) {
-        window.addEventListener('mousemove', function (e) {
-          px = (e.clientX / window.innerWidth - 0.5) * 56;
-          py = (e.clientY / window.innerHeight - 0.5) * 44;
-        }, { passive: true });
-      }
-
-      window.addEventListener('scroll', function () {
-        root.style.setProperty('--tier-scroll', window.scrollY + 'px');
-      }, { passive: true });
-
-      raf = requestAnimationFrame(parallax);
-    }
-
-    Promise.all([
-      fetch('/assets/img/logo.svg').then(function (res) {
-        if (!res.ok) throw new Error('logo.svg not found');
-        return res.text();
-      }),
-      fetch('/assets/img/logo-outline.svg').then(function (res) {
-        if (!res.ok) throw new Error('logo-outline.svg not found');
-        return res.text();
-      })
-    ])
-      .then(function (results) {
-        mountBackground(
-          prepareMarkSvg(results[0], 'fill'),
-          prepareMarkSvg(results[1], 'outline')
-        );
-      })
-      .catch(function () {});
-  })();
-
-  (function contactMap() {
+  function contactMap() {
     var mount = document.querySelector('.contact-map-mount');
     if (!mount) return;
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -361,11 +313,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       })
       .catch(function () {});
-  })();
+  }
 
-  (function heroStrokeDraw() {
+  function heroStrokeDraw() {
     var g = document.querySelector('.hero-stroke-glyphs');
-    if (!g || typeof opentype === 'undefined') return;
+    if (!g) return;
+    function draw() {
+      if (!g.isConnected || typeof opentype === 'undefined') return;
     var TEXT = 'TIER STUDIOS';
     function heroSize() {
       var vw = window.innerWidth || 1200;
@@ -381,8 +335,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var FONT = 'https://fonts.gstatic.com/s/archivo/v25/k3k6o8UDI-1M0wlSV9XAw6lQkqWY8Q82sJaRE-NWIDdgffTTnTRp8A.ttf';
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     opentype.load(FONT, function (err, font) {
-      if (err) return;
+      if (err || !g.isConnected) return;
       var ns = 'http://www.w3.org/2000/svg';
+      g.innerHTML = '';
       var x = 0;
       TEXT.split('').forEach(function (c) {
         var path = font.getPath(c, x, BASE, SIZE);
@@ -412,9 +367,26 @@ document.addEventListener('DOMContentLoaded', function () {
         );
       }
     });
-  })();
+    }
+    if (typeof opentype !== 'undefined') {
+      draw();
+      return;
+    }
+    if (window.__tierOpentypeLoading) {
+      window.addEventListener('tier:opentype', draw, { once: true });
+      return;
+    }
+    window.__tierOpentypeLoading = true;
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js';
+    script.onload = function () {
+      window.dispatchEvent(new Event('tier:opentype'));
+      draw();
+    };
+    document.head.appendChild(script);
+  }
 
-  (function heroParticles() {
+  function heroParticles() {
     var layer = document.querySelector('.hero-panel-particles');
     var panel = document.querySelector('.hero-title-panel');
     if (!layer || !panel) return;
@@ -443,18 +415,23 @@ document.addEventListener('DOMContentLoaded', function () {
     build();
     requestAnimationFrame(function () { requestAnimationFrame(build); });
     var t;
-    window.addEventListener('resize', function () {
+    var onResize = function () {
       clearTimeout(t);
       t = setTimeout(build, 200);
+    };
+    window.addEventListener('resize', onResize);
+    window.tierOnPageLeave(function () {
+      window.removeEventListener('resize', onResize);
+      clearTimeout(t);
     });
-  })();
+  }
 
-  /* Copyright year */
-  var cpEl = document.getElementById('copyright');
-  if (cpEl) cpEl.textContent = '\u00a9 ' + new Date().getFullYear() + ' Tier Studios';
+  function copyrightYear() {
+    var cpEl = document.getElementById('copyright');
+    if (cpEl) cpEl.textContent = '\u00a9 ' + new Date().getFullYear() + ' Tier Studios';
+  }
 
-  /* Scroll reveals */
-  (function reveals() {
+  function reveals() {
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     document.querySelectorAll('[data-stagger]').forEach(function (wrap) {
@@ -502,10 +479,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 
     els.forEach(function (el) { io.observe(el); });
-  })();
+    window.tierOnPageLeave(function () { io.disconnect(); });
+  }
 
   /* Games page — terminal code sequence */
-  (function gameDevTerminal() {
+  function gameDevTerminal() {
     var panel = document.getElementById('gameDevPanel');
     if (!panel) return;
 
@@ -677,16 +655,42 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (panel.classList.contains('in')) run();
 
-    window.addEventListener('tier:lang', function () {
+    var onLang = function () {
       if (panel.classList.contains('in')) run();
+    };
+    window.addEventListener('tier:lang', onLang);
+    window.tierOnPageLeave(function () {
+      running = false;
+      if (timer) window.clearTimeout(timer);
+      mo.disconnect();
+      window.removeEventListener('tier:lang', onLang);
     });
-  })();
+  }
 
-  /* Nav solidify on scroll */
+  /* Nav solidify + hide on scroll down */
   (function navSolid() {
     var nav = document.getElementById('nav');
     if (!nav) return;
-    var onScroll = function () { nav.classList.toggle('solid', window.scrollY > 24); };
+    var lastY = window.scrollY;
+    var hidden = false;
+
+    var onScroll = function () {
+      var y = window.scrollY;
+      nav.classList.toggle('solid', y > 24);
+
+      var menuOpen = document.body.classList.contains('menu-open');
+      if (menuOpen || y < 80) {
+        hidden = false;
+      } else if (y > lastY + 6) {
+        hidden = true;
+      } else if (y < lastY - 4) {
+        hidden = false;
+      }
+
+      nav.classList.toggle('is-hidden', hidden);
+      lastY = y;
+    };
+
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   })();
@@ -786,7 +790,7 @@ document.addEventListener('DOMContentLoaded', function () {
   })();
 
   /* Hero fade on scroll */
-  (function heroParallax() {
+  function heroParallax() {
     var inner = document.getElementById('heroInner');
     if (!inner) return;
     var raf;
@@ -796,12 +800,17 @@ document.addEventListener('DOMContentLoaded', function () {
       inner.style.opacity = String(fade);
       inner.style.transform = 'translate3d(0,' + (y * 0.14) + 'px,0)';
     };
-    window.addEventListener('scroll', function () {
+    var onScroll = function () {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(update);
-    }, { passive: true });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
     update();
-  })();
+    window.tierOnPageLeave(function () {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(raf);
+    });
+  }
 
   /* Mobile nav */
   (function mobileNav() {
@@ -878,7 +887,7 @@ document.addEventListener('DOMContentLoaded', function () {
     dockLinks();
   })();
 
-  /* Code highlighting & copy (docs pages) */
+  function docsCode() {
   if (typeof hljs !== 'undefined') {
     hljs.highlightAll();
   }
@@ -938,6 +947,118 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+  }
+
+  function primeGamesBanner() {
+    var banner = document.querySelector('.games-video-banner');
+    if (!banner) return;
+    var video = window.tierMountGamesVideo ? window.tierMountGamesVideo() : banner.querySelector('.games-video-banner-video');
+    if (!video) return;
+
+    var settled = false;
+    var finish = function () {
+      if (settled) return;
+      settled = true;
+      video.classList.add('is-ready');
+    };
+
+    var tryPlay = function () {
+      var play = video.play();
+      if (play && typeof play.then === 'function') {
+        play.then(function () {
+          if (!video.paused) finish();
+        }).catch(function () {});
+      }
+    };
+
+    video.muted = true;
+    video.defaultMuted = true;
+    video.loop = true;
+    video.playsInline = true;
+
+    video.addEventListener('playing', finish, { once: true });
+    video.addEventListener('canplay', tryPlay, { once: true });
+    video.addEventListener('error', finish, { once: true });
+
+    tryPlay();
+    if (video.readyState >= 2) tryPlay();
+    if (video.readyState >= 3 && !video.paused) finish();
+  }
+
+  function contactForm() {
+    var form = document.getElementById('contact-form');
+    if (!form || form.dataset.tierBound === '1') return;
+    form.dataset.tierBound = '1';
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var successMessage = document.getElementById('success-message');
+      var errorMessage = document.getElementById('error-message');
+      if (errorMessage) errorMessage.style.display = 'none';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.classList.add('is-loading');
+      }
+      fetch('https://formspree.io/f/xgvkbywq', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      }).then(function (response) {
+        if (response.ok) {
+          form.reset();
+          if (successMessage) successMessage.style.display = 'block';
+          if (errorMessage) errorMessage.style.display = 'none';
+          if (window.tierAnalytics) {
+            window.tierAnalytics.track('contact_form_submit', { form_name: 'contact' });
+          }
+          setTimeout(function () {
+            if (successMessage) successMessage.style.display = 'none';
+          }, 5000);
+        } else if (errorMessage) {
+          errorMessage.textContent = window.tierI18n ? window.tierI18n.t('contact.error') : 'An error occurred. Please try again later.';
+          errorMessage.style.display = 'block';
+        }
+      }).catch(function () {
+        if (errorMessage) {
+          errorMessage.textContent = window.tierI18n ? window.tierI18n.t('contact.errorSend') : 'An error occurred while sending the message.';
+          errorMessage.style.display = 'block';
+        }
+      }).finally(function () {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('is-loading');
+        }
+      });
+    });
+  }
+
+  function bootPage() {
+    var path = (window.location.pathname || '/').replace(/\/+$/, '') || '/';
+    if (path === '/games' && window.location.hash === '#press') {
+      window.location.replace('/press');
+      return;
+    }
+    assetBadges();
+    footerShortcuts();
+    navActiveRoute();
+    contactMap();
+    copyrightYear();
+    heroStrokeDraw();
+    heroParticles();
+    reveals();
+    gameDevTerminal();
+    heroParallax();
+    contactForm();
+    docsCode();
+    if (window.tierInitGamesMedia) window.tierInitGamesMedia();
+    if (window.tierInitGamesPress) window.tierInitGamesPress();
+    if (window.tierInitGamesLb) window.tierInitGamesLb();
+    if (window.tierI18n && window.tierI18n.applyLang) window.tierI18n.applyLang();
+    primeGamesBanner();
+  }
+
+  window.tierBootPage = bootPage;
+  bootPage();
 });
 
 (function tierAmbience() {
@@ -1031,8 +1152,157 @@ document.addEventListener('DOMContentLoaded', function () {
   requestAnimationFrame(paint);
 })();
 
-/* Games page gallery + ambient audio */
-(function gamesPageMedia() {
+(function tierMarkBackground() {
+  if (document.querySelector('.tier-bg')) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var narrow = window.matchMedia('(max-width: 900px)').matches;
+  var fillConfigs = [
+    { top: '8%', right: '4%', width: 102, depth: 0.55, phase: 0, amp: 16 },
+    { top: '18%', left: '3%', width: 88, depth: 0.48, phase: 1.1, amp: 14 },
+    { top: '32%', right: '10%', width: 80, depth: 0.42, phase: 2.3, amp: 12 },
+    { bottom: '20%', right: '6%', width: 92, depth: 0.5, phase: 3.5, amp: 15 },
+    { bottom: '8%', left: '5%', width: 108, depth: 0.44, phase: 4.7, amp: 16 },
+    { top: '46%', left: '9%', width: 72, depth: 0.38, phase: 0.6, amp: 11 },
+    { top: '56%', right: '14%', width: 78, depth: 0.34, phase: 1.9, amp: 12 },
+    { bottom: '34%', left: '18%', width: 68, depth: 0.3, phase: 2.8, amp: 10 },
+    { top: '68%', right: '22%', width: 65, depth: 0.26, phase: 4.1, amp: 9 }
+  ];
+  var outlineConfigs = [
+    { top: '11%', right: '11%', width: 55, depth: 0.6, phase: 0.35, amp: 10 },
+    { top: '21%', left: '9%', width: 48, depth: 0.52, phase: 1.55, amp: 9 },
+    { top: '35%', right: '16%', width: 42, depth: 0.46, phase: 2.65, amp: 8 },
+    { bottom: '23%', right: '12%', width: 50, depth: 0.54, phase: 3.75, amp: 9 },
+    { bottom: '11%', left: '10%', width: 58, depth: 0.48, phase: 4.95, amp: 10 },
+    { top: '49%', left: '13%', width: 40, depth: 0.42, phase: 0.95, amp: 8 },
+    { top: '59%', right: '19%', width: 38, depth: 0.38, phase: 2.15, amp: 7 },
+    { bottom: '37%', left: '23%', width: 35, depth: 0.34, phase: 3.25, amp: 7 },
+    { top: '71%', right: '27%', width: 32, depth: 0.3, phase: 4.45, amp: 6 }
+  ];
+
+  function tagMarkPaths(svg, variant) {
+    var paths = svg.querySelectorAll('path');
+    if (paths.length >= 2) {
+      paths[0].setAttribute('class', 'tier-mark-bottom');
+      paths[1].setAttribute('class', 'tier-mark-top');
+    }
+    paths.forEach(function (p) {
+      if (variant === 'outline') {
+        p.setAttribute('fill', 'none');
+        p.setAttribute('stroke', 'currentColor');
+        if (!p.getAttribute('stroke-width')) p.setAttribute('stroke-width', '16');
+        p.setAttribute('stroke-linejoin', 'round');
+        p.setAttribute('stroke-linecap', 'round');
+      } else {
+        p.setAttribute('fill', 'currentColor');
+        p.removeAttribute('stroke');
+        p.removeAttribute('stroke-width');
+      }
+    });
+    return svg.outerHTML;
+  }
+
+  function prepareMarkSvg(svgText, variant) {
+    var doc = new DOMParser().parseFromString(svgText, 'image/svg+xml');
+    var svg = doc.documentElement;
+    svg.removeAttribute('width');
+    svg.removeAttribute('height');
+    svg.setAttribute('aria-hidden', 'true');
+    return tagMarkPaths(svg, variant || 'fill');
+  }
+
+  function mountOrbit(root, cfg, markSvg, variant) {
+    var el = document.createElement('div');
+    el.className = 'tier-bg-orbit tier-bg-orbit--' + variant;
+    el.style.width = cfg.width + 'px';
+    if (cfg.top) el.style.top = cfg.top;
+    if (cfg.bottom) el.style.bottom = cfg.bottom;
+    if (cfg.left) el.style.left = cfg.left;
+    if (cfg.right) el.style.right = cfg.right;
+    el.dataset.depth = cfg.depth;
+    el.dataset.phase = cfg.phase;
+    el.dataset.amp = cfg.amp;
+    el.innerHTML = markSvg;
+    root.appendChild(el);
+  }
+
+  function mountBackground(fillSvg, outlineSvg) {
+    var root = document.createElement('div');
+    root.className = 'tier-bg';
+    root.setAttribute('aria-hidden', 'true');
+
+    var fills = narrow ? fillConfigs.slice(0, 3) : fillConfigs;
+    var outlines = narrow ? outlineConfigs.slice(0, 2) : outlineConfigs;
+
+    fills.forEach(function (cfg) {
+      mountOrbit(root, cfg, fillSvg, 'fill');
+    });
+    outlines.forEach(function (cfg) {
+      mountOrbit(root, cfg, outlineSvg, 'outline');
+    });
+
+    document.body.insertBefore(root, document.body.firstChild);
+
+    if (reduced) return;
+
+    var orbitNodes = root.querySelectorAll('.tier-bg-orbit');
+    var px = 0;
+    var py = 0;
+    var tx = 0;
+    var ty = 0;
+    var coarse = window.matchMedia('(pointer: coarse)').matches;
+
+    function parallax() {
+      var t = Date.now() * 0.001;
+      tx += (px - tx) * 0.09;
+      ty += (py - ty) * 0.09;
+      orbitNodes.forEach(function (node) {
+        var depth = parseFloat(node.dataset.depth) || 0.3;
+        var phase = parseFloat(node.dataset.phase) || 0;
+        var amp = narrow ? (parseFloat(node.dataset.amp) || 10) * 0.6 : (parseFloat(node.dataset.amp) || 10);
+        var idleX = Math.sin(t * 0.55 + phase) * amp;
+        var idleY = Math.cos(t * 0.48 + phase * 1.3) * amp;
+        var rot = Math.sin(t * 0.35 + phase) * (narrow ? 2 : 3.5);
+        var mx = tx * depth + idleX;
+        var my = ty * depth + idleY;
+        node.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0) rotate(' + rot + 'deg)';
+      });
+      root.style.setProperty('--tier-scroll', window.scrollY + 'px');
+      requestAnimationFrame(parallax);
+    }
+
+    if (!coarse && !narrow) {
+      window.addEventListener('mousemove', function (e) {
+        px = (e.clientX / window.innerWidth - 0.5) * 56;
+        py = (e.clientY / window.innerHeight - 0.5) * 44;
+      }, { passive: true });
+    }
+
+    window.addEventListener('scroll', function () {
+      root.style.setProperty('--tier-scroll', window.scrollY + 'px');
+    }, { passive: true });
+
+    requestAnimationFrame(parallax);
+  }
+
+  Promise.all([
+    fetch('/assets/img/logo.svg').then(function (res) {
+      if (!res.ok) throw new Error('logo.svg not found');
+      return res.text();
+    }),
+    fetch('/assets/img/logo-outline.svg').then(function (res) {
+      if (!res.ok) throw new Error('logo-outline.svg not found');
+      return res.text();
+    })
+  ]).then(function (results) {
+    mountBackground(
+      prepareMarkSvg(results[0], 'fill'),
+      prepareMarkSvg(results[1], 'outline')
+    );
+  }).catch(function () {});
+})();
+
+/* Games page gallery */
+window.tierInitGamesMedia = function () {
   if (!document.body || !document.body.classList.contains('games-page')) return;
 
   (function gallery() {
@@ -1169,147 +1439,21 @@ document.addEventListener('DOMContentLoaded', function () {
       });
       render(items);
     });
+
+    window.tierOnPageLeave(function () {
+      stopAuto();
+    });
   })();
+};
 
-  (function audioDock() {
-    var wrap = document.getElementById('gamesAudio');
-    var audio = document.getElementById('gamesTheme');
-    var muteBtn = document.getElementById('gamesAudioMute');
-    var volumeInput = document.getElementById('gamesAudioVolume');
-    if (!wrap || !audio || !muteBtn || !volumeInput) return;
-
-    var storageKey = 'tier-games-audio-volume';
-    var muted = true;
-    var volume = 0.4;
-    var ready = false;
-    var icon = muteBtn.querySelector('i');
-
-    try {
-      var saved = Number(localStorage.getItem(storageKey));
-      if (!isNaN(saved) && saved > 0 && saved <= 1) volume = saved;
-    } catch (err) {}
-
-    function saveVolume() {
-      try {
-        localStorage.setItem(storageKey, String(volume));
-      } catch (err) {}
-    }
-
-    function t(key, fallback) {
-      var val = window.tierI18n && window.tierI18n.t ? window.tierI18n.t(key) : null;
-      return val != null ? val : fallback;
-    }
-
-    function syncUi() {
-      volumeInput.value = String(Math.round(volume * 100));
-      muteBtn.setAttribute('aria-pressed', muted || volume === 0 ? 'true' : 'false');
-      muteBtn.setAttribute(
-        'aria-label',
-        muted || volume === 0 ? t('games.audioUnmute', 'Unmute music') : t('games.audioMute', 'Mute music')
-      );
-      if (icon) {
-        icon.className = muted || volume === 0 ? 'fas fa-volume-xmark' : (volume < 0.35 ? 'fas fa-volume-low' : 'fas fa-volume-high');
-      }
-    }
-
-    function applyVolume() {
-      audio.volume = muted ? 0 : volume;
-    }
-
-    function playSafe() {
-      if (!ready || muted || volume === 0) return;
-      var playPromise = audio.play();
-      if (playPromise && typeof playPromise.catch === 'function') {
-        playPromise.catch(function () {});
-      }
-    }
-
-    function stopAudio() {
-      audio.pause();
-      audio.currentTime = 0;
-    }
-
-    function reveal() {
-      wrap.hidden = false;
-    }
-
-    function markReady() {
-      ready = true;
-      reveal();
-    }
-
-    /* Her ziyarette kapalı başla — mute tercihi saklanmaz, sadece volume hatırlanır */
-    function resetMutedEntry() {
-      muted = true;
-      audio.muted = true;
-      applyVolume();
-      stopAudio();
-      syncUi();
-    }
-
-    audio.loop = true;
-    audio.autoplay = false;
-    audio.muted = true;
-    resetMutedEntry();
-    reveal();
-
-    audio.addEventListener('loadeddata', markReady);
-    audio.addEventListener('canplay', markReady);
-
-    audio.addEventListener('error', function () {
-      ready = false;
-      reveal();
-    });
-
-    if (audio.readyState >= 2) markReady();
-    else {
-      try { audio.load(); } catch (err) {}
-    }
-
-    /* Geri/ileri cache ile dönüşte de kapalı ikon + sessiz kalsın */
-    window.addEventListener('pageshow', function () {
-      resetMutedEntry();
-    });
-
-    muteBtn.addEventListener('click', function () {
-      muted = !(muted || volume === 0);
-      if (!muted && volume === 0) volume = 0.4;
-      audio.muted = muted;
-      applyVolume();
-      syncUi();
-      saveVolume();
-      if (!muted) {
-        ready = true;
-        playSafe();
-      } else {
-        stopAudio();
-      }
-    });
-
-    volumeInput.addEventListener('input', function () {
-      volume = Math.min(1, Math.max(0, Number(volumeInput.value) / 100));
-      muted = volume === 0;
-      audio.muted = muted;
-      applyVolume();
-      syncUi();
-      if (volume > 0) saveVolume();
-      if (!muted) {
-        ready = true;
-        playSafe();
-      } else {
-        stopAudio();
-      }
-    });
-
-    window.addEventListener('tier:lang', syncUi);
-  })();
-})();
-
-/* Keep Chaos press kit previews (/games) */
-(function gamesPressPreview() {
-  var root = document.querySelector('.games-press-media');
+/* Press kit previews (/press) */
+window.tierInitGamesPress = function () {
+  var section = document.querySelector('.games-press');
+  var root = section && section.querySelector('.games-press-media');
   var lightbox = document.getElementById('gamesPressLightbox');
   if (!root || !lightbox) return;
+  var zipBtn = section.querySelector('[data-press-zip]');
+  var zipLabel = zipBtn && zipBtn.querySelector('[data-i18n="games.press.downloadAll"]');
 
   var imgEl = document.getElementById('gamesPressLightboxImg');
   var titleEl = document.getElementById('gamesPressLightboxTitle');
@@ -1584,6 +1728,193 @@ document.addEventListener('DOMContentLoaded', function () {
     return true;
   }
 
+  var CRC_TABLE = (function () {
+    var table = new Uint32Array(256);
+    for (var n = 0; n < 256; n++) {
+      var c = n;
+      for (var k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+      table[n] = c >>> 0;
+    }
+    return table;
+  })();
+
+  function crc32(bytes) {
+    var crc = 0xFFFFFFFF;
+    for (var i = 0; i < bytes.length; i++) crc = CRC_TABLE[(crc ^ bytes[i]) & 0xFF] ^ (crc >>> 8);
+    return (crc ^ 0xFFFFFFFF) >>> 0;
+  }
+
+  function u16(n) {
+    return new Uint8Array([n & 255, (n >>> 8) & 255]);
+  }
+
+  function u32(n) {
+    return new Uint8Array([n & 255, (n >>> 8) & 255, (n >>> 16) & 255, (n >>> 24) & 255]);
+  }
+
+  function concatBytes(parts) {
+    var len = 0;
+    var i;
+    for (i = 0; i < parts.length; i++) len += parts[i].length;
+    var out = new Uint8Array(len);
+    var offset = 0;
+    for (i = 0; i < parts.length; i++) {
+      out.set(parts[i], offset);
+      offset += parts[i].length;
+    }
+    return out;
+  }
+
+  function zipStore(files) {
+    var encoder = new TextEncoder();
+    var locals = [];
+    var centrals = [];
+    var offset = 0;
+    for (var i = 0; i < files.length; i++) {
+      var name = encoder.encode(files[i].name);
+      var data = files[i].data;
+      var crc = crc32(data);
+      var size = data.length;
+      var local = concatBytes([
+        u32(0x04034b50), u16(20), u16(0x0800), u16(0), u16(0), u16(0),
+        u32(crc), u32(size), u32(size), u16(name.length), u16(0), name, data
+      ]);
+      var central = concatBytes([
+        u32(0x02014b50), u16(20), u16(20), u16(0x0800), u16(0), u16(0), u16(0),
+        u32(crc), u32(size), u32(size), u16(name.length), u16(0), u16(0), u16(0),
+        u16(0), u32(0), u32(offset), name
+      ]);
+      locals.push(local);
+      centrals.push(central);
+      offset += local.length;
+    }
+    var centralDir = concatBytes(centrals);
+    var eocd = concatBytes([
+      u32(0x06054b50), u16(0), u16(0), u16(files.length), u16(files.length),
+      u32(centralDir.length), u32(offset), u16(0)
+    ]);
+    return concatBytes(locals.concat([centralDir, eocd]));
+  }
+
+  function canvasToBytes(canvas) {
+    return new Promise(function (resolve, reject) {
+      if (!canvas || !canvas.toBlob) {
+        reject(new Error('canvas'));
+        return;
+      }
+      canvas.toBlob(function (blob) {
+        if (!blob) {
+          reject(new Error('blob'));
+          return;
+        }
+        blob.arrayBuffer().then(function (buf) {
+          resolve(new Uint8Array(buf));
+        }).catch(reject);
+      }, 'image/png');
+    });
+  }
+
+  function fetchBytes(url) {
+    return fetch(url).then(function (res) {
+      if (!res.ok) throw new Error('fetch');
+      return res.arrayBuffer();
+    }).then(function (buf) {
+      return new Uint8Array(buf);
+    });
+  }
+
+  function logoToneBytes(src, tone) {
+    return loadImage(src).then(function (img) {
+      var canvas = recolorLogo(img, tone);
+      if (!canvas) throw new Error('recolor');
+      return canvasToBytes(canvas);
+    });
+  }
+
+  function pressKitReadme() {
+    var text =
+      'TIER STUDIOS — PRESS KIT\n' +
+      'https://tierstudios.com/press\n\n' +
+      'Keep Chaos\n' +
+      'Genre: TPS · Survivor-like · Bullet Heaven · Rogue-Lite\n' +
+      'Platform: Steam (PC)\n' +
+      'Developer / Publisher: Tier Studios\n' +
+      'Press: info@tierstudios.com\n\n' +
+      'Included\n' +
+      'logos/\n' +
+      '  TierStudios-Logo-White.png\n' +
+      '  TierStudios-Logo-Black.png\n' +
+      '  KeepChaos-Logo-White.png\n' +
+      '  KeepChaos-Logo-Black.png\n' +
+      'key-art/\n' +
+      '  KeepChaos-KeyArt-1.png\n' +
+      '  KeepChaos-KeyArt-2.png\n\n' +
+      'Usage\n' +
+      'Keep logos intact. Do not stretch, recolor, or add effects.\n' +
+      'Use the white logo on dark backgrounds and the black logo on light backgrounds.\n';
+    return new TextEncoder().encode(text);
+  }
+
+  function setZipBusy(busy) {
+    if (!zipBtn) return;
+    zipBtn.disabled = !!busy;
+    zipBtn.setAttribute('aria-busy', busy ? 'true' : 'false');
+    if (!zipLabel) return;
+    zipLabel.textContent = busy
+      ? t('games.press.downloadAllBusy', 'Preparing zip…')
+      : t('games.press.downloadAll', 'Download all (.zip)');
+  }
+
+  function downloadZipBytes(bytes, filename) {
+    var blob = new Blob([bytes], { type: 'application/zip' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+  }
+
+  function buildPressZip() {
+    var jobs = [
+      Promise.resolve({ name: 'README.txt', data: pressKitReadme() })
+    ];
+
+    root.querySelectorAll('[data-press-colorable]').forEach(function (asset) {
+      var preview = asset.querySelector('.games-press-preview');
+      var src = preview && preview.getAttribute('data-press-src');
+      var base = preview && preview.getAttribute('data-press-filename');
+      if (!src || !base) return;
+      jobs.push(logoToneBytes(src, 'white').then(function (data) {
+        return { name: 'logos/' + fileNameFor(base, 'white'), data: data };
+      }));
+      jobs.push(logoToneBytes(src, 'black').then(function (data) {
+        return { name: 'logos/' + fileNameFor(base, 'black'), data: data };
+      }));
+    });
+
+    root.querySelectorAll('[data-press-variantable]').forEach(function (asset) {
+      var preview = asset.querySelector('.games-press-preview');
+      var base = preview && preview.getAttribute('data-press-filename');
+      if (!preview || !base) return;
+      for (var n = 1; n <= 9; n++) {
+        var src = preview.getAttribute('data-press-src-' + n);
+        if (!src) continue;
+        (function (fileSrc, fileName) {
+          jobs.push(fetchBytes(fileSrc).then(function (data) {
+            return { name: fileName, data: data };
+          }));
+        })(src, 'key-art/' + variantFileName(base, String(n)));
+      }
+    });
+
+    return Promise.all(jobs).then(function (files) {
+      return zipStore(files);
+    });
+  }
+
   root.addEventListener('click', function (e) {
     var variantBtn = e.target.closest('[data-press-variant].games-press-tone');
     if (variantBtn && root.contains(variantBtn)) {
@@ -1639,10 +1970,24 @@ document.addEventListener('DOMContentLoaded', function () {
   root.querySelectorAll('[data-press-colorable]').forEach(function (asset) {
     setAssetTone(asset, 'white');
   });
-})();
+
+  if (zipBtn) {
+    zipBtn.addEventListener('click', function () {
+      if (zipBtn.disabled) return;
+      setZipBusy(true);
+      buildPressZip().then(function (bytes) {
+        downloadZipBytes(bytes, 'TierStudios-PressKit.zip');
+      }).catch(function () {
+        window.alert(t('games.press.downloadAllError', 'Could not build the zip. Try again.'));
+      }).then(function () {
+        setZipBusy(false);
+      });
+    });
+  }
+};
 
 /* Keep Chaos leaderboard (/games/stats) */
-(function gamesLeaderboard() {
+window.tierInitGamesLb = function () {
   if (!document.body || !document.body.classList.contains('games-stats-page')) return;
 
   var listEl = document.getElementById('gamesLbList');
@@ -1981,14 +2326,408 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  document.addEventListener('visibilitychange', function () {
+  var onVisibility = function () {
     if (document.hidden) {
       stopNameCycle();
     } else {
       startNameCycle();
       updateCountdown();
     }
-  });
+  };
+  document.addEventListener('visibilitychange', onVisibility);
 
   loadBoard(false);
+
+  window.tierOnPageLeave(function () {
+    stopNameCycle();
+    if (countdownTimer) window.clearInterval(countdownTimer);
+    document.removeEventListener('visibilitychange', onVisibility);
+  });
+};
+
+(function tierCookies() {
+  function hasChoice() {
+    var v = window.tierAnalytics && window.tierAnalytics.get();
+    return v === 'granted' || v === 'denied';
+  }
+
+  function mount() {
+    if (!document.getElementById('tierCookieUi')) {
+      var ui = document.createElement('div');
+      ui.id = 'tierCookieUi';
+      ui.hidden = true;
+      ui.innerHTML =
+        '<div class="cookie-overlay" data-cookie-close></div>' +
+        '<div class="cookie-panel" role="dialog" aria-modal="true" aria-labelledby="cookiePanelTitle">' +
+          '<button type="button" class="cookie-panel-close" data-cookie-close data-cursor="hover" data-i18n-aria="cookies.panel.close" aria-label="Close">&times;</button>' +
+          '<h2 class="cookie-panel-title" id="cookiePanelTitle" data-i18n="cookies.panel.title">Cookie Settings</h2>' +
+          '<p class="cookie-panel-desc" data-i18n="cookies.panel.desc">Choose what this site may store besides what it needs to run.</p>' +
+          '<div class="cookie-row">' +
+            '<div class="cookie-row-copy">' +
+              '<span class="cookie-row-name" data-i18n="cookies.panel.necessary">Necessary</span>' +
+              '<span class="cookie-row-help" data-i18n="cookies.panel.necessaryDesc">Language and your cookie choice. Always on.</span>' +
+            '</div>' +
+            '<span class="cookie-switch is-locked" aria-hidden="true"></span>' +
+          '</div>' +
+          '<label class="cookie-row" for="cookieAnalytics">' +
+            '<div class="cookie-row-copy">' +
+              '<span class="cookie-row-name" data-i18n="cookies.panel.analytics">Analytics</span>' +
+              '<span class="cookie-row-help" data-i18n="cookies.panel.analyticsDesc">Google Analytics · pages visited, only if you allow it.</span>' +
+            '</div>' +
+            '<input id="cookieAnalytics" class="cookie-switch-input" type="checkbox" />' +
+            '<span class="cookie-switch" aria-hidden="true"></span>' +
+          '</label>' +
+          '<div class="cookie-actions">' +
+            '<button type="button" class="cookie-btn cookie-btn--ghost" data-cookie-reject data-cursor="hover" data-i18n="cookies.panel.reject">Reject analytics</button>' +
+            '<button type="button" class="cookie-btn" data-cookie-save data-cursor="hover" data-i18n="cookies.panel.save">Save</button>' +
+          '</div>' +
+          '<a class="cookie-policy-link" href="/cookies" data-cursor="hover" data-i18n="cookies.panel.policy">Cookie policy</a>' +
+        '</div>';
+      document.body.appendChild(ui);
+    }
+
+    if (!document.getElementById('tierCookieBar')) {
+      var bar = document.createElement('div');
+      bar.id = 'tierCookieBar';
+      bar.className = 'cookie-bar';
+      bar.setAttribute('role', 'dialog');
+      bar.setAttribute('aria-labelledby', 'cookieBarText');
+      bar.hidden = true;
+      bar.innerHTML =
+        '<p class="cookie-bar-text" id="cookieBarText" data-i18n="cookies.bar.text">Necessary storage is always on. Analytics only if you allow it.</p>' +
+        '<div class="cookie-bar-actions">' +
+          '<a class="cookie-bar-link" href="/cookies" data-cursor="hover" data-i18n="cookies.panel.policy">Cookie policy</a>' +
+          '<button type="button" class="cookie-btn cookie-btn--ghost" data-cookie-settings data-cursor="hover" data-i18n="footer.cookieSettings">Cookie Settings</button>' +
+          '<button type="button" class="cookie-btn cookie-btn--ghost" data-cookie-reject data-cursor="hover" data-i18n="cookies.bar.reject">Reject</button>' +
+          '<button type="button" class="cookie-btn" data-cookie-accept data-cursor="hover" data-i18n="cookies.bar.accept">Accept</button>' +
+        '</div>';
+      document.body.appendChild(bar);
+    }
+
+    if (window.tierI18n && window.tierI18n.applyLang) window.tierI18n.applyLang();
+    syncBar();
+  }
+
+  function syncToggle() {
+    var input = document.getElementById('cookieAnalytics');
+    if (!input) return;
+    var granted = window.tierAnalytics && window.tierAnalytics.get() === 'granted';
+    input.checked = granted;
+  }
+
+  function syncBar() {
+    var bar = document.getElementById('tierCookieBar');
+    var ui = document.getElementById('tierCookieUi');
+    var show = !hasChoice() && (!ui || ui.hidden);
+    if (bar) bar.hidden = !show;
+    document.body.classList.toggle('has-cookie-bar', !!show);
+  }
+
+  function open() {
+    mount();
+    syncToggle();
+    var ui = document.getElementById('tierCookieUi');
+    if (!ui) return;
+    ui.hidden = false;
+    document.body.classList.add('is-cookie-open');
+    syncBar();
+    var closeBtn = ui.querySelector('[data-cookie-close].cookie-panel-close');
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function close() {
+    var ui = document.getElementById('tierCookieUi');
+    if (ui) ui.hidden = true;
+    document.body.classList.remove('is-cookie-open');
+    syncBar();
+  }
+
+  function setConsent(value) {
+    if (window.tierAnalytics && window.tierAnalytics.set) window.tierAnalytics.set(value);
+    syncToggle();
+    close();
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-cookie-settings]')) {
+      e.preventDefault();
+      open();
+      return;
+    }
+    if (e.target.closest('[data-cookie-accept]')) {
+      setConsent('granted');
+      return;
+    }
+    if (e.target.closest('[data-cookie-reject]')) {
+      setConsent('denied');
+      return;
+    }
+    var ui = document.getElementById('tierCookieUi');
+    if (!ui || ui.hidden) return;
+    if (e.target.closest('[data-cookie-close]')) {
+      close();
+      return;
+    }
+    if (e.target.closest('[data-cookie-save]')) {
+      var input = document.getElementById('cookieAnalytics');
+      setConsent(input && input.checked ? 'granted' : 'denied');
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') close();
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mount);
+  } else {
+    mount();
+  }
+
+  window.tierOpenCookieSettings = open;
+})();
+
+(function tierInstantNav() {
+  var CORE = {
+    '/': 1,
+    '/tools': 1,
+    '/games': 1,
+    '/team': 1,
+    '/contact': 1,
+    '/games/stats': 1,
+    '/press': 1,
+    '/privacy': 1,
+    '/cookies': 1
+  };
+  var cache = {};
+  var pending = {};
+  var current = '';
+  var navigating = false;
+
+  function normPath(path) {
+    path = String(path || '/').replace(/index\.html$/i, '');
+    path = path.replace(/\/+$/, '') || '/';
+    return path;
+  }
+
+  function samePage(url) {
+    return normPath(url.pathname) === current && !url.hash;
+  }
+
+  function isCore(url) {
+    if (url.origin !== location.origin) return false;
+    return !!CORE[normPath(url.pathname)];
+  }
+
+  function parseDoc(html) {
+    return new DOMParser().parseFromString(html, 'text/html');
+  }
+
+  function isPersistent(el) {
+    if (!el || el.nodeType !== 1) return false;
+    if (el.tagName === 'SCRIPT') return true;
+    if (el.id === 'nav' || el.id === 'navLinks') return true;
+    if (el.id === 'tierCookieUi' || el.id === 'tierCookieBar') return true;
+    if (el.classList.contains('skip-link')) return true;
+    if (el.classList.contains('tier-ambience-canvas')) return true;
+    if (el.classList.contains('tier-bg')) return true;
+    if (el.classList.contains('nav-mobile-backdrop')) return true;
+    if (el.id === 'gamesVideoWarm' || el.classList.contains('games-video-warm')) return true;
+    return false;
+  }
+
+  function snapshot(doc) {
+    var nodes = [];
+    var child = doc.body.firstElementChild;
+    while (child) {
+      if (!isPersistent(child)) nodes.push(child.cloneNode(true));
+      child = child.nextElementSibling;
+    }
+    return {
+      title: doc.title,
+      bodyClass: doc.body.className,
+      page: doc.body.getAttribute('data-page') || '',
+      nodes: nodes
+    };
+  }
+
+  function closeMobileNav() {
+    var btn = document.getElementById('mobileNavBtn');
+    var links = document.getElementById('navLinks');
+    var backdrop = document.querySelector('.nav-mobile-backdrop');
+    if (btn) {
+      btn.classList.remove('active');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    if (links) links.classList.remove('active');
+    if (backdrop) backdrop.classList.remove('active');
+    document.body.classList.remove('menu-open');
+    var nav = document.getElementById('nav');
+    if (nav) nav.classList.remove('menu-open');
+  }
+
+  function applyPage(page, url) {
+    if (window.tierTeardownPage) window.tierTeardownPage();
+
+    var body = document.body;
+    var doomed = [];
+    Array.prototype.forEach.call(body.children, function (el) {
+      if (!isPersistent(el)) doomed.push(el);
+    });
+    doomed.forEach(function (el) { el.remove(); });
+
+    body.className = page.bodyClass;
+    if (page.page) body.setAttribute('data-page', page.page);
+    else body.removeAttribute('data-page');
+
+    var firstScript = null;
+    Array.prototype.forEach.call(body.children, function (el) {
+      if (!firstScript && el.tagName === 'SCRIPT') firstScript = el;
+    });
+
+    page.nodes.forEach(function (node) {
+      var imported = document.importNode(node, true);
+      if (imported.tagName === 'SCRIPT') return;
+      body.insertBefore(imported, firstScript);
+    });
+    document.title = page.title;
+
+    var nav = document.getElementById('nav');
+    if (nav) {
+      nav.classList.remove('is-hidden');
+      nav.classList.toggle('solid', window.scrollY > 24);
+    }
+
+    current = normPath(url.pathname);
+    if (window.tierPinTop) window.tierPinTop();
+    else window.scrollTo(0, 0);
+
+    if (url.hash) {
+      var id = decodeURIComponent(url.hash.slice(1));
+      var target = id && document.getElementById(id);
+      if (target) target.scrollIntoView();
+    }
+
+    if (window.tierBootPage) window.tierBootPage();
+
+    if (window.gtag) {
+      window.gtag('event', 'page_view', {
+        page_title: document.title,
+        page_location: url.href,
+        page_path: url.pathname
+      });
+    }
+  }
+
+  function load(url) {
+    var key = normPath(url.pathname);
+    if (cache[key]) return Promise.resolve(cache[key]);
+    if (pending[key]) return pending[key];
+    pending[key] = fetch(url.pathname, { credentials: 'same-origin' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('nav');
+        return res.text();
+      })
+      .then(function (html) {
+        var page = snapshot(parseDoc(html));
+        cache[key] = page;
+        delete pending[key];
+        if (key === '/games') {
+          var poster = new Image();
+          poster.src = '/assets/img/game/keep-chaos-banner.png';
+          if (window.tierWarmGamesVideo) window.tierWarmGamesVideo();
+        }
+        return page;
+      })
+      .catch(function (err) {
+        delete pending[key];
+        throw err;
+      });
+    return pending[key];
+  }
+
+  function go(href, push) {
+    var url;
+    try {
+      url = new URL(href, location.href);
+    } catch (err) {
+      location.href = href;
+      return;
+    }
+    if (!isCore(url)) {
+      location.href = url.href;
+      return;
+    }
+    if (navigating) return;
+    if (samePage(url)) {
+      closeMobileNav();
+      if (window.tierPinTop) window.tierPinTop();
+      else window.scrollTo(0, 0);
+      return;
+    }
+    navigating = true;
+    closeMobileNav();
+    if (normPath(url.pathname) === '/games' && window.tierWarmGamesVideo) {
+      window.tierWarmGamesVideo();
+    }
+    load(url).then(function (page) {
+      if (push !== false) history.pushState({ tierNav: true }, '', url.pathname + url.search + url.hash);
+      applyPage(page, url);
+    }).catch(function () {
+      location.href = url.href;
+    }).then(function () {
+      navigating = false;
+    });
+  }
+
+  function prefetch(path) {
+    var url;
+    try { url = new URL(path, location.href); } catch (err) { return; }
+    if (!isCore(url) || cache[normPath(url.pathname)] || pending[normPath(url.pathname)]) return;
+    load(url).catch(function () {});
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented) return;
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var link = e.target.closest('a[href]');
+    if (!link) return;
+    if (link.target && link.target !== '_self') return;
+    if (link.hasAttribute('download')) return;
+    var url;
+    try { url = new URL(link.href, location.href); } catch (err) { return; }
+    if (!isCore(url)) return;
+    e.preventDefault();
+    go(url.href, true);
+  }, true);
+
+  document.addEventListener('mouseover', function (e) {
+    var link = e.target.closest('a[href]');
+    if (!link) return;
+    var url;
+    try { url = new URL(link.href, location.href); } catch (err) { return; }
+    prefetch(url.pathname);
+    if (isCore(url) && normPath(url.pathname) === '/games' && window.tierWarmGamesVideo) {
+      window.tierWarmGamesVideo();
+    }
+  }, true);
+
+  window.addEventListener('popstate', function () {
+    var url = new URL(location.href);
+    if (!isCore(url)) {
+      location.reload();
+      return;
+    }
+    load(url).then(function (page) {
+      applyPage(page, url);
+    }).catch(function () {
+      location.reload();
+    });
+  });
+
+  current = normPath(location.pathname);
+  prefetch(current);
+  Object.keys(CORE).forEach(function (path) {
+    if (path !== current) prefetch(path);
+  });
 })();

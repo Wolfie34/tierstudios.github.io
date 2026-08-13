@@ -23,7 +23,7 @@ Key facts:
 - Genre labels: survivor-like, bullet heaven, bullet hell, TPS, horde survival, online co-op
 - Official page: https://tierstudios.com/games
 - FAQ: https://tierstudios.com/games#faq
-- Press kit assets (logo, key art, facts): https://tierstudios.com/games#press
+- Press kit assets (logo, key art, facts): https://tierstudios.com/press
 - Leaderboard: https://tierstudios.com/games/stats
 - Community Discord for builds and early news: https://discord.gg/keepchaos
 
