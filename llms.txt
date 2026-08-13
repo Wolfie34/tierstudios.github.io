@@ -18,7 +18,8 @@ Keep Chaos is Tier Studios' debut / flagship title, currently in active developm
 
 - Genre: 3D TPS survivor-like / bullet heaven / rogue-lite (horde survival)
 - Comparable vibe: Vampire Survivors, Megabonk, online co-op survivor-like / bullet heaven
-- Platforms: PC, planned release on Steam
+- Platforms: PC, Steam
+- Steam: https://store.steampowered.com/app/3791920/Keep_Chaos/
 - Modes: Solo and up to 4-player local / online co-op (PvE)
 - Art style: Low-poly 3D medieval fantasy
 - Page: https://tierstudios.com/games

@@ -1838,6 +1838,7 @@ window.tierInitGamesPress = function () {
       'Keep Chaos\n' +
       'Genre: TPS · Survivor-like · Bullet Heaven · Rogue-Lite\n' +
       'Platform: Steam (PC)\n' +
+      'Store: https://store.steampowered.com/app/3791920/Keep_Chaos/\n' +
       'Developer / Publisher: Tier Studios\n' +
       'Press: info@tierstudios.com\n\n' +
       'Included\n' +

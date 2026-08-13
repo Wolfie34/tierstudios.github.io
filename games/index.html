@@ -86,7 +86,10 @@
         "name": "Keep Chaos",
         "alternateName": ["KeepChaos", "Keep Chaos game"],
         "url": "https://tierstudios.com/games",
-        "description": "Fast-paced low-poly 3D TPS survivor-like / bullet heaven rogue-lite. Fight endless enemy hordes solo or in up to 4-player local and online co-op (PvE). Classes, team synergy, and rogue-lite builds in a chaotic medieval fantasy world. Developed by Tier Studios. Coming to Steam.",
+        "sameAs": [
+          "https://store.steampowered.com/app/3791920/Keep_Chaos/"
+        ],
+        "description": "Fast-paced low-poly 3D TPS survivor-like / bullet heaven rogue-lite. Fight endless enemy hordes solo or in up to 4-player local and online co-op (PvE). Classes, team synergy, and rogue-lite builds in a chaotic medieval fantasy world. Developed by Tier Studios. Wishlist on Steam.",
         "keywords": "Keep Chaos, survivor-like, Vampire Survivors like, Megabonk like, online co-op, bullet heaven, bullet hell, TPS, rogue-lite, horde survival",
         "genre": [
           "Action",
@@ -135,7 +138,7 @@
           "availability": "https://schema.org/PreOrder",
           "priceCurrency": "USD",
           "seller": { "@id": "https://tierstudios.com/#organization" },
-          "url": "https://tierstudios.com/games#steam",
+          "url": "https://store.steampowered.com/app/3791920/Keep_Chaos/",
           "description": "Wishlist Keep Chaos on Steam"
         }
       },
@@ -172,7 +175,7 @@
             "name": "Where can I wishlist Keep Chaos?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Keep Chaos is planned for Steam (PC). Wishlist and follow updates at https://tierstudios.com/games#steam and join the Discord community for builds and early news."
+              "text": "Keep Chaos is on Steam (PC). Wishlist at https://store.steampowered.com/app/3791920/Keep_Chaos/ and join the Discord community for builds and early news."
             }
           }
         ]
@@ -203,7 +206,7 @@
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="/assets/css/style.css?v=20260813noaud" />
+  <link rel="stylesheet" href="/assets/css/style.css?v=20260814steam" />
   <link rel="preload" href="/assets/video/keep-chaos.mp4?v=20260802a" as="video" type="video/mp4" />
 
 </head>
@@ -350,7 +353,7 @@
           </article>
           <article class="games-faq-item">
             <h3 class="games-faq-q" data-i18n="games.faq.q4">Where can I wishlist Keep Chaos?</h3>
-            <p class="games-faq-a" data-i18n="games.faq.a4">Keep Chaos is coming to Steam (PC). Wishlist from this page and join Discord for builds and early news.</p>
+            <p class="games-faq-a" data-i18n="games.faq.a4">Keep Chaos is on Steam (PC). Wishlist from this page and join Discord for builds and early news.</p>
           </article>
         </div>
       </section>
@@ -383,18 +386,19 @@
       <section class="games-steam reveal" id="steam" data-delay="60" aria-labelledby="gamesSteamTitle">
         <span class="label games-steam-kicker" data-i18n="games.steam.kicker">Steam</span>
         <h2 class="display games-steam-title" id="gamesSteamTitle" data-i18n="games.steam.title">Wishlist on Steam</h2>
-        <p class="games-steam-desc" data-i18n="games.steam.desc">Keep Chaos is coming to Steam. Wishlist will open soon — be ready when chaos drops.</p>
+        <p class="games-steam-desc" data-i18n="games.steam.desc">Keep Chaos is on Steam. Wishlist now — be ready when chaos drops.</p>
         <a
           id="steamWishlistBtn"
-          class="btn-primary games-steam-btn is-soon"
-          role="link"
-          aria-disabled="true"
-          tabindex="-1"
-          data-i18n-aria="games.steam.btnSoonAria"
-          aria-label="Coming soon to Steam"
+          class="btn-primary games-steam-btn"
+          href="https://store.steampowered.com/app/3791920/Keep_Chaos/"
+          target="_blank"
+          rel="noopener"
+          data-cursor="hover"
+          data-i18n-aria="games.steam.btn"
+          aria-label="Wishlist on Steam"
         >
           <i class="fab fa-steam" aria-hidden="true"></i>
-          <span data-i18n="games.steam.btnSoon">Coming soon to Steam</span>
+          <span data-i18n="games.steam.btn">Wishlist on Steam</span>
         </a>
       </section>
 
@@ -468,9 +472,9 @@
 
   </div>
 
-  <script src="/assets/js/i18n.js?v=20260813noaud"></script>
+  <script src="/assets/js/i18n.js?v=20260814steam"></script>
 
-  <script src="/assets/js/script.js?v=20260813noaud"></script>
+  <script src="/assets/js/script.js?v=20260814steam"></script>
 
 </body>
 

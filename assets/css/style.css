@@ -4138,6 +4138,14 @@ textarea.field {
   text-wrap: balance;
 }
 
+.game-teaser-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px 22px;
+}
+
 .game-teaser-genres {
   margin: 0;
   letter-spacing: 0.22em;
@@ -6061,6 +6069,17 @@ body.is-cookie-open {
   font-weight: 400;
   line-height: 1.4;
   color: var(--fg);
+}
+
+.games-press-facts dd a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.games-press-facts dd a:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .games-press-fact-cta {

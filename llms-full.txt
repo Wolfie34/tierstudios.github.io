@@ -16,8 +16,8 @@ Tier Studios builds original game worlds and production-grade Unity tools. The s
 Keep Chaos is a fast-paced low-poly 3D TPS survivor-like / bullet heaven rogue-lite set in a chaotic medieval fantasy world. It sits in the same genre family as Vampire Survivors and Megabonk, with online multiplayer co-op for up to 4 players.
 
 Key facts:
-- Status: In development / on Steam wishlist path
-- Planned storefront: Steam (PC)
+- Status: In development / wishlist live on Steam
+- Storefront: Steam (PC) · https://store.steampowered.com/app/3791920/Keep_Chaos/
 - Players: Solo or up to 4-player local and online co-op (PvE)
 - Features: class-based team synergy, rogue-lite progression, dense enemy swarms, spell/weapon builds
 - Genre labels: survivor-like, bullet heaven, bullet hell, TPS, horde survival, online co-op
