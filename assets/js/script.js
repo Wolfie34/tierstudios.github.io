@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
           '<span class="label footer-shortcuts-label" data-i18n="footer.games">Games</span>' +
           '<ul class="footer-shortcuts-list">' +
             '<li><a href="/games" data-cursor="hover" data-i18n="nav.keepChaos">Keep Chaos</a></li>' +
-            '<li><a href="/games/stats" data-cursor="hover" data-i18n="footer.leaderboard">Leaderboard</a></li>' +
+            '<li><span class="footer-soon" aria-disabled="true"><span data-i18n="footer.leaderboard">Leaderboard</span> · <span data-i18n="common.comingSoon">Coming soon</span></span></li>' +
           '</ul>' +
         '</div>' +
         '<div class="footer-shortcuts-group">' +
@@ -1839,6 +1839,7 @@ window.tierInitGamesPress = function () {
       'Genre: TPS · Survivor-like · Bullet Heaven · Rogue-Lite\n' +
       'Platform: Steam (PC)\n' +
       'Store: https://store.steampowered.com/app/3791920/Keep_Chaos/\n' +
+      'Trailer: https://www.youtube.com/watch?v=VDieXeRXhK0\n' +
       'Developer / Publisher: Tier Studios\n' +
       'Press: info@tierstudios.com\n\n' +
       'Included\n' +
