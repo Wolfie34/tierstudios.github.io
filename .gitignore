@@ -4,3 +4,4 @@ package-lock.json
 .DS_Store
 *.log
 _gen-favicons.js
+assets/video/keep-chaos-trailer.mp4

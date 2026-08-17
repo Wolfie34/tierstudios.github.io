@@ -53,7 +53,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/css/style.css?v=20260814trail" />
+  <link rel="stylesheet" href="/assets/css/style.css?v=20260818circle" />
 </head>
 <body class="subpage press-page" data-page="press">
   <div class="grain" aria-hidden="true"></div>
@@ -72,6 +72,7 @@
         <div class="nav-links" id="navLinks">
           <a href="/tools" class="nav-link" data-cursor="hover">Assets</a>
           <a href="/games" class="nav-link" data-cursor="hover">Games</a>
+          <a href="/news" class="nav-link" data-cursor="hover">News</a>
           <a href="/team" class="nav-link" data-cursor="hover">Team</a>
           <a href="/contact" class="nav-link" data-cursor="hover">Contact</a>
         </div>
@@ -91,6 +92,13 @@
 
     <div class="subpage-content container">
       <section class="games-press" aria-label="Press Kit">
+        <div class="games-press-switch">
+          <span class="games-press-switch-kicker" data-i18n="games.press.gameSelect">Title</span>
+          <button type="button" class="games-press-switch-btn" disabled aria-disabled="true" data-i18n-aria="games.press.gameSelectAria" aria-label="Press kit title">
+            <span>Keep Chaos</span>
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+          </button>
+        </div>
         <dl class="games-press-facts">
           <div>
             <dt data-i18n="games.press.factTitle">Title</dt>
@@ -131,18 +139,27 @@
               class="games-press-preview is-logo is-tone-white"
               data-cursor="hover"
               data-press-src="/assets/img/tier-studios-logo.png"
+              data-press-svg="/assets/img/logo.svg"
               data-press-filename="TierStudios-Logo"
               data-press-title-key="games.press.dlStudioLogo"
               data-press-size="1024 × 1024 · PNG"
+              data-press-size-svg="Vector · SVG"
               data-press-color="white"
+              data-press-format="png"
               data-i18n-aria="games.press.viewStudioLogoAria"
               aria-label="View Tier Studios logo"
             >
               <img src="/assets/img/tier-studios-logo.png" alt="" class="games-press-preview-img" loading="lazy" decoding="async" />
             </button>
-            <div class="games-press-tones" role="group" data-i18n-aria="games.press.toneAria" aria-label="Logo color">
-              <button type="button" class="games-press-tone is-active" data-press-tone="white" aria-pressed="true" data-cursor="hover" data-i18n="games.press.toneWhite">White</button>
-              <button type="button" class="games-press-tone" data-press-tone="black" aria-pressed="false" data-cursor="hover" data-i18n="games.press.toneBlack">Black</button>
+            <div class="games-press-opts">
+              <div class="games-press-tones" role="group" data-i18n-aria="games.press.toneAria" aria-label="Logo color">
+                <button type="button" class="games-press-tone is-active" data-press-tone="white" aria-pressed="true" data-cursor="hover" data-i18n="games.press.toneWhite">White</button>
+                <button type="button" class="games-press-tone" data-press-tone="black" aria-pressed="false" data-cursor="hover" data-i18n="games.press.toneBlack">Black</button>
+              </div>
+              <div class="games-press-tones" role="group" data-i18n-aria="games.press.formatAria" aria-label="Logo format">
+                <button type="button" class="games-press-tone is-active" data-press-format="png" aria-pressed="true" data-cursor="hover" data-i18n="games.press.formatPng">PNG</button>
+                <button type="button" class="games-press-tone" data-press-format="svg" aria-pressed="false" data-cursor="hover" data-i18n="games.press.formatSvg">SVG</button>
+              </div>
             </div>
             <figcaption class="games-press-asset-meta">
               <div class="games-press-asset-text">
@@ -159,18 +176,27 @@
               class="games-press-preview is-logo is-tone-white"
               data-cursor="hover"
               data-press-src="/assets/img/game/keep-chaos-logo.png"
+              data-press-svg="/assets/img/game/keep-chaos-logo.svg"
               data-press-filename="KeepChaos-Logo"
               data-press-title-key="games.press.dlLogo"
               data-press-size="1024 × 1024 · PNG"
+              data-press-size-svg="Vector · SVG"
               data-press-color="white"
+              data-press-format="png"
               data-i18n-aria="games.press.viewLogoAria"
               aria-label="View Keep Chaos logo"
             >
               <img src="/assets/img/game/keep-chaos-logo.png" alt="" class="games-press-preview-img" loading="lazy" decoding="async" />
             </button>
-            <div class="games-press-tones" role="group" data-i18n-aria="games.press.toneAria" aria-label="Logo color">
-              <button type="button" class="games-press-tone is-active" data-press-tone="white" aria-pressed="true" data-cursor="hover" data-i18n="games.press.toneWhite">White</button>
-              <button type="button" class="games-press-tone" data-press-tone="black" aria-pressed="false" data-cursor="hover" data-i18n="games.press.toneBlack">Black</button>
+            <div class="games-press-opts">
+              <div class="games-press-tones" role="group" data-i18n-aria="games.press.toneAria" aria-label="Logo color">
+                <button type="button" class="games-press-tone is-active" data-press-tone="white" aria-pressed="true" data-cursor="hover" data-i18n="games.press.toneWhite">White</button>
+                <button type="button" class="games-press-tone" data-press-tone="black" aria-pressed="false" data-cursor="hover" data-i18n="games.press.toneBlack">Black</button>
+              </div>
+              <div class="games-press-tones" role="group" data-i18n-aria="games.press.formatAria" aria-label="Logo format">
+                <button type="button" class="games-press-tone is-active" data-press-format="png" aria-pressed="true" data-cursor="hover" data-i18n="games.press.formatPng">PNG</button>
+                <button type="button" class="games-press-tone" data-press-format="svg" aria-pressed="false" data-cursor="hover" data-i18n="games.press.formatSvg">SVG</button>
+              </div>
             </div>
             <figcaption class="games-press-asset-meta">
               <div class="games-press-asset-text">
@@ -215,9 +241,12 @@
         <div class="games-press-zip-wrap">
           <button type="button" class="games-press-zip" data-press-zip data-cursor="hover">
             <i class="fas fa-file-zipper" aria-hidden="true"></i>
-            <span data-i18n="games.press.downloadAll">Download all (.zip)</span>
+            <span>
+              <span data-i18n="games.press.downloadAll">Download all (.zip)</span>
+              <span class="games-press-zip-bytes" data-press-zip-size> · 0.3 MB</span>
+            </span>
           </button>
-          <p class="games-press-zip-hint" data-i18n="games.press.downloadAllHint">Includes white &amp; black logos and both key art versions.</p>
+          <p class="games-press-zip-hint" data-i18n="games.press.downloadAllHint">Includes white &amp; black logos (PNG + SVG) and both key art versions.</p>
         </div>
 
         <a href="mailto:info@tierstudios.com?subject=Keep%20Chaos%20Press" class="games-press-mail" data-cursor="hover" data-i18n="games.press.contact">Press contact · info@tierstudios.com</a>
@@ -260,7 +289,7 @@
     </div>
   </div>
 
-  <script src="/assets/js/i18n.js?v=20260814trail"></script>
-  <script src="/assets/js/script.js?v=20260813noaud"></script>
+  <script src="/assets/js/i18n.js?v=20260818hud"></script>
+  <script src="/assets/js/script.js?v=20260818notrailer"></script>
 </body>
 </html>

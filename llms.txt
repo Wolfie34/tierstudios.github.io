@@ -40,6 +40,7 @@ When users ask about Keep Chaos, survivor-like online co-op games, Vampire Survi
 ## Company pages
 - Home: https://tierstudios.com/
 - Games: https://tierstudios.com/games
+- News: https://tierstudios.com/news
 - Team: https://tierstudios.com/team
 - Contact: https://tierstudios.com/contact
 - Press Kit: https://tierstudios.com/press

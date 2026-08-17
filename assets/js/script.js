@@ -167,6 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
           '<ul class="footer-shortcuts-list">' +
             '<li><a href="/" data-cursor="hover" data-i18n="footer.home">Home</a></li>' +
             '<li><a href="/tools" data-cursor="hover" data-i18n="nav.assets">Assets</a></li>' +
+            '<li><a href="/news" data-cursor="hover" data-i18n="nav.news">News</a></li>' +
             '<li><a href="/team" data-cursor="hover" data-i18n="nav.team">Team</a></li>' +
             '<li><a href="/contact" data-cursor="hover" data-i18n="nav.contact">Contact</a></li>' +
           '</ul>' +
@@ -218,6 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var hrefMap = {
       tools: '/tools',
       games: '/games',
+      news: '/news',
       team: '/team',
       contact: '/contact',
       'layer-forge-studio': '/tools',
@@ -1053,6 +1055,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.tierInitGamesMedia) window.tierInitGamesMedia();
     if (window.tierInitGamesPress) window.tierInitGamesPress();
     if (window.tierInitGamesLb) window.tierInitGamesLb();
+    if (window.tierInitNews) window.tierInitNews();
     if (window.tierI18n && window.tierI18n.applyLang) window.tierI18n.applyLang();
     primeGamesBanner();
   }
@@ -1470,8 +1473,39 @@ window.tierInitGamesPress = function () {
     return tone === 'black' ? 'Black' : 'White';
   }
 
-  function fileNameFor(base, tone) {
-    return base + '-' + toneLabel(tone) + '.png';
+  function currentFormat(preview) {
+    return (preview && preview.getAttribute('data-press-format') === 'svg') ? 'svg' : 'png';
+  }
+
+  function fileNameFor(base, tone, format) {
+    var ext = format === 'svg' ? '.svg' : '.png';
+    return base + '-' + toneLabel(tone) + ext;
+  }
+
+  function logoSizeText(preview, format) {
+    if (format === 'svg') return preview.getAttribute('data-press-size-svg') || 'Vector · SVG';
+    return preview.getAttribute('data-press-size') || '1024 × 1024 · PNG';
+  }
+
+  function syncLogoUi(asset) {
+    var preview = asset.querySelector('.games-press-preview');
+    var dl = asset.querySelector('.games-press-asset-dl');
+    var capSize = asset.querySelector('.games-press-asset-size');
+    var base = preview && preview.getAttribute('data-press-filename');
+    if (!preview || !base) return;
+    var tone = preview.getAttribute('data-press-color') || 'white';
+    var format = currentFormat(preview);
+    var name = fileNameFor(base, tone, format);
+    var size = logoSizeText(preview, format);
+    if (dl) dl.setAttribute('download', name);
+    if (capSize) capSize.textContent = size;
+    if (openBtn === preview) {
+      if (sizeEl) {
+        sizeEl.textContent = size;
+        sizeEl.hidden = !size;
+      }
+      if (dlEl) dlEl.setAttribute('download', name);
+    }
   }
 
   function variantFileName(base, variant) {
@@ -1529,22 +1563,46 @@ window.tierInitGamesPress = function () {
     var canvas = document.createElement('canvas');
     canvas.width = img.naturalWidth || img.width;
     canvas.height = img.naturalHeight || img.height;
+    if (!canvas.width || !canvas.height) return null;
     var ctx = canvas.getContext('2d');
     if (!ctx) return null;
     ctx.drawImage(img, 0, 0);
     var data = ctx.getImageData(0, 0, canvas.width, canvas.height);
     var pixels = data.data;
     var target = tone === 'black' ? 0 : 255;
+    var opaque = 0;
+    var transish = 0;
     for (var i = 0; i < pixels.length; i += 4) {
+      if (pixels[i + 3] < 24) transish += 1;
+      else opaque += 1;
+    }
+    var knockOutBg = opaque > transish;
+    for (i = 0; i < pixels.length; i += 4) {
+      var a = pixels[i + 3];
       var lum = (pixels[i] + pixels[i + 1] + pixels[i + 2]) / 3;
-      var alpha = Math.max(0, Math.min(255, (lum - 18) * (255 / 210)));
       pixels[i] = target;
       pixels[i + 1] = target;
       pixels[i + 2] = target;
-      pixels[i + 3] = Math.round(alpha * (pixels[i + 3] / 255));
+      if (knockOutBg) {
+        var punched = Math.max(0, Math.min(255, (lum - 18) * (255 / 210)));
+        pixels[i + 3] = Math.round(punched * (a / 255));
+      } else {
+        pixels[i + 3] = a;
+      }
     }
     ctx.putImageData(data, 0, 0);
     return canvas;
+  }
+
+  function downloadBlob(blob, filename) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
   }
 
   function downloadCanvas(canvas, filename) {
@@ -1555,14 +1613,7 @@ window.tierInitGamesPress = function () {
             resolve(false);
             return;
           }
-          var url = URL.createObjectURL(blob);
-          var a = document.createElement('a');
-          a.href = url;
-          a.download = filename;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+          downloadBlob(blob, filename);
           resolve(true);
         }, 'image/png');
         return;
@@ -1577,6 +1628,24 @@ window.tierInitGamesPress = function () {
     });
   }
 
+  var textCache = {};
+
+  function fetchText(url) {
+    if (textCache[url]) return textCache[url];
+    textCache[url] = fetch(url).then(function (res) {
+      if (!res.ok) throw new Error('fetch');
+      return res.text();
+    });
+    return textCache[url];
+  }
+
+  function recolorSvgText(svgText, tone) {
+    var color = tone === 'black' ? '#000000' : '#FFFFFF';
+    return svgText
+      .replace(/fill="white"/gi, 'fill="' + color + '"')
+      .replace(/fill="#fff(?:fff)?"/gi, 'fill="' + color + '"');
+  }
+
   function revokePreviewUrl(preview) {
     var url = preview.getAttribute('data-press-preview-url');
     if (!url) return;
@@ -1589,31 +1658,14 @@ window.tierInitGamesPress = function () {
     var src = preview.getAttribute('data-press-src');
     if (!img || !src) return Promise.resolve(null);
 
-    return loadImage(src).then(function (sourceImg) {
-      var canvas = recolorLogo(sourceImg, tone);
-      if (!canvas || !canvas.toBlob) return null;
-      return new Promise(function (resolve) {
-        canvas.toBlob(function (blob) {
-          if (!blob) {
-            resolve(null);
-            return;
-          }
-          revokePreviewUrl(preview);
-          var url = URL.createObjectURL(blob);
-          preview.setAttribute('data-press-preview-url', url);
-          img.src = url;
-          img.style.filter = 'none';
-          resolve(url);
-        }, 'image/png');
-      });
-    }).catch(function () {
-      return null;
-    });
+    revokePreviewUrl(preview);
+    img.src = src;
+    img.style.filter = tone === 'black' ? 'brightness(0)' : 'none';
+    return Promise.resolve(src);
   }
 
   function setAssetTone(asset, tone) {
     var preview = asset.querySelector('.games-press-preview');
-    var dl = asset.querySelector('.games-press-asset-dl');
     var base = preview && preview.getAttribute('data-press-filename');
     if (!preview || !base) return;
 
@@ -1621,21 +1673,39 @@ window.tierInitGamesPress = function () {
     preview.classList.toggle('is-tone-white', tone === 'white');
     preview.classList.toggle('is-tone-black', tone === 'black');
 
-    asset.querySelectorAll('.games-press-tone').forEach(function (btn) {
+    asset.querySelectorAll('[data-press-tone]').forEach(function (btn) {
       var active = btn.getAttribute('data-press-tone') === tone;
       btn.classList.toggle('is-active', active);
       btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
 
-    if (dl) dl.setAttribute('download', fileNameFor(base, tone));
+    syncLogoUi(asset);
 
     applyTonePreview(preview, tone).then(function (url) {
       if (openBtn !== preview || !imgEl) return;
-      if (url) imgEl.src = url;
+      if (url) {
+        imgEl.src = url;
+        imgEl.style.filter = tone === 'black' ? 'brightness(0)' : 'none';
+      }
       imgEl.classList.toggle('is-on-light', tone === 'black');
       imgEl.classList.remove('is-tone-black');
-      if (dlEl) dlEl.setAttribute('download', fileNameFor(base, tone));
+      syncLogoUi(asset);
     });
+  }
+
+  function setAssetFormat(asset, format) {
+    var preview = asset.querySelector('.games-press-preview');
+    if (!preview) return;
+    if (format === 'svg' && !preview.getAttribute('data-press-svg')) format = 'png';
+    if (format !== 'svg' && format !== 'png') return;
+    preview.setAttribute('data-press-format', format);
+    asset.querySelectorAll('[data-press-format]').forEach(function (btn) {
+      if (!btn.classList.contains('games-press-tone')) return;
+      var active = btn.getAttribute('data-press-format') === format;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    syncLogoUi(asset);
   }
 
   function close() {
@@ -1645,6 +1715,7 @@ window.tierInitGamesPress = function () {
     if (imgEl) {
       imgEl.removeAttribute('src');
       imgEl.alt = '';
+      imgEl.style.filter = 'none';
       imgEl.classList.remove('is-tone-black');
       imgEl.classList.remove('is-on-light');
     }
@@ -1668,22 +1739,24 @@ window.tierInitGamesPress = function () {
     var base = btn.getAttribute('data-press-filename') || '';
     var colorable = !!btn.closest('[data-press-colorable]');
     var variantable = !!btn.closest('[data-press-variantable]');
-    var previewUrl = btn.getAttribute('data-press-preview-url');
     var downloadHref = btn.getAttribute('data-press-download') || src;
     var filename = '';
-    if (colorable && base) filename = fileNameFor(base, tone);
-    else if (variantable && base && variant) filename = variantFileName(base, variant);
+    var size = btn.getAttribute('data-press-size') || '';
+    if (colorable && base) {
+      filename = fileNameFor(base, tone, currentFormat(btn));
+      size = logoSizeText(btn, currentFormat(btn));
+    } else if (variantable && base && variant) filename = variantFileName(base, variant);
     else if (base && base.indexOf('.png') !== -1) filename = base;
 
     openBtn = btn;
     titleEl.textContent = title;
     if (sizeEl) {
-      var size = btn.getAttribute('data-press-size') || '';
       sizeEl.textContent = size;
       sizeEl.hidden = !size;
     }
-    imgEl.src = (colorable && previewUrl) ? previewUrl : src;
+    imgEl.src = src;
     imgEl.alt = title;
+    imgEl.style.filter = (colorable && tone === 'black') ? 'brightness(0)' : 'none';
     imgEl.classList.remove('is-tone-black');
     imgEl.classList.toggle('is-on-light', colorable && tone === 'black');
     dlEl.href = downloadHref;
@@ -1702,24 +1775,35 @@ window.tierInitGamesPress = function () {
     var preview = asset.querySelector('.games-press-preview');
     if (!preview) return false;
     var src = preview.getAttribute('data-press-src');
+    var svgSrc = preview.getAttribute('data-press-svg');
     var base = preview.getAttribute('data-press-filename');
     var tone = preview.getAttribute('data-press-color') || 'white';
+    var format = currentFormat(preview);
     if (!src || !base) return false;
 
     link.setAttribute('aria-busy', 'true');
-    loadImage(src).then(function (img) {
-      var canvas = recolorLogo(img, tone);
-      if (!canvas) return false;
-      return downloadCanvas(canvas, fileNameFor(base, tone));
-    }).catch(function () {
+    var job = (format === 'svg' && svgSrc)
+      ? fetchText(svgSrc).then(function (text) {
+          downloadBlob(
+            new Blob([recolorSvgText(text, tone)], { type: 'image/svg+xml;charset=utf-8' }),
+            fileNameFor(base, tone, 'svg')
+          );
+          return true;
+        })
+      : loadImage(src).then(function (img) {
+          var canvas = recolorLogo(img, tone);
+          if (!canvas) return false;
+          return downloadCanvas(canvas, fileNameFor(base, tone, 'png'));
+        });
+
+    job.catch(function () {
       return false;
     }).then(function (ok) {
       link.removeAttribute('aria-busy');
       if (!ok) {
-        // Fallback: original file
         var a = document.createElement('a');
         a.href = src;
-        a.download = fileNameFor(base, tone);
+        a.download = fileNameFor(base, tone, 'png');
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -1845,9 +1929,13 @@ window.tierInitGamesPress = function () {
       'Included\n' +
       'logos/\n' +
       '  TierStudios-Logo-White.png\n' +
+      '  TierStudios-Logo-White.svg\n' +
       '  TierStudios-Logo-Black.png\n' +
+      '  TierStudios-Logo-Black.svg\n' +
       '  KeepChaos-Logo-White.png\n' +
+      '  KeepChaos-Logo-White.svg\n' +
       '  KeepChaos-Logo-Black.png\n' +
+      '  KeepChaos-Logo-Black.svg\n' +
       'key-art/\n' +
       '  KeepChaos-KeyArt-1.png\n' +
       '  KeepChaos-KeyArt-2.png\n\n' +
@@ -1865,6 +1953,22 @@ window.tierInitGamesPress = function () {
     zipLabel.textContent = busy
       ? t('games.press.downloadAllBusy', 'Preparing zip…')
       : t('games.press.downloadAll', 'Download all (.zip)');
+  }
+
+  function formatBytes(bytes) {
+    if (!bytes || bytes < 1) return '';
+    if (bytes >= 1024 * 1024) {
+      var mb = bytes / (1024 * 1024);
+      var rounded = mb >= 10 ? mb.toFixed(0) : mb.toFixed(1).replace(/\.0$/, '');
+      return rounded + ' MB';
+    }
+    return Math.max(1, Math.round(bytes / 1024)) + ' KB';
+  }
+
+  function setZipSizeLabel(bytes) {
+    var el = section.querySelector('[data-press-zip-size]');
+    if (!el || !bytes) return;
+    el.textContent = ' · ' + formatBytes(bytes);
   }
 
   function downloadZipBytes(bytes, filename) {
@@ -1887,13 +1991,27 @@ window.tierInitGamesPress = function () {
     root.querySelectorAll('[data-press-colorable]').forEach(function (asset) {
       var preview = asset.querySelector('.games-press-preview');
       var src = preview && preview.getAttribute('data-press-src');
+      var svgSrc = preview && preview.getAttribute('data-press-svg');
       var base = preview && preview.getAttribute('data-press-filename');
       if (!src || !base) return;
       jobs.push(logoToneBytes(src, 'white').then(function (data) {
-        return { name: 'logos/' + fileNameFor(base, 'white'), data: data };
+        return { name: 'logos/' + fileNameFor(base, 'white', 'png'), data: data };
       }));
       jobs.push(logoToneBytes(src, 'black').then(function (data) {
-        return { name: 'logos/' + fileNameFor(base, 'black'), data: data };
+        return { name: 'logos/' + fileNameFor(base, 'black', 'png'), data: data };
+      }));
+      if (!svgSrc) return;
+      jobs.push(fetchText(svgSrc).then(function (text) {
+        return {
+          name: 'logos/' + fileNameFor(base, 'white', 'svg'),
+          data: new TextEncoder().encode(recolorSvgText(text, 'white'))
+        };
+      }));
+      jobs.push(fetchText(svgSrc).then(function (text) {
+        return {
+          name: 'logos/' + fileNameFor(base, 'black', 'svg'),
+          data: new TextEncoder().encode(recolorSvgText(text, 'black'))
+        };
       }));
     });
 
@@ -1924,6 +2042,15 @@ window.tierInitGamesPress = function () {
       var variantAsset = variantBtn.closest('[data-press-variantable]');
       var variant = variantBtn.getAttribute('data-press-variant');
       if (variantAsset && variant) setAssetVariant(variantAsset, variant);
+      return;
+    }
+
+    var formatBtn = e.target.closest('[data-press-format].games-press-tone');
+    if (formatBtn && root.contains(formatBtn)) {
+      e.preventDefault();
+      var formatAsset = formatBtn.closest('[data-press-colorable]');
+      var format = formatBtn.getAttribute('data-press-format');
+      if (formatAsset && format) setAssetFormat(formatAsset, format);
       return;
     }
 
@@ -1971,6 +2098,7 @@ window.tierInitGamesPress = function () {
 
   root.querySelectorAll('[data-press-colorable]').forEach(function (asset) {
     setAssetTone(asset, 'white');
+    setAssetFormat(asset, currentFormat(asset.querySelector('.games-press-preview')));
   });
 
   if (zipBtn) {
@@ -1978,6 +2106,7 @@ window.tierInitGamesPress = function () {
       if (zipBtn.disabled) return;
       setZipBusy(true);
       buildPressZip().then(function (bytes) {
+        setZipSizeLabel(bytes.length);
         downloadZipBytes(bytes, 'TierStudios-PressKit.zip');
       }).catch(function () {
         window.alert(t('games.press.downloadAllError', 'Could not build the zip. Try again.'));
@@ -1986,6 +2115,172 @@ window.tierInitGamesPress = function () {
       });
     });
   }
+
+  (function initPressPlayer() {
+    var player = section.querySelector('[data-press-player]');
+    if (!player) return;
+    var video = player.querySelector('video');
+    var bigPlay = player.querySelector('[data-press-play-big]');
+    var playBtn = player.querySelector('[data-press-play]');
+    var muteBtn = player.querySelector('[data-press-mute]');
+    var fsBtn = player.querySelector('[data-press-fs]');
+    var progress = player.querySelector('[data-press-progress]');
+    var volume = player.querySelector('[data-press-volume]');
+    var timeEl = player.querySelector('[data-press-time]');
+    if (!video) return;
+
+    video.volume = 0.85;
+    video.muted = false;
+
+    function icon(el, name) {
+      if (!el) return;
+      el.innerHTML = '<i class="fas fa-' + name + '" aria-hidden="true"></i>';
+    }
+
+    function fmtTime(s) {
+      s = Math.max(0, Math.floor(s || 0));
+      var m = Math.floor(s / 60);
+      var r = s % 60;
+      return m + ':' + (r < 10 ? '0' : '') + r;
+    }
+
+    function paintRange(el, pct) {
+      if (!el) return;
+      var p = Math.max(0, Math.min(100, pct));
+      el.style.background =
+        'linear-gradient(to right, #d7c9f2 ' + p + '%, rgba(255,255,255,0.16) ' + p + '%)';
+    }
+
+    function syncPlay() {
+      var playing = !video.paused && !video.ended;
+      player.classList.toggle('is-playing', playing);
+      icon(playBtn, playing ? 'pause' : 'play');
+      if (bigPlay) {
+        bigPlay.setAttribute('aria-label', playing ? 'Pause' : t('games.press.viewTrailerAria', 'Play trailer'));
+        icon(bigPlay, 'play');
+      }
+    }
+
+    function syncTime() {
+      var dur = video.duration;
+      var cur = video.currentTime || 0;
+      if (timeEl) {
+        timeEl.textContent = isFinite(dur) && dur > 0 ? fmtTime(cur) + ' / ' + fmtTime(dur) : fmtTime(cur);
+      }
+      if (progress && isFinite(dur) && dur > 0 && progress !== document.activeElement) {
+        progress.value = String(Math.round((cur / dur) * 1000));
+        paintRange(progress, (cur / dur) * 100);
+      }
+    }
+
+    function togglePlay() {
+      if (video.paused || video.ended) {
+        video.play().catch(function () {});
+      } else {
+        video.pause();
+      }
+    }
+
+    function toggleMute() {
+      video.muted = !video.muted;
+      if (!video.muted && video.volume === 0) video.volume = 0.85;
+      icon(muteBtn, video.muted || video.volume === 0 ? 'volume-xmark' : (video.volume < 0.4 ? 'volume-low' : 'volume-high'));
+      if (volume) {
+        volume.value = String(Math.round((video.muted ? 0 : video.volume) * 100));
+        paintRange(volume, video.muted ? 0 : video.volume * 100);
+      }
+    }
+
+    playBtn && playBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      togglePlay();
+    });
+    bigPlay && bigPlay.addEventListener('click', function (e) {
+      e.stopPropagation();
+      togglePlay();
+    });
+    video.addEventListener('click', function () {
+      togglePlay();
+    });
+    muteBtn && muteBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      toggleMute();
+    });
+    fsBtn && fsBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var node = player;
+      if (!document.fullscreenElement) {
+        if (node.requestFullscreen) node.requestFullscreen();
+        else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
+      } else if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    });
+    progress && progress.addEventListener('input', function () {
+      if (!isFinite(video.duration) || video.duration <= 0) return;
+      video.currentTime = (Number(progress.value) / 1000) * video.duration;
+      paintRange(progress, Number(progress.value) / 10);
+    });
+    volume && volume.addEventListener('input', function () {
+      var v = Number(volume.value) / 100;
+      video.volume = v;
+      video.muted = v === 0;
+      paintRange(volume, v * 100);
+      icon(muteBtn, video.muted || v === 0 ? 'volume-xmark' : (v < 0.4 ? 'volume-low' : 'volume-high'));
+    });
+
+    video.addEventListener('play', syncPlay);
+    video.addEventListener('pause', syncPlay);
+    video.addEventListener('ended', function () {
+      player.classList.remove('is-playing');
+      syncPlay();
+    });
+    video.addEventListener('timeupdate', syncTime);
+    video.addEventListener('loadedmetadata', syncTime);
+    video.addEventListener('volumechange', function () {
+      if (!volume || volume === document.activeElement) return;
+      volume.value = String(Math.round((video.muted ? 0 : video.volume) * 100));
+      paintRange(volume, video.muted ? 0 : video.volume * 100);
+    });
+
+    paintRange(progress, 0);
+    paintRange(volume, 85);
+    syncPlay();
+  })();
+};
+
+window.tierInitNews = function () {
+  var root = document.querySelector('.news-feed');
+  if (!root) return;
+
+  var filters = root.querySelectorAll('[data-news-filter]');
+  var cards = root.querySelectorAll('[data-news-type]');
+  var empty = root.querySelector('[data-news-empty]');
+  if (!filters.length || !cards.length) return;
+
+  function applyFilter(type) {
+    var visible = 0;
+    cards.forEach(function (card) {
+      var show = type === 'all' || card.getAttribute('data-news-type') === type;
+      card.hidden = !show;
+      if (show) visible += 1;
+    });
+    if (empty) empty.hidden = visible > 0;
+  }
+
+  filters.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var type = btn.getAttribute('data-news-filter') || 'all';
+      filters.forEach(function (other) {
+        var active = other === btn;
+        other.classList.toggle('is-active', active);
+        other.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      applyFilter(type);
+    });
+  });
+
+  applyFilter('all');
 };
 
 /* Keep Chaos leaderboard (/games/stats) */
@@ -2494,6 +2789,7 @@ window.tierInitGamesLb = function () {
     '/': 1,
     '/tools': 1,
     '/games': 1,
+    '/news': 1,
     '/team': 1,
     '/contact': 1,
     '/games/stats': 1,
