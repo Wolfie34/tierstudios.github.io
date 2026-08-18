@@ -1918,7 +1918,7 @@ window.tierInitGamesPress = function () {
   function pressKitReadme() {
     var text =
       'TIER STUDIOS — PRESS KIT\n' +
-      'https://tierstudios.com/press\n\n' +
+      'https://tierstudios.com/press/\n\n' +
       'Keep Chaos\n' +
       'Genre: TPS · Survivor-like · Bullet Heaven · Rogue-Lite\n' +
       'Platform: Steam (PC)\n' +
