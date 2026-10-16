@@ -10,7 +10,13 @@
   </url>
   <url>
     <loc>https://tierstudios.com/games/</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://tierstudios.com/games/keep-chaos/</loc>
+    <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <image:image>

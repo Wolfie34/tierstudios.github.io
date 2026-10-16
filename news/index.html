@@ -53,7 +53,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/css/style.css?v=20260818newscenter" />
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261016newsL" />
 </head>
 <body class="subpage news-page" data-page="news">
   <div class="grain" aria-hidden="true"></div>
@@ -82,10 +82,23 @@
   </nav>
 
   <div id="outer-wrapper">
-    <header class="subpage-hero container">
-      <div class="section-head-title reveal" data-delay="100">
-        <span class="section-head-ghost display" aria-hidden="true" data-i18n="news.title">News</span>
-        <h1 class="display" data-i18n="news.title">News</h1>
+    <header class="subpage-hero container news-hero">
+      <div class="news-hero-top reveal" data-delay="100">
+        <div class="section-head-title">
+          <span class="section-head-ghost display" aria-hidden="true" data-i18n="news.title">News</span>
+          <h1 class="display" data-i18n="news.title">News</h1>
+        </div>
+        <div class="news-game-tag" data-news-game-tag>
+          <button type="button" class="news-game-tag-btn label" id="newsGameTagBtn" data-cursor="hover" aria-haspopup="listbox" aria-expanded="false" data-i18n-aria="news.gameFilterAria" aria-label="Filter by game">
+            <span class="news-game-tag-prefix" data-i18n="news.gameFilterLabel">Game</span>
+            <span class="news-game-tag-value" id="newsGameTagValue" data-i18n="news.gameAll">All games</span>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="news-game-tag-menu" id="newsGameTagMenu" role="listbox" hidden>
+            <button type="button" class="news-game-tag-option is-active" role="option" data-news-game-filter="all" aria-selected="true" data-cursor="hover" data-i18n="news.gameAll">All games</button>
+            <button type="button" class="news-game-tag-option" role="option" data-news-game-filter="keep-chaos" aria-selected="false" data-cursor="hover">Keep Chaos</button>
+          </div>
+        </div>
       </div>
       <p class="sub-desc reveal" data-delay="200" data-i18n="news.desc">Devlogs, events, and announcements from the studio · Keep Chaos updates and behind-the-scenes notes.</p>
     </header>
@@ -100,7 +113,7 @@
         </div>
 
         <div class="news-list" data-news-list data-stagger="90">
-          <article class="news-card reveal" data-news-type="announcement">
+          <article class="news-card reveal" data-news-type="announcement" data-news-game="keep-chaos">
             <div class="news-card-meta">
               <span class="news-card-tag label" data-i18n="news.filterAnnouncement">Announcements</span>
               <time class="news-card-date label" datetime="2026-08-15">Aug 15, 2026</time>
@@ -113,7 +126,7 @@
             </div>
           </article>
 
-          <article class="news-card reveal" data-news-type="announcement">
+          <article class="news-card reveal" data-news-type="announcement" data-news-game="keep-chaos">
             <div class="news-card-meta">
               <span class="news-card-tag label" data-i18n="news.filterAnnouncement">Announcements</span>
               <time class="news-card-date label" datetime="2026-08-15">Aug 15, 2026</time>
@@ -126,7 +139,7 @@
             </div>
           </article>
 
-          <article class="news-card reveal" data-news-type="devlog">
+          <article class="news-card reveal" data-news-type="devlog" data-news-game="keep-chaos">
             <div class="news-card-meta">
               <span class="news-card-tag label" data-i18n="news.filterDevlog">Devlog</span>
               <time class="news-card-date label" datetime="2026-07-10">Jul 10, 2026</time>
@@ -176,7 +189,7 @@
     </footer>
   </div>
 
-  <script src="/assets/js/i18n.js?v=20260818steam15"></script>
-  <script src="/assets/js/script.js?v=20260818news"></script>
+  <script src="/assets/js/i18n.js?v=20261016tag"></script>
+  <script src="/assets/js/script.js?v=20261016tag"></script>
 </body>
 </html>

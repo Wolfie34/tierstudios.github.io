@@ -175,8 +175,9 @@ document.addEventListener('DOMContentLoaded', function () {
         '<div class="footer-shortcuts-group">' +
           '<span class="label footer-shortcuts-label" data-i18n="footer.games">Games</span>' +
           '<ul class="footer-shortcuts-list">' +
-            '<li><a href="/games" data-cursor="hover" data-i18n="nav.keepChaos">Keep Chaos</a></li>' +
-            '<li><span class="footer-soon" aria-disabled="true"><span data-i18n="footer.leaderboard">Leaderboard</span> · <span data-i18n="common.comingSoon">Coming soon</span></span></li>' +
+            '<li><a href="/games" data-cursor="hover" data-i18n="nav.games">Games</a></li>' +
+            '<li><a href="/games/keep-chaos" data-cursor="hover" data-i18n="nav.keepChaos">Keep Chaos</a></li>' +
+            '<li><span class="footer-soon" aria-disabled="true"><span data-i18n="footer.leaderboard">Keep Chaos Leaderboard</span> · <span data-i18n="common.comingSoon">Coming soon</span></span></li>' +
           '</ul>' +
         '</div>' +
         '<div class="footer-shortcuts-group">' +
@@ -1056,6 +1057,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.tierInitGamesPress) window.tierInitGamesPress();
     if (window.tierInitGamesLb) window.tierInitGamesLb();
     if (window.tierInitNews) window.tierInitNews();
+    if (window.tierInitGamesWipCode) window.tierInitGamesWipCode();
     if (window.tierI18n && window.tierI18n.applyLang) window.tierI18n.applyLang();
     primeGamesBanner();
   }
@@ -1063,6 +1065,104 @@ document.addEventListener('DOMContentLoaded', function () {
   window.tierBootPage = bootPage;
   bootPage();
 });
+
+window.tierInitGamesWipCode = function () {
+  var field = document.getElementById('gamesLibraryWipCode');
+  if (!field) return;
+
+  var snippets = [
+    'Codename = "???";',
+    'BuildPipeline.Warm();',
+    'while (prototyping)',
+    'yield return Iterate();',
+    'Playtest();',
+    'Status = Active;',
+    'ShipWhenReady();',
+    'new World();',
+    'await NextBuild();',
+    'tier.studios.dev'
+  ];
+
+  var slots = [
+    { top: '8%', left: '6%', rot: -6, opacity: 0.38 },
+    { top: '18%', left: '28%', rot: 3, opacity: 0.5 },
+    { top: '30%', left: '8%', rot: -2, opacity: 0.32 },
+    { top: '42%', left: '36%', rot: 5, opacity: 0.45 },
+    { top: '52%', left: '10%', rot: -4, opacity: 0.36 },
+    { top: '64%', left: '24%', rot: 2, opacity: 0.28 }
+  ];
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var frags = [];
+  var i;
+
+  for (i = 0; i < slots.length; i++) {
+    var el = document.createElement('span');
+    el.className = 'games-library-code-frag';
+    el.style.top = slots[i].top;
+    el.style.left = slots[i].left;
+    el.style.transform = 'rotate(' + slots[i].rot + 'deg)';
+    el.style.opacity = String(slots[i].opacity);
+    if (reduced) el.textContent = snippets[i % snippets.length];
+    field.appendChild(el);
+    frags.push({
+      el: el,
+      text: snippets[i % snippets.length],
+      char: 0,
+      pause: i * 6,
+      deleting: false
+    });
+  }
+
+  if (reduced) return;
+
+  var active = 0;
+  var timer = null;
+
+  function step() {
+    var frag = frags[active];
+    if (!frag) return;
+
+    if (frag.pause > 0) {
+      frag.pause -= 1;
+      timer = window.setTimeout(step, 55);
+      return;
+    }
+
+    frags.forEach(function (f, idx) {
+      f.el.classList.toggle('is-typing', idx === active);
+    });
+
+    if (!frag.deleting) {
+      if (frag.char < frag.text.length) {
+        frag.char += 1;
+        frag.el.textContent = frag.text.slice(0, frag.char);
+        timer = window.setTimeout(step, 26 + Math.random() * 40);
+        return;
+      }
+      frag.deleting = true;
+      frag.pause = 22;
+      timer = window.setTimeout(step, 60);
+      return;
+    }
+
+    if (frag.char > 0) {
+      frag.char -= 1;
+      frag.el.textContent = frag.text.slice(0, frag.char);
+      timer = window.setTimeout(step, 16);
+      return;
+    }
+
+    frag.deleting = false;
+    frag.text = snippets[Math.floor(Math.random() * snippets.length)];
+    frag.pause = 8;
+    frag.el.classList.remove('is-typing');
+    active = (active + 1) % frags.length;
+    timer = window.setTimeout(step, 80);
+  }
+
+  timer = window.setTimeout(step, 350);
+};
 
 (function tierAmbience() {
   if (!document.body || document.querySelector('.tier-ambience-canvas')) return;
@@ -2253,34 +2353,93 @@ window.tierInitNews = function () {
   var root = document.querySelector('.news-feed');
   if (!root) return;
 
-  var filters = root.querySelectorAll('[data-news-filter]');
-  var cards = root.querySelectorAll('[data-news-type]');
+  var typeFilters = root.querySelectorAll('[data-news-filter]');
+  var cards = root.querySelectorAll('.news-card[data-news-type]');
   var empty = root.querySelector('[data-news-empty]');
-  if (!filters.length || !cards.length) return;
+  var tagWrap = document.querySelector('[data-news-game-tag]');
+  var tagBtn = document.getElementById('newsGameTagBtn');
+  var tagValue = document.getElementById('newsGameTagValue');
+  var tagMenu = document.getElementById('newsGameTagMenu');
+  var gameOptions = tagMenu ? tagMenu.querySelectorAll('[data-news-game-filter]') : [];
+  if (!typeFilters.length || !cards.length) return;
 
-  function applyFilter(type) {
+  var activeType = 'all';
+  var activeGame = 'all';
+
+  function applyFilters() {
     var visible = 0;
     cards.forEach(function (card) {
-      var show = type === 'all' || card.getAttribute('data-news-type') === type;
+      var typeOk = activeType === 'all' || card.getAttribute('data-news-type') === activeType;
+      var game = card.getAttribute('data-news-game') || '';
+      var gameOk = activeGame === 'all' || game === activeGame;
+      var show = typeOk && gameOk;
       card.hidden = !show;
       if (show) visible += 1;
     });
     if (empty) empty.hidden = visible > 0;
   }
 
-  filters.forEach(function (btn) {
+  typeFilters.forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var type = btn.getAttribute('data-news-filter') || 'all';
-      filters.forEach(function (other) {
+      activeType = btn.getAttribute('data-news-filter') || 'all';
+      typeFilters.forEach(function (other) {
         var active = other === btn;
         other.classList.toggle('is-active', active);
         other.setAttribute('aria-selected', active ? 'true' : 'false');
       });
-      applyFilter(type);
+      applyFilters();
     });
   });
 
-  applyFilter('all');
+  function closeTagMenu() {
+    if (!tagWrap || !tagBtn || !tagMenu) return;
+    tagWrap.classList.remove('is-open');
+    tagBtn.setAttribute('aria-expanded', 'false');
+    tagMenu.hidden = true;
+  }
+
+  function openTagMenu() {
+    if (!tagWrap || !tagBtn || !tagMenu) return;
+    tagWrap.classList.add('is-open');
+    tagBtn.setAttribute('aria-expanded', 'true');
+    tagMenu.hidden = false;
+  }
+
+  if (tagBtn && tagMenu && gameOptions.length) {
+    tagBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (tagWrap.classList.contains('is-open')) closeTagMenu();
+      else openTagMenu();
+    });
+
+    gameOptions.forEach(function (opt) {
+      opt.addEventListener('click', function () {
+        activeGame = opt.getAttribute('data-news-game-filter') || 'all';
+        gameOptions.forEach(function (other) {
+          var active = other === opt;
+          other.classList.toggle('is-active', active);
+          other.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        if (tagValue) {
+          tagValue.textContent = opt.textContent;
+          if (activeGame === 'all') tagValue.setAttribute('data-i18n', 'news.gameAll');
+          else tagValue.removeAttribute('data-i18n');
+        }
+        closeTagMenu();
+        applyFilters();
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!tagWrap.contains(e.target)) closeTagMenu();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeTagMenu();
+    });
+  }
+
+  applyFilters();
 };
 
 /* Keep Chaos leaderboard (/games/stats) */
@@ -2789,6 +2948,7 @@ window.tierInitGamesLb = function () {
     '/': 1,
     '/tools': 1,
     '/games': 1,
+    '/games/keep-chaos': 1,
     '/news': 1,
     '/team': 1,
     '/contact': 1,
@@ -2930,7 +3090,7 @@ window.tierInitGamesLb = function () {
         var page = snapshot(parseDoc(html));
         cache[key] = page;
         delete pending[key];
-        if (key === '/games') {
+        if (key === '/games/keep-chaos') {
           var poster = new Image();
           poster.src = '/assets/img/game/keep-chaos-banner.png';
           if (window.tierWarmGamesVideo) window.tierWarmGamesVideo();
@@ -2965,7 +3125,7 @@ window.tierInitGamesLb = function () {
     }
     navigating = true;
     closeMobileNav();
-    if (normPath(url.pathname) === '/games' && window.tierWarmGamesVideo) {
+    if (normPath(url.pathname) === '/games/keep-chaos' && window.tierWarmGamesVideo) {
       window.tierWarmGamesVideo();
     }
     load(url).then(function (page) {
@@ -3005,7 +3165,7 @@ window.tierInitGamesLb = function () {
     var url;
     try { url = new URL(link.href, location.href); } catch (err) { return; }
     prefetch(url.pathname);
-    if (isCore(url) && normPath(url.pathname) === '/games' && window.tierWarmGamesVideo) {
+    if (isCore(url) && normPath(url.pathname) === '/games/keep-chaos' && window.tierWarmGamesVideo) {
       window.tierWarmGamesVideo();
     }
   }, true);
