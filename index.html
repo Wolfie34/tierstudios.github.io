@@ -186,7 +186,7 @@
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="/assets/css/style.css?v=20261016news" />
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261018hero2" />
 
 </head>
 
@@ -244,34 +244,85 @@
 
 
 
-  <header id="top" class="hero">
+  <header id="top" class="demo-hero" data-demo-launch data-demo-start="2026-10-19T20:00:00+03:00" aria-labelledby="demoHeroTitle">
 
-    <div class="hero-inner" id="heroInner">
+    <h1 class="sr-only">Tier Studios · Independent Game Development Studio</h1>
 
-      <div class="hero-title-wrap">
+    <div class="demo-hero-media" aria-hidden="true">
+      <video class="demo-hero-video" autoplay muted loop playsinline preload="auto" poster="/assets/img/game/keep-chaos-keyart.png">
+        <source src="/assets/video/keep-chaos-discord.mp4?v=20260804c" type="video/mp4" />
+      </video>
+    </div>
+    <div class="demo-hero-shade" aria-hidden="true"></div>
+    <div class="demo-hero-scan" aria-hidden="true"></div>
+    <div class="demo-hero-embers" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
 
-        <h1 class="sr-only">Tier Studios · Independent Game Development Studio</h1>
+    <div class="demo-hero-inner container">
+      <span class="label demo-hero-kicker reveal" data-delay="100">
+        <span class="game-teaser-rec" aria-hidden="true"></span>
+        <span data-demo-live-key="index.demo.kickerLive" data-i18n="index.demo.kicker">Steam Demo</span>
+      </span>
 
-        <div class="hero-title-panel" aria-hidden="true">
+      <span class="demo-hero-logo-wrap reveal" data-delay="220">
+        <img class="demo-hero-logo" src="/assets/img/game/keep-chaos-logo.svg" alt="Keep Chaos" width="1024" height="576" />
+      </span>
 
-          <div class="hero-panel-particles"></div>
+      <h2 class="display demo-hero-title reveal" data-delay="360" id="demoHeroTitle" data-demo-live-key="index.demo.titleLive" data-i18n="index.demo.title">The demo lands on Steam</h2>
 
-        </div>
+      <p class="demo-hero-when reveal" data-delay="460">
+        <span class="display demo-hero-date" data-i18n="index.demo.date">19 October</span>
+        <span class="demo-hero-dot" aria-hidden="true"></span>
+        <span class="display demo-hero-time" data-i18n="index.demo.time">20:00 TRT</span>
+      </p>
 
-        <svg class="hero-stroke-svg" viewBox="0 0 1200 120" aria-label="TIER STUDIOS" role="img">
-
-          <g class="hero-stroke-glyphs"></g>
-
-        </svg>
-
-        <div class="hero-sub reveal" data-delay="2000">
-          <span class="hero-sub-line" data-i18n="hero.sub1">Oyun Geliştirme · Yayıncılık</span>
-          <span class="hero-sub-line" data-i18n="hero.sub2">Online Koop Oyunlar</span>
-        </div>
-
+      <div class="demo-hero-count reveal" data-delay="580" data-demo-countdown>
+        <span class="demo-hero-unit"><b class="demo-digit" data-demo-d>00</b><small class="label" data-i18n="index.demo.days">Days</small></span>
+        <span class="demo-hero-colon" aria-hidden="true">:</span>
+        <span class="demo-hero-unit"><b class="demo-digit" data-demo-h>00</b><small class="label" data-i18n="index.demo.hours">Hours</small></span>
+        <span class="demo-hero-colon" aria-hidden="true">:</span>
+        <span class="demo-hero-unit"><b class="demo-digit" data-demo-m>00</b><small class="label" data-i18n="index.demo.minutes">Min</small></span>
+        <span class="demo-hero-colon" aria-hidden="true">:</span>
+        <span class="demo-hero-unit"><b class="demo-digit" data-demo-s>00</b><small class="label" data-i18n="index.demo.seconds">Sec</small></span>
       </div>
 
+      <div class="demo-hero-actions reveal" data-delay="700">
+        <a href="https://store.steampowered.com/app/3791920/Keep_Chaos/" class="demo-hero-btn demo-hero-btn--main" target="_blank" rel="noopener" data-cursor="hover" data-analytics="outbound" data-analytics-label="hero_demo_steam">
+          <span class="demo-hero-btn-ring" aria-hidden="true"></span>
+          <span class="demo-hero-btn-face">
+            <i class="fab fa-steam" aria-hidden="true"></i>
+            <span data-demo-live-key="index.demo.btnLive" data-i18n="index.demo.btnSoon">Wishlist on Steam</span>
+          </span>
+        </a>
+        <a href="/games/keep-chaos#trailer" class="demo-hero-btn demo-hero-btn--ghost" data-cursor="hover" data-analytics-label="hero_demo_trailer">
+          <span class="demo-hero-btn-face">
+            <i class="fa-solid fa-play" aria-hidden="true"></i>
+            <span data-i18n="index.demo.trailer">Watch the trailer</span>
+          </span>
+        </a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Keep%20Chaos%20%C2%B7%20Steam%20Demo&amp;dates=20261019T170000Z/20261019T180000Z&amp;details=Keep%20Chaos%20demo%20on%20Steam%20%C2%B7%20https%3A%2F%2Fstore.steampowered.com%2Fapp%2F3791920%2FKeep_Chaos%2F&amp;location=https%3A%2F%2Fstore.steampowered.com%2Fapp%2F3791920%2FKeep_Chaos%2F" class="demo-hero-btn demo-hero-btn--ghost" target="_blank" rel="noopener" data-cursor="hover" data-demo-hide-live data-analytics="outbound" data-analytics-label="hero_demo_calendar">
+          <span class="demo-hero-btn-face">
+            <i class="fa-regular fa-calendar-plus" aria-hidden="true"></i>
+            <span data-i18n="index.demo.calendar">Add to calendar</span>
+          </span>
+        </a>
+      </div>
     </div>
+
+    <div class="demo-hero-hud demo-hero-hud--left label" aria-hidden="true">
+      <span class="demo-hero-hud-line"></span>
+      <span data-i18n="index.demo.hudLeft">Solo · 4-player co-op · Online &amp; local</span>
+    </div>
+    <div class="demo-hero-hud demo-hero-hud--right label" aria-hidden="true">
+      <span data-i18n="index.demo.hudRight">PC · Steam</span>
+      <span class="demo-hero-hud-line"></span>
+    </div>
+
+    <a href="#discover" class="demo-hero-scroll label" data-cursor="hover">
+      <span data-i18n="index.demo.scroll">Discover Tier Studios</span>
+      <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+    </a>
 
   </header>
 
@@ -353,7 +404,7 @@
           <div class="game-teaser-top">
             <span class="label game-teaser-status">
               <span class="game-teaser-rec" aria-hidden="true"></span>
-              <span data-i18n="index.games.status">On Steam</span>
+              <span data-i18n="index.games.demoStatus">Steam Demo · 19 October</span>
             </span>
           </div>
           <div class="game-teaser-bottom">
@@ -539,11 +590,9 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js"></script>
+  <script src="/assets/js/i18n.js?v=20261019steam"></script>
 
-  <script src="/assets/js/i18n.js?v=20261016news"></script>
-
-  <script src="/assets/js/script.js?v=20261016news"></script>
+  <script src="/assets/js/script.js?v=20261019steam"></script>
 
 </body>
 

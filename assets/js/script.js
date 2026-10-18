@@ -1058,6 +1058,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.tierInitGamesLb) window.tierInitGamesLb();
     if (window.tierInitNews) window.tierInitNews();
     if (window.tierInitGamesWipCode) window.tierInitGamesWipCode();
+    if (window.tierInitDemoLaunch) window.tierInitDemoLaunch();
     if (window.tierI18n && window.tierI18n.applyLang) window.tierI18n.applyLang();
     primeGamesBanner();
   }
@@ -1065,6 +1066,99 @@ document.addEventListener('DOMContentLoaded', function () {
   window.tierBootPage = bootPage;
   bootPage();
 });
+
+window.tierInitDemoLaunch = function () {
+  if (window.tierDemoLaunchTimer) {
+    window.clearInterval(window.tierDemoLaunchTimer);
+    window.tierDemoLaunchTimer = null;
+  }
+
+  var source = document.querySelector('[data-demo-start]');
+  if (!source) return;
+
+  var start = Date.parse(source.getAttribute('data-demo-start') || '');
+  if (!isFinite(start)) return;
+
+  function all(sel) {
+    return Array.prototype.slice.call(document.querySelectorAll(sel));
+  }
+
+  var units = {
+    d: all('[data-demo-d]'),
+    h: all('[data-demo-h]'),
+    m: all('[data-demo-m]'),
+    s: all('[data-demo-s]')
+  };
+  var live = false;
+
+  function pad(n) {
+    return (n < 10 ? '0' : '') + n;
+  }
+
+  function setDigit(list, value) {
+    list.forEach(function (el) {
+      if (el.textContent === value) return;
+      el.textContent = value;
+      el.classList.remove('is-tick');
+      void el.offsetWidth;
+      el.classList.add('is-tick');
+    });
+  }
+
+  function goLive() {
+    live = true;
+    all('[data-demo-launch]').forEach(function (el) { el.classList.add('is-live'); });
+    all('[data-demo-countdown], [data-demo-hide-live]').forEach(function (el) { el.hidden = true; });
+    all('[data-demo-live-key]').forEach(function (el) {
+      var key = el.getAttribute('data-demo-live-key');
+      el.setAttribute('data-i18n', key);
+      var label = window.tierI18n && window.tierI18n.t(key);
+      if (label) el.textContent = label;
+    });
+  }
+
+  function tick() {
+    var left = start - Date.now();
+    if (left <= 0) {
+      goLive();
+      if (window.tierDemoLaunchTimer) window.clearInterval(window.tierDemoLaunchTimer);
+      window.tierDemoLaunchTimer = null;
+      return;
+    }
+    var total = Math.floor(left / 1000);
+    setDigit(units.d, pad(Math.floor(total / 86400)));
+    setDigit(units.h, pad(Math.floor((total % 86400) / 3600)));
+    setDigit(units.m, pad(Math.floor((total % 3600) / 60)));
+    setDigit(units.s, pad(total % 60));
+  }
+
+  tick();
+  if (!live) {
+    window.tierDemoLaunchTimer = window.setInterval(tick, 1000);
+  }
+
+  var hero = document.querySelector('.demo-hero');
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (hero && finePointer && !reduced && !hero.dataset.parallax) {
+    hero.dataset.parallax = '1';
+    var raf = 0;
+    hero.addEventListener('mousemove', function (e) {
+      var rect = hero.getBoundingClientRect();
+      var mx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+      var my = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(function () {
+        hero.style.setProperty('--mx', mx.toFixed(3));
+        hero.style.setProperty('--my', my.toFixed(3));
+      });
+    });
+    hero.addEventListener('mouseleave', function () {
+      hero.style.setProperty('--mx', '0');
+      hero.style.setProperty('--my', '0');
+    });
+  }
+};
 
 window.tierInitGamesWipCode = function () {
   var field = document.getElementById('gamesLibraryWipCode');
@@ -1416,12 +1510,15 @@ window.tierInitGamesMedia = function () {
     if (!root || !main || !thumbsWrap) return;
 
     var candidates = [
-      { src: '/assets/img/game/keep-chaos-ss-1.png', alt: 'Keep Chaos — nighttime forest combat with wolf-hooded hero', label: 'Screenshot 1' },
-      { src: '/assets/img/game/keep-chaos-ss-2.png', alt: 'Keep Chaos — swarm combat around a stone pillar', label: 'Screenshot 2' },
-      { src: '/assets/img/game/keep-chaos-ss-3.png', alt: 'Keep Chaos — co-op bullet hell with damage numbers', label: 'Screenshot 3' },
-      { src: '/assets/img/game/keep-chaos-ss-4.png', alt: 'Keep Chaos — ability ring and magenta dash trail', label: 'Screenshot 4' },
-      { src: '/assets/img/game/keep-chaos-ss-5.png', alt: 'Keep Chaos — fighting ghosts with AOE circles', label: 'Screenshot 5' },
-      { src: '/assets/img/game/keep-chaos-ss-6.png', alt: 'Keep Chaos — Wishlist now on Steam', label: 'Wishlist' }
+      { src: '/assets/img/game/steam/kc-steam-ss-1.jpg', alt: 'Keep Chaos — co-op squad fighting a Rock Golem boss in wave 6', label: 'Screenshot 1' },
+      { src: '/assets/img/game/steam/kc-steam-ss-2.jpg', alt: 'Keep Chaos — wave 1 begins in the haunted night forest', label: 'Screenshot 2' },
+      { src: '/assets/img/game/steam/kc-steam-ss-3.jpg', alt: 'Keep Chaos — knight and allies cutting through a goblin horde', label: 'Screenshot 3' },
+      { src: '/assets/img/game/steam/kc-steam-ss-4.jpg', alt: 'Keep Chaos — caped hero charging goblins under glowing trees', label: 'Screenshot 4' },
+      { src: '/assets/img/game/steam/kc-steam-ss-5.jpg', alt: 'Keep Chaos — activating a shrine while co-op allies fight', label: 'Screenshot 5' },
+      { src: '/assets/img/game/steam/kc-steam-ss-6.jpg', alt: 'Keep Chaos — shrine bonus upgrade choice', label: 'Screenshot 6' },
+      { src: '/assets/img/game/steam/kc-steam-ss-7.jpg', alt: 'Keep Chaos — swarm incoming across the graveyard', label: 'Screenshot 7' },
+      { src: '/assets/img/game/steam/kc-steam-ss-8.jpg', alt: 'Keep Chaos — two Rock Golem bosses at once', label: 'Screenshot 8' },
+      { src: '/assets/img/game/steam/kc-steam-ss-9.jpg', alt: 'Keep Chaos — level-up weapon choice mid-fight', label: 'Screenshot 9' }
     ];
     var AUTO_MS = 5000;
     var autoTimer = null;

@@ -122,15 +122,25 @@
           "https://tierstudios.com/assets/img/game/keep-chaos-banner.png",
           "https://tierstudios.com/assets/img/game/keep-chaos-logo.png"
         ],
-        "screenshot": "https://tierstudios.com/assets/img/game/keep-chaos-keyart.png",
+        "screenshot": [
+          "https://tierstudios.com/assets/img/game/steam/kc-steam-ss-1.jpg",
+          "https://tierstudios.com/assets/img/game/steam/kc-steam-ss-2.jpg",
+          "https://tierstudios.com/assets/img/game/steam/kc-steam-ss-3.jpg",
+          "https://tierstudios.com/assets/img/game/steam/kc-steam-ss-4.jpg",
+          "https://tierstudios.com/assets/img/game/steam/kc-steam-ss-5.jpg",
+          "https://tierstudios.com/assets/img/game/steam/kc-steam-ss-6.jpg",
+          "https://tierstudios.com/assets/img/game/steam/kc-steam-ss-7.jpg",
+          "https://tierstudios.com/assets/img/game/steam/kc-steam-ss-8.jpg",
+          "https://tierstudios.com/assets/img/game/steam/kc-steam-ss-9.jpg"
+        ],
         "trailer": {
           "@type": "VideoObject",
-          "name": "Keep Chaos - Official Teaser / Steam Announcement Trailer",
-          "description": "Official Keep Chaos teaser and Steam announcement trailer from Tier Studios.",
-          "embedUrl": "https://www.youtube.com/embed/VDieXeRXhK0",
-          "contentUrl": "https://www.youtube.com/watch?v=VDieXeRXhK0",
-          "thumbnailUrl": "https://i.ytimg.com/vi/VDieXeRXhK0/hqdefault.jpg",
-          "uploadDate": "2026-08-14"
+          "name": "Keep Chaos - Demo Gameplay Trailer (Next Fest)",
+          "description": "Keep Chaos demo gameplay trailer from Tier Studios, as published on the Steam store page.",
+          "contentUrl": "https://tierstudios.com/assets/video/keep-chaos-trailer-steam.mp4",
+          "thumbnailUrl": "https://tierstudios.com/assets/img/game/steam/trailer-poster.jpg",
+          "duration": "PT1M15S",
+          "uploadDate": "2026-09-18"
         },
         "inLanguage": ["en", "tr"],
         "creativeWorkStatus": "Incomplete",
@@ -149,6 +159,14 @@
         "@type": "FAQPage",
         "@id": "https://tierstudios.com/games/keep-chaos/#faq",
         "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is there a Keep Chaos demo?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The Keep Chaos demo opens on Steam on 19 October 2026 at 20:00 TRT (UTC+3). Wishlist at https://store.steampowered.com/app/3791920/Keep_Chaos/ to get notified when it goes live."
+            }
+          },
           {
             "@type": "Question",
             "name": "What genre is Keep Chaos?",
@@ -209,7 +227,7 @@
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="/assets/css/style.css?v=20261016lib" />
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261019steam" />
   <link rel="preload" href="/assets/video/keep-chaos.mp4?v=20260802a" as="video" type="video/mp4" />
 
 </head>
@@ -266,7 +284,7 @@
 
   <div id="outer-wrapper">
 
-    <section class="games-video-banner" aria-label="Keep Chaos">
+    <section class="games-video-banner" aria-label="Keep Chaos" data-demo-launch data-demo-start="2026-10-19T20:00:00+03:00">
       <img
         class="games-video-banner-media"
         src="/assets/img/game/keep-chaos-banner.png"
@@ -288,13 +306,42 @@
         <source src="/assets/video/keep-chaos.mp4?v=20260802a" type="video/mp4" />
       </video>
       <div class="games-video-banner-shade" aria-hidden="true"></div>
-      <div class="games-video-banner-copy">
-        <span class="label games-video-banner-kicker" data-i18n="games.flagship">Flagship Title</span>
-        <h1 class="display games-video-banner-title">Keep Chaos</h1>
-        <p class="games-video-banner-status label">
-          <span class="game-teaser-rec" aria-hidden="true"></span>
-          <span data-i18n="index.games.status">On Steam</span>
-        </p>
+      <div class="games-video-banner-copy games-video-banner-copy--demo">
+        <div class="games-banner-main">
+          <span class="label games-video-banner-kicker" data-i18n="games.flagship">Flagship Title</span>
+          <h1 class="display games-video-banner-title">Keep Chaos</h1>
+          <p class="games-video-banner-status label">
+            <span class="game-teaser-rec" aria-hidden="true"></span>
+            <span data-demo-live-key="games.demo.statusLive" data-i18n="games.demo.status">Steam demo · 19 October · 20:00 TRT</span>
+          </p>
+        </div>
+
+        <div class="games-banner-demo">
+          <div class="demo-hero-count" data-demo-countdown>
+            <span class="demo-hero-unit"><b class="demo-digit" data-demo-d>00</b><small class="label" data-i18n="index.demo.days">Days</small></span>
+            <span class="demo-hero-colon" aria-hidden="true">:</span>
+            <span class="demo-hero-unit"><b class="demo-digit" data-demo-h>00</b><small class="label" data-i18n="index.demo.hours">Hours</small></span>
+            <span class="demo-hero-colon" aria-hidden="true">:</span>
+            <span class="demo-hero-unit"><b class="demo-digit" data-demo-m>00</b><small class="label" data-i18n="index.demo.minutes">Min</small></span>
+            <span class="demo-hero-colon" aria-hidden="true">:</span>
+            <span class="demo-hero-unit"><b class="demo-digit" data-demo-s>00</b><small class="label" data-i18n="index.demo.seconds">Sec</small></span>
+          </div>
+          <div class="demo-hero-actions">
+            <a href="https://store.steampowered.com/app/3791920/Keep_Chaos/" class="demo-hero-btn demo-hero-btn--main" target="_blank" rel="noopener" data-cursor="hover" data-analytics="outbound" data-analytics-label="kc_banner_demo_steam">
+              <span class="demo-hero-btn-ring" aria-hidden="true"></span>
+              <span class="demo-hero-btn-face">
+                <i class="fab fa-steam" aria-hidden="true"></i>
+                <span data-demo-live-key="index.demo.btnLive" data-i18n="index.demo.btnSoon">Wishlist on Steam</span>
+              </span>
+            </a>
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Keep%20Chaos%20%C2%B7%20Steam%20Demo&amp;dates=20261019T170000Z/20261019T180000Z&amp;details=Keep%20Chaos%20demo%20on%20Steam%20%C2%B7%20https%3A%2F%2Fstore.steampowered.com%2Fapp%2F3791920%2FKeep_Chaos%2F&amp;location=https%3A%2F%2Fstore.steampowered.com%2Fapp%2F3791920%2FKeep_Chaos%2F" class="demo-hero-btn demo-hero-btn--ghost" target="_blank" rel="noopener" data-cursor="hover" data-demo-hide-live data-analytics="outbound" data-analytics-label="kc_banner_demo_calendar">
+              <span class="demo-hero-btn-face">
+                <i class="fa-regular fa-calendar-plus" aria-hidden="true"></i>
+                <span data-i18n="index.demo.calendar">Add to calendar</span>
+              </span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -342,27 +389,29 @@
         <header class="games-trailer-intro">
           <span class="label games-trailer-kicker" data-i18n="games.trailer.kicker">Trailer</span>
           <h2 class="display games-trailer-title" id="gamesTrailerTitle" data-i18n="games.trailer.title">Official trailer</h2>
-          <p class="games-trailer-desc" data-i18n="games.trailer.desc">Keep Chaos · Steam announcement teaser.</p>
+          <p class="games-trailer-desc" data-i18n="games.trailer.desc">Keep Chaos · Demo gameplay trailer (Steam Next Fest).</p>
         </header>
         <div class="games-trailer-frame">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/VDieXeRXhK0"
-            title="Keep Chaos official trailer"
+          <video
+            class="games-trailer-video"
+            controls
+            playsinline
+            preload="metadata"
+            poster="/assets/img/game/steam/trailer-poster.jpg?v=2"
             data-i18n-aria="games.trailer.iframeTitle"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-            loading="lazy"
-          ></iframe>
+            aria-label="Keep Chaos demo gameplay trailer"
+          >
+            <source src="/assets/video/keep-chaos-trailer-steam.mp4?v=20261019" type="video/mp4" />
+          </video>
         </div>
         <a
-          href="https://www.youtube.com/watch?v=VDieXeRXhK0"
+          href="https://store.steampowered.com/app/3791920/Keep_Chaos/"
           target="_blank"
           rel="noopener"
           class="games-trailer-watch"
           data-cursor="hover"
           data-i18n="games.trailer.watch"
-        >Watch on YouTube</a>
+        >Watch on Steam</a>
       </section>
 
       <section class="games-faq reveal" id="faq" data-delay="55" aria-labelledby="gamesFaqTitle">
@@ -371,6 +420,10 @@
           <h2 class="display games-faq-title" id="gamesFaqTitle" data-i18n="games.faq.title">Keep Chaos questions</h2>
         </header>
         <div class="games-faq-list">
+          <article class="games-faq-item">
+            <h3 class="games-faq-q" data-i18n="games.faq.qDemo">Is there a Keep Chaos demo?</h3>
+            <p class="games-faq-a" data-i18n="games.faq.aDemo">Yes. The Keep Chaos demo opens on Steam on 19 October 2026 at 20:00 TRT (UTC+3). Wishlist the game on Steam to get notified when it goes live.</p>
+          </article>
           <article class="games-faq-item">
             <h3 class="games-faq-q" data-i18n="games.faq.q1">What genre is Keep Chaos?</h3>
             <p class="games-faq-a" data-i18n="games.faq.a1">Keep Chaos is a 3D TPS survivor-like / bullet heaven rogue-lite with dense enemy hordes, class builds, and third-person action.</p>
@@ -402,10 +455,10 @@
             <img
               id="gamesGalleryMain"
               class="games-gallery-main"
-              src="/assets/img/game/keep-chaos-ss-1.png"
-              alt="Keep Chaos gameplay — nighttime forest combat"
-              width="1280"
-              height="720"
+              src="/assets/img/game/steam/kc-steam-ss-1.jpg"
+              alt="Keep Chaos — co-op squad fighting a Rock Golem boss in wave 6"
+              width="1920"
+              height="1080"
             />
           </figure>
           <div class="games-gallery-progress" aria-hidden="true">
@@ -422,9 +475,9 @@
           </video>
         </div>
         <div class="studio-cta-copy">
-          <span class="label studio-cta-kicker" data-i18n="games.steam.kicker">Steam</span>
-          <p class="studio-cta-title display" id="gamesSteamTitle" data-i18n="games.steam.title">Wishlist on Steam</p>
-          <p class="studio-cta-desc" data-i18n="games.steam.desc">Keep Chaos is on Steam. Wishlist now — be ready when chaos drops.</p>
+          <span class="label studio-cta-kicker" data-i18n="index.demo.kicker">Steam Demo</span>
+          <p class="studio-cta-title display" id="gamesSteamTitle" data-demo-live-key="index.demo.titleLive" data-i18n="games.demo.ctaTitle">Playable on 19 October · 20:00 TRT</p>
+          <p class="studio-cta-desc" data-i18n="games.demo.ctaDesc">The Keep Chaos demo opens on Steam. Wishlist now so Steam tells you the moment it goes live.</p>
         </div>
         <a
           id="steamWishlistBtn"
@@ -437,7 +490,7 @@
           aria-label="Wishlist on Steam"
         >
           <i class="fab fa-steam" aria-hidden="true"></i>
-          <span data-i18n="games.steam.btn">Wishlist on Steam</span>
+          <span data-demo-live-key="index.demo.btnLive" data-i18n="games.steam.btn">Wishlist on Steam</span>
         </a>
       </aside>
 
@@ -510,9 +563,9 @@
 
   </div>
 
-  <script src="/assets/js/i18n.js?v=20261016lib"></script>
+  <script src="/assets/js/i18n.js?v=20261019steam"></script>
 
-  <script src="/assets/js/script.js?v=20261016lib"></script>
+  <script src="/assets/js/script.js?v=20261019steam"></script>
 
 </body>
 
