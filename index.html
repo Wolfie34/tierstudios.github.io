@@ -145,7 +145,7 @@
           "https://store.steampowered.com/app/3791920/Keep_Chaos/",
           "https://www.youtube.com/watch?v=VDieXeRXhK0"
         ],
-        "description": "Fast-paced low-poly 3D TPS survivor-like / bullet heaven rogue-lite with solo and up to 4-player local or online co-op (PvE). In active development at Tier Studios. Wishlist on Steam (PC).",
+        "description": "Fast-paced low-poly 3D TPS survivor-like / bullet heaven rogue-lite with solo and up to 4-player local or online co-op (PvE). By Tier Studios. Out now on Steam (PC).",
         "keywords": "Keep Chaos, survivor-like, Vampire Survivors like, Megabonk like, online co-op, bullet heaven, TPS rogue-lite",
         "genre": ["Action", "Shooter", "Survivor-like", "Bullet heaven", "Bullet hell", "Rogue-lite", "Co-op"],
         "gamePlatform": ["PC"],
@@ -163,15 +163,13 @@
           "https://tierstudios.com/assets/img/game/keep-chaos-logo.png"
         ],
         "inLanguage": ["en", "tr"],
-        "creativeWorkStatus": "Incomplete",
+        "creativeWorkStatus": "Published",
         "offers": {
           "@type": "Offer",
-          "availability": "https://schema.org/PreOrder",
-          "price": "0",
-          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
           "seller": { "@id": "https://tierstudios.com/#organization" },
           "url": "https://store.steampowered.com/app/3791920/Keep_Chaos/",
-          "description": "Wishlist Keep Chaos on Steam"
+          "description": "Keep Chaos is out now on Steam"
         }
       }
     ]
@@ -186,7 +184,7 @@
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="/assets/css/style.css?v=20261018hero2" />
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261113launch" />
 
 </head>
 
@@ -244,12 +242,12 @@
 
 
 
-  <header id="top" class="demo-hero" data-demo-launch data-demo-start="2026-10-19T20:00:00+03:00" aria-labelledby="demoHeroTitle">
+  <header id="top" class="demo-hero is-live" aria-labelledby="demoHeroTitle">
 
     <h1 class="sr-only">Tier Studios · Independent Game Development Studio</h1>
 
     <div class="demo-hero-media" aria-hidden="true">
-      <video class="demo-hero-video" autoplay muted loop playsinline preload="auto" poster="/assets/img/game/keep-chaos-keyart.png">
+      <video class="demo-hero-video" autoplay muted loop playsinline preload="auto" poster="/assets/img/game/keep-chaos-hero-poster.jpg">
         <source src="/assets/video/keep-chaos-discord.mp4?v=20260804c" type="video/mp4" />
       </video>
     </div>
@@ -262,49 +260,27 @@
     <div class="demo-hero-inner container">
       <span class="label demo-hero-kicker reveal" data-delay="100">
         <span class="game-teaser-rec" aria-hidden="true"></span>
-        <span data-demo-live-key="index.demo.kickerLive" data-i18n="index.demo.kicker">Steam Demo</span>
+        <span data-i18n="index.launch.kicker">Out now</span>
       </span>
 
       <span class="demo-hero-logo-wrap reveal" data-delay="220">
         <img class="demo-hero-logo" src="/assets/img/game/keep-chaos-logo.svg" alt="Keep Chaos" width="1024" height="576" />
       </span>
 
-      <h2 class="display demo-hero-title reveal" data-delay="360" id="demoHeroTitle" data-demo-live-key="index.demo.titleLive" data-i18n="index.demo.title">The demo lands on Steam</h2>
+      <h2 class="display demo-hero-title reveal" data-delay="360" id="demoHeroTitle" data-i18n="index.launch.title">Out now on Steam</h2>
 
-      <p class="demo-hero-when reveal" data-delay="460">
-        <span class="display demo-hero-date" data-i18n="index.demo.date">19 October</span>
-        <span class="demo-hero-dot" aria-hidden="true"></span>
-        <span class="display demo-hero-time" data-i18n="index.demo.time">20:00 TRT</span>
-      </p>
-
-      <div class="demo-hero-count reveal" data-delay="580" data-demo-countdown>
-        <span class="demo-hero-unit"><b class="demo-digit" data-demo-d>00</b><small class="label" data-i18n="index.demo.days">Days</small></span>
-        <span class="demo-hero-colon" aria-hidden="true">:</span>
-        <span class="demo-hero-unit"><b class="demo-digit" data-demo-h>00</b><small class="label" data-i18n="index.demo.hours">Hours</small></span>
-        <span class="demo-hero-colon" aria-hidden="true">:</span>
-        <span class="demo-hero-unit"><b class="demo-digit" data-demo-m>00</b><small class="label" data-i18n="index.demo.minutes">Min</small></span>
-        <span class="demo-hero-colon" aria-hidden="true">:</span>
-        <span class="demo-hero-unit"><b class="demo-digit" data-demo-s>00</b><small class="label" data-i18n="index.demo.seconds">Sec</small></span>
-      </div>
-
-      <div class="demo-hero-actions reveal" data-delay="700">
-        <a href="https://store.steampowered.com/app/3791920/Keep_Chaos/" class="demo-hero-btn demo-hero-btn--main" target="_blank" rel="noopener" data-cursor="hover" data-analytics="outbound" data-analytics-label="hero_demo_steam">
+      <div class="demo-hero-actions reveal" data-delay="500">
+        <a href="https://store.steampowered.com/app/3791920/Keep_Chaos/" class="demo-hero-btn demo-hero-btn--main" target="_blank" rel="noopener" data-cursor="hover" data-analytics="outbound" data-analytics-label="hero_launch_steam">
           <span class="demo-hero-btn-ring" aria-hidden="true"></span>
           <span class="demo-hero-btn-face">
             <i class="fab fa-steam" aria-hidden="true"></i>
-            <span data-demo-live-key="index.demo.btnLive" data-i18n="index.demo.btnSoon">Wishlist on Steam</span>
+            <span data-i18n="index.launch.btn">View on Steam</span>
           </span>
         </a>
-        <a href="/games/keep-chaos#trailer" class="demo-hero-btn demo-hero-btn--ghost" data-cursor="hover" data-analytics-label="hero_demo_trailer">
+        <a href="/games/keep-chaos#trailer" class="demo-hero-btn demo-hero-btn--ghost" data-cursor="hover" data-analytics-label="hero_launch_trailer">
           <span class="demo-hero-btn-face">
             <i class="fa-solid fa-play" aria-hidden="true"></i>
             <span data-i18n="index.demo.trailer">Watch the trailer</span>
-          </span>
-        </a>
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Keep%20Chaos%20%C2%B7%20Steam%20Demo&amp;dates=20261019T170000Z/20261019T180000Z&amp;details=Keep%20Chaos%20demo%20on%20Steam%20%C2%B7%20https%3A%2F%2Fstore.steampowered.com%2Fapp%2F3791920%2FKeep_Chaos%2F&amp;location=https%3A%2F%2Fstore.steampowered.com%2Fapp%2F3791920%2FKeep_Chaos%2F" class="demo-hero-btn demo-hero-btn--ghost" target="_blank" rel="noopener" data-cursor="hover" data-demo-hide-live data-analytics="outbound" data-analytics-label="hero_demo_calendar">
-          <span class="demo-hero-btn-face">
-            <i class="fa-regular fa-calendar-plus" aria-hidden="true"></i>
-            <span data-i18n="index.demo.calendar">Add to calendar</span>
           </span>
         </a>
       </div>
@@ -398,13 +374,13 @@
         <span class="game-teaser-corner game-teaser-corner--br" aria-hidden="true"></span>
         <div class="game-teaser-hover">
           <img class="game-teaser-mark" src="/assets/img/game/keep-chaos-logo.png" alt="" width="640" height="640" />
-          <p class="display game-teaser-steam" data-i18n="index.games.steamSoon">Wishlist on Steam</p>
+          <p class="display game-teaser-steam" data-i18n="index.launch.title">Out now on Steam</p>
         </div>
         <div class="game-teaser-chrome">
           <div class="game-teaser-top">
             <span class="label game-teaser-status">
               <span class="game-teaser-rec" aria-hidden="true"></span>
-              <span data-i18n="index.games.demoStatus">Steam Demo · 19 October</span>
+              <span data-i18n="index.launch.title">Out now on Steam</span>
             </span>
           </div>
           <div class="game-teaser-bottom">
@@ -422,7 +398,7 @@
         <div class="game-teaser-links">
           <a href="https://store.steampowered.com/app/3791920/Keep_Chaos/" target="_blank" rel="noopener" class="btn-primary" data-cursor="hover">
             <i class="fab fa-steam" aria-hidden="true"></i>
-            <span data-i18n="index.games.steamSoon">Wishlist on Steam</span>
+            <span data-i18n="index.launch.btn">View on Steam</span>
           </a>
           <a href="/games/keep-chaos" class="game-teaser-more" data-cursor="hover" data-i18n="index.games.more">More about Keep Chaos</a>
         </div>
@@ -590,7 +566,7 @@
 
 
 
-  <script src="/assets/js/i18n.js?v=20261019steam"></script>
+  <script src="/assets/js/i18n.js?v=20261113launch2"></script>
 
   <script src="/assets/js/script.js?v=20261019steam"></script>
 

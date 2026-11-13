@@ -1161,9 +1161,16 @@ window.tierInitDemoLaunch = function () {
 };
 
 window.tierInitGamesWipCode = function () {
-  var field = document.getElementById('gamesLibraryWipCode');
-  if (!field) return;
+  var fields = document.querySelectorAll('[data-wip-code]');
+  for (var f = 0; f < fields.length; f++) {
+    if (!fields[f].dataset.wipReady) {
+      fields[f].dataset.wipReady = '1';
+      initWipField(fields[f], f);
+    }
+  }
+};
 
+function initWipField(field, variant) {
   var snippets = [
     'Codename = "???";',
     'BuildPipeline.Warm();',
@@ -1177,14 +1184,26 @@ window.tierInitGamesWipCode = function () {
     'tier.studios.dev'
   ];
 
-  var slots = [
-    { top: '8%', left: '6%', rot: -6, opacity: 0.38 },
-    { top: '18%', left: '28%', rot: 3, opacity: 0.5 },
-    { top: '30%', left: '8%', rot: -2, opacity: 0.32 },
-    { top: '42%', left: '36%', rot: 5, opacity: 0.45 },
-    { top: '52%', left: '10%', rot: -4, opacity: 0.36 },
-    { top: '64%', left: '24%', rot: 2, opacity: 0.28 }
+  var layouts = [
+    [
+      { top: '8%', left: '6%', rot: -6, opacity: 0.38 },
+      { top: '18%', left: '28%', rot: 3, opacity: 0.5 },
+      { top: '30%', left: '8%', rot: -2, opacity: 0.32 },
+      { top: '42%', left: '36%', rot: 5, opacity: 0.45 },
+      { top: '52%', left: '10%', rot: -4, opacity: 0.36 },
+      { top: '64%', left: '24%', rot: 2, opacity: 0.28 }
+    ],
+    [
+      { top: '10%', left: '30%', rot: 4, opacity: 0.42 },
+      { top: '22%', left: '8%', rot: -5, opacity: 0.34 },
+      { top: '34%', left: '34%', rot: 2, opacity: 0.48 },
+      { top: '46%', left: '6%', rot: -3, opacity: 0.3 },
+      { top: '56%', left: '26%', rot: 6, opacity: 0.4 },
+      { top: '66%', left: '12%', rot: -2, opacity: 0.28 }
+    ]
   ];
+  var slots = layouts[variant % layouts.length];
+  var offset = variant * 4;
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var frags = [];
@@ -1197,13 +1216,13 @@ window.tierInitGamesWipCode = function () {
     el.style.left = slots[i].left;
     el.style.transform = 'rotate(' + slots[i].rot + 'deg)';
     el.style.opacity = String(slots[i].opacity);
-    if (reduced) el.textContent = snippets[i % snippets.length];
+    if (reduced) el.textContent = snippets[(i + offset) % snippets.length];
     field.appendChild(el);
     frags.push({
       el: el,
-      text: snippets[i % snippets.length],
+      text: snippets[(i + offset) % snippets.length],
       char: 0,
-      pause: i * 6,
+      pause: i * 6 + variant * 9,
       deleting: false
     });
   }
@@ -1256,7 +1275,7 @@ window.tierInitGamesWipCode = function () {
   }
 
   timer = window.setTimeout(step, 350);
-};
+}
 
 (function tierAmbience() {
   if (!document.body || document.querySelector('.tier-ambience-canvas')) return;
